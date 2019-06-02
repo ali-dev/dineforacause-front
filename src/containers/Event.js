@@ -16,7 +16,7 @@ class Event extends Component {
     //   return cause.title.toLowerCase().includes(searchField.toLowerCase());
     // })
     return (
-    <div className="App">
+    <div>
       <header className="App-header">
         <div className="Header">
 	      <article data-name="article-full-bleed-background">
@@ -29,7 +29,8 @@ class Event extends Component {
 
 	          <section className="pt5 pb4">
 	            <p className="times lh-copy measure f4 mt0">
-	              <CreateEventForm/>             
+	     	       <CreateEventForm/>
+	                           
 	            </p>
 
 	          </section>
@@ -39,7 +40,6 @@ class Event extends Component {
 	    </div>
                 
       </header>
-      
       
       
     </div>
