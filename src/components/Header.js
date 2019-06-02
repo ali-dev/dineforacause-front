@@ -22,9 +22,26 @@ function Header() {
               More details tbd More details tbdMore details tbdMore details tbdMore details tbd             
             </p>
 
+            <p className="times lh-copy measure f4 mt0 ml2 mr2">
+              Dine for a cause is an initiative that combines Food and Culture with Humanitarian Assistance. 
+              More details tbd More details tbdMore details tbdMore details tbdMore details tbd             
+            </p>
+
           </section>
+           
+
         </div>
+         <nav class="dt w-100  center bg-white o-90 mb0"> 
+            <div className=" v-mid tr pa3 ">
+              <a className="f6 fw6 hover-red no-underline gray dn dib-ns pv2 ph3" href="/" >How it Works</a> 
+              <a className="f6 fw6 hover-red no-underline gray dn dib-l pv2 ph3" href="/" >Causes</a> 
+              <a className="f6 fw6 hover-red no-underline gray dn dib-l pv2 ph3" href="/" >Organizations</a> 
+              <a className="f6 fw6 hover-red no-underline gray dn dib-ns pv2 ph3" href="/" >Partners</a>
+              <a className="f6 fw6 hover-red no-underline gray dib ml2 pv2 ph3 ba" href="/" >Sign Up</a> 
+            </div>
+          </nav>  
       </div>
+
     </article>
     </div>
   );
