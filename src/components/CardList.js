@@ -10,7 +10,10 @@ const CardList = ({ causes }) => {
             <Card
               key={i}
               id={causes[i].id}
-              title={causes[i].title}
+              causeName={causes[i].causeName}
+              country={causes[i].country}
+              image={causes[i].image}
+              
               />
           );
         })

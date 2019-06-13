@@ -11,7 +11,8 @@ export const setSearchField = (text) => ({ type: CHANGE_SEARCHFIELD, payload: te
 
 export const requestCauses = () => (dispatch) => {
   dispatch({ type: REQUEST_CAUSES_PENDING })
-  apiCall('https://jsonplaceholder.typicode.com/posts')
+  // apiCall('https://jsonplaceholder.typicode.com/posts')
+  apiCall('https://c0rhb23fte.execute-api.us-east-1.amazonaws.com/dev/cause')
     .then(data => dispatch({ type: REQUEST_CAUSES_SUCCESS, payload: data }))
     .catch(error => dispatch({ type: REQUEST_CAUSES_FAILED, payload: error }))
 }

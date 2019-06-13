@@ -38,7 +38,7 @@ class App extends Component {
   render() {
   	const { causes, searchField, onSearchChange, isPending } = this.props;
     const filteredCauses = causes.filter(cause => {
-      return cause.title.toLowerCase().includes(searchField.toLowerCase());
+      return cause.details.toLowerCase().includes(searchField.toLowerCase());
     })
     return (
     
@@ -49,8 +49,6 @@ class App extends Component {
       </header>
       <SearchBox searchChange={onSearchChange}/>
       <CardList causes={filteredCauses} />
-    
-      
       
     </div>
     
