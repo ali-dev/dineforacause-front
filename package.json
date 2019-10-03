@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-client": "^2.6.4",
     "aws-amplify": "^1.1.40",
     "aws-amplify-react": "^2.4.4",
+    "aws-appsync": "^2.0.0",
+    "aws-appsync-react": "^2.0.0",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
