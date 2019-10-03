@@ -30,6 +30,7 @@ const CreateEventForm = () => (
 	          name="date"
 	          placeholder="Date"
 	          iconPosition="left"
+	          required false
 	        />
 	        <TimeInput
 	          name="time"
@@ -37,7 +38,8 @@ const CreateEventForm = () => (
 	          iconPosition="left"
 	        />
         </Form.Group>
-	    <div class="ui divider"></div>
+        
+	    <div className="ui divider"></div>
 	    <Form.Field required>
 	      <label>Address</label>
 	      <input  />
@@ -63,7 +65,7 @@ const CreateEventForm = () => (
 	    
 	    </Form.Group>
 	    
-	    <div class="ui divider"></div>
+	    <div className="ui divider"></div>
 	    
 	    <Form.Field>
 	      <Checkbox label='I agree to the Terms and Conditions' />

@@ -1,21 +1,34 @@
 import React, { Component } from 'react';
 import Header from '../components/Header'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { connect } from 'react-redux';
+import { createLogger } from 'redux-logger';
 import FormStep from '../components/FormStep'
+import { requestCause } from '../actions';
 import CreateEventForm from '../forms/CreateEventForm'
+const logger = createLogger()
 
+const mapStateToProps = (state) => {
+  return {
+    cause: state.requestCause.cause,
+    isPending: state.requestCause.isPending
+  }
+}
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onRequestCause: () => dispatch(requestCause())
+  }
+}
 
 class Event extends Component {
-  // componentDidMount() {
-  //   this.props.onRequestCauses();
-  // }
-
+  componentDidMount() {
+    this.props.onRequestCause();
+  }
+  
   render(causeId) {
-  	
-  	// const { causes, searchField, onSearchChange, isPending } = this.props;
-    // const filteredCauses = causes.filter(cause => {
-    //   return cause.title.toLowerCase().includes(searchField.toLowerCase());
-    // })
+  	const { cause } = this.props;
+  
     return (
     <div >
       <header className="App-header">
@@ -27,26 +40,20 @@ class Event extends Component {
 	            <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3 avenir ml2 mr2">Dine for a Cause</h3>
 	          	<h4 className="f3 fw4 i lh-title mt0 ml2 mr2">Create Event</h4>  
 	          </header>
-
 	          <section className="bg-white o-90 measure-wide">
-	               
 	               <div className="fl w-60 pt5  pb4 bg-white   ">
-	               	<CreateEventForm/>
+	               	{/*<CreateEventForm/>*/}
 	               </div>
-	                
 	          </section>
 	        </div>
 	      </div>
 	    </article>
 	    </div>
-                
       </header>
-      
-      
     </div>
     
   	);
   }
 }
 
-export default Event;
+export default connect(mapStateToProps, mapDispatchToProps)(Event)

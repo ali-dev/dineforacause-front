@@ -2,7 +2,10 @@ import {
   CHANGE_SEARCHFIELD,
   REQUEST_CAUSES_PENDING,
   REQUEST_CAUSES_SUCCESS,
-  REQUEST_CAUSES_FAILED
+  REQUEST_CAUSES_FAILED,
+  REQUEST_CAUSE_PENDING,
+  REQUEST_CAUSE_SUCCESS,
+  REQUEST_CAUSE_FAILED  
  } from './constants';
 
 const initialStateSearch = {
@@ -30,6 +33,25 @@ export const requestCauses = (state=initialStateCauses, action={}) => {
     case REQUEST_CAUSES_SUCCESS:
       return Object.assign({}, state, {causes: action.payload, isPending: false})
     case REQUEST_CAUSES_FAILED:
+      return Object.assign({}, state, {error: action.payload})
+    default:
+      return state
+  }
+}
+
+
+const initialStateCause = {
+  cause: "test",
+  isPending: true
+}
+
+export const requestCause = (state=initialStateCause, action={}) => {
+  switch (action.type) {
+    case REQUEST_CAUSE_PENDING:
+      return Object.assign({}, state, {isPending: true})
+    case REQUEST_CAUSE_SUCCESS:
+      return Object.assign({}, state, {cause: action.payload, isPending: false})
+    case REQUEST_CAUSE_FAILED:
       return Object.assign({}, state, {error: action.payload})
     default:
       return state
