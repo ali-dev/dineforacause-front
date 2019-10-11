@@ -42,7 +42,7 @@ class Event extends Component {
 	          </header>
 	          <section className="bg-white o-90 measure-wide">
 	               <div className="fl w-60 pt5  pb4 bg-white   ">
-	               	{/*<CreateEventForm/>*/}
+	               	<CreateEventForm/>
 	               </div>
 	          </section>
 	        </div>
