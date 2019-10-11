@@ -17,16 +17,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onRequestCause: () => dispatch(requestCause())
+    onRequestCause: (organizationId, id) => dispatch(requestCause(organizationId, id))
   }
 }
 
 class Event extends Component {
   componentDidMount() {
-    this.props.onRequestCause();
+    this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.causeId);
   }
   
-  render(causeId) {
+  render(causeId, organizationId) {
   	const { cause } = this.props;
   
     return (
