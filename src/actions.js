@@ -1,7 +1,7 @@
 import Amplify, { API, graphqlOperation, Logger } from 'aws-amplify';
 import gql from 'graphql-tag';
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
-import {getCauseInfo} from './graphql/queries';
+import {getCauseInfo, getCauses} from './graphql/queries';
 
 import { apiCall } from './api/api'
 import {
@@ -33,9 +33,15 @@ export const setSearchField = (text) => ({ type: CHANGE_SEARCHFIELD, payload: te
 export const requestCauses = () => (dispatch) => {
   dispatch({ type: REQUEST_CAUSES_PENDING })
   // apiCall('https://jsonplaceholder.typicode.com/posts')
-  apiCall('https://c0rhb23fte.execute-api.us-east-1.amazonaws.com/dev/cause')
-    .then(data => dispatch({ type: REQUEST_CAUSES_SUCCESS, payload: data }))
-    .catch(error => dispatch({ type: REQUEST_CAUSES_FAILED, payload: error }))
+  client.query({
+	  query: gql(getCauses),
+	  
+	}).then(data => dispatch({ type: REQUEST_CAUSES_SUCCESS, payload: data.data.getAllCauses.causes }))
+	  .catch(e => dispatch({ type: REQUEST_CAUSES_FAILED, payload: e }))
+
+  // apiCall('https://c0rhb23fte.execute-api.us-east-1.amazonaws.com/dev/cause')
+  //   .then(data => dispatch({ type: REQUEST_CAUSES_SUCCESS, payload: data }))
+  //   .catch(error => dispatch({ type: REQUEST_CAUSES_FAILED, payload: error }))
 }
 
 

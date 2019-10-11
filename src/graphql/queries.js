@@ -17,3 +17,16 @@ export const getCauseInfo = `query GetCauseInfo($id: String!, $organizationId: S
   }
 }
 `;
+
+export const getCauses = `query causes {
+   getAllCauses {
+      causes {
+        causeName
+        country
+        details
+        image
+       }
+    }
+  }
+`;
+

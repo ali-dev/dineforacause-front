@@ -13,6 +13,7 @@ import Event from './Event'
 
 // parameter state comes from index.js provider store state(rootReducers)
 const mapStateToProps = (state) => {
+
   return {
     searchField: state.searchCauses.searchField,
     causes: state.requestCauses.causes,
@@ -37,6 +38,9 @@ class App extends Component {
 
   render() {
   	const { causes, searchField, onSearchChange, isPending } = this.props;
+console.log("TESTTTTTTTTTT")
+    
+    console.log(causes)
     const filteredCauses = causes.filter(cause => {
       return cause.details.toLowerCase().includes(searchField.toLowerCase());
     })
