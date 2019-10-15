@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createLogger } from 'redux-logger';
 import FormStep from '../components/FormStep'
 import { requestCause } from '../actions';
-import CreateEventForm from '../forms/CreateEventForm'
+//import CreateEventForm from '../forms/CreateEventForm'
 const logger = createLogger()
 
 const mapStateToProps = (state) => {
@@ -23,10 +23,11 @@ const mapDispatchToProps = (dispatch) => {
 
 class Event extends Component {
   componentDidMount() {
-    this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.causeId);
+    console.log(this.props.match.params);
+    this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
   }
   
-  render(causeId, organizationId) {
+  render() {
   	const { cause } = this.props;
   
     return (
@@ -42,8 +43,12 @@ class Event extends Component {
 	          </header>
 	          <section className="bg-white o-90 measure-wide">
 	               <div className="fl w-60 pt5  pb4 bg-white   ">
-	               	<CreateEventForm/>
+	               	 {/*<CreateEventForm/>*/}
+                    {cause.causeName}
 	               </div>
+                 <div className="fl w-60 pt5  pb4 bg-white   ">
+                    <div>{cause.ame}</div>
+                 </div>
 	          </section>
 	        </div>
 	      </div>

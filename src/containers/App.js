@@ -38,7 +38,7 @@ class App extends Component {
 
   render() {
   	const { causes, searchField, onSearchChange, isPending } = this.props;
-console.log("TESTTTTTTTTTT")
+
     
     console.log(causes)
     const filteredCauses = causes.filter(cause => {

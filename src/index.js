@@ -35,7 +35,7 @@ const routing = (
     <div>
       <Provider store={store}>	
       <Route exact={true} path="/" component={App} />
-      <Route path="/event/:action/:causeId" component={Event} />
+      <Route path="/event/create/:organizationId/:id" component={Event} />
       </Provider>
     </div>
   </Router>

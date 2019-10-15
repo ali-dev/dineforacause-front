@@ -8,7 +8,7 @@ export const getOrganizationInfo = `query GetOrganizationInfo($name: String!) {
   }
 }
 `;
-export const getCauseInfo = `query GetCauseInfo($id: String!, $organizationId: String!) {
+export const getCauseInfo = `query GetCauseInfo($organizationId: String!, $id: String!) {
   getCauseInfo(id: $id, organizationId: $organizationId) {
     causeName
     details
@@ -21,6 +21,7 @@ export const getCauseInfo = `query GetCauseInfo($id: String!, $organizationId: S
 export const getCauses = `query causes {
    getAllCauses {
       causes {
+        id
         organizationId
         organizationName
         causeName

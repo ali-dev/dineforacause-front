@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 import {getCauseInfo, getCauses} from './graphql/queries';
 
-import { apiCall } from './api/api'
+//import { apiCall } from './api/api'
 import {
   CHANGE_SEARCHFIELD,
   REQUEST_CAUSES_PENDING,
@@ -45,14 +45,14 @@ export const requestCauses = () => (dispatch) => {
 }
 
 
-export const requestCause = (organizationId = "60790acc-8d7c-11e9-bc42-526af7764f64", id  ) => (dispatch) => {
+export const requestCause = (organizationId, id) => (dispatch) => {
   dispatch({ type: REQUEST_CAUSE_PENDING })
   client.query({
 	  query: gql(getCauseInfo),
 	  variables: {
-        id: id,//"b8586912-dc35-11e9-a981-95bdc25a2792",
         organizationId: organizationId,//"60790acc-8d7c-11e9-bc42-526af7764f64",
-		    
+		    id: id,//"b8586912-dc35-11e9-a981-95bdc25a2792",
+        
 	  }
 	}).then(data => dispatch({ type: REQUEST_CAUSE_SUCCESS, payload: data }))
 	  .catch(e => dispatch({ type: REQUEST_CAUSE_FAILED, payload: e }))

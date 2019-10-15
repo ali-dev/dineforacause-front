@@ -1,9 +1,10 @@
 import React from 'react';
 import Card from './Card';
-
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 const CardList = ({ causes }) => {
   return (
     <div>
+      {/*<Router>*/}   
       {
         causes.map((cause, i) => {
           return (
@@ -20,6 +21,9 @@ const CardList = ({ causes }) => {
           );
         })
       }
+      {/*<Route path="/event/create/:organizationId/:id" component={Event}/> 
+          
+      </Router>*/}
     </div>
   );
 }

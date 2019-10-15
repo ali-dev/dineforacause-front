@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 const Card = ({ causeName, id, organizationId, organizationName, details, country, image }) => {
   return (
     <div style={{width:200, height:300}} className="br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5 center dib">
@@ -11,6 +11,7 @@ const Card = ({ causeName, id, organizationId, organizationName, details, countr
           <h1 className="f7 f7-ns mv0">{causeName}</h1> 
           <h2 className="f7 f7-ns mv0">{organizationName}</h2> 
           <p >
+          
           <Link className="f7 fw6 db red link dim dib v-btm" to={`/event/create/${organizationId}/${id}`}>Create event</Link>
           </p>
           
