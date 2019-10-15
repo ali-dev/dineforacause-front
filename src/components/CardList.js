@@ -11,6 +11,7 @@ const CardList = ({ causes }) => {
               key={i}
               id={causes[i].id}
               organizationId={causes[i].organizationId}
+              organizationName={causes[i].organizationName}
               causeName={causes[i].causeName}
               country={causes[i].country}
               image={causes[i].image}

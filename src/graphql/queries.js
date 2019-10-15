@@ -22,6 +22,7 @@ export const getCauses = `query causes {
    getAllCauses {
       causes {
         organizationId
+        organizationName
         causeName
         country
         details
