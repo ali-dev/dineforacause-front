@@ -54,7 +54,7 @@ export const requestCause = (organizationId, id) => (dispatch) => {
 		    id: id,//"b8586912-dc35-11e9-a981-95bdc25a2792",
         
 	  }
-	}).then(data => dispatch({ type: REQUEST_CAUSE_SUCCESS, payload: data }))
+	}).then(data => dispatch({ type: REQUEST_CAUSE_SUCCESS, payload: data.data.getCauseInfo }))
 	  .catch(e => dispatch({ type: REQUEST_CAUSE_FAILED, payload: e }))
  
 }

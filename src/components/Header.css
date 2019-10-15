@@ -28,8 +28,11 @@
   /*height: 200px; */
 
   /* Create the parallax scrolling effect */
+  /*opacity: 0.6;*/
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
