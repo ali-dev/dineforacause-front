@@ -3,7 +3,9 @@ import Card from './Card';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 const CardList = ({ causes }) => {
   return (
-    <div>
+    <article>
+      <h2 class="f3 fw4 pa3 mv0">Causes</h2>
+      <div class="cf pa2">
       {/*<Router>*/}   
       {
         causes.map((cause, i) => {
@@ -25,6 +27,7 @@ const CardList = ({ causes }) => {
           
       </Router>*/}
     </div>
+    </article>
   );
 }
 
