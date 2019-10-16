@@ -6,7 +6,6 @@ const CardList = ({ causes }) => {
     <article>
       <h2 class="f3 fw4 pa3 mv0">Causes</h2>
       <div class="cf pa2">
-      {/*<Router>*/}   
       {
         causes.map((cause, i) => {
           return (
@@ -23,9 +22,6 @@ const CardList = ({ causes }) => {
           );
         })
       }
-      {/*<Route path="/event/create/:organizationId/:id" component={Event}/> 
-          
-      </Router>*/}
     </div>
     </article>
   );
