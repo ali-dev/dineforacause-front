@@ -40,7 +40,6 @@ class App extends Component {
   	const { causes, searchField, onSearchChange, isPending } = this.props;
 
     
-    console.log(causes)
     const filteredCauses = causes.filter(cause => {
       return cause.details.toLowerCase().includes(searchField.toLowerCase());
     })
