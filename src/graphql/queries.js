@@ -33,3 +33,12 @@ export const getCauses = `query causes {
   }
 `;
 
+
+export const addEvent = `mutation addEvent($eventName: String!) {
+   addEvent(eventName: $eventName) {
+    eventName
+  }
+  }
+`;
+
+
