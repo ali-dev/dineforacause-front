@@ -1,8 +1,6 @@
-import Amplify, { API, graphqlOperation, Logger } from 'aws-amplify';
 import gql from 'graphql-tag';
-import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
-import {getCauseInfo, getCauses} from './graphql/queries';
-
+import {getCauseInfo, getCauses, addCharge} from './graphql/queries';
+import client from './api/appSyncClient'
 //import { apiCall } from './api/api'
 import {
   CHANGE_SEARCHFIELD,
@@ -15,18 +13,6 @@ import {
   
  } from './constants'
 
-import awsconfig from './aws-exports';
-Amplify.configure(awsconfig);
-
-
-const client = new AWSAppSyncClient({
-  url: awsconfig.aws_appsync_graphqlEndpoint,
-  region: awsconfig.aws_appsync_region,
-  auth: {
-    type: AUTH_TYPE.API_KEY, // or type: awsconfig.aws_appsync_authenticationType,
-    apiKey: awsconfig.aws_appsync_apiKey,
-  }
-});
 
 export const setSearchField = (text) => ({ type: CHANGE_SEARCHFIELD, payload: text })
 
@@ -41,6 +27,8 @@ export const requestCauses = () => (dispatch) => {
 }
 
 
+
+
 export const requestCause = (organizationId, id) => (dispatch) => {
   dispatch({ type: REQUEST_CAUSE_PENDING })
   client.query({
@@ -52,6 +40,7 @@ export const requestCause = (organizationId, id) => (dispatch) => {
 	  }
 	}).then(data => dispatch({ type: REQUEST_CAUSE_SUCCESS, payload: data.data.getCauseInfo }))
 	  .catch(e => dispatch({ type: REQUEST_CAUSE_FAILED, payload: e }))
- 
 }
+
+
 
