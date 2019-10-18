@@ -21,7 +21,9 @@ export default class RSVP extends React.Component {
 
     client.query({
       query: gql(addCharge),
-      variables: JSON.stringify(token)
+      variables: {
+        token: JSON.stringify(token)
+      }
     }).then(data => alert(`We are in business, ${data.email}`))
       .catch(e => alert(e))
 
