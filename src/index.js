@@ -12,6 +12,7 @@ import 'tachyons';
 
 import App from './containers/App';
 import Event from './containers/Event';
+import RSVP from './containers/RSVP';
 import registerServiceWorker from './registerServiceWorker';
 import { requestCauses, requestCause, searchCauses } from './reducers'
 
@@ -38,6 +39,8 @@ const routing = (
       <Provider store={store}>	
       <Route exact={true} path="/" component={App} />
       <Route path="/event/create/:organizationId/:id" component={Event} />
+      <Route path="/rsvp" component={RSVP} />
+      
       </Provider>
     </div>
   </Router>
