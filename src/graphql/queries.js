@@ -42,3 +42,13 @@ export const addEvent = `mutation addEvent($eventName: String!) {
 `;
 
 
+export const addEvent = `mutation addCharge($token: AWSJSON!!) {
+   addCharge(token: $token) {
+    body
+  }
+  }
+`;
+
+
+
+

@@ -38,10 +38,6 @@ export const requestCauses = () => (dispatch) => {
 	  
 	}).then(data => dispatch({ type: REQUEST_CAUSES_SUCCESS, payload: data.data.getAllCauses.causes }))
 	  .catch(e => dispatch({ type: REQUEST_CAUSES_FAILED, payload: e }))
-
-  // apiCall('https://c0rhb23fte.execute-api.us-east-1.amazonaws.com/dev/cause')
-  //   .then(data => dispatch({ type: REQUEST_CAUSES_SUCCESS, payload: data }))
-  //   .catch(error => dispatch({ type: REQUEST_CAUSES_FAILED, payload: error }))
 }
 
 
@@ -50,8 +46,8 @@ export const requestCause = (organizationId, id) => (dispatch) => {
   client.query({
 	  query: gql(getCauseInfo),
 	  variables: {
-        organizationId: organizationId,//"60790acc-8d7c-11e9-bc42-526af7764f64",
-		    id: id,//"b8586912-dc35-11e9-a981-95bdc25a2792",
+        organizationId: organizationId,
+		    id: id,
         
 	  }
 	}).then(data => dispatch({ type: REQUEST_CAUSE_SUCCESS, payload: data.data.getCauseInfo }))
