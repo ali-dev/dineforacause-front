@@ -6,38 +6,16 @@ import {addCharge} from '../graphql/queries'
 export default class RSVP extends React.Component {
 
   
-  // client.query({
-  //   query: gql(getCauseInfo),
-  //   variables: {
-  //       organizationId: organizationId,
-  //       id: id,
-        
-  //   }
-  // }).then(data => dispatch({ type: REQUEST_CAUSE_SUCCESS, payload: data.data.getCauseInfo }))
-  //   .catch(e => dispatch({ type: REQUEST_CAUSE_FAILED, payload: e }))
-
-
   onToken = (token) => {
-
-    client.query({
-      query: gql(addCharge),
+    client.mutate({
+      mutation: gql(addCharge),
       variables: {
-        token: JSON.stringify(token)
+        token: JSON.stringify(JSON.stringify(token))
       }
     }).then(data => alert(`We are in business, ${data.email}`))
       .catch(e => alert(e))
-
-    // fetch('/save-stripe-token', {
-    //   method: 'POST',
-    //   body: JSON.stringify(token),
-    // }).then(response => {
-    //   response.json().then(data => {
-    //     alert(`We are in business, ${data.email}`);
-    //   });
-    // });
   }
  
-  // ...
  
   render() {
     return (
