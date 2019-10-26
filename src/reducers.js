@@ -5,7 +5,10 @@ import {
   REQUEST_CAUSES_FAILED,
   REQUEST_CAUSE_PENDING,
   REQUEST_CAUSE_SUCCESS,
-  REQUEST_CAUSE_FAILED  
+  REQUEST_CAUSE_FAILED, 
+  ADD_EVENT_PENDING,
+  ADD_EVENT_SUCCESS,
+  ADD_EVENT_FAILED  
  } from './constants';
 
 const initialStateSearch = {
@@ -57,3 +60,19 @@ export const requestCause = (state=initialStateCause, action={}) => {
       return state
   }
 }
+
+
+export const addEvent = (state=initialStateCause, action={}) => {
+  switch (action.type) {
+    case ADD_EVENT_PENDING:
+      return Object.assign({}, state, {isPending: true})
+    case ADD_EVENT_SUCCESS:
+      return Object.assign({}, state, {causes: action.payload, isPending: false})
+    case ADD_EVENT_FAILED:
+      return Object.assign({}, state, {error: action.payload})
+    default:
+      return state
+  }
+}
+
+

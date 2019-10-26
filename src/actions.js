@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {getCauseInfo, getCauses, addCharge} from './graphql/queries';
+import {getCauseInfo, getCauses, addCharge, addEvent} from './graphql/queries';
 import client from './api/appSyncClient'
 //import { apiCall } from './api/api'
 import {
@@ -10,6 +10,9 @@ import {
   REQUEST_CAUSE_PENDING,
   REQUEST_CAUSE_SUCCESS,
   REQUEST_CAUSE_FAILED,
+  ADD_EVENT_SUCCESS,
+  ADD_EVENT_FAILED,
+  ADD_EVENT_PENDING
   
  } from './constants'
 
@@ -40,6 +43,18 @@ export const requestCause = (organizationId, id) => (dispatch) => {
 	  }
 	}).then(data => dispatch({ type: REQUEST_CAUSE_SUCCESS, payload: data.data.getCauseInfo }))
 	  .catch(e => dispatch({ type: REQUEST_CAUSE_FAILED, payload: e }))
+}
+
+
+export const submitAddEventForm = (formData) => (dispatch) => {
+  dispatch({ type: REQUEST_CAUSE_PENDING })
+  client.mutate({
+    mutation: gql(addEvent),
+    variables: formData
+  })
+  .then(data => dispatch({ type: ADD_EVENT_SUCCESS, payload: data.data.eventName}))
+  .catch(e => dispatch({type: ADD_EVENT_FAILED, payload: e}))
+
 }
 
 

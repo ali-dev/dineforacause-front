@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Checkbox, Form, Select, Step, Divider } from 'semantic-ui-react'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
+// import { addEvent } from '../graphql/queries';
+import { submitAddEventForm } from '../actions';
+
  const states = [
   {key: 'n', text: 'New York', value: 'New York City' },
   { key: 'm', text: 'Minnesota', value: 'Minnesota' },
@@ -12,12 +16,29 @@ import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
   ];
 
 
+const mapStateToProps = (state) => {
 
+  return {
+  	  eventName: '',
+      address: '',	
+      date: '',
+      time: '',
+      country: '',
+      state: '',
+      zipCode: ''      
+	  }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleSubmit: (event) => dispatch(submitAddEventForm(event.target.value))
+  }
+}
 
 class CreateEventForm extends Component {
   constructor(props) {
     super(props);
- 	this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       eventName: '',
       address: '',	
@@ -27,6 +48,7 @@ class CreateEventForm extends Component {
       state: '',
       zipCode: ''      
     };
+
   }
 
   handleChange = (event, {name, value}) => {
@@ -35,28 +57,29 @@ class CreateEventForm extends Component {
     }
   }
   
-  handleSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    let object = {};
-	data.forEach((value, key) => {object[key] = value});
-	let json = JSON.stringify(object);
-	console.log(json)
-	console.log(object)
-	
-    console.log(this.state);
+ //  handleSubmit(event) {
+ //    event.preventDefault();
+ //    const data = new FormData(event.target);
+ //    let object = {};
+	// data.forEach((value, key) => {object[key] = value});
+	// let json = JSON.stringify(object);
+	// console.log(json)
+	// console.log(object)
+	// console.log(this.state);
+	// submitAddEventForm(this.state)
+    
 
-  }
+ //  }
 
   componentDidMount() {
     // this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
     
   }
   render() {
-  	const { cause } = this.props;
+  	const { cause, handleSubmit } = this.props;
     
     return (
-    	<Form onSubmit={this.handleSubmit}>
+    	<Form onSubmit={handleSubmit}>
 	    <Form.Field required>
 	      <label>Event Name</label>
 	      <input  id='eventName' name='eventName' placeholder='Event Name' />
@@ -119,4 +142,6 @@ class CreateEventForm extends Component {
   }
 }
 
-export default CreateEventForm
+// export default CreateEventForm
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateEventForm)
