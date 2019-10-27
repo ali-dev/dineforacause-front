@@ -56,12 +56,12 @@ class Event extends Component {
     	          </header>
                 */}
   	          <section className="bg-white w-100  ">
-  	               <div  className="fl w-30 pt5 pa3 pa2-ns   bg-white   ">
+  	               <div  className="fl w-40 pt5 pa3 pa2-ns   bg-white   ">
   	               	 <CreateEventForm/>
                       
   	               </div>
 
-                   <div className="fl w-70  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">
+                   <div className="fl w-60  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">
                       <h2   className="f2 orange">Causes</h2>
                       {cause.causeName}
                    </div>

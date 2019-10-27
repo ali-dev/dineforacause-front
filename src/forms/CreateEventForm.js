@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Checkbox, Form, Select, Step, Divider } from 'semantic-ui-react'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
@@ -16,26 +16,40 @@ import { submitAddEventForm } from '../actions';
   { key: 'j', text: 'Jordan', value: 'Jordan' },
   ];
 
+  const amounts = [
+  {key: '10', text: '$10', value: '10' },
+  {key: '15', text: '$15', value: '15' },
+  {key: '20', text: '$20', value: '20' },
+  {key: '30', text: '$30', value: '30' },
+  {key: '40', text: '$40', value: '40' },
+  {key: '50', text: '$50', value: '50' },
+  {key: '60', text: '$60', value: '60' },
+  {key: '70', text: '$70', value: '70' },
+  {key: '80', text: '$80', value: '80' },
+  {key: '100', text: '$100', value: '100' },
+  {key: '120', text: '$120', value: '120' },
+  {key: '140', text: '$140', value: '140' },
+  {key: '160', text: '$160', value: '160' },
+  {key: '180', text: '$180', value: '180' },
+  {key: '200', text: '$200', value: '200' },
+  ];
 
-// const mapStateToProps = (state) => {
+  const mapStateToProps = (state) => {
+	  return {
+	      eventName: '',
+	      address: '',	
+	      date: '',
+	      time: '',
+	      country: '',
+	      state: '',
+	      zipCode: '',
+	      minDonation: '',
+	      recommendedDonation: '',
+	      maxCapacity: ''      
+	  }
+   }
 
-//   return {
-//   	  eventName: '',
-//       address: '',	
-//       date: '',
-//       time: '',
-//       country: '',
-//       state: '',
-//       zipCode: ''      
-// 	  }
-// }
 
-
-// const mapDispatchToProps = (dispatch, ownProps) => {
-//   return {
-//     submitF: (event) => dispatch(submitAddEventForm(event))
-//   }
-// }
 
 class CreateEventForm extends Component {
   constructor(props) {
@@ -47,28 +61,53 @@ class CreateEventForm extends Component {
       time: '',
       country: '',
       state: '',
-      zipCode: ''      
+      zipCode: '',
+      minDonation: '',
+      recommendedDonation: '',
+      maxCapacity: ''      
     };
 
   }
 
+  
+
   handleChange = (event, {name, value}) => {
+  	console.log("state updating")
+  	console.log(name)
+  	console.log(this.state.hasOwnProperty(name))
+  	console.log(value)
+  	
     if (this.state.hasOwnProperty(name)) {
+    	console.log("state updated")
       this.setState({ [name]: value });
+      console.log(this.state);
     }
   }
   
+
+  handleChangeInput = (event ) => {
+    if (this.state.hasOwnProperty(event.target.name)) {
+      this.setState({ [event.target.name]: event.target.value });
+      console.log(this.state);
+    }
+  }
+  
+
   handleSubmit(event) {
     event.preventDefault();
-    const data = new FormData(event.target);
-    let object = {};
-	data.forEach((value, key) => {object[key] = value});
+    console.log(this.state);
+    
+ //    const data = new FormData(event.target);
+ //    let object = {};
+	// data.forEach((value, key) => {object[key] = value});
+	console.log("test")
+	
 	// let json = JSON.stringify(object);
 	// console.log(json)
 	// console.log(object)
 	// console.log(this.state);
 	// this.props.submitF(this.state)
-	trigger.createEvent(object)    
+	trigger.createEvent(this.state)    
 
   }
 
@@ -77,13 +116,13 @@ class CreateEventForm extends Component {
     
   }
   render() {
-  	const { cause, handleSubmit } = this.props;
+  	const { cause } = this.props;
     
     return (
-    	<Form onSubmit={this.handleSubmit}>
+    	<Form onSubmit={this.handleSubmit.bind(this)}>
 	    <Form.Field required>
 	      <label>Event Name</label>
-	      <input   name='eventName' placeholder='Event Name' />
+	      <input onChange={this.handleChangeInput}   name="eventName" placeholder="Event Name" />
 	    </Form.Field>
 	    
 	    <Form.Group widths='equal'>
@@ -106,7 +145,7 @@ class CreateEventForm extends Component {
 	    <div className="ui divider"></div>
 	    <Form.Field required>
 	      <label>Address</label>
-	      <input name="address" />
+	      <input onChange={this.handleChangeInput} name="address" />
 	    </Form.Field>
 
 	    <Form.Select  
@@ -126,13 +165,40 @@ class CreateEventForm extends Component {
 	    />
 	    <Form.Field>
 	      <label>Zip Code</label>
-	      <input id='zipCode' name='zipCode' placeholder='Enter Zip Code' />
+	      <input  onChange={this.handleChangeInput} id='zipCode' name='zipCode' placeholder='Enter Zip Code' />
 	    </Form.Field>
 	    
 	    </Form.Group>
 	    
 	    <div className="ui divider"></div>
-	    
+	    <Form.Field>
+		      <label>Max. number of guests </label>
+		      <input onChange={this.handleChangeInput} id='maxCapacity' name='maxCapacity' placeholder='Enter Max Number of Guests' />
+		    </Form.Field>
+
+	    <Form.Group widths='equal'>
+		     <Form.Select 
+		    	options={amounts}
+		    	label='Minimum Donation'
+		    	placeholder='Minimum Donation'
+		    	name='minDonation'
+		    	value={this.state.minDonation}
+		    	onChange={this.handleChange}
+	    	/>	
+		     <Form.Select 
+		    	options={amounts}
+		    	label='Recommended Donation'
+		    	placeholder='Recommended Donation'
+		    	name='recommendedDonation'
+		    	value={this.state.recommendedDonation}
+		    	onChange={this.handleChange}
+	    	/>	
+
+		    
+        </Form.Group>
+
+
+
 	    <Form.Field>
 	      <Checkbox label='I agree to the Terms and Conditions' />
 	    </Form.Field>
@@ -144,30 +210,3 @@ class CreateEventForm extends Component {
 }
 
 export default CreateEventForm
-
-// export default connect(mapStateToProps, mapDispatchToProps)(CreateEventForm)
-
-
-// export default connect(
-//   state => ({
-//   	  eventName: '',
-//       address: '',	
-//       date: '',
-//       time: '',
-//       country: '',
-//       state: '',
-//       zipCode: ''      
-// 	  }),
-//   // { submitF }
-//   (dispatch, ownProps, stateProps) => ({
-//     ...ownProps,
-//     ...stateProps,
-//     ...dispatch,
-//     submitF: (event) => dispatch(submitAddEventForm(useState))
-//     // unlockItem(item_id) {
-//     //     if (stateProps.quota > 0) {
-//     //       dispatchProps.unlockItem(item_id)
-//     //     }
-//     // }
-//   })
-// )(CreateEventForm)
