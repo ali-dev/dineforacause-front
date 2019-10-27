@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Checkbox, Form, Select, Step, Divider } from 'semantic-ui-react'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
-// import { addEvent } from '../graphql/queries';
+import { addEvent } from '../graphql/queries';
+import  trigger  from '../graphql/triggers'
 import { submitAddEventForm } from '../actions';
 
  const states = [
@@ -16,25 +17,25 @@ import { submitAddEventForm } from '../actions';
   ];
 
 
-const mapStateToProps = (state) => {
+// const mapStateToProps = (state) => {
 
-  return {
-  	  eventName: '',
-      address: '',	
-      date: '',
-      time: '',
-      country: '',
-      state: '',
-      zipCode: ''      
-	  }
-}
+//   return {
+//   	  eventName: '',
+//       address: '',	
+//       date: '',
+//       time: '',
+//       country: '',
+//       state: '',
+//       zipCode: ''      
+// 	  }
+// }
 
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleSubmit: (event) => dispatch(submitAddEventForm(event.target.value))
-  }
-}
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//   return {
+//     submitF: (event) => dispatch(submitAddEventForm(event))
+//   }
+// }
 
 class CreateEventForm extends Component {
   constructor(props) {
@@ -57,19 +58,19 @@ class CreateEventForm extends Component {
     }
   }
   
- //  handleSubmit(event) {
- //    event.preventDefault();
- //    const data = new FormData(event.target);
- //    let object = {};
-	// data.forEach((value, key) => {object[key] = value});
+  handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    let object = {};
+	data.forEach((value, key) => {object[key] = value});
 	// let json = JSON.stringify(object);
 	// console.log(json)
 	// console.log(object)
 	// console.log(this.state);
-	// submitAddEventForm(this.state)
-    
+	// this.props.submitF(this.state)
+	trigger.createEvent(object)    
 
- //  }
+  }
 
   componentDidMount() {
     // this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
@@ -79,10 +80,10 @@ class CreateEventForm extends Component {
   	const { cause, handleSubmit } = this.props;
     
     return (
-    	<Form onSubmit={handleSubmit}>
+    	<Form onSubmit={this.handleSubmit}>
 	    <Form.Field required>
 	      <label>Event Name</label>
-	      <input  id='eventName' name='eventName' placeholder='Event Name' />
+	      <input   name='eventName' placeholder='Event Name' />
 	    </Form.Field>
 	    
 	    <Form.Group widths='equal'>
@@ -142,6 +143,31 @@ class CreateEventForm extends Component {
   }
 }
 
-// export default CreateEventForm
+export default CreateEventForm
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateEventForm)
+// export default connect(mapStateToProps, mapDispatchToProps)(CreateEventForm)
+
+
+// export default connect(
+//   state => ({
+//   	  eventName: '',
+//       address: '',	
+//       date: '',
+//       time: '',
+//       country: '',
+//       state: '',
+//       zipCode: ''      
+// 	  }),
+//   // { submitF }
+//   (dispatch, ownProps, stateProps) => ({
+//     ...ownProps,
+//     ...stateProps,
+//     ...dispatch,
+//     submitF: (event) => dispatch(submitAddEventForm(useState))
+//     // unlockItem(item_id) {
+//     //     if (stateProps.quota > 0) {
+//     //       dispatchProps.unlockItem(item_id)
+//     //     }
+//     // }
+//   })
+// )(CreateEventForm)

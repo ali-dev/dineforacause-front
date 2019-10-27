@@ -47,6 +47,8 @@ export const requestCause = (organizationId, id) => (dispatch) => {
 
 
 export const submitAddEventForm = (formData) => (dispatch) => {
+  console.log(formData)
+  console.log(formData)
   dispatch({ type: REQUEST_CAUSE_PENDING })
   client.mutate({
     mutation: gql(addEvent),
