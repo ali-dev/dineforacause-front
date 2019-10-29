@@ -34,20 +34,20 @@ import { submitAddEventForm } from '../actions';
   {key: '200', text: '$200', value: '200' },
   ];
 
-  const mapStateToProps = (state) => {
-	  return {
-	      eventName: '',
-	      address: '',	
-	      date: '',
-	      time: '',
-	      country: '',
-	      state: '',
-	      zipCode: '',
-	      minDonation: '',
-	      recommendedDonation: '',
-	      maxCapacity: ''      
-	  }
-   }
+  // const mapStateToProps = (state) => {
+	 //  return {
+	 //      eventName: '',
+	 //      address: '',	
+	 //      date: '',
+	 //      time: '',
+	 //      country: '',
+	 //      state: '',
+	 //      zipCode: '',
+	 //      minDonation: '',
+	 //      recommendedDonation: '',
+	 //      maxCapacity: ''      
+	 //  }
+  //  }
 
 
 
@@ -56,7 +56,7 @@ class CreateEventForm extends Component {
     super(props);
     this.state = {
       eventName: '',
-      address: '',	
+      location: '',	
       date: '',
       time: '',
       country: '',
@@ -95,18 +95,7 @@ class CreateEventForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
     
- //    const data = new FormData(event.target);
- //    let object = {};
-	// data.forEach((value, key) => {object[key] = value});
-	console.log("test")
-	
-	// let json = JSON.stringify(object);
-	// console.log(json)
-	// console.log(object)
-	// console.log(this.state);
-	// this.props.submitF(this.state)
 	trigger.createEvent(this.state)    
 
   }
@@ -144,8 +133,8 @@ class CreateEventForm extends Component {
         
 	    <div className="ui divider"></div>
 	    <Form.Field required>
-	      <label>Address</label>
-	      <input onChange={this.handleChangeInput} name="address" />
+	      <label>Location</label>
+	      <input onChange={this.handleChangeInput} name="location" />
 	    </Form.Field>
 
 	    <Form.Select  

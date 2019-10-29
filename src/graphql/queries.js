@@ -36,18 +36,22 @@ export const getCauses = `query causes {
 
 export const addEvent = `mutation addEvent(
 $eventName: String!, 
-$address: String! , 
+$location: String! , 
 $zipCode: String, 
 $minDonation: Int, 
 $recommendedDonation: Int!,
+$date: String!, 
+$time: String!,
 $maxCapacity: Int!) {
    addEvent(
    eventName: $eventName, 
-   address: $address, 
+   location: $location, 
    zipCode: $zipCode, 
    minDonation: $minDonation, 
    recommendedDonation: $recommendedDonation,
-   maxCapacity: $maxCapacity
+   maxCapacity: $maxCapacity,
+   date: $date,
+   time: $time
    ) {
     eventName
   }
