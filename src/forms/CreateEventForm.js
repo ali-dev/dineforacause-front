@@ -6,15 +6,15 @@ import { addEvent } from '../graphql/queries';
 import  trigger  from '../graphql/triggers'
 import { submitAddEventForm } from '../actions';
 
- const states = [
-  {key: 'n', text: 'New York', value: 'New York City' },
-  { key: 'm', text: 'Minnesota', value: 'Minnesota' },
-  ];
+ // const states = [
+ //  {key: 'n', text: 'New York', value: 'New York City' },
+ //  { key: 'm', text: 'Minnesota', value: 'Minnesota' },
+ //  ];
 
-  const countries = [
-  {key: 'u', text: 'United States', value: 'United States' },
-  { key: 'j', text: 'Jordan', value: 'Jordan' },
-  ];
+  // const countries = [
+  // {key: 'u', text: 'United States', value: 'United States' },
+  // { key: 'j', text: 'Jordan', value: 'Jordan' },
+  // ];
 
   const amounts = [
   {key: '10', text: '$10', value: '10' },
@@ -34,20 +34,7 @@ import { submitAddEventForm } from '../actions';
   {key: '200', text: '$200', value: '200' },
   ];
 
-  // const mapStateToProps = (state) => {
-	 //  return {
-	 //      eventName: '',
-	 //      address: '',	
-	 //      date: '',
-	 //      time: '',
-	 //      country: '',
-	 //      state: '',
-	 //      zipCode: '',
-	 //      minDonation: '',
-	 //      recommendedDonation: '',
-	 //      maxCapacity: ''      
-	 //  }
-  //  }
+ 
 
 
 
@@ -136,7 +123,7 @@ class CreateEventForm extends Component {
 	      <label>Location</label>
 	      <input onChange={this.handleChangeInput} name="location" />
 	    </Form.Field>
-
+	    {/*
 	    <Form.Select  
 	        onChange={this.handleChange}
 	    	options={countries}
@@ -157,7 +144,7 @@ class CreateEventForm extends Component {
 	      <input  onChange={this.handleChangeInput} id='zipCode' name='zipCode' placeholder='Enter Zip Code' />
 	    </Form.Field>
 	    
-	    </Form.Group>
+	    </Form.Group>*/}
 	    
 	    <div className="ui divider"></div>
 	    <Form.Field>
