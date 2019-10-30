@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {getCauseInfo, getCauses, addCharge, addEvent, getEventByView} from './graphql/queries';
+import {getCauseInfo, getCauses, addCharge, addEvent, getEventForView} from './graphql/queries';
 import client from './api/appSyncClient'
 import {
   CHANGE_SEARCHFIELD,
@@ -44,13 +44,13 @@ export const requestCause = (organizationId, id) => (dispatch) => {
 }
 
 export const requestEventForView = (viewId) => (dispatch) => {
-  dispatch({ type: REQUEST_EVENT_PENDING })
+  dispatch({ type: REQUEST_EVENT_PENDING });
   client.query({
-    query: gql(getEventByView),
+    query: gql(getEventForView),
     variables: {
         viewId: viewId
     }
-  }).then(data => dispatch({ type: REQUEST_EVENT_SUCCESS, payload: data.data.getEventByView }))
+  }).then(data => dispatch({ type: REQUEST_EVENT_SUCCESS, payload: data.data.getEventForView }))
     .catch(e => dispatch({ type: REQUEST_EVENT_FAILED, payload: e }))
 }
 

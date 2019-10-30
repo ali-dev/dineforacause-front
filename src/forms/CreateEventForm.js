@@ -6,8 +6,8 @@ import  trigger  from '../graphql/triggers'
 import { submitAddEventForm } from '../actions';
 import  shortid  from 'shortid';
 
-// import { withRouter } from "react-router-dom";
 import createHistory from 'history/createBrowserHistory'
+// require("history").createBrowserHistory as createHistory
 // import { useHistory } from "react-router-dom";
 const history = createHistory()
  // const states = [

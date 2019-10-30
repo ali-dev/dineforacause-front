@@ -64,8 +64,8 @@ $rsvpId: String!
   }
 `;
 
-export const getEventByView = `query getEventByView($viewId: String!)
-  getEventByView(viewId: $viewId) {
+export const getEventForView = `query getEventForView($viewId: String!) {
+  getEventForView(viewId: $viewId) {
     eventName
     location
     date
@@ -74,6 +74,7 @@ export const getEventByView = `query getEventByView($viewId: String!)
     editId
     rsvpId
   }
+}
 `
 
 
