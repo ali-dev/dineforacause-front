@@ -56,15 +56,8 @@ class CreateEventForm extends Component {
   
 
   handleChange = (event, {name, value}) => {
-  	console.log("state updating")
-  	console.log(name)
-  	console.log(this.state.hasOwnProperty(name))
-  	console.log(value)
-  	
-    if (this.state.hasOwnProperty(name)) {
-    	console.log("state updated")
+  	if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
-      console.log(this.state);
     }
   }
   
