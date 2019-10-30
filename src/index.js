@@ -13,8 +13,9 @@ import 'tachyons';
 import App from './containers/App';
 import Event from './containers/Event';
 import RSVP from './containers/RSVP';
+import EventView from './containers/EventView';
 import registerServiceWorker from './registerServiceWorker';
-import { requestCauses, requestCause, searchCauses } from './reducers'
+import { requestCauses, requestCause, searchCauses, requestEventForView } from './reducers'
 
 import './index.css';
 
@@ -28,7 +29,7 @@ Amplify.configure(awsconfig);
 
 const logger = createLogger()
 
-const rootReducers = combineReducers({requestCauses, requestCause, searchCauses})
+const rootReducers = combineReducers({requestCauses, requestCause, searchCauses, requestEventForView})
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
 
@@ -40,6 +41,7 @@ const routing = (
       <Route exact={true} path="/" component={App} />
       <Route path="/event/create/:organizationId/:id" component={Event} />
       <Route path="/rsvp" component={RSVP} />
+      <Route path="/event/view/:viewId" component={EventView} />
       
       </Provider>
     </div>

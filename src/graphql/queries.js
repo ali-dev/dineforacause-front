@@ -58,11 +58,23 @@ $rsvpId: String!
    editId: $editId,
    rsvpId: $rsvpId
    ) {
-    eventName,
+    eventName
     viewId
   }
   }
 `;
+
+export const getEventByView = `query getEventByView($viewId: String!)
+  getEventByView(viewId: $viewId) {
+    eventName
+    location
+    date
+    time
+    viewId
+    editId
+    rsvpId
+  }
+`
 
 
 export const addCharge = `mutation addCharge($token: AWSJSON!) {

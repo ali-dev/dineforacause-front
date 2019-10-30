@@ -6,9 +6,9 @@ import {
   REQUEST_CAUSE_PENDING,
   REQUEST_CAUSE_SUCCESS,
   REQUEST_CAUSE_FAILED, 
-  ADD_EVENT_PENDING,
-  ADD_EVENT_SUCCESS,
-  ADD_EVENT_FAILED  
+  REQUEST_EVENT_PENDING,
+  REQUEST_EVENT_SUCCESS,
+  REQUEST_EVENT_FAILED  
  } from './constants';
 
 const initialStateSearch = {
@@ -62,16 +62,33 @@ export const requestCause = (state=initialStateCause, action={}) => {
 }
 
 
-export const addEvent = (state=initialStateCause, action={}) => {
+// export const addEvent = (state=initialStateCause, action={}) => {
+//   switch (action.type) {
+//     case ADD_EVENT_PENDING:
+//       return Object.assign({}, state, {isPending: true})
+//     case ADD_EVENT_SUCCESS:
+//       return Object.assign({}, state, {causes: action.payload, isPending: false})
+//     case ADD_EVENT_FAILED:
+//       return Object.assign({}, state, {error: action.payload})
+//     default:
+//       return state
+//   }
+// }
+
+const initialStateEventView = {
+  event: undefined,
+  isPending: true
+}
+export const requestEventForView = (state=initialStateEventView, action={}) => {
   switch (action.type) {
-    case ADD_EVENT_PENDING:
+    case REQUEST_EVENT_PENDING:
       return Object.assign({}, state, {isPending: true})
-    case ADD_EVENT_SUCCESS:
-      return Object.assign({}, state, {causes: action.payload, isPending: false})
-    case ADD_EVENT_FAILED:
+    case REQUEST_EVENT_SUCCESS:
+      return Object.assign({}, state, {cause: action.payload, isPending: false})
+    case REQUEST_EVENT_FAILED:
       return Object.assign({}, state, {error: action.payload})
     default:
-      return state
+      return state  
   }
 }
 
