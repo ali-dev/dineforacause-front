@@ -41,7 +41,11 @@ $minDonation: Int,
 $recommendedDonation: Int!,
 $date: String!, 
 $time: String!,
-$maxCapacity: Int!) {
+$maxCapacity: Int!
+$viewId: String!,
+$editId: String!,
+$rsvpId: String!
+) {
    addEvent(
    eventName: $eventName, 
    location: $location, 
@@ -49,9 +53,13 @@ $maxCapacity: Int!) {
    recommendedDonation: $recommendedDonation,
    maxCapacity: $maxCapacity,
    date: $date,
-   time: $time
+   time: $time,
+   viewId: $viewId,
+   editId: $editId,
+   rsvpId: $rsvpId
    ) {
-    eventName
+    eventName,
+    viewId
   }
   }
 `;

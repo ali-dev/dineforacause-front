@@ -5,7 +5,12 @@ import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 import { addEvent } from '../graphql/queries';
 import  trigger  from '../graphql/triggers'
 import { submitAddEventForm } from '../actions';
+import  shortid  from 'shortid';
 
+// import { withRouter } from "react-router-dom";
+import createHistory from 'history/createBrowserHistory'
+// import { useHistory } from "react-router-dom";
+const history = createHistory()
  // const states = [
  //  {key: 'n', text: 'New York', value: 'New York City' },
  //  { key: 'm', text: 'Minnesota', value: 'Minnesota' },
@@ -48,7 +53,11 @@ class CreateEventForm extends Component {
       time: '',
       minDonation: '',
       recommendedDonation: '',
-      maxCapacity: ''      
+      maxCapacity: '',
+      viewId: shortid.generate(),
+      editId: shortid.generate(),
+      rsvpId: shortid.generate()
+            
     };
 
   }
@@ -73,7 +82,12 @@ class CreateEventForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     
-	trigger.createEvent(this.state)    
+    trigger
+		.createEvent(this.state)
+		.then(data => {
+			console.log(data)
+			history.push(`/event/view/${data.data.addEvent.viewId}`);
+		} )     
 
   }
 
@@ -83,7 +97,6 @@ class CreateEventForm extends Component {
   }
   render() {
   	const { cause } = this.props;
-    
     return (
     	<Form onSubmit={this.handleSubmit.bind(this)}>
 	    <Form.Field required>
