@@ -46,9 +46,6 @@ class CreateEventForm extends Component {
       location: '',	
       date: '',
       time: '',
-      country: '',
-      state: '',
-      zipCode: '',
       minDonation: '',
       recommendedDonation: '',
       maxCapacity: ''      
