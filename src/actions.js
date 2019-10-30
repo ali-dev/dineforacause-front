@@ -1,7 +1,6 @@
 import gql from 'graphql-tag';
 import {getCauseInfo, getCauses, addCharge, addEvent, getEventByView} from './graphql/queries';
 import client from './api/appSyncClient'
-//import { apiCall } from './api/api'
 import {
   CHANGE_SEARCHFIELD,
   REQUEST_CAUSES_PENDING,
@@ -10,9 +9,6 @@ import {
   REQUEST_CAUSE_PENDING,
   REQUEST_CAUSE_SUCCESS,
   REQUEST_CAUSE_FAILED,
-  ADD_EVENT_SUCCESS,
-  ADD_EVENT_FAILED,
-  ADD_EVENT_PENDING,
   REQUEST_EVENT_PENDING,
   REQUEST_EVENT_SUCCESS,
   REQUEST_EVENT_FAILED
@@ -24,7 +20,6 @@ export const setSearchField = (text) => ({ type: CHANGE_SEARCHFIELD, payload: te
 
 export const requestCauses = () => (dispatch) => {
   dispatch({ type: REQUEST_CAUSES_PENDING })
-  // apiCall('https://jsonplaceholder.typicode.com/posts')
   client.query({
 	  query: gql(getCauses),
 	  
@@ -49,7 +44,6 @@ export const requestCause = (organizationId, id) => (dispatch) => {
 }
 
 export const requestEventForView = (viewId) => (dispatch) => {
-  console.log("here");
   dispatch({ type: REQUEST_EVENT_PENDING })
   client.query({
     query: gql(getEventByView),
@@ -58,19 +52,6 @@ export const requestEventForView = (viewId) => (dispatch) => {
     }
   }).then(data => dispatch({ type: REQUEST_EVENT_SUCCESS, payload: data.data.getEventByView }))
     .catch(e => dispatch({ type: REQUEST_EVENT_FAILED, payload: e }))
-}
-
-
-
-export const submitAddEventForm = (formData) => (dispatch) => {
-  dispatch({ type: REQUEST_CAUSE_PENDING })
-  client.mutate({
-    mutation: gql(addEvent),
-    variables: formData
-  })
-  .then(data => dispatch({ type: ADD_EVENT_SUCCESS, payload: data.data.eventName}))
-  .catch(e => dispatch({type: ADD_EVENT_FAILED, payload: e}))
-
 }
 
 

@@ -6,7 +6,6 @@ import { createLogger } from 'redux-logger';
 import FormStep from '../components/FormStep'
 import { requestCause } from '../actions';
 import CreateEventForm from '../forms/CreateEventForm'
-// import './App.css';
 const logger = createLogger()
 
 const mapStateToProps = (state) => {

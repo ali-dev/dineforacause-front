@@ -62,19 +62,6 @@ export const requestCause = (state=initialStateCause, action={}) => {
 }
 
 
-// export const addEvent = (state=initialStateCause, action={}) => {
-//   switch (action.type) {
-//     case ADD_EVENT_PENDING:
-//       return Object.assign({}, state, {isPending: true})
-//     case ADD_EVENT_SUCCESS:
-//       return Object.assign({}, state, {causes: action.payload, isPending: false})
-//     case ADD_EVENT_FAILED:
-//       return Object.assign({}, state, {error: action.payload})
-//     default:
-//       return state
-//   }
-// }
-
 const initialStateEventView = {
   event: undefined,
   isPending: true
