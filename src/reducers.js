@@ -34,6 +34,7 @@ export const requestCauses = (state=initialStateCauses, action={}) => {
     case REQUEST_CAUSES_PENDING:
       return Object.assign({}, state, {isPending: true})
     case REQUEST_CAUSES_SUCCESS:
+      console.log(action.payload);
       return Object.assign({}, state, {causes: action.payload, isPending: false})
     case REQUEST_CAUSES_FAILED:
       return Object.assign({}, state, {error: action.payload})
@@ -71,7 +72,7 @@ export const requestEventForView = (state=initialStateEventView, action={}) => {
     case REQUEST_EVENT_PENDING:
       return Object.assign({}, state, {isPending: true})
     case REQUEST_EVENT_SUCCESS:
-      return Object.assign({}, state, {cause: action.payload, isPending: false})
+      return Object.assign({}, state, {event: action.payload, isPending: false})
     case REQUEST_EVENT_FAILED:
       return Object.assign({}, state, {error: action.payload})
     default:

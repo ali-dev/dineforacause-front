@@ -10,10 +10,10 @@ export default class RSVP extends React.Component {
     client.mutate({
       mutation: gql(addCharge),
       variables: {
-        token: JSON.stringify(JSON.stringify(token))
+        token: JSON.stringify(token)
       }
     }).then(data => alert(`We are in business, ${data.email}`))
-      .catch(e => alert(e))
+      .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`))
   }
  
  

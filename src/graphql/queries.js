@@ -78,7 +78,7 @@ export const getEventForView = `query getEventForView($viewId: String!) {
 `
 
 
-export const addCharge = `mutation addCharge($token: AWSJSON!) {
+export const addCharge = `mutation addCharge($token: String!) {
     addCharge(token: $token) {
       body
     }
