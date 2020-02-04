@@ -64,7 +64,7 @@ export const requestCause = (state=initialStateCause, action={}) => {
 
 
 const initialStateEventView = {
-  event: undefined,
+  event: "test",
   isPending: true
 }
 export const requestEventForView = (state=initialStateEventView, action={}) => {

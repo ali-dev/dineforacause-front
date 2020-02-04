@@ -27,7 +27,7 @@ class EventView extends Component {
     
   }
   render() {
-  	const { event } = this.props;
+  	const { event, isPending } = this.props;
     
     return (
     <div  className="App ">
@@ -43,7 +43,7 @@ class EventView extends Component {
           </nav>  
         <div className="">
           <header className="bb b--black-40 pv4 bg-white">
-            <h3   className="f2 fw7 ttu tracked lh-title mt0 mb3  ml2 mr2 ">Create Event</h3>
+            <h3   className="f2 fw7 ttu tracked lh-title mt0 mb3  ml2 mr2 "> { event.location }</h3>
           </header>
   	      <article data-name="article-full-bleed-background">
     	      <div className="cf  Header-image-events" >
@@ -59,8 +59,19 @@ class EventView extends Component {
   	               </div>
 
                    <div className="fl w-60  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">
+                      <div>
                       <h2   className="f2 orange">Event</h2>
-                       { /*event.eventName*/ } 
+                       { event.location }
+                       </div> 
+                       <div>
+                       { event.date }
+                       </div> 
+                       <div>
+                       { event.time }
+                       </div> 
+                       <div>
+                       { event.minDonation }
+                       </div> 
                    </div>
   	          </section>
   	        </div>
