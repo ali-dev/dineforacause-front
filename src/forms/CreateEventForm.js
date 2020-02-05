@@ -55,8 +55,11 @@ class CreateEventForm extends Component {
       maxCapacity: '',
       viewId: shortid.generate(),
       editId: shortid.generate(),
-      rsvpId: shortid.generate()
-            
+      rsvpId: shortid.generate(),
+	  attendees: [],
+	  attendeeEmail: '',
+	  attendeeName: '',
+	        
     };
 
   }
@@ -73,9 +76,9 @@ class CreateEventForm extends Component {
   handleChangeInput = (event ) => {
     if (this.state.hasOwnProperty(event.target.name)) {
       this.setState({ [event.target.name]: event.target.value });
-      console.log(this.state);
     }
   }
+
   
 
   handleSubmit(event) {
@@ -90,14 +93,27 @@ class CreateEventForm extends Component {
 
   }
 
+  addAttendee = () => {
+	const attendees = this.state.attendees;
+	if (attendees[this.state.attendeeEmail]) {
+		alert(`Email ${this.state.attendeeEmail} already added`); 
+		return;
+	}	
+	attendees[this.state.attendeeEmail] = this.state.attendeeName;
+	this.setState({
+	  attendees: attendees,
+	});
+  };
+  
   componentDidMount() {
     // this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
     
   }
   render() {
-  	const { cause } = this.props;
+	  const { cause } = this.props;
+	  
     return (
-    	<Form onSubmit={this.handleSubmit.bind(this)}>
+		<Form size='small'>
 	    <Form.Field required>
 	      <label>Event Name</label>
 	      <input onChange={this.handleChangeInput}   name="eventName" placeholder="Event Name" />
@@ -175,14 +191,28 @@ class CreateEventForm extends Component {
 		    
         </Form.Group>
 
-
-
-	    <Form.Field>
+		{/* <Form.Field>
 	      <Checkbox label='I agree to the Terms and Conditions' />
 	    </Form.Field>
-	    <Button type='submit'  >Submit</Button>
-	  </Form>
-  
+	     */}
+		<div className="ui divider"></div>
+
+	    {/* <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button> */}
+		<h3 className="f3 green">Attendees</h3>
+		<Form.Group>
+		<Form.Field required>
+			
+			<input onChange={this.handleChangeInput}   name="attendeeName" value={this.state.attendeeName} placeholder="Attendee Name" />
+		</Form.Field>
+		<Form.Field required>
+			<input onChange={this.handleChangeInput}  value={this.state.attendeeEmail} name="attendeeEmail" placeholder="Attendee Email" />
+		</Form.Field>
+		<Form.Button content='Submit' onClick={this.addAttendee} />
+		</Form.Group>
+		<div className="attendees"></div>
+		</Form>
+
+	  
     )
   }
 }
