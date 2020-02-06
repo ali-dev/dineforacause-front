@@ -95,14 +95,24 @@ class CreateEventForm extends Component {
 
   addAttendee = () => {
 	const attendees = this.state.attendees;
+	const attendeeName = this.state.attendeeName;
+	const attendeeEmail = this.state.attendeeEmail
 	if (attendees[this.state.attendeeEmail]) {
 		alert(`Email ${this.state.attendeeEmail} already added`); 
 		return;
 	}	
-	attendees[this.state.attendeeEmail] = this.state.attendeeName;
+
+	// attendees[this.state.attendeeEmail] = this.state.attendeeName;
+	attendees.push({ attendeeName, attendeeEmail})
+	console.log(attendees);
 	this.setState({
 	  attendees: attendees,
+	  attendeeEmail: "",
+	  attendeeName: ""
+	  
 	});
+	// this.refs.attendeeName.label = "";
+	// this.forceUpdate();
   };
   
   componentDidMount() {
@@ -202,14 +212,27 @@ class CreateEventForm extends Component {
 		<Form.Group>
 		<Form.Field required>
 			
-			<input onChange={this.handleChangeInput}   name="attendeeName" value={this.state.attendeeName} placeholder="Attendee Name" />
+			<input onChange={this.handleChangeInput}   name="attendeeName" ref="attendeeName" value={this.state.attendeeName} placeholder="Attendee Name" />
 		</Form.Field>
 		<Form.Field required>
-			<input onChange={this.handleChangeInput}  value={this.state.attendeeEmail} name="attendeeEmail" placeholder="Attendee Email" />
+			<input onChange={this.handleChangeInput}  value={this.state.attendeeEmail} name="attendeeEmail" id="attendeeEmail" placeholder="Attendee Email" />
 		</Form.Field>
-		<Form.Button content='Submit' onClick={this.addAttendee} />
+		<Form.Button content='Add' onClick={this.addAttendee} />
 		</Form.Group>
-		<div className="attendees"></div>
+		<div className="attendees">
+		
+		{this.state.attendees.map(function(item, key){
+			return (
+			<div key={`attendee-${key}`}>
+				<div className="ui divider"></div> 
+				<div className="fl w-40 pt5 pa3 pa2-ns   bg-white" key={`attendeeName-${key}`}>{item.attendeeName}</div>
+				<div className="fl w-40 pt5 pa3 pa2-ns   bg-white" key={`attendeeEmail-${key}`}>{item.attendeeEmail}</div>
+				[remove]
+			</div>
+			)}
+			)}
+
+		</div>
 		</Form>
 
 	  
