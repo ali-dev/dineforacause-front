@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Checkbox, Form, Select, Step, Divider } from 'semantic-ui-react'
+import { Button, Form, } from 'semantic-ui-react'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 import { addEvent } from '../graphql/queries';
 import  trigger  from '../graphql/triggers'
@@ -79,8 +79,6 @@ class CreateEventForm extends Component {
     }
   }
 
-  
-
   handleSubmit(event) {
     event.preventDefault();
     
@@ -104,17 +102,22 @@ class CreateEventForm extends Component {
 
 	// attendees[this.state.attendeeEmail] = this.state.attendeeName;
 	attendees.push({ attendeeName, attendeeEmail})
-	console.log(attendees);
 	this.setState({
 	  attendees: attendees,
 	  attendeeEmail: "",
-	  attendeeName: ""
-	  
+	  attendeeName: ""  
 	});
-	// this.refs.attendeeName.label = "";
-	// this.forceUpdate();
   };
   
+  removeAttendee = (key) => {
+	let attendees = this.state.attendees;	
+	attendees.splice(key, 1)
+	this.setState({
+	  attendees: attendees,
+	});
+  };
+
+
   componentDidMount() {
     // this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
     
@@ -222,15 +225,19 @@ class CreateEventForm extends Component {
 		<div className="attendees">
 		
 		{this.state.attendees.map(function(item, key){
+			// return this.renderItem(item.attendeeName, item.attendeeEmail, key)
 			return (
+				
 			<div key={`attendee-${key}`}>
 				<div className="ui divider"></div> 
-				<div className="fl w-40 pt5 pa3 pa2-ns   bg-white" key={`attendeeName-${key}`}>{item.attendeeName}</div>
-				<div className="fl w-40 pt5 pa3 pa2-ns   bg-white" key={`attendeeEmail-${key}`}>{item.attendeeEmail}</div>
-				[remove]
+				<div className="fl w-40 pt5 pa3 pa2-ns   bg-white" >{item.attendeeName}</div>
+				<div className="fl w-40 pt5 pa3 pa2-ns   bg-white" >{item.attendeeEmail}</div>
+				<div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
+					<Button size='small' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
+				</div>
 			</div>
-			)}
-			)}
+			)
+			}, this)}
 
 		</div>
 		</Form>
