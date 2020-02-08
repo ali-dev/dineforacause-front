@@ -72,7 +72,6 @@ class EventGuests extends Component {
                 <div className="attendees">
 
                     {this.state.attendees.map(function (item, key) {
-                        // return this.renderItem(item.attendeeName, item.attendeeEmail, key)
                         return (
 
                             <div key={`attendee-${key}`}>

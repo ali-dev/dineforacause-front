@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Form, } from 'semantic-ui-react'
+import {  Form, } from 'semantic-ui-react'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 import { addEvent } from '../graphql/queries';
 import trigger from '../graphql/triggers'
-import { submitAddEventForm } from '../actions';
+
 import shortid from 'shortid';
 import EventGuests from './EventGuests'
 
