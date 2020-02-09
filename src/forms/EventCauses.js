@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Dropdown, Form, } from 'semantic-ui-react'
+import { Dropdown, Form } from 'semantic-ui-react'
 import { setSearchField, requestCauses } from '../actions';
 import EventGuests from './EventGuests';
 
@@ -27,22 +27,20 @@ const mapStateToProps = (state) => {
     return {
         causeList: state.requestCauses.causes,
     }
-  }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      onRequestCauses: () => dispatch(requestCauses())
+        onRequestCauses: () => dispatch(requestCauses())
     }
-  }
+}
 
 class EventCauses extends Component {
-    
-    
-        
     constructor(props) {
         super(props);
+        console.log(props)
         this.state = {
-            cause: '',
+            cause: false,
             causeList: [],
             minDonation: '',
             recommendedDonation: '',
@@ -51,11 +49,8 @@ class EventCauses extends Component {
 
     componentDidMount() {
         this.props.onRequestCauses();
-        
+        // this.setState({'cause': this.props.causeList[0]})
     }
-
-    
-
 
     handleChange = (event, { name, value }) => {
         if (this.state.hasOwnProperty(name)) {
@@ -63,15 +58,21 @@ class EventCauses extends Component {
         }
     }
 
+    selectCause = (event, { name, value }) => {
+        this.setState({ cause: this.props.causeList[value] })
+    }
+
     render() {
-        
         const { causeList } = this.props;
-        console.log(this.props);
+        const { cause } = this.state;
+        const imagePath = 'https://dfac-main.s3.amazonaws.com/app';
+
         let causes = [];
         for (let i = 0; i < causeList.length; i++) {
-            console.log(causeList[i].eventName);
-            causes.push({ key: causeList[i].id, text: causeList[i].causeName, value: causeList[i].id })
+            causes.push({ key: `causeSelect-${i}`, text: causeList[i].causeName, value: i })
         }
+        
+        
         return (
             <div>
                 <Form.Group widths='equal'>
@@ -94,15 +95,45 @@ class EventCauses extends Component {
 
 
                 </Form.Group>
-                <Dropdown
-                    placeholder='Choose a Cause'
-                    fluid
-                    search
-                    selection
-                    options={causes}
-                />
+                <Form.Field>
+                    <Dropdown
+                        selectOnNavigation={true}
+                        placeholder="Choose a Cause"
+                        fluid
+                        search
+                        selection
+                        options={causes}
+                        onChange={this.selectCause}
+                    />
+                </Form.Field>
+                {cause!=false ? (
+                <div>
+                     
+                    <div className="fl w-50 w-100-m w-50-l pa2">
+                        <img className="w-100 db outline black-10" src={`${imagePath}/${cause.image}`} />
+
+                        <dl className="mt2 f6 lh-copy tc">
+                            <dt className="clip">Title</dt>
+                            <dd className="ml0 black truncate w-100">{cause.causeName}</dd>
+                            <dt className="clip">{cause.causeName}</dt>
+                            <dd className="ml0 gray truncate w-100">{cause.organizationName}</dd>
+
+
+                        </dl>
+                    </div>
+                    <div className="fl w-50 w-50-m w-50-r pa2">
+                        {cause.details}
+                    </div>
+                    
+                    
+                    
+                </div>
+                ): (
+                    <div></div>
+                  )
+                }
             </div>
-            // .map(function(item)  { return item.causeName})
+
         )
     }
 }

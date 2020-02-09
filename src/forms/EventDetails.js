@@ -175,7 +175,7 @@ class CreateEventForm extends Component {
 	     */}
 
                 {/* <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button> */}
-                {/* <EventGuests/> */}
+                {/* { <EventGuests/> } */}
 
             </div>
 
