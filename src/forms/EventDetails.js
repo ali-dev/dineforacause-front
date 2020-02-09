@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  Form, } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 import { addEvent } from '../graphql/queries';
 import trigger from '../graphql/triggers'
@@ -31,6 +31,7 @@ class CreateEventForm extends Component {
         super(props);
         this.state = {
             eventName: '',
+            eventDetails: '',
             location: '',
             date: '',
             time: '',
@@ -165,16 +166,17 @@ class CreateEventForm extends Component {
                     <input onChange={this.handleChangeInput} id='maxCapacity' name='maxCapacity' placeholder='Enter Max Number of Guests' />
                 </Form.Field>
 
-                
+                <Form.TextArea onChange={this.handleChangeInput} label='Event Description' name='eventDetails' value={this.state.eventDetails} placeholder='Tell us more about the event...' />
+        
+
                 {/* <Form.Field>
 	      <Checkbox label='I agree to the Terms and Conditions' />
 	    </Form.Field>
 	     */}
-                <div className="ui divider"></div>
 
                 {/* <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button> */}
-                <EventGuests/>
-                
+                {/* <EventGuests/> */}
+
             </div>
 
 
