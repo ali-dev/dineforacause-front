@@ -11,15 +11,15 @@ import createHistory from 'history/createBrowserHistory'
 // require("history").createBrowserHistory as createHistory
 // import { useHistory } from "react-router-dom";
 const history = createHistory()
-// const states = [
-//  {key: 'n', text: 'New York', value: 'New York City' },
-//  { key: 'm', text: 'Minnesota', value: 'Minnesota' },
-//  ];
+const states = [
+ {key: 'n', text: 'New York', value: 'New York City' },
+ { key: 'm', text: 'Minnesota', value: 'Minnesota' },
+ ];
 
-// const countries = [
-// {key: 'u', text: 'United States', value: 'United States' },
-// { key: 'j', text: 'Jordan', value: 'Jordan' },
-// ];
+const countries = [
+{key: 'u', text: 'United States', value: 'United States' },
+{ key: 'j', text: 'Jordan', value: 'Jordan' },
+];
 
 
 
@@ -112,7 +112,7 @@ class CreateEventForm extends Component {
             <div>
                 <Form.Field required>
                     <label>Event Name</label>
-                    <input onChange={this.handleChangeInput} name="eventName" placeholder="Event Name" />
+                    <input onChange={this.handleChangeInput} name="eventName" placeholder="Add a short, clear name" />
                 </Form.Field>
 
                 <Form.Group widths='equal'>
@@ -134,10 +134,10 @@ class CreateEventForm extends Component {
 
                 <div className="ui divider"></div>
                 <Form.Field required>
-                    <label>Location</label>
-                    <input onChange={this.handleChangeInput} name="location" />
+                    <label>Where</label>
+                    <input onChange={this.handleChangeInput} name="location" placeholder="Address" />
                 </Form.Field>
-                {/*
+                
 	    <Form.Select  
 	        onChange={this.handleChange}
 	    	options={countries}
@@ -158,15 +158,15 @@ class CreateEventForm extends Component {
 	      <input  onChange={this.handleChangeInput} id='zipCode' name='zipCode' placeholder='Enter Zip Code' />
 	    </Form.Field>
 	    
-	    </Form.Group>*/}
+	    </Form.Group>
 
                 <div className="ui divider"></div>
-                <Form.Field>
+                {/* <Form.Field>
                     <label>Max. number of guests </label>
                     <input onChange={this.handleChangeInput} id='maxCapacity' name='maxCapacity' placeholder='Enter Max Number of Guests' />
-                </Form.Field>
+                </Form.Field> */}
 
-                <Form.TextArea onChange={this.handleChangeInput} label='Event Description' name='eventDetails' value={this.state.eventDetails} placeholder='Tell us more about the event...' />
+                <Form.TextArea onChange={this.handleChangeInput} label='Description' name='eventDetails' value={this.state.eventDetails} placeholder='Tell guests what your event is about' />
         
 
                 {/* <Form.Field>

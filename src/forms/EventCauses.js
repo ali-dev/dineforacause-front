@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Dropdown, Form } from 'semantic-ui-react'
+import { Dropdown, Form, Popup, Icon, Grid } from 'semantic-ui-react'
 import { setSearchField, requestCauses } from '../actions';
 import EventGuests from './EventGuests';
 
@@ -75,26 +75,7 @@ class EventCauses extends Component {
         
         return (
             <div>
-                <Form.Group widths='equal'>
-                    <Form.Select
-                        options={amounts}
-                        label='Minimum Donation'
-                        placeholder='Minimum Donation'
-                        name='minDonation'
-                        value={this.state.minDonation}
-                        onChange={this.handleChange}
-                    />
-                    <Form.Select
-                        options={amounts}
-                        label='Recommended Donation'
-                        placeholder='Recommended Donation'
-                        name='recommendedDonation'
-                        value={this.state.recommendedDonation}
-                        onChange={this.handleChange}
-                    />
-
-
-                </Form.Group>
+                
                 <Form.Field>
                     <Dropdown
                         selectOnNavigation={true}
@@ -106,6 +87,43 @@ class EventCauses extends Component {
                         onChange={this.selectCause}
                     />
                 </Form.Field>
+                <Form.Group widths='equal'>
+                    <Form.Field>
+                        <label>Minimum Donation &nbsp;  
+                        <Popup
+                            trigger={<Icon name='question' color='grey' size='small' circular />}
+                            content='This is the minimum amout you would like each of one your guests to contribure to your cause of choice.'
+                            position="right"
+                        />
+
+                        </label>
+                        
+                    <Dropdown
+                        options={amounts}
+                        label='Minimum Donation'
+                        placeholder='Choose amount'
+                        name='minDonation'
+                        value={this.state.minDonation}
+                        onChange={this.handleChange}
+                        fluid
+                        selection
+                    />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Recommended Donation</label>
+                        <Dropdown
+                            options={amounts}
+                            placeholder='Choose amount (optional)'
+                            name='recommendedDonation'
+                            value={this.state.recommendedDonation}
+                            fluid
+                            selection
+                            onChange={this.handleChange}
+                        />
+                    </Form.Field>
+
+                </Form.Group>
+
                 {cause!=false ? (
                 <div>
                      
