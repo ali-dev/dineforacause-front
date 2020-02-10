@@ -28,7 +28,7 @@ class CreateEventForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            cause: false,
+			cause: '',
             minDonation: '',
 			recommendedDonation: '',
 			viewId: shortid.generate(),
@@ -49,7 +49,7 @@ class CreateEventForm extends Component {
 
 	handleFieldChange(name, value) {
 		this.setState({ [name]: value });
-		// console.log(this.state);
+		console.log(this.state);
 	}
 
 	handleSubmit(event) {

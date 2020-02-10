@@ -40,6 +40,7 @@ class EventCauses extends Component {
         super(props);
         this.state = {
             cause: false,
+            causeSelection: '',
             causeList: [],
             minDonation: '',
             recommendedDonation: '',
@@ -59,9 +60,12 @@ class EventCauses extends Component {
         
     }
 
-    selectCause = (event, { name, value }) => {
+    selectCause = (event, { name, value, key }) => {
+        
+        const causeId = this.props.causeList[value].id
         this.setState({ cause: this.props.causeList[value] })
-        this.props.onChange("cause" , value);
+        this.setState({ causeSelection: causeId})
+        this.props.onChange("cause" , causeId);
     }
 
     render() {
@@ -70,6 +74,7 @@ class EventCauses extends Component {
         const imagePath = 'https://dfac-main.s3.amazonaws.com/app';
 
         let causes = [];
+        console.log(causeList);
         for (let i = 0; i < causeList.length; i++) {
             causes.push({ key: `causeSelect-${i}`, text: causeList[i].causeName, value: i })
         }
