@@ -38,28 +38,30 @@ const mapDispatchToProps = (dispatch) => {
 class EventCauses extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         this.state = {
             cause: false,
             causeList: [],
             minDonation: '',
             recommendedDonation: '',
         };
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
         this.props.onRequestCauses();
-        // this.setState({'cause': this.props.causeList[0]})
     }
 
     handleChange = (event, { name, value }) => {
         if (this.state.hasOwnProperty(name)) {
             this.setState({ [name]: value });
         }
+        this.props.onChange(name , value);
+        
     }
 
     selectCause = (event, { name, value }) => {
         this.setState({ cause: this.props.causeList[value] })
+        this.props.onChange("cause" , value);
     }
 
     render() {
@@ -71,11 +73,11 @@ class EventCauses extends Component {
         for (let i = 0; i < causeList.length; i++) {
             causes.push({ key: `causeSelect-${i}`, text: causeList[i].causeName, value: i })
         }
-        
-        
+
+
         return (
             <div>
-                
+
                 <Form.Field>
                     <Dropdown
                         selectOnNavigation={true}
@@ -88,26 +90,27 @@ class EventCauses extends Component {
                     />
                 </Form.Field>
                 <Form.Group widths='equal'>
-                    <Form.Field>
-                        <label>Minimum Donation &nbsp;  
+                    <Form.Field required>
+                        <label>Minimum Donation &nbsp;
                         <Popup
-                            trigger={<Icon name='question' color='grey' size='small' circular />}
-                            content='This is the minimum amout you would like each of one your guests to contribure to your cause of choice.'
-                            position="right"
-                        />
+                                trigger={<Icon name='question' color='grey' size='small' circular />}
+                                content='This is the minimum amout you would like each of one your guests to contribure to your cause of choice.'
+                                position="right"
+                            />
 
                         </label>
-                        
-                    <Dropdown
-                        options={amounts}
-                        label='Minimum Donation'
-                        placeholder='Choose amount'
-                        name='minDonation'
-                        value={this.state.minDonation}
-                        onChange={this.handleChange}
-                        fluid
-                        selection
-                    />
+
+                        <Dropdown
+                            options={amounts}
+                            label='Minimum Donation'
+                            placeholder='Choose amount'
+                            name='minDonation'
+                            value={this.state.minDonation}
+                            onChange={this.handleChange}
+                            fluid
+                            selection
+
+                        />
                     </Form.Field>
                     <Form.Field>
                         <label>Recommended Donation</label>
@@ -124,31 +127,31 @@ class EventCauses extends Component {
 
                 </Form.Group>
 
-                {cause!=false ? (
-                <div>
-                     
-                    <div className="fl w-50 w-100-m w-50-l pa2">
-                        <img className="w-100 db outline black-10" src={`${imagePath}/${cause.image}`} />
+                {cause != false ? (
+                    <div>
 
-                        <dl className="mt2 f6 lh-copy tc">
-                            <dt className="clip">Title</dt>
-                            <dd className="ml0 black truncate w-100">{cause.causeName}</dd>
-                            <dt className="clip">{cause.causeName}</dt>
-                            <dd className="ml0 gray truncate w-100">{cause.organizationName}</dd>
+                        <div className="fl w-50 w-100-m w-50-l pa2">
+                            <img className="w-100 db outline black-10" src={`${imagePath}/${cause.image}`} />
+
+                            <dl className="mt2 f6 lh-copy tc">
+                                <dt className="clip">Title</dt>
+                                <dd className="ml0 black truncate w-100">{cause.causeName}</dd>
+                                <dt className="clip">{cause.causeName}</dt>
+                                <dd className="ml0 gray truncate w-100">{cause.organizationName}</dd>
 
 
-                        </dl>
+                            </dl>
+                        </div>
+                        <div className="fl w-50 w-50-m w-50-r pa2">
+                            {cause.details}
+                        </div>
+
+
+
                     </div>
-                    <div className="fl w-50 w-50-m w-50-r pa2">
-                        {cause.details}
-                    </div>
-                    
-                    
-                    
-                </div>
-                ): (
-                    <div></div>
-                  )
+                ) : (
+                        <div></div>
+                    )
                 }
             </div>
 

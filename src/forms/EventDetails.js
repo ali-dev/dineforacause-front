@@ -4,7 +4,7 @@ import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 import { addEvent } from '../graphql/queries';
 import trigger from '../graphql/triggers'
 
-import shortid from 'shortid';
+
 import EventGuests from './EventGuests'
 
 import createHistory from 'history/createBrowserHistory'
@@ -12,13 +12,13 @@ import createHistory from 'history/createBrowserHistory'
 // import { useHistory } from "react-router-dom";
 const history = createHistory()
 const states = [
- {key: 'n', text: 'New York', value: 'New York City' },
- { key: 'm', text: 'Minnesota', value: 'Minnesota' },
- ];
+    { key: 'n', text: 'New York', value: 'New York City' },
+    { key: 'm', text: 'Minnesota', value: 'Minnesota' },
+];
 
 const countries = [
-{key: 'u', text: 'United States', value: 'United States' },
-{ key: 'j', text: 'Jordan', value: 'Jordan' },
+    { key: 'u', text: 'United States', value: 'United States' },
+    { key: 'j', text: 'Jordan', value: 'Jordan' },
 ];
 
 
@@ -32,18 +32,19 @@ class CreateEventForm extends Component {
         this.state = {
             eventName: '',
             eventDetails: '',
+            hostName: '',
+            hostEmail: '',
             location: '',
             date: '',
             time: '',
-            maxCapacity: '',
-            viewId: shortid.generate(),
-            editId: shortid.generate(),
-            rsvpId: shortid.generate(),
+            // maxCapacity: '',
             attendees: [],
             attendeeEmail: '',
             attendeeName: '',
 
         };
+
+        this.handleChange = this.handleChange.bind(this);
 
     }
 
@@ -52,13 +53,16 @@ class CreateEventForm extends Component {
     handleChange = (event, { name, value }) => {
         if (this.state.hasOwnProperty(name)) {
             this.setState({ [name]: value });
+            this.props.onChange(name , value);
         }
+        
     }
 
 
     handleChangeInput = (event) => {
         if (this.state.hasOwnProperty(event.target.name)) {
             this.setState({ [event.target.name]: event.target.value });
+            this.props.onChange(event.target.name , event.target.value);
         }
     }
 
@@ -110,6 +114,16 @@ class CreateEventForm extends Component {
 
         return (
             <div>
+                <Form.Group widths='equal'>
+                    <Form.Field required>
+                        <label>Your name</label>
+                        <input onChange={this.handleChangeInput} name="hostName" />
+                    </Form.Field>
+                    <Form.Field required>
+                        <label>Email</label>
+                        <input onChange={this.handleChangeInput} name="hostEmail" />
+                    </Form.Field>
+                </Form.Group>
                 <Form.Field required>
                     <label>Event Name</label>
                     <input onChange={this.handleChangeInput} name="eventName" placeholder="Add a short, clear name" />
@@ -137,28 +151,28 @@ class CreateEventForm extends Component {
                     <label>Where</label>
                     <input onChange={this.handleChangeInput} name="location" placeholder="Address" />
                 </Form.Field>
-                
-	    <Form.Select  
-	        onChange={this.handleChange}
-	    	options={countries}
-	    	label='Country'
-	    	name="country"
-	    />
-	    <Form.Group widths='equal'>
-	    
-	    <Form.Select 
-		    	options={states}
-		    	label='State'
-		    	placeholder='State'
-		    	name='state'
-		    	onChange={this.handleChange}
-	    />
-	    <Form.Field>
-	      <label>Zip Code</label>
-	      <input  onChange={this.handleChangeInput} id='zipCode' name='zipCode' placeholder='Enter Zip Code' />
-	    </Form.Field>
-	    
-	    </Form.Group>
+
+                {/* <Form.Select
+                    onChange={this.handleChange}
+                    options={countries}
+                    label='Country'
+                    name="country"
+                />
+                <Form.Group widths='equal'>
+
+                    <Form.Select
+                        options={states}
+                        label='State'
+                        placeholder='State'
+                        name='state'
+                        onChange={this.handleChange}
+                    />
+                    <Form.Field>
+                        <label>Zip Code</label>
+                        <input onChange={this.handleChangeInput} id='zipCode' name='zipCode' placeholder='Enter Zip Code' />
+                    </Form.Field>
+
+                </Form.Group> */}
 
                 <div className="ui divider"></div>
                 {/* <Form.Field>
@@ -167,14 +181,14 @@ class CreateEventForm extends Component {
                 </Form.Field> */}
 
                 <Form.TextArea onChange={this.handleChangeInput} label='Description' name='eventDetails' value={this.state.eventDetails} placeholder='Tell guests what your event is about' />
-        
+
 
                 {/* <Form.Field>
 	      <Checkbox label='I agree to the Terms and Conditions' />
 	    </Form.Field>
 	     */}
 
-                {/* <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button> */}
+               
                 {/* { <EventGuests/> } */}
 
             </div>
