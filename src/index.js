@@ -21,7 +21,8 @@ import { requestCauses, requestCause, searchCauses, requestEventForView } from '
 
 import { Router } from 'react-router';
 import { Route} from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
+// import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 
 
 import './index.css';
@@ -35,7 +36,7 @@ const logger = createLogger()
 const rootReducers = combineReducers({requestCauses, requestCause, searchCauses, requestEventForView})
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
-const history = createHistory(); 
+const history = createBrowserHistory(); 
 
 const routing = (
   <Provider store={store}>
