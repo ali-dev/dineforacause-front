@@ -67,7 +67,7 @@ $rsvpId: String!
    rsvpId: $rsvpId
    ) {
     eventName
-    viewId
+    editId
   }
   }
 `;
