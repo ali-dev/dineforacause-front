@@ -14,6 +14,7 @@ import App from './containers/App';
 import Event from './containers/Event';
 import RSVP from './containers/RSVP';
 import EventView from './containers/EventView';
+import EventManage from './containers/EventManage';
 import registerServiceWorker from './registerServiceWorker';
 import { requestCauses, requestCause, searchCauses, requestEventForView } from './reducers'
 
@@ -42,6 +43,7 @@ const routing = (
       <Route path="/event/create/:organizationId/:id" component={Event} />
       <Route path="/rsvp" component={RSVP} />
       <Route path="/event/view/:viewId" component={EventView} />
+      <Route path="/event/manage/:editId" component={EventManage} />
       
       </Provider>
     </div>

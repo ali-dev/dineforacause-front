@@ -59,7 +59,7 @@ class CreateEventForm extends Component {
             .createEvent(this.state)
             .then(data => {
                 console.log(data)
-                history.push(`/event/view/${data.data.addEvent.viewId}`);
+                history.push(`/event/manage/${data.data.addEvent.editId}`);
             })
 
 	}

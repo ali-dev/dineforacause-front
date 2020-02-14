@@ -73,6 +73,27 @@ $rsvpId: String!
 export const getEventForView = `query getEventForView($viewId: String!) {
   getEventForView(viewId: $viewId) {
     eventName
+    hostName
+    hostEmail
+    minDonation
+    recommendedDonation
+    location
+    date
+    time
+    viewId
+    editId
+    rsvpId
+  }
+}
+`
+
+export const getEventForEdit = `query getEventForEdit($editId: String!) {
+  getEventForEdit(editId: $editId) {
+    eventName
+    hostName
+    hostEmail
+    minDonation
+    recommendedDonation
     location
     date
     time
