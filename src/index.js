@@ -18,11 +18,13 @@ import EventManage from './containers/EventManage';
 import registerServiceWorker from './registerServiceWorker';
 import { requestCauses, requestCause, searchCauses, requestEventForView } from './reducers'
 
+
+import { Router } from 'react-router';
+import { Route} from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
+
+
 import './index.css';
-
-
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-
 
 Amplify.configure(awsconfig);
 
@@ -33,19 +35,21 @@ const logger = createLogger()
 const rootReducers = combineReducers({requestCauses, requestCause, searchCauses, requestEventForView})
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
-
+const history = createHistory(); 
 
 const routing = (
-  <Router>
-      <Provider store={store}>	
+  <Provider store={store}>
+  <Router history={history}>
+      	
       <Route exact={true} path="/" component={App} />
       <Route path="/event/create/:organizationId/:id" component={Event} />
       <Route path="/rsvp" component={RSVP} />
       <Route path="/event/view/:viewId" component={EventView} />
       <Route path="/event/manage/:editId" component={EventManage} />
       
-      </Provider>
+      
   </Router>
+  </Provider>
 )
 
 ReactDOM.render(routing, document.getElementById('root'));

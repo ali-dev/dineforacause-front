@@ -24,6 +24,10 @@ const mapDispatchToProps = (dispatch) => {
   
 
 class Event extends Component {
+  constructor(props){
+    super(props);
+ }
+ 
   componentDidMount() {
     this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
     

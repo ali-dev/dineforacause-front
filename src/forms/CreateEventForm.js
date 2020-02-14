@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import { Button, Form, } from 'semantic-ui-react'
 import EventCauses from './EventCauses'
 import EventDetails from './EventDetails'
-import createHistory from 'history/createBrowserHistory'
 import trigger from '../graphql/triggers'
 import shortid from 'shortid';
-// require("history").createBrowserHistory as createHistory
-// import { useHistory } from "react-router-dom";
-const history = createHistory()
+import { withRouter } from 'react-router-dom';
 // const states = [
 //  {key: 'n', text: 'New York', value: 'New York City' },
 //  { key: 'm', text: 'Minnesota', value: 'Minnesota' },
@@ -17,9 +14,6 @@ const history = createHistory()
 // {key: 'u', text: 'United States', value: 'United States' },
 // { key: 'j', text: 'Jordan', value: 'Jordan' },
 // ];
-
-
-
 
 
 
@@ -54,7 +48,8 @@ class CreateEventForm extends Component {
 	}
 
 	handleSubmit(event) {
-        event.preventDefault();
+		event.preventDefault();
+		const { history } = this.props;
 		console.log(this.state);
         trigger
             .createEvent(this.state)
@@ -85,4 +80,4 @@ class CreateEventForm extends Component {
 	}
 }
 
-export default CreateEventForm
+export default withRouter(CreateEventForm);
