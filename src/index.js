@@ -37,7 +37,6 @@ const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger)
 
 const routing = (
   <Router>
-    <div>
       <Provider store={store}>	
       <Route exact={true} path="/" component={App} />
       <Route path="/event/create/:organizationId/:id" component={Event} />
@@ -46,7 +45,6 @@ const routing = (
       <Route path="/event/manage/:editId" component={EventManage} />
       
       </Provider>
-    </div>
   </Router>
 )
 

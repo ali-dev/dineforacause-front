@@ -37,6 +37,7 @@ export const getCauses = `query causes {
 export const addEvent = `mutation addEvent(
 $eventName: String!, 
 $cause: String!, 
+$organizationId: String!, 
 $location: String! , 
 $minDonation: Int!,
 $hostName: String!, 
@@ -52,6 +53,7 @@ $rsvpId: String!
    addEvent(
    eventName: $eventName,
    cause: $cause, 
+   organizationId: $organizationId, 
    hostName: $hostName, 
    hostEmail: $hostEmail, 
    location: $location, 
@@ -75,6 +77,7 @@ export const getEventForView = `query getEventForView($viewId: String!) {
     eventName
     hostName
     hostEmail
+    causeDetails
     minDonation
     recommendedDonation
     location
@@ -90,6 +93,8 @@ export const getEventForView = `query getEventForView($viewId: String!) {
 export const getEventForEdit = `query getEventForEdit($editId: String!) {
   getEventForEdit(editId: $editId) {
     eventName
+    cause
+    causeDetails
     hostName
     hostEmail
     minDonation

@@ -7,10 +7,6 @@ import trigger from '../graphql/triggers'
 
 import EventGuests from './EventGuests'
 
-import createHistory from 'history/createBrowserHistory'
-// require("history").createBrowserHistory as createHistory
-// import { useHistory } from "react-router-dom";
-const history = createHistory()
 const states = [
     { key: 'n', text: 'New York', value: 'New York City' },
     { key: 'm', text: 'Minnesota', value: 'Minnesota' },
@@ -66,17 +62,7 @@ class CreateEventForm extends Component {
         }
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-
-        trigger
-            .createEvent(this.state)
-            .then(data => {
-                console.log(data)
-                history.push(`/event/view/${data.data.addEvent.viewId}`);
-            })
-
-    }
+    
 
     addAttendee = () => {
         const attendees = this.state.attendees;

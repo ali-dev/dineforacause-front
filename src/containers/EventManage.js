@@ -55,7 +55,7 @@ class EventManage extends Component {
     	          </header>
                 */}
                 <section className="bg-white w-80 center  ">
-					<div className="fl w-50 pt5 pa3 pa2-ns   bg-white   ">
+					{/* <div className="fl w-50 pt5 pa3 pa2-ns   bg-white   ">
 						<h3 className="f3 green">Event Details </h3>
                         <div>Event Name:</div><div>{event['eventName']}</div>
 					</div>
@@ -63,8 +63,30 @@ class EventManage extends Component {
 					<div className="fl w-50  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">
 						<h3 className="f3 green">Cause</h3>
 						
-					</div>
-					 <Button type='submit'  >Submit</Button>
+					</div> */}
+
+                    <div>
+
+                    {/* <div className="fl w-50 w-100-m w-50-l pa2">
+                        <img className="w-100 db outline black-10" src={`${imagePath}/${cause.image}`} />
+
+                        <dl className="mt2 f6 lh-copy tc">
+                            <dt className="clip">Title</dt>
+                            <dd className="ml0 black truncate w-100">{event.eventName}</dd>
+                            <dt className="clip">{cause.causeName}</dt>
+                            <dd className="ml0 gray truncate w-100">{cause.organizationName}</dd>
+
+
+                        </dl>
+                    </div>
+                    <div className="fl w-50 w-50-m w-50-r pa2">
+                        {cause.details}
+                    </div> */}
+
+
+
+                    </div>
+					 
 				</section>
 
 

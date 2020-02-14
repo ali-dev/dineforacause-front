@@ -63,8 +63,10 @@ class EventCauses extends Component {
     selectCause = (event, { name, value, key }) => {
         
         const causeId = this.props.causeList[value].id
+        
         this.setState({ cause: this.props.causeList[value] })
         this.setState({ causeSelection: causeId})
+        this.props.onChange("organizationId" , this.props.causeList[value].organizationId);
         this.props.onChange("cause" , causeId);
     }
 

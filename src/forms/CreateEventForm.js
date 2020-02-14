@@ -29,6 +29,7 @@ class CreateEventForm extends Component {
 		super(props);
 		this.state = {
 			cause: '',
+            organizationId: '',
             minDonation: '',
 			recommendedDonation: '',
 			viewId: shortid.generate(),
@@ -65,7 +66,6 @@ class CreateEventForm extends Component {
 	}
 	
 	render() {
-
 		return (
 			<Form size='small'>
 				<section className="bg-white w-80 center  ">
