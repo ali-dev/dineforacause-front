@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setSearchField, requestCauses } from '../actions';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import './App.css';
 import Header from '../components/Header'
 import CardList from '../components/CardList'
 import SearchBox from '../components/SearchBox'
-import Event from './Event'
 
 
 
@@ -37,7 +34,7 @@ class App extends Component {
   }
 
   render() {
-  	const { causes, searchField, onSearchChange, isPending } = this.props;
+  	const { causes, searchField, onSearchChange } = this.props;
 
     
     const filteredCauses = causes.filter(cause => {

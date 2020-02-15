@@ -1,8 +1,7 @@
 import React from 'react';
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import awsconfig from './aws-exports';
-import AWSAppSyncClient from 'aws-appsync';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -21,7 +20,6 @@ import { requestCauses, requestCause, searchCauses, requestEventForView } from '
 
 import { Router } from 'react-router';
 import { Route} from 'react-router-dom';
-// import createHistory from 'history/createBrowserHistory';
 import { createBrowserHistory } from 'history';
 
 
@@ -35,7 +33,7 @@ const logger = createLogger()
 
 const rootReducers = combineReducers({requestCauses, requestCause, searchCauses, requestEventForView})
 
-const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger))
+const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger)) //@todo disable logger in prod
 const history = createBrowserHistory(); 
 
 const routing = (

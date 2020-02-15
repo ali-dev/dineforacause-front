@@ -1,9 +1,9 @@
 import React from 'react';
 /*br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw5*/
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
-const imgWidth = {
-  width: "200px"
-}
+import {Link} from 'react-router-dom';
+// const imgWidth = {
+//   width: "200px"
+// }
 // const imagePath = "https://dfac-main.s3.amazonaws.com/app/";
 const imagePath =  'https://dfac-main.s3.amazonaws.com/app';
 const image2 = 'cause2.jpg';
@@ -11,7 +11,7 @@ const Card = ({ causeName, id, organizationId, organizationName, details, countr
   return (
     <div className="fl w-50 w-25-m w-20-l pa2">
       <Link className="db link dim tc" to={`/event/create/${organizationId}/${id}`}>
-        <img className="w-100 db outline black-10" src={`${imagePath}/${image2}`} />
+        <img className="w-100 db outline black-10" alt={image2} src={`${imagePath}/${image2}`} />
       </Link>
         <dl className="mt2 f6 lh-copy tc">
           <dt className="clip">Title</dt>

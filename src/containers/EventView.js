@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import Header from '../components/Header'
-import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { connect } from 'react-redux';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 import { requestEventForView } from '../actions';
 
-const logger = createLogger()
+// const logger = createLogger() // @todo: check how to use this. Might come in handy
 
 const mapStateToProps = (state) => {
   return {
     event: state.requestEventForView.event,
-    isPending: state.requestEventForView.isPending
+    // isPending: state.requestEventForView.isPending //@todo what do we need this for
   }
 }
 
@@ -27,7 +25,7 @@ class EventView extends Component {
     
   }
   render() {
-  	const { event, isPending } = this.props;
+  	const { event } = this.props;
     
     return (
     <div  className="App ">

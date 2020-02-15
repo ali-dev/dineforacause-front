@@ -1,6 +1,6 @@
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 import awsconfig from '../aws-exports';
-import Amplify, { API, graphqlOperation, Logger } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 Amplify.configure(awsconfig);
 
 

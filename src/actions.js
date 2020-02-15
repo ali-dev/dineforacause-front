@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import {getCauseInfo, getCauses, addCharge, addEvent, getEventForView, getEventForEdit} from './graphql/queries';
+import {getCauseInfo, getCauses, getEventForView, getEventForEdit} from './graphql/queries';//addCharge, 
 import client from './api/appSyncClient'
 import {
   CHANGE_SEARCHFIELD,

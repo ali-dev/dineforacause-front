@@ -1,11 +1,10 @@
 import React from 'react';
 import Card from './Card';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
 const CardList = ({ causes }) => {
   return (
     <article>
-      <h2 class="f3 fw4 pa3 mv0">Causes</h2>
-      <div class="cf pa2">
+      <h2 className="f3 fw4 pa3 mv0">Causes</h2>
+      <div className="cf pa2">
       {
         causes.map((cause, i) => {
           return (

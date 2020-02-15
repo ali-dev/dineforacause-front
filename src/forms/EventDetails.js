@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import { Form } from 'semantic-ui-react'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
-import { addEvent } from '../graphql/queries';
-import trigger from '../graphql/triggers'
 
+// @todo decide if we are going to use state/country
+// const states = [
+//     { key: 'n', text: 'New York', value: 'New York City' },
+//     { key: 'm', text: 'Minnesota', value: 'Minnesota' },
+// ];
 
-import EventGuests from './EventGuests'
-
-const states = [
-    { key: 'n', text: 'New York', value: 'New York City' },
-    { key: 'm', text: 'Minnesota', value: 'Minnesota' },
-];
-
-const countries = [
-    { key: 'u', text: 'United States', value: 'United States' },
-    { key: 'j', text: 'Jordan', value: 'Jordan' },
-];
+// const countries = [
+//     { key: 'u', text: 'United States', value: 'United States' },
+//     { key: 'j', text: 'Jordan', value: 'Jordan' },
+// ];
 
 
 
@@ -96,8 +92,7 @@ class CreateEventForm extends Component {
 
     }
     render() {
-        const { cause } = this.props;
-
+        
         return (
             <div>
                 <Form.Group widths='equal'>

@@ -36,28 +36,22 @@ class CreateEventForm extends Component {
             location: '',
             date: '',
 			time: '',
-			location: ''
-            
         };
 		this.handleFieldChange = this.handleFieldChange.bind(this);
 	}
 
 	handleFieldChange(name, value) {
 		this.setState({ [name]: value });
-		console.log(this.state);
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
 		const { history } = this.props;
-		console.log(this.state);
-        trigger
+		trigger
             .createEvent(this.state)
             .then(data => {
-                console.log(data)
                 history.push(`/event/manage/${data.data.addEvent.editId}`);
             })
-
 	}
 	
 	render() {

@@ -1,40 +1,20 @@
 import React, { Component } from 'react';
-import Header from '../components/Header'
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { connect } from 'react-redux';
-import { createLogger } from 'redux-logger';
-import FormStep from '../components/FormStep'
-import { requestCause } from '../actions';
+// import { connect } from 'react-redux';
+// import { createLogger } from 'redux-logger';
+// import { requestCause } from '../actions';
 import CreateEventForm from '../forms/CreateEventForm'
 
-const logger = createLogger()
+// const logger = createLogger()
 
-const mapStateToProps = (state) => {
-  return {
-    cause: state.requestCause.cause,
-    isPending: state.requestCause.isPending
-  }
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onRequestCause: (organizationId, id) => dispatch(requestCause(organizationId, id))
-  }
-}
   
 
 class Event extends Component {
-  constructor(props){
-    super(props);
- }
- 
-  componentDidMount() {
-    this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
-    
-  }
+  
+
+
   render() {
-  	const { cause } = this.props;
-    
+  	
     return (
     <div  className="App ">
       <header className="App-header ">
@@ -54,7 +34,7 @@ class Event extends Component {
   	      <article data-name="article-full-bleed-background">
     	      <div className="cf" >
     	        <div className="fl w-100   black-70 f3  ">
-    	          {/*
+                {/*
                 <header className="bb b--black-80 pv2 bg-white">
     	            <h4 style="font-family: 'Varela', sans-serif;" className="f3 fw6 i lh-title mt0 ml2 mr3 ">Create Event</h4>  
     	          </header>
@@ -71,4 +51,4 @@ class Event extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Event)
+export default Event;

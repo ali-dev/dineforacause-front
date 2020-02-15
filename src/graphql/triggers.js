@@ -1,8 +1,6 @@
 import gql from 'graphql-tag';
 import client from '../api/appSyncClient';
-import {getCauseInfo, getCauses, addCharge, addEvent} from './queries';
-
-
+import { addEvent} from './queries'; // @todo: maybe include getCauseInfo, getCauses, addCharge,
 
 const trigger = {
     createEvent(eventData) { 
