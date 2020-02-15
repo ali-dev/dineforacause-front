@@ -15,7 +15,7 @@ import RSVP from './containers/RSVP';
 import EventView from './containers/EventView';
 import EventManage from './containers/EventManage';
 import registerServiceWorker from './registerServiceWorker';
-import { requestCauses, requestCause, searchCauses, requestEventForView } from './reducers'
+import { requestCauses, requestCause, searchCauses, requestEventForView, requestEventForEdit } from './reducers'
 
 
 import { Router } from 'react-router';
@@ -31,7 +31,7 @@ Amplify.configure(awsconfig);
 
 const logger = createLogger()
 
-const rootReducers = combineReducers({requestCauses, requestCause, searchCauses, requestEventForView})
+const rootReducers = combineReducers({requestCauses, requestCause, searchCauses, requestEventForView, requestEventForEdit})
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger)) //@todo disable logger in prod
 const history = createBrowserHistory(); 

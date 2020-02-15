@@ -8,7 +8,10 @@ import {
   REQUEST_CAUSE_FAILED, 
   REQUEST_EVENT_PENDING,
   REQUEST_EVENT_SUCCESS,
-  REQUEST_EVENT_FAILED  
+  REQUEST_EVENT_FAILED,
+  REQUEST_EVENT_FOR_EDIT_PENDING,
+  REQUEST_EVENT_FOR_EDIT_SUCCESS,
+  REQUEST_EVENT_FOR_EDIT_FAILED,  
  } from './constants';
 
 const initialStateSearch = {
@@ -73,6 +76,24 @@ export const requestEventForView = (state=initialStateEventView, action={}) => {
     case REQUEST_EVENT_SUCCESS:
       return Object.assign({}, state, {event: action.payload, isPending: false})
     case REQUEST_EVENT_FAILED:
+      return Object.assign({}, state, {error: action.payload})
+    default:
+      return state  
+  }
+}
+
+const initialStateEventEdit = {
+  event: "test",
+  isPending: true,
+  causeDetails: {}
+}
+export const requestEventForEdit = (state=initialStateEventEdit, action={}) => {
+  switch (action.type) {
+    case REQUEST_EVENT_FOR_EDIT_PENDING:
+      return Object.assign({}, state, {isPending: true})
+    case REQUEST_EVENT_FOR_EDIT_SUCCESS:
+      return Object.assign({}, state, {event: action.payload, isPending: false})
+    case REQUEST_EVENT_FOR_EDIT_FAILED:
       return Object.assign({}, state, {error: action.payload})
     default:
       return state  
