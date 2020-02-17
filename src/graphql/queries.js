@@ -3,120 +3,75 @@
 
 export const getOrganizationInfo = `query GetOrganizationInfo($name: String!) {
   getOrganizationInfo(name: $name) {
-    id
     name
   }
 }
 `;
-export const getCauseInfo = `query GetCauseInfo($organizationId: String!, $id: String!) {
+export const getCauseInfo = `query GetCauseInfo($id: String!, $organizationId: String!) {
   getCauseInfo(id: $id, organizationId: $organizationId) {
+    id
     causeName
+    organizationId
+    organizationName
     details
     image
     country
   }
 }
 `;
-
-export const getCauses = `query causes {
-   getAllCauses {
-      causes {
-        id
-        organizationId
-        organizationName
-        causeName
-        country
-        details
-        image
-       }
+export const getAllCauses = `query GetAllCauses {
+  getAllCauses {
+    causes {
+      id
+      causeName
+      organizationId
+      organizationName
+      details
+      image
+      country
     }
   }
-`;
-
-
-export const addEvent = `mutation addEvent(
-$eventName: String!, 
-$cause: String!, 
-$organizationId: String!, 
-$location: String! , 
-$minDonation: Int!,
-$hostName: String!, 
-$hostEmail: String!,
-$recommendedDonation: Int,
-$date: String!, 
-$time: String!,
-$maxCapacity: Int
-$viewId: String!,
-$editId: String!,
-$rsvpId: String!
-) {
-   addEvent(
-   eventName: $eventName,
-   cause: $cause, 
-   organizationId: $organizationId, 
-   hostName: $hostName, 
-   hostEmail: $hostEmail, 
-   location: $location, 
-   minDonation: $minDonation, 
-   recommendedDonation: $recommendedDonation,
-   maxCapacity: $maxCapacity,
-   date: $date,
-   time: $time,
-   viewId: $viewId,
-   editId: $editId,
-   rsvpId: $rsvpId
-   ) {
-    eventName
-    editId
-  }
-  }
-`;
-
-export const getEventForView = `query getEventForView($viewId: String!) {
-  getEventForView(viewId: $viewId) {
-    eventName
-    hostName
-    hostEmail
-    causeDetails
-    minDonation
-    recommendedDonation
-    location
-    date
-    time
-    viewId
-    editId
-    rsvpId
-  }
 }
-`
-
-export const getEventForEdit = `query getEventForEdit($editId: String!) {
-  getEventForEdit(editId: $editId) {
+`;
+export const getEventForView = `query GetEventForView($viewId: String!) {
+  getEventForView(viewId: $viewId) {
+    id
     eventName
     cause
+    organizationId
     causeDetails
     hostName
     hostEmail
-    minDonation
-    recommendedDonation
     location
     date
     time
+    minDonation
+    recommendedDonation
+    maxCapacity
     viewId
-    editId
     rsvpId
+    editId
   }
 }
-`
-
-
-export const addCharge = `mutation addCharge($token: String!) {
-    addCharge(token: $token) {
-      body
-    }
-  }
 `;
-
-
-
-
+export const getEventForEdit = `query GetEventForEdit($editId: String!) {
+  getEventForEdit(editId: $editId) {
+    id
+    eventName
+    cause
+    organizationId
+    causeDetails
+    hostName
+    hostEmail
+    location
+    date
+    time
+    minDonation
+    recommendedDonation
+    maxCapacity
+    viewId
+    rsvpId
+    editId
+  }
+}
+`;
