@@ -2,11 +2,12 @@ import React from 'react'
 import StripeCheckout from 'react-stripe-checkout';
 import client from '../api/appSyncClient'
 import gql from 'graphql-tag';
-import {addCharge} from '../graphql/queries'
+import {addCharge} from '../graphql/mutations'
 export default class RSVP extends React.Component {
 
   
   onToken = (token) => {
+    console.log("Update")
     client.mutate({
       mutation: gql(addCharge),
       variables: {
