@@ -25,6 +25,7 @@ import { createBrowserHistory } from 'history';
 
 import './index.css';
 
+
 Amplify.configure(awsconfig);
 
 
