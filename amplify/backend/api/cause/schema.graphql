@@ -3,7 +3,7 @@ schema {
   mutation: Mutation
 }
 
-type Cause {
+type Cause @model{
   causeName: String!
   country: String!
   details: String!
@@ -17,7 +17,7 @@ type Causes {
   causes: [Cause!]
 }
 
-type Event {
+type Event @model {
   cause: String!
   causeDetails: AWSJSON
   date: String!
@@ -41,7 +41,7 @@ type Mutation {
   addEvent(cause: String!, date: String!, editId: String!, eventName: String!, hostEmail: String!, hostName: String!, location: String!, maxCapacity: Int, minDonation: Int!, organizationId: String!, recommendedDonation: Int, rsvpId: String!, time: String!, viewId: String!): Event!
 }
 
-type Organization {
+type Organization @model {
   name: String!
 }
 
