@@ -1,14 +1,14 @@
 {
     "develop": {
         "awscloudformation": {
-            "AuthRoleName": "dineforacause-develop-20191002203208-authRole",
-            "UnauthRoleArn": "arn:aws:iam::395974092468:role/dineforacause-develop-20191002203208-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::395974092468:role/dineforacause-develop-20191002203208-authRole",
+            "AuthRoleName": "cause-develop-20200219060359-authRole",
+            "UnauthRoleArn": "arn:aws:iam::395974092468:role/cause-develop-20200219060359-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::395974092468:role/cause-develop-20200219060359-authRole",
             "Region": "us-east-1",
-            "DeploymentBucketName": "dineforacause-develop-20191002203208-deployment",
-            "UnauthRoleName": "dineforacause-develop-20191002203208-unauthRole",
-            "StackName": "dineforacause-develop-20191002203208",
-            "StackId": "arn:aws:cloudformation:us-east-1:395974092468:stack/dineforacause-develop-20191002203208/3b827310-e575-11e9-8a95-12f2c8f206e2"
+            "DeploymentBucketName": "cause-develop-20200219060359-deployment",
+            "UnauthRoleName": "cause-develop-20200219060359-unauthRole",
+            "StackName": "cause-develop-20200219060359",
+            "StackId": "arn:aws:cloudformation:us-east-1:395974092468:stack/cause-develop-20200219060359/881addc0-5307-11ea-9562-1246411399d1"
         }
     }
 }

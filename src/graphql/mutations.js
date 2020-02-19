@@ -1,60 +1,60 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const addEvent = `mutation AddEvent(
-  $eventName: String!
-  $cause: String!
-  $organizationId: String!
-  $hostName: String!
-  $hostEmail: String!
-  $location: String!
-  $minDonation: Int!
-  $recommendedDonation: Int
-  $maxCapacity: Int
-  $date: String!
-  $time: String!
-  $viewId: String!
-  $editId: String!
-  $rsvpId: String!
-) {
-  addEvent(
-    eventName: $eventName
-    cause: $cause
-    organizationId: $organizationId
-    hostName: $hostName
-    hostEmail: $hostEmail
-    location: $location
-    minDonation: $minDonation
-    recommendedDonation: $recommendedDonation
-    maxCapacity: $maxCapacity
-    date: $date
-    time: $time
-    viewId: $viewId
-    editId: $editId
-    rsvpId: $rsvpId
-  ) {
-    id
-    eventName
-    cause
-    organizationId
-    causeDetails
-    hostName
-    hostEmail
-    location
-    date
-    time
-    minDonation
-    recommendedDonation
-    maxCapacity
-    viewId
-    rsvpId
-    editId
-  }
-}
-`;
 export const addCharge = `mutation AddCharge($token: String!) {
   addCharge(token: $token) {
     body
+  }
+}
+`;
+export const addEvent = `mutation AddEvent(
+  $cause: String!
+  $date: String!
+  $editId: String!
+  $eventName: String!
+  $hostEmail: String!
+  $hostName: String!
+  $location: String!
+  $maxCapacity: Int
+  $minDonation: Int!
+  $organizationId: String!
+  $recommendedDonation: Int
+  $rsvpId: String!
+  $time: String!
+  $viewId: String!
+) {
+  addEvent(
+    cause: $cause
+    date: $date
+    editId: $editId
+    eventName: $eventName
+    hostEmail: $hostEmail
+    hostName: $hostName
+    location: $location
+    maxCapacity: $maxCapacity
+    minDonation: $minDonation
+    organizationId: $organizationId
+    recommendedDonation: $recommendedDonation
+    rsvpId: $rsvpId
+    time: $time
+    viewId: $viewId
+  ) {
+    cause
+    causeDetails
+    date
+    editId
+    eventName
+    hostEmail
+    hostName
+    id
+    location
+    maxCapacity
+    minDonation
+    organizationId
+    recommendedDonation
+    rsvpId
+    time
+    viewId
   }
 }
 `;
