@@ -1,14 +1,14 @@
 {
     "develop": {
         "awscloudformation": {
-            "AuthRoleName": "cause-develop-20200219060359-authRole",
-            "UnauthRoleArn": "arn:aws:iam::395974092468:role/cause-develop-20200219060359-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::395974092468:role/cause-develop-20200219060359-authRole",
+            "AuthRoleName": "causeandcuisine-develop-20200219153314-authRole",
+            "UnauthRoleArn": "arn:aws:iam::395974092468:role/causeandcuisine-develop-20200219153314-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::395974092468:role/causeandcuisine-develop-20200219153314-authRole",
             "Region": "us-east-1",
-            "DeploymentBucketName": "cause-develop-20200219060359-deployment",
-            "UnauthRoleName": "cause-develop-20200219060359-unauthRole",
-            "StackName": "cause-develop-20200219060359",
-            "StackId": "arn:aws:cloudformation:us-east-1:395974092468:stack/cause-develop-20200219060359/881addc0-5307-11ea-9562-1246411399d1"
+            "DeploymentBucketName": "causeandcuisine-develop-20200219153314-deployment",
+            "UnauthRoleName": "causeandcuisine-develop-20200219153314-unauthRole",
+            "StackName": "causeandcuisine-develop-20200219153314",
+            "StackId": "arn:aws:cloudformation:us-east-1:395974092468:stack/causeandcuisine-develop-20200219153314/0ded5820-5357-11ea-9232-120022ae60fd"
         }
     }
 }

@@ -1,176 +1,119 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getAllCauses = `query GetAllCauses {
-  getAllCauses {
-    causes {
-      causeName
-      country
-      details
-      id
-      image
-      organizationId
-      organizationName
-    }
-  }
-}
-`;
-export const getCauseInfo = `query GetCauseInfo($id: String!, $organizationId: String!) {
-  getCauseInfo(id: $id, organizationId: $organizationId) {
-    causeName
-    country
-    details
-    id
-    image
-    organizationId
-    organizationName
-  }
-}
-`;
-export const getEventForEdit = `query GetEventForEdit($editId: String!) {
-  getEventForEdit(editId: $editId) {
-    cause
-    causeDetails
-    date
-    editId
-    eventName
-    hostEmail
-    hostName
-    id
-    location
-    maxCapacity
-    minDonation
-    organizationId
-    recommendedDonation
-    rsvpId
-    time
-    viewId
-  }
-}
-`;
-export const getEventForView = `query GetEventForView($viewId: String!) {
-  getEventForView(viewId: $viewId) {
-    cause
-    causeDetails
-    date
-    editId
-    eventName
-    hostEmail
-    hostName
-    id
-    location
-    maxCapacity
-    minDonation
-    organizationId
-    recommendedDonation
-    rsvpId
-    time
-    viewId
-  }
-}
-`;
 export const getOrganizationInfo = `query GetOrganizationInfo($name: String!) {
   getOrganizationInfo(name: $name) {
+    id
     name
   }
 }
 `;
-export const getCause = `query GetCause($id: ID!) {
-  getCause(id: $id) {
+export const getCauseInfo = `query GetCauseInfo($organizationId: String!, $id: String!) {
+  getCauseInfo(id: $id, organizationId: $organizationId) {
     causeName
-    country
     details
-    id
     image
-    organizationId
-    organizationName
+    country
   }
 }
 `;
-export const listCauses = `query ListCauses(
-  $filter: ModelCauseFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listCauses(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      causeName
-      country
-      details
-      id
-      image
-      organizationId
-      organizationName
+
+export const getAllCauses = `query causes {
+   getAllCauses {
+      causes {
+        id
+        organizationId
+        organizationName
+        causeName
+        country
+        details
+        image
+       }
     }
-    nextToken
   }
-}
 `;
-export const getEvent = `query GetEvent($id: ID!) {
-  getEvent(id: $id) {
-    cause
-    causeDetails
-    date
-    editId
+
+
+export const addEvent = `mutation addEvent(
+$eventName: String!, 
+$cause: String!, 
+$organizationId: String!, 
+$location: String! , 
+$minDonation: Int!,
+$hostName: String!, 
+$hostEmail: String!,
+$recommendedDonation: Int,
+$date: String!, 
+$time: String!,
+$maxCapacity: Int
+$viewId: String!,
+$editId: String!,
+$rsvpId: String!
+) {
+   addEvent(
+   eventName: $eventName,
+   cause: $cause, 
+   organizationId: $organizationId, 
+   hostName: $hostName, 
+   hostEmail: $hostEmail, 
+   location: $location, 
+   minDonation: $minDonation, 
+   recommendedDonation: $recommendedDonation,
+   maxCapacity: $maxCapacity,
+   date: $date,
+   time: $time,
+   viewId: $viewId,
+   editId: $editId,
+   rsvpId: $rsvpId
+   ) {
     eventName
-    hostEmail
+    editId
+  }
+  }
+`;
+
+export const getEventForView = `query getEventForView($viewId: String!) {
+  getEventForView(viewId: $viewId) {
+    eventName
     hostName
-    id
-    location
-    maxCapacity
+    hostEmail
+    causeDetails
     minDonation
-    organizationId
     recommendedDonation
-    rsvpId
+    location
+    date
     time
     viewId
+    editId
+    rsvpId
   }
 }
-`;
-export const listEvents = `query ListEvents(
-  $filter: ModelEventFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      cause
-      causeDetails
-      date
-      editId
-      eventName
-      hostEmail
-      hostName
-      id
-      location
-      maxCapacity
-      minDonation
-      organizationId
-      recommendedDonation
-      rsvpId
-      time
-      viewId
+`
+
+export const getEventForEdit = `query getEventForEdit($editId: String!) {
+  getEventForEdit(editId: $editId) {
+    eventName
+    cause
+    causeDetails
+    hostName
+    hostEmail
+    minDonation
+    recommendedDonation
+    location
+    date
+    time
+    viewId
+    editId
+    rsvpId
+  }
+}
+`
+
+
+export const addCharge = `mutation addCharge($token: String!) {
+    addCharge(token: $token) {
+      body
     }
-    nextToken
   }
-}
 `;
-export const getOrganization = `query GetOrganization($id: ID!) {
-  getOrganization(id: $id) {
-    name
-  }
-}
-`;
-export const listOrganizations = `query ListOrganizations(
-  $filter: ModelOrganizationFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listOrganizations(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      name
-    }
-    nextToken
-  }
-}
-`;
+
