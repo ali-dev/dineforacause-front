@@ -1,0 +1,58 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Cause {
+  causeName: String!
+  country: String!
+  details: String!
+  id: String!
+  image: String
+  organizationId: String!
+  organizationName: String!
+}
+
+type Causes {
+  causes: [Cause!]
+}
+
+type Event {
+  cause: String!
+  causeDetails: AWSJSON
+  date: String!
+  editId: String!
+  eventName: String!
+  hostEmail: String!
+  hostName: String!
+  id: String!
+  location: String!
+  maxCapacity: Int
+  minDonation: Int!
+  organizationId: String!
+  recommendedDonation: Int
+  rsvpId: String!
+  time: String!
+  viewId: String!
+}
+
+type Mutation {
+  addCharge(token: String!): StripeCharge!
+  addEvent(cause: String!, date: String!, editId: String!, eventName: String!, hostEmail: String!, hostName: String!, location: String!, maxCapacity: Int, minDonation: Int!, organizationId: String!, recommendedDonation: Int, rsvpId: String!, time: String!, viewId: String!): Event!
+}
+
+type Organization {
+  name: String!
+}
+
+type Query {
+  getAllCauses: Causes!
+  getCauseInfo(id: String!, organizationId: String!): Cause
+  getEventForEdit(editId: String!): Event!
+  getEventForView(viewId: String!): Event!
+  getOrganizationInfo(name: String!): Organization!
+}
+
+type StripeCharge {
+  body: String!
+}
