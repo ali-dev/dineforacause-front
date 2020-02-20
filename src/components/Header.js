@@ -19,7 +19,7 @@ function Header() {
           </nav>  
         <div className="fl pa3 pa4-ns black-70 measure-narrow f3">
           <header className="bb b--black-70 pv4 bg-white">
-            <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3 ml2 mr2">Dine for a Cause</h3>
+            <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3 ml2 mr2">Cause & Cuisine</h3>
           </header>
 
             <section className="pt5 pb4 bg-white o-90">

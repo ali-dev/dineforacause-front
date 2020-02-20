@@ -6,7 +6,5 @@ const awsmobile =  {
     "aws_appsync_authenticationType": "API_KEY",
     "aws_appsync_apiKey": process.env.REACT_APP_APPSYNC_API_KEY,
 };
-console.log(awsmobile);
 
-console.log(process.env);
 export default awsmobile;
