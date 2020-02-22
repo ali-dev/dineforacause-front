@@ -86,6 +86,7 @@ export const getEventForView = `query getEventForView($viewId: String!) {
     viewId
     editId
     rsvpId
+    guests
   }
 }
 `

@@ -10,6 +10,8 @@ import { createLogger } from 'redux-logger';
 import 'tachyons';
 
 import App from './containers/App';
+import ComingSoon from './containers/ComingSoon';
+
 import Event from './containers/Event';
 import RSVP from './containers/RSVP';
 import EventView from './containers/EventView';
@@ -36,23 +38,45 @@ const rootReducers = combineReducers({requestCauses, requestCause, searchCauses,
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger)) //@todo disable logger in prod
 const history = createBrowserHistory(); 
+console.log(process.env)
 
-const routing = (
+const isReleased = parseInt(process.env.REACT_APP_IS_RELEASED) === 1;
+
+
+let routing = (
   <Provider store={store}>
   <Router history={history}>
-      	
-      <Route exact={true} path="/" component={App} />
-      <Route path="/event/create/:organizationId/:id" component={Event} />
-      <Route path="/rsvp" component={RSVP} />
-      <Route path="/event/view/:viewId" component={EventView} />
-      <Route path="/event/manage/:editId" component={EventManage} />
-      
-      
+      <Route exact={true} path="/" component={ComingSoon} />
   </Router>
   </Provider>
 )
 
+if (isReleased) {
+  
+
+  routing = (
+    <Provider store={store}>
+    <Router history={history}>
+        <Route exact={true} path="/" component={App} />
+        <Route path="/event/create/:organizationId/:id" component={Event} />
+        <Route path="/rsvp" component={RSVP} />
+        <Route path="/event/view/:viewId" component={EventView} />
+        <Route path="/event/manage/:editId" component={EventManage} />
+        
+        
+    </Router>
+    </Provider>
+  )
+    
+}
+
+
 ReactDOM.render(routing, document.getElementById('root'));
 
 registerServiceWorker();
-export default withAuthenticator(App, true);
+let componentToRender = App;
+if (!isReleased) {
+  componentToRender = ComingSoon;
+}
+ 
+export default withAuthenticator(componentToRender, true);
