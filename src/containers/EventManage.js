@@ -7,7 +7,7 @@ import { requestEventForEdit } from '../actions';
 
 const mapStateToProps = (state) => {
   return {
-    event: state.requestEventForEdit.event, // @todo it should be requestEventForEdit
+    event: state.requestEventForEdit.event, 
     isPending: state.requestEventForEdit
   }
 }

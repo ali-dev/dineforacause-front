@@ -106,6 +106,7 @@ export const getEventForEdit = `query getEventForEdit($editId: String!) {
     viewId
     editId
     rsvpId
+    guests
   }
 }
 `

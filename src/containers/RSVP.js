@@ -1,32 +1,165 @@
-import React from 'react'
-import StripeCheckout from 'react-stripe-checkout';
-import client from '../api/appSyncClient'
-import gql from 'graphql-tag';
-import {addCharge} from '../graphql/mutations'
-export default class RSVP extends React.Component {
+import React, { Component } from "react";
+import StripeCheckout from "react-stripe-checkout";
+import client from "../api/appSyncClient";
+import gql from "graphql-tag";
+import { addCharge } from "../graphql/mutations";
+import { requestEventForEdit } from '../actions';
+import { connect } from 'react-redux';
 
-  
-  onToken = (token) => {
-    console.log("Update")
-    client.mutate({
-      mutation: gql(addCharge),
-      variables: {
-        token: JSON.stringify(token)
-      }
-    }).then(data => alert(`We are in business, ${data.email}`))
-      .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`))
+const mapStateToProps = state => {
+  return {
+    event: state.requestEventForEdit.event, // @todo it should be requestEventForEdit
+    isPending: state.requestEventForEdit
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onRequestEvent: editId => dispatch(requestEventForEdit(editId))
+  };
+};
+
+class RSVP extends Component {
+  componentDidMount() {
+    this.props.onRequestEvent(this.props.match.params.editId);
   }
- 
- 
+
+  onToken = token => {
+    client
+      .mutate({
+        mutation: gql(addCharge),
+        variables: {
+          token: JSON.stringify(token)
+        }
+      })
+      .then(data => alert(`We are in business, ${data.email}`))
+      .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
+  };
+
   render() {
+    const { event } = this.props;
+    
+    let causeDetails = {};
+    if (event.causeDetails !== undefined) {
+      causeDetails = JSON.parse(event.causeDetails);
+    }
+    const imagePath = "https://dfac-main.s3.amazonaws.com/app";
     return (
-      // ...
-      <StripeCheckout
-        token={this.onToken}
-        name="Dine For A Cause" 
-        panelLabel="Donate"
-        stripeKey="pk_test_uo2pgWCmS9OklnawX92zOec600IDnTkg42"
-      />
+    <div className="App ">
+      <header className="App-header ">
+        <nav className="dt w-100  center bg-white o-90 mt0">
+          <div className=" v-mid tr pa3 ">
+            <a
+              className="f8 fw6 hover-red  no-underline gray dn dib-ns pv2 ph3"
+              href="/"
+            >
+              How it Works
+            </a>
+            <a
+              className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
+              href="/"
+            >
+              Causes
+            </a>
+            <a
+              className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
+              href="/"
+            >
+              Organizations
+            </a>
+            <a
+              className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
+              href="/"
+            >
+              Partners
+            </a>
+            <a
+              className="f8 fw6 hover-red no-underline gray dib ml2 pv2 ph3 ba"
+              href="/"
+            >
+              Sign Up
+            </a>
+          </div>
+        </nav>
+        <div className="">
+          <header className="bb b--black-40 pv4 bg-white">
+            <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3  ml2 mr2 ">
+              
+              {event.eventName}
+            </h3>
+          </header>
+          
+          
+            <article data-name="article-full-bleed-background" >
+              
+                <section className="bg-white w-60 center ">
+                  <div className="fl w-30 pt5 pa3 pa2-ns   bg-white     ">
+                  <dl class="lh-title pa4 mt0">
+                    <dt class="f8 b">Host Name</dt>
+                    <dd class="ml0 gray">{event.hostName}</dd>
+                    <dt class="f8 b mt2">When</dt>
+                    <dd class="ml0 gray">{event.date} @ {event.time}</dd>
+                    <dt class="f8 b mt2">Where</dt>
+                    <dd class="ml0 gray">{event.location}</dd>
+                    <dt class="f8 b mt2">Minimum Donation</dt>
+                    <dd class="ml0 gray">${event.minDonation}</dd>
+                    <dt class="f8 b mt2">Recommended Donation</dt>
+                    <dd class="ml0 gray">${event.recommendedDonation}</dd>
+                    <dt class="f8 b mt2">Event Details</dt>
+                    <dd class="ml0 gray">{event.details}</dd>
+                  </dl>
+                  </div>
+                  <div className="fl w-70 pt5 pa3 pa2-ns   bg-white   ">
+                  
+
+
+                  <section className="bg-white w-80 center  ">
+                    <div className="fl w-50 w-100-m w-50-l pa2">
+                      <img
+                        className="w-100 db outline black-10"
+                        alt={causeDetails.image}
+                        src={`${imagePath}/${causeDetails.image}`}
+                      />
+
+                      <dl className="mt2 f6 lh-copy tc">
+                        <dt>{causeDetails.causeName}</dt>
+                        <dd className="ml0 gray truncate w-100">
+                          {causeDetails.organizationName}
+                        </dd>
+                      </dl>
+                    </div>
+                    <div className="fl w-50 w-50-m w-50-r pa2">
+                      {causeDetails.details}
+                    </div>
+                    <div>
+                      <StripeCheckout
+                        token={this.onToken}
+                        name="Dine For A Cause"
+                        panelLabel="Donate"
+                        stripeKey="pk_test_uo2pgWCmS9OklnawX92zOec600IDnTkg42"
+                      />
+                    </div>
+                    
+                  </section>
+                  </div>
+                  </section>
+                
+            </article>
+          
+        </div>
+      </header>
+    </div>
     )
+    // return (
+    //   // ...
+    //   <StripeCheckout
+    //     token={this.onToken}
+    //     name="Dine For A Cause"
+    //     panelLabel="Donate"
+    //     stripeKey="pk_test_uo2pgWCmS9OklnawX92zOec600IDnTkg42"
+    //   />
+    // )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(RSVP)
