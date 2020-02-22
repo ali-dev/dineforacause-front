@@ -1,11 +1,13 @@
 import React, { useState, Component } from "react";
 import { Form, Dropdown } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
+import client from "../api/appSyncClient";
+import gql from "graphql-tag";
+import { addCharge } from "../graphql/queries";
 import {
   CardElement,
   Elements,
-  ElementsConsumer,
-  CardAmountElement
+  ElementsConsumer
 } from "@stripe/react-stripe-js";
 import "./stripe.css";
 // Custom styling can be passed to options when creating an Element.
@@ -64,6 +66,7 @@ const amounts = [
 
 const DEFAULT_STATE = {
   error: null,
+  elements: null,
   cardComplete: false,
   processing: false,
   paymentMethod: null,
@@ -80,17 +83,25 @@ class CheckoutForm extends Component {
     super(props);
     this.state = DEFAULT_STATE;
   }
-  // Handle real-time validation errors from the card Element.
-  handleChange = event => {
-    // const [error, setError] = useState(null);
+
+  handleCCChange = (event) => {
     if (event.error) {
       this.setState({ ["error"]: event.error.message });
+      return;
     } else {
       this.setState({ ["error"]: null });
     }
+
   };
 
   handleChange = (event, { name, value }) => {
+    if (event.error) {
+      alert(event.error.message);
+      this.setState({ ["error"]: event.error.message });
+      return;
+    } else {
+      this.setState({ ["error"]: null });
+    }
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
     }
@@ -120,23 +131,30 @@ class CheckoutForm extends Component {
     // to find your CardElement because there can only ever be one of
     // each type of element.
     const cardElement = elements.getElement(CardElement);
-    const {token} = stripe.createToken();
-    alert(token);
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       amount: this.state.amount,
       card: cardElement
     });
-
-    if (error) {
+    const { token } = await stripe.createToken(cardElement);
+    if (token) {
+      client
+        .mutate({
+          mutation: gql(addCharge),
+          variables: {
+            token: JSON.stringify(token)
+          }
+        })
+        .then(data => alert(`We are in business, ${data.email}`))
+        .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
+    //   console.log("[PaymentMethod]", paymentMethod);
+    } else if (error) {
       console.log("[error]", error);
-    } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      this.setState({ ["error"]: error.message });
     }
   };
 
   render() {
-    // const [error, setError] = useState(null);
     // const stripe = useStripe();
     // const elements = useElements();
     const {
@@ -158,6 +176,7 @@ class CheckoutForm extends Component {
               options={rsvp}
               placeholder="RSVP"
               name="rsvp"
+              id="rsvp_input"
             />
 
             <br />
@@ -166,17 +185,16 @@ class CheckoutForm extends Component {
               className=""
               id="card-element"
               options={CARD_ELEMENT_OPTIONS}
-              onChange={this.handleChange}
+              onChange={this.handleCCChange}
             />
 
             <div className="card-errors bg-light-gray" role="alert">
               {error}
             </div>
 
-
             <Dropdown
               options={amounts}
-              placeholder='Choose amount'
+              placeholder="Choose amount"
               name="amount"
               value={this.state.amount}
               onChange={this.handleChange}
@@ -203,18 +221,6 @@ const App = () => {
   );
 };
 
-// POST the token ID to your backend.
-async function stripeTokenHandler(token) {
-  const response = await fetch("/charge", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ token: token.id })
-  });
-
-  return response.json();
-}
 
 const InjectedCheckoutForm = () => {
   return (
