@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import StripeCheckout from "react-stripe-checkout";
+// import StripeCheckout from "react-stripe-checkout";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
 import { addCharge } from "../graphql/mutations";
 import { requestEventForEdit } from '../actions';
 import { connect } from 'react-redux';
+import Payment from "../components/Payment"
 
 const mapStateToProps = state => {
   return {
@@ -82,19 +83,21 @@ class RSVP extends Component {
           </div>
         </nav>
         <div className="">
-          <header className="bb b--black-40 pv4 bg-white">
-            <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3  ml2 mr2 ">
+          <header className="bb b--black-40 pv4 bg-white ">
+            <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3  ml2 mr2 center">
               
               {event.eventName}
             </h3>
+            
           </header>
           
           
             <article data-name="article-full-bleed-background" >
               
-                <section className="bg-white w-60 center ">
-                  <div className="fl w-30 pt5 pa3 pa2-ns   bg-white     ">
-                  <dl class="lh-title pa4 mt0">
+                <section className="bg-white w-80 center ">
+                  <div className="fl w-60 pt5 pa3 pa2-ns   bg-white     ">
+                  <h3 className="f3 green">Event Details</h3>
+                  <dl class="lh-title pa1 mt0">
                     <dt class="f8 b">Host Name</dt>
                     <dd class="ml0 gray">{event.hostName}</dd>
                     <dt class="f8 b mt2">When</dt>
@@ -108,13 +111,11 @@ class RSVP extends Component {
                     <dt class="f8 b mt2">Event Details</dt>
                     <dd class="ml0 gray">{event.details}</dd>
                   </dl>
-                  </div>
-                  <div className="fl w-70 pt5 pa3 pa2-ns   bg-white   ">
-                  
 
 
-                  <section className="bg-white w-80 center  ">
-                    <div className="fl w-50 w-100-m w-50-l pa2">
+                  <section className="bg-white w-100   ">
+                  <h3 className="f3 green">Cause Details</h3>
+                    <div className="fl w-30 w-100-m w-50-l pa2">
                       <img
                         className="w-100 db outline black-10"
                         alt={causeDetails.image}
@@ -128,37 +129,35 @@ class RSVP extends Component {
                         </dd>
                       </dl>
                     </div>
-                    <div className="fl w-50 w-50-m w-50-r pa2">
+                    <div className="fl w-700 w-50-m w-50-r pa2">
                       {causeDetails.details}
                     </div>
                     <div>
-                      <StripeCheckout
-                        token={this.onToken}
-                        name="Dine For A Cause"
-                        panelLabel="Donate"
-                        stripeKey="pk_test_uo2pgWCmS9OklnawX92zOec600IDnTkg42"
-                      />
+                      <br/>
+                    
+                      
+                      
                     </div>
                     
                   </section>
+                  
                   </div>
+                  <div className="fl w-40 pt5 pa3 pa2-ns   bg-light-gray   ">
+                  <Payment /> 
+                  
+                  </div>
+                  
                   </section>
+                  
                 
             </article>
-          
+                       
         </div>
+        
       </header>
     </div>
     )
-    // return (
-    //   // ...
-    //   <StripeCheckout
-    //     token={this.onToken}
-    //     name="Dine For A Cause"
-    //     panelLabel="Donate"
-    //     stripeKey="pk_test_uo2pgWCmS9OklnawX92zOec600IDnTkg42"
-    //   />
-    // )
+  
   }
 }
 
