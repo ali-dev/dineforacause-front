@@ -57,7 +57,7 @@ if (isReleased) {
     <Provider store={store}>
     <Router history={history}>
         <Route exact={true} path="/" component={App} />
-        <Route path="/event/create/:organizationId/:id" component={Event} />
+        <Route path="/event/create/" component={Event} />
         <Route path="/rsvp/:editId" component={RSVP} />
         <Route path="/event/view/:viewId" component={EventView} />
         <Route path="/event/manage/:editId" component={EventManage} />

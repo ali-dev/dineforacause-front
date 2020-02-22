@@ -97,7 +97,7 @@ class CreateEventForm extends Component {
             <div>
                 <Form.Group widths='equal'>
                     <Form.Field required>
-                        <label>Your name</label>
+                        <label>Your Name</label>
                         <input onChange={this.handleChangeInput} name="hostName" />
                     </Form.Field>
                     <Form.Field required>

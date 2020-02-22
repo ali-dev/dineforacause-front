@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, {  Component } from "react";
 import { Form, Dropdown } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
 import client from "../api/appSyncClient";

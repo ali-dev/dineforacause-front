@@ -39,7 +39,6 @@ $eventName: String!,
 $cause: String!, 
 $organizationId: String!, 
 $location: String! , 
-$minDonation: Int!,
 $hostName: String!, 
 $hostEmail: String!,
 $recommendedDonation: Int,
@@ -57,7 +56,6 @@ $rsvpId: String!
    hostName: $hostName, 
    hostEmail: $hostEmail, 
    location: $location, 
-   minDonation: $minDonation, 
    recommendedDonation: $recommendedDonation,
    maxCapacity: $maxCapacity,
    date: $date,
@@ -78,7 +76,6 @@ export const getEventForView = `query getEventForView($viewId: String!) {
     hostName
     hostEmail
     causeDetails
-    minDonation
     recommendedDonation
     location
     date
@@ -98,7 +95,6 @@ export const getEventForEdit = `query getEventForEdit($editId: String!) {
     causeDetails
     hostName
     hostEmail
-    minDonation
     recommendedDonation
     location
     date

@@ -24,7 +24,7 @@ class CreateEventForm extends Component {
 		this.state = {
 			cause: '',
             organizationId: '',
-            minDonation: '',
+            // minDonation: '',
 			recommendedDonation: '',
 			viewId: shortid.generate(),
             editId: shortid.generate(),
