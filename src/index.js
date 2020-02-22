@@ -38,7 +38,6 @@ const rootReducers = combineReducers({requestCauses, requestCause, searchCauses,
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger)) //@todo disable logger in prod
 const history = createBrowserHistory(); 
-console.log(process.env)
 
 const isReleased = parseInt(process.env.REACT_APP_IS_RELEASED) === 1;
 
