@@ -1,44 +1,7 @@
 import React, { Component } from "react";
 import { Form, Dropdown } from "semantic-ui-react";
 import { DateInput, TimeInput } from "semantic-ui-calendar-react";
-
-// @todo decide if we are going to use state/country
-// const states = [
-//     { key: 'n', text: 'New York', value: 'New York City' },
-//     { key: 'm', text: 'Minnesota', value: 'Minnesota' },
-// ];
-
-// const countries = [
-//     { key: 'u', text: 'United States', value: 'United States' },
-//     { key: 'j', text: 'Jordan', value: 'Jordan' },
-// ];
-
-const times = [
-  { key: "7am", text: "7:00 AM", value: "7:00 AM" },
-  { key: "730am", text: "7:30 AM", value: "7:30 AM" },
-  { key: "8am", text: "8:00 AM", value: "8:00 AM" },
-  { key: "830am", text: "8:30 AM", value: "8:30 AM" },
-  { key: "9am", text: "9:00 AM", value: "9:00 AM" },
-  { key: "930am", text: "9:30 AM", value: "9:30 AM" },
-  { key: "10am", text: "10:00 AM", value: "10:00 AM" },
-  { key: "1030am", text: "10:30 AM", value: "10:30 AM" },
-  { key: "11am", text: "11:00 AM", value: "11:00 AM" },
-  { key: "1130am", text: "11:30 AM", value: "11:30 AM" },
-  { key: "12pm", text: "12:00 PM", value: "12:00 PM" },
-  { key: "1230pm", text: "12:30 PM", value: "12:30 PM" },
-  { key: "1pm", text: "1:00 PM", value: "1:00 PM" },
-  { key: "130pm", text: "1:30 PM", value: "1:30 PM" },
-  { key: "2pm", text: "2:00 PM", value: "2:00 PM" },
-  { key: "230pm", text: "2:30 PM", value: "2:30 PM" },
-  { key: "3pm", text: "3:00 PM", value: "3:00 PM" },
-  { key: "330pm", text: "3:30 PM", value: "3:30 PM" },
-  { key: "4pm", text: "4:00 PM", value: "4:00 PM" },
-  { key: "430pm", text: "4:30 PM", value: "4:30 PM" },
-  { key: "5pm", text: "5:00 PM", value: "5:00 PM" },
-  { key: "530pm", text: "5:30 PM", value: "5:30 PM" },
-  { key: "6pm", text: "6:00 PM", value: "6:00 PM" },
-  { key: "630pm", text: "6:30 PM", value: "6:30 PM" }
-];
+import {TIME_LIST} from '../utils/lists';
 
 class CreateEventForm extends Component {
   constructor(props) {
@@ -146,7 +109,7 @@ class CreateEventForm extends Component {
               search
               selection
               name="time"
-              options={times}
+              options={TIME_LIST}
               onChange={this.handleChange}
             />
           </Form.Field>
@@ -160,25 +123,27 @@ class CreateEventForm extends Component {
               selection
               name="endTime"
               clearable
-              options={times}
+              options={TIME_LIST}
               onChange={this.handleChange}
             />
           </Form.Field>
         </Form.Group>
 
         <div className="ui divider"></div>
-        <Form.Field required>
-          <label>Where</label>
-          <input
+        <Form.TextArea 
+            required
+            label="Where"
             onChange={this.handleChangeInput}
             name="location"
-            placeholder="Address"
-          />
-        </Form.Field>
+            value={this.state.location}
+            placeholder="Add the address and instructions to get to location"
+          
+        />
 
         <div className="ui divider"></div>
         <Form.TextArea
           onChange={this.handleChangeInput}
+          required
           label="Description"
           name="eventDetails"
           value={this.state.eventDetails}

@@ -87,8 +87,8 @@ class EventCauses extends Component {
       <div>
         <Form.Group widths="equal">
         
-          <Form.Field>
-            <label>Choose your cause</label>  
+          <Form.Field required>
+            <label>Cause</label>  
             <Dropdown
               selectOnNavigation={true}
               fluid

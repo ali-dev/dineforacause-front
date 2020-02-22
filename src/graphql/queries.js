@@ -44,10 +44,12 @@ $hostEmail: String!,
 $recommendedDonation: Int,
 $date: String!, 
 $time: String!,
-$maxCapacity: Int
+$endTime: String,
+$eventDetails: String!,
 $viewId: String!,
 $editId: String!,
 $rsvpId: String!
+
 ) {
    addEvent(
    eventName: $eventName,
@@ -57,9 +59,10 @@ $rsvpId: String!
    hostEmail: $hostEmail, 
    location: $location, 
    recommendedDonation: $recommendedDonation,
-   maxCapacity: $maxCapacity,
    date: $date,
    time: $time,
+   endTime: $endTime,
+   eventDetails: $eventDetails,
    viewId: $viewId,
    editId: $editId,
    rsvpId: $rsvpId
