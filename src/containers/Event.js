@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { createLogger } from 'redux-logger';
-// import { requestCause } from '../actions';
 import CreateEventForm from '../forms/CreateEventForm'
-
-// const logger = createLogger()
 
 
   
@@ -34,11 +29,6 @@ class Event extends Component {
   	      <article data-name="article-full-bleed-background">
     	      <div className="cf" >
     	        <div className="fl w-100   black-70 f3  ">
-                {/*
-                <header className="bb b--black-80 pv2 bg-white">
-    	            <h4 style="font-family: 'Varela', sans-serif;" className="f3 fw6 i lh-title mt0 ml2 mr3 ">Create Event</h4>  
-    	          </header>
-                */}
   	          <CreateEventForm/>
   	        </div>
   	      </div>
