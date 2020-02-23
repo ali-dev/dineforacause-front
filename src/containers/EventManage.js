@@ -34,12 +34,7 @@ class EventManage extends Component {
       return null;
     }
     const { event } = this.props;
-    // let causeDetails = {};
-    // if (event.causeDetails !== undefined) {
-    //   causeDetails = JSON.parse(event.causeDetails);
-    // }
-    const causeDetails = JSON.parse(event.causeDetails);
-    const imagePath = "https://dfac-main.s3.amazonaws.com/app";
+    
     return (
       <div className="App ">
         <header className="App-header ">
