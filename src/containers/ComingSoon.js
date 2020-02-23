@@ -15,9 +15,9 @@ class ComingSoon extends Component {
     
     return (
     
-    <div className="App">
+    <div className="vh-100 dt w-100 coming-soon-image">
       <header className="App-header">
-        <Header />
+        {/* <Header /> */}
                 
       </header>
       <h1>COMING SOON</h1>

@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
-import { Button } from 'semantic-ui-react'
-// import "./App.css";
-
-
 const initialState = {
   pages: {
     about_us: "About Us",
@@ -114,22 +110,9 @@ class App extends Component {
         
       </div>
     );
-
-    // const filteredCauses = causes.filter(cause => {
-    //   return cause.details.toLowerCase().includes(searchField.toLowerCase());
-    // })
+    // @todo do we need slider?              
     return slider;
-    // return (
 
-    // <div className="App">
-    //   <header className="App-header">
-    //     <Header />
-
-    //   </header>
-
-    // </div>
-
-    // );
   }
 }
 

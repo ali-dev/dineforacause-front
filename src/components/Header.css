@@ -67,6 +67,19 @@
   background-size: cover;
 }
 
+.coming-soon-image {
+  background: url(../assets/test13.jpeg); 
+  /* background-color: palevioletred; */
+  /* Set a specific height */
+  /*height: 200px; */
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
  
  
 
