@@ -7,20 +7,24 @@ class CreateEventForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventName: "",
-      eventDetails: "",
-      hostName: "",
-      hostEmail: "",
-      location: "",
-      date: "",
-      time: "",
-      endTime: "",
-      // maxCapacity: '',
-      attendees: [],
-      attendeeEmail: "",
-      attendeeName: ""
-    };
-
+        eventName: "",
+        eventDetails: "",
+        hostName: "",
+        hostEmail: "",
+        location: "",
+        date: "",
+        time: "",
+        endTime: "",
+        // maxCapacity: '',
+        attendees: [],
+        attendeeEmail: "",
+        attendeeName: ""
+      };
+  
+    if (this.props.eventToEdit) {
+        this.state = this.props.eventToEdit
+    }
+    
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -73,17 +77,18 @@ class CreateEventForm extends Component {
         <Form.Group widths="equal">
           <Form.Field required>
             <label>Your Name</label>
-            <input onChange={this.handleChangeInput} name="hostName" />
+            <input onChange={this.handleChangeInput} value={this.state.hostName} name="hostName" />
           </Form.Field>
           <Form.Field required>
             <label>Email</label>
-            <input onChange={this.handleChangeInput} name="hostEmail" />
+            <input onChange={this.handleChangeInput} value={this.state.hostEmail} name="hostEmail" />
           </Form.Field>
         </Form.Group>
         <Form.Field required>
           <label>Event Name</label>
           <input
             onChange={this.handleChangeInput}
+            value={this.state.eventName}
             name="eventName"
             placeholder="Add a short, clear name"
           />
@@ -109,6 +114,7 @@ class CreateEventForm extends Component {
               search
               selection
               name="time"
+              value={this.state.time}
               options={TIME_LIST}
               onChange={this.handleChange}
             />
@@ -122,6 +128,7 @@ class CreateEventForm extends Component {
               search
               selection
               name="endTime"
+              value={this.state.endTime}
               clearable
               options={TIME_LIST}
               onChange={this.handleChange}

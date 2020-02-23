@@ -19,29 +19,13 @@ const mapStateToProps = (state) => {
 class EditEventForm extends Component {
     componentDidMount() {
         //@todo figure out how to pass event from parent to child
-        this.setState({ ["event"]: this.props.event });
+        
         // this.props.onRequestEvent(this.props.match.params.editId);
       }
 	constructor(props) {
         super(props);
-        console.log(props);
-		this.state = {
-			cause: '',
-            organizationId: '',
-            // minDonation: '',
-			recommendedDonation: '',
-			viewId: shortid.generate(),
-            editId: shortid.generate(),
-			rsvpId: shortid.generate(),
-			eventName: '',
-            eventDetails: '',
-            hostName: '',
-            hostEmail: '',
-            location: '',
-            date: '',
-			time: '',
-			endTime:''
-        };
+        this.state = this.props.eventToEdit
+        
         console.log(this.state);
 		this.handleFieldChange = this.handleFieldChange.bind(this);
 	}
@@ -61,6 +45,12 @@ class EditEventForm extends Component {
 	}
 	
 	render() {
+        console.log(this.state);
+        const cause = this.state.causeDetails;
+        const causeDetails = JSON.parse(cause);
+        console.log(causeDetails);
+        const imagePath = "https://dfac-main.s3.amazonaws.com/app";
+    
         return (
 			<Form size='small'>
 				<section className="bg-white w-80 center  ">
@@ -70,8 +60,32 @@ class EditEventForm extends Component {
 
 					<div className="fl w-50  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">
 						<h3 className="f3 green">Event Details</h3>
-						<EventDetails onChange={this.handleFieldChange} />
-                        <EventCauses onChange={this.handleFieldChange} />
+						<EventDetails eventToEdit={this.state} onChange={this.handleFieldChange} />
+                        
+                        <h3 className="f3 green">Cause Details</h3>
+                        <div className="fl w-100 w-50-m w-50-l pa2">
+                        
+                        <img
+                            className="w-100 db outline black-10"
+                            alt="cause"
+                            src={`${imagePath}/${causeDetails.image} `}
+                        />
+                        
+                        <dl className="mt2 f6 lh-copy tc">
+                            <dt className="clip">Title</dt>
+                            <dd className="ml0 black truncate w-100">
+                            {causeDetails.causeName}
+                            </dd>
+                            <dt className="clip">{causeDetails.causeName}</dt>
+                            <dd className="ml0 gray truncate w-100">
+                            {causeDetails.organizationName}
+                            </dd>
+                        </dl>
+                        </div>
+                        <div className="fl w-50 w-50-m w-50-r pa2">
+                        {causeDetails.details}
+                        </div>
+                
 					</div>
 					 <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button>
 				</section>
