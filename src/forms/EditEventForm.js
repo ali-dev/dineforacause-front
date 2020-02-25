@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Form, } from 'semantic-ui-react'
-import EventCauses from './EventCauses'
 import EventDetails from './EventDetails'
 import EventGuests from './EventGuests'
 import trigger from '../graphql/triggers'
-import shortid from 'shortid';
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
@@ -27,7 +25,7 @@ class EditEventForm extends Component {
         this.state = this.props.eventToEdit
         
         console.log(this.state);
-		this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
 	}
 
 	handleFieldChange(name, value) {
@@ -45,17 +43,16 @@ class EditEventForm extends Component {
 	}
 	
 	render() {
-        console.log(this.state);
+        console.log(this.state.editId);
         const cause = this.state.causeDetails;
         const causeDetails = JSON.parse(cause);
-        console.log(causeDetails);
         const imagePath = "https://dfac-main.s3.amazonaws.com/app";
     
         return (
 			<Form size='small'>
 				<section className="bg-white w-80 center  ">
 					<div className="fl w-50 pt5 pa3 pa2-ns   bg-white   ">
-						<EventGuests />
+						<EventGuests eventEditId={this.state.editId} />
 					</div>
 
 					<div className="fl w-50  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">

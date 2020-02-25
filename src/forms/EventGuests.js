@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, } from 'semantic-ui-react'
-
+import trigger from '../graphql/triggers'
 
 
 class EventGuests extends Component {
@@ -9,9 +9,11 @@ class EventGuests extends Component {
         this.state = {
             attendees: [],
             attendeeEmail: '',
-            attendeeName:''
+            attendeeName:'',
+            eventEditId: null
         };
 
+        
     }
 
 
@@ -37,6 +39,22 @@ class EventGuests extends Component {
             attendeeEmail: "",
             attendeeName: ""
         });
+
+        const data = {
+            'eventId': this.state.eventEditId, 
+            'guestId': 'id',
+            'guestDetails': {
+                'name': this.state.attendeeName,
+                'email': this.state.attendeeEmail,
+                'status': 'created',
+                'rsvp_status': 'pending'
+            }
+        }
+        trigger
+            .addGuest(data)
+            // .then(data => {
+            //     //history.push(`/event/manage/${data.data.addEvent.editId}`);
+            // })
     };
 
     removeAttendee = (key) => {
@@ -49,11 +67,11 @@ class EventGuests extends Component {
 
 
     componentDidMount() {
-        // this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
-
+        if (this.props.eventEditId) {
+            this.setState({["eventEditId"]: this.props.eventEditId});
+        }
     }
     render() {
-        
         return (
             <div>
                 {/* <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button> */}

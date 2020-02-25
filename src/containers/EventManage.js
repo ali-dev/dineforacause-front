@@ -30,7 +30,7 @@ class EventManage extends Component {
   //   };
   // }
   render() {
-    if (this.props.event == "test") {
+    if (this.props.event === "test") {
       return null;
     }
     const { event } = this.props;

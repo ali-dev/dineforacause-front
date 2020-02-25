@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Dropdown } from "semantic-ui-react";
-import { DateInput, TimeInput } from "semantic-ui-calendar-react";
+import { DateInput } from "semantic-ui-calendar-react";
 import {TIME_LIST} from '../utils/lists';
 
 class CreateEventForm extends Component {
@@ -143,7 +143,7 @@ class CreateEventForm extends Component {
             onChange={this.handleChangeInput}
             name="location"
             value={this.state.location}
-            placeholder="Add the address and instructions to get to location"
+            placeholder="Add an address or location"
           
         />
 

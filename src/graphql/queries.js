@@ -110,6 +110,11 @@ export const getEventForEdit = `query getEventForEdit($editId: String!) {
 }
 `
 
+export const addGuest = `mutation addGuest($guestId: String!, eventId: String!, guestDetails: AWSJSON!) {
+  addGuest(guestId: $guestId, eventId: $eventId, guestDetails: $guestDetails) 
+}
+`;
+
 
 export const addCharge = `mutation addCharge($token: String!) {
     addCharge(token: $token) {
