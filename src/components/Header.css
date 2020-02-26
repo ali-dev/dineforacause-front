@@ -5,7 +5,7 @@
 */
 
   background: url(../assets/test5.jpeg); 
-
+  /* background-color: palevioletred; */
   /* Set a specific height */
   /*height: 200px; */
 
@@ -15,6 +15,91 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.about-us-image {
+  
+   background: url(../assets/test10.jpeg); 
+   /* background-color: palevioletred; */
+  
+   /* Create the parallax scrolling effect */
+   background-attachment: fixed;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+ }
+
+ .causes-image {
+   background: url(../assets/test21.jpeg); 
+   /* background-color: palevioletred; */
+   /* Set a specific height */
+   /*height: 200px; */
+ 
+   /* Create the parallax scrolling effect */
+   background-attachment: fixed;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+ }
+
+.organizations-image {
+   background: url(../assets/food.jpg); 
+   /* background-color: palevioletred; */
+   /* Set a specific height */
+   /*height: 200px; */
+ 
+   /* Create the parallax scrolling effect */
+   background-attachment: fixed;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+ }
+
+ .how-it-works-image {
+  background: url(../assets/test19.jpeg); 
+  /* background-color: palevioletred; */
+  /* Set a specific height */
+  /*height: 200px; */
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.coming-soon-image {
+  background: url(../assets/test13.jpeg); 
+  /* background-color: palevioletred; */
+  /* Set a specific height */
+  /*height: 200px; */
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+ 
+ 
+
+
+.aws-btn {
+
+  --slider-height-percentage: 60%;
+  --slider-transition-duration: 700ms;
+  --organic-arrow-thickness: 4px;
+  --organic-arrow-border-radius: 0px;
+  --organic-arrow-height: 40px;
+  --organic-arrow-color: #36b041;
+  --control-button-width: 10%;
+  --control-button-height: 25%;
+  --control-button-background: transparent;
+  --control-bullet-color: #5c8215;
+  --control-bullet-active-color: #26456f;
+  --loader-bar-color: #851515;
+  --loader-bar-height: 6px;
+  }
 
 .Header-image-events {
  /* background: url(../assets/food.jpg) no-repeat center center fixed; 

@@ -5,15 +5,7 @@ import EventDetails from './EventDetails'
 import trigger from '../graphql/triggers'
 import shortid from 'shortid';
 import { withRouter } from 'react-router-dom';
-// const states = [
-//  {key: 'n', text: 'New York', value: 'New York City' },
-//  { key: 'm', text: 'Minnesota', value: 'Minnesota' },
-//  ];
 
-// const countries = [
-// {key: 'u', text: 'United States', value: 'United States' },
-// { key: 'j', text: 'Jordan', value: 'Jordan' },
-// ];
 
 
 
@@ -24,7 +16,7 @@ class CreateEventForm extends Component {
 		this.state = {
 			cause: '',
             organizationId: '',
-            minDonation: '',
+            // minDonation: '',
 			recommendedDonation: '',
 			viewId: shortid.generate(),
             editId: shortid.generate(),
@@ -36,6 +28,8 @@ class CreateEventForm extends Component {
             location: '',
             date: '',
 			time: '',
+			endTime:'',
+			guests: '{}'
         };
 		this.handleFieldChange = this.handleFieldChange.bind(this);
 	}
