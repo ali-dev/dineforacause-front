@@ -48,7 +48,8 @@ $endTime: String,
 $eventDetails: String!,
 $viewId: String!,
 $editId: String!,
-$rsvpId: String!
+$rsvpId: String!,
+$guests: AWSJSON
 
 ) {
    addEvent(
@@ -65,7 +66,8 @@ $rsvpId: String!
    eventDetails: $eventDetails,
    viewId: $viewId,
    editId: $editId,
-   rsvpId: $rsvpId
+   rsvpId: $rsvpId,
+   guests: $guests
    ) {
     eventName
     editId
@@ -93,6 +95,7 @@ export const getEventForView = `query getEventForView($viewId: String!) {
 
 export const getEventForEdit = `query getEventForEdit($editId: String!) {
   getEventForEdit(editId: $editId) {
+    id
     eventName
     cause
     causeDetails
@@ -110,7 +113,7 @@ export const getEventForEdit = `query getEventForEdit($editId: String!) {
 }
 `
 
-export const addGuest = `mutation addGuest($guestId: String!, eventId: String!, guestDetails: AWSJSON!) {
+export const addGuest = `mutation addGuest($guestId: String!, $eventId: String!, $guestDetails: AWSJSON!) {
   addGuest(guestId: $guestId, eventId: $eventId, guestDetails: $guestDetails) 
 }
 `;

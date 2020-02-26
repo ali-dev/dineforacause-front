@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, } from 'semantic-ui-react'
 import trigger from '../graphql/triggers'
-
+import shortid from 'shortid';
 
 class EventGuests extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class EventGuests extends Component {
             attendees: [],
             attendeeEmail: '',
             attendeeName:'',
-            eventEditId: null
+            eventId: null
         };
 
         
@@ -39,17 +39,18 @@ class EventGuests extends Component {
             attendeeEmail: "",
             attendeeName: ""
         });
-
+        
         const data = {
-            'eventId': this.state.eventEditId, 
-            'guestId': 'id',
-            'guestDetails': {
+            'eventId': this.state.eventId, 
+            'guestId': shortid.generate(),
+            'guestDetails': JSON.stringify({
                 'name': this.state.attendeeName,
                 'email': this.state.attendeeEmail,
                 'status': 'created',
                 'rsvp_status': 'pending'
-            }
+            })
         }
+        console.log(data);
         trigger
             .addGuest(data)
             // .then(data => {
@@ -67,8 +68,8 @@ class EventGuests extends Component {
 
 
     componentDidMount() {
-        if (this.props.eventEditId) {
-            this.setState({["eventEditId"]: this.props.eventEditId});
+        if (this.props.eventId) {
+            this.setState({["eventId"]: this.props.eventId});
         }
     }
     render() {

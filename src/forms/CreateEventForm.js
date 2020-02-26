@@ -28,7 +28,8 @@ class CreateEventForm extends Component {
             location: '',
             date: '',
 			time: '',
-			endTime:''
+			endTime:'',
+			guests: '{}'
         };
 		this.handleFieldChange = this.handleFieldChange.bind(this);
 	}

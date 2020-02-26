@@ -43,7 +43,6 @@ class EditEventForm extends Component {
 	}
 	
 	render() {
-        console.log(this.state.editId);
         const cause = this.state.causeDetails;
         const causeDetails = JSON.parse(cause);
         const imagePath = "https://dfac-main.s3.amazonaws.com/app";
@@ -52,7 +51,7 @@ class EditEventForm extends Component {
 			<Form size='small'>
 				<section className="bg-white w-80 center  ">
 					<div className="fl w-50 pt5 pa3 pa2-ns   bg-white   ">
-						<EventGuests eventEditId={this.state.editId} />
+						<EventGuests eventId={this.state.id} />
 					</div>
 
 					<div className="fl w-50  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">
