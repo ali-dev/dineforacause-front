@@ -86,10 +86,10 @@ class CheckoutForm extends Component {
 
   handleCCChange = (event) => {
     if (event.error) {
-      this.setState({ ["error"]: event.error.message });
+      this.setState({ "error": event.error.message });
       return;
     } else {
-      this.setState({ ["error"]: null });
+      this.setState({ "error": null });
     }
 
   };
@@ -97,20 +97,20 @@ class CheckoutForm extends Component {
   handleChange = (event, { name, value }) => {
     if (event.error) {
       alert(event.error.message);
-      this.setState({ ["error"]: event.error.message });
+      this.setState({ "error": event.error.message });
       return;
     } else {
-      this.setState({ ["error"]: null });
+      this.setState({ "error": null });
     }
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
     }
     if (name === "rsvp") {
       let willDonate = false;
-      if (value === "attending" || value == "not_attending_donating") {
+      if (value === "attending" || value === "not_attending_donating") {
         willDonate = true;
       }
-      this.setState({ ["willDonate"]: willDonate });
+      this.setState({ "willDonate": willDonate });
     }
     // this.props.onChange(name , value);
   };
@@ -150,7 +150,7 @@ class CheckoutForm extends Component {
     //   console.log("[PaymentMethod]", paymentMethod);
     } else if (error) {
       console.log("[error]", error);
-      this.setState({ ["error"]: error.message });
+      this.setState({ "error": error.message });
     }
   };
 
@@ -159,14 +159,14 @@ class CheckoutForm extends Component {
     // const elements = useElements();
     const {
       error,
-      willDonate,
-      processing,
-      paymentMethod,
-      name,
-      email,
-      phone
+      // willDonate,
+      // processing,
+      // paymentMethod,
+      // name,
+      // email,
+      // phone
     } = this.state;
-    return (
+    return (  
       <div className="bg-light-gray w-100 center  ">
         <h3 className="f3 green">RSVP & Donate</h3>
         <form onSubmit={this.handleSubmit} className="payment-form">
@@ -213,13 +213,13 @@ class CheckoutForm extends Component {
   }
 }
 
-const App = () => {
-  return (
-    <Elements stripe={stripePromise}>
-      <CheckoutForm />
-    </Elements>
-  );
-};
+// const App = () => {
+//   return (
+//     <Elements stripe={stripePromise}>
+//       <CheckoutForm />
+//     </Elements>
+//   );
+// };
 
 
 const InjectedCheckoutForm = () => {

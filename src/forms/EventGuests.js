@@ -69,7 +69,7 @@ class EventGuests extends Component {
 
     componentDidMount() {
         if (this.props.eventId) {
-            this.setState({["eventId"]: this.props.eventId});
+            this.setState({"eventId": this.props.eventId});
         }
     }
     render() {
