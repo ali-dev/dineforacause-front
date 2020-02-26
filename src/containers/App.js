@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
+import '../components/Header.css';
+
 const initialState = {
   pages: {
     about_us: "About Us",
