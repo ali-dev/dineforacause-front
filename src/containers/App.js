@@ -75,11 +75,13 @@ class App extends Component {
                     Cause & Cuisine provides the ability to create fundraising events. 
                     We are here to help support causes through partnerships with non-profit organizations, 
                     and we truly believe that social events and dinner parties are a powerful and organic way to do so.
-                     We offer a flawless user experience that enables users to easily choose a cause, 
+                     
+                    </p>
+                    <p className="lh-copy measure f5 mt0 ml2 mr2">
+                    We offer a flawless user experience that enables users to easily choose a cause, 
                      create events and invite guests within minutes, in addition to providing hundreds of community-driven recipes,
                       and tips on how to throw the perfect dinner party. 
                     </p>
-                    
 
                     
                     {/* onClick={this.handleSubmit.bind(this)} */}
