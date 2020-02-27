@@ -72,24 +72,16 @@ class App extends Component {
 
                   <section className="pt5 pb4 bg-white o-90 ">
                     <p className="lh-copy measure f5 mt0 ml2 mr2">
-                      Dine for a cause is an initiative that combines Food and
-                      Culture with Humanitarian Assistance. More details tbd
-                      More details tbdMore details tbdMore details tbdMore
-                      details tbd
+                    Cause & Cuisine provides the ability to create fundraising events. 
+                    We are here to help support causes through partnerships with non-profit organizations, 
+                    and we truly believe that social events and dinner parties are a powerful and organic way to do so.
+                     We offer a flawless user experience that enables users to easily choose a cause, 
+                     create events and invite guests within minutes, in addition to providing hundreds of community-driven recipes,
+                      and tips on how to throw the perfect dinner party. 
                     </p>
-                    <p className="lh-copy measure f5 mt0 ml2 mr2">
-                      Dine for a cause is an initiative that combines Food and
-                      Culture with Humanitarian Assistance. More details tbd
-                      More details tbdMore details tbdMore details tbdMore
-                      details tbd
-                    </p>
+                    
 
-                    <p className="lh-copy measure f5 mt0 ml2 mr2">
-                      Dine for a cause is an initiative that combines Food and
-                      Culture with Humanitarian Assistance. More details tbd
-                      More details tbdMore details tbdMore details tbdMore
-                      details tbd
-                    </p>
+                    
                     {/* onClick={this.handleSubmit.bind(this)} */}
                     <div className="lh-copy measure f5 mt0 ml2 mr2">
                     <a class={createEventButtonClass} href="/event/create">Create Event</a>
