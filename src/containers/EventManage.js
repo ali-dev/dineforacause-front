@@ -41,34 +41,10 @@ class EventManage extends Component {
           <nav className="dt w-100  center bg-white o-90 mt0">
             <div className=" v-mid tr pa3 ">
               <a
-                className="f8 fw6 hover-red  no-underline gray dn dib-ns pv2 ph3"
-                href="/"
-              >
-                How it Works
-              </a>
-              <a
-                className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
-                href="/"
-              >
-                Causes
-              </a>
-              <a
-                className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
-                href="/"
-              >
-                Organizations
-              </a>
-              <a
-                className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
-                href="/"
-              >
-                Partners
-              </a>
-              <a
                 className="f8 fw6 hover-red no-underline gray dib ml2 pv2 ph3 ba"
                 href="/"
               >
-                Sign Up
+                Home
               </a>
             </div>
           </nav>

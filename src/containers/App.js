@@ -26,6 +26,9 @@ class App extends Component {
     this.setState({'createEventButtonClass': "f6 link dim br-pill ph3 pv2 mb2 dib white "+createEventButtonClass})
     
   };
+  signup = () => {
+    alert('Not implemented yet');
+  }
 
   render() {
     const { image, upperTapeClass, createEventButtonClass } = this.state;
@@ -54,13 +57,10 @@ class App extends Component {
                     <Link to="/"  onClick={() => this.handleChange('how-it-works', 'b--blue', 'bg-blue')} className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3">
                       How it Works
                     </Link>
-
-                    <a
-                      className="f8 fw6 hover-red no-underline gray dib ml2 pv2 ph3 ba"
-                      href="/"
-                    >
+                    <Link to="/"  onClick={() => this.signup()} className="f8 fw6 hover-red no-underline gray dib ml2 pv2 ph3 ba">
                       Sign Up
-                    </a>
+                    </Link>
+                      
                   </div>
                 </nav>
                 <div className="fl pa3  pa4-ns black-70 measure-narrow f3 ">
