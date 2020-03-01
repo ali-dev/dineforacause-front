@@ -16,6 +16,22 @@ class EventGuests extends Component {
         
     }
 
+    componentDidMount() {
+        if (this.props.eventId) {
+            this.setState({"eventId": this.props.eventId});
+        }
+        if (this.props.attendees) {
+            console.log(this.props.attendees);
+            let self = this;
+            const attendees = JSON.parse(this.props.attendees);
+            Object.keys(attendees).map(function(key, val) {
+                self.state.attendees.push({[key]: attendees[key] })
+            });
+            console.log(this.state);
+            // this.setState({"attendees": JSON.parse(this.props.attendees)});
+        }
+    }
+
 
     handleChangeInput = (event ) => {
         if (this.state.hasOwnProperty(event.target.name)) {
@@ -27,27 +43,40 @@ class EventGuests extends Component {
         const attendees = this.state.attendees;
         const attendeeName = this.state.attendeeName;
         const attendeeEmail = this.state.attendeeEmail;
+
         if (attendees[this.state.attendeeEmail]) {
             alert(`Email ${this.state.attendeeEmail} already added`);
             return;
         }
-
+        const status = 'created';
+        const rsvpStatus = 'pending';
+        const guestId = shortid.generate();
         // attendees[this.state.attendeeEmail] = this.state.attendeeName;
-        attendees.push({ attendeeName, attendeeEmail })
+        const attendee = {
+            [guestId] :{
+                'name': attendeeName,
+                'email': attendeeEmail,
+                'status': status,
+                'rsvp_status': rsvpStatus 
+            }
+        }
+        // console.log(attendee);
+        attendees.push(attendee)
         this.setState({
             attendees: attendees,
             attendeeEmail: "",
             attendeeName: ""
         });
+        console.log(this.state);
         
         const data = {
             'eventId': this.state.eventId, 
-            'guestId': shortid.generate(),
+            'guestId': guestId,
             'guestDetails': JSON.stringify({
-                'name': this.state.attendeeName,
-                'email': this.state.attendeeEmail,
-                'status': 'created',
-                'rsvp_status': 'pending'
+                'name': attendeeName,
+                'email': attendeeEmail,
+                'status': status,
+                'rsvp_status': rsvpStatus
             })
         }
         // console.log(data);
@@ -67,11 +96,7 @@ class EventGuests extends Component {
     };
 
 
-    componentDidMount() {
-        if (this.props.eventId) {
-            this.setState({"eventId": this.props.eventId});
-        }
-    }
+    
     render() {
         return (
             <div>
@@ -89,15 +114,22 @@ class EventGuests extends Component {
                 </Form.Group>
                 <div className="attendees">
 
-                    {this.state.attendees.map(function (item, key) {
+                    {this.state.attendees.map(function(item, key) {
+                        // @todo: remove these
+                        //console.log(Object.keys(item)[0]);
+                        // console.log(key);
+                        const obkectKey = Object.keys(item)[0]
                         return (
 
-                            <div key={`attendee-${key}`}>
-                                <div className="ui divider"></div>
-                                <div className="fl w-40 pt5 pa3 pa2-ns   bg-white" >{item.attendeeName}</div>
-                                <div className="fl w-40 pt5 pa3 pa2-ns   bg-white" >{item.attendeeEmail}</div>
+                            <div key={`attendee-${obkectKey}`}>
+                                <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
+                                <div className="fl w-40 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
+                                <div className="fl w-40 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
+                                {/* <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" > */}
+                                {/* <Button size='tiny' color='green'>Send Invitation</Button> */}
+                                {/* </div>     */}
                                 <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
-                                    <Button size='small' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
+                                    <Button size='small' color='red' icon='remove' onClick={() => this.removeAttendee(obkectKey)} />
                                 </div>
                             </div>
                         )
