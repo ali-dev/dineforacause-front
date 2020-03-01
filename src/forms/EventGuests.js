@@ -50,7 +50,7 @@ class EventGuests extends Component {
                 'rsvp_status': 'pending'
             })
         }
-        console.log(data);
+        // console.log(data);
         trigger
             .addGuest(data)
             // .then(data => {
@@ -80,12 +80,12 @@ class EventGuests extends Component {
                 <Form.Group>
                     <Form.Field required>
 
-                        <input onChange={this.handleChangeInput}  name="attendeeName" ref="attendeeName" value={this.state.attendeeName}  placeholder="Guest Name" />
+                        <input onChange={this.handleChangeInput}  name="attendeeName" ref="attendeeName" id="attendeeName" value={this.state.attendeeName}  placeholder="Guest Name" />
                     </Form.Field>
                     <Form.Field required>
-                        <input onChange={this.handleChangeInput}  name="attendeeEmail" id="attendeeEmail" value={this.state.attendeeEmail} placeholder="Guest Email" />
+                        <input onChange={this.handleChangeInput}  name="attendeeEmail" className="attendeeEmail" id="attendeeEmail" value={this.state.attendeeEmail} placeholder="Guest Email" />
                     </Form.Field>
-                    <Form.Button content='Add' onClick={this.addAttendee} />
+                    <Form.Button content='Add' id="addGuestButton" className="addGuestButton" onClick={this.addAttendee} />
                 </Form.Group>
                 <div className="attendees">
 

@@ -86,7 +86,7 @@ class App extends Component {
                     
                     {/* onClick={this.handleSubmit.bind(this)} */}
                     <div className="lh-copy measure f5 mt0 ml2 mr2">
-                    <a class={createEventButtonClass} href="/event/create">Create Event</a>
+                    <a className={createEventButtonClass} href="/event/create">Create Event</a>
   
                       {/* <Button  type='submit'  className="dt w-50  center bg-white ">Create Event</Button> */}
                     </div>
