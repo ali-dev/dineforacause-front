@@ -118,6 +118,11 @@ export const addGuest = `mutation addGuest($guestId: String!, $eventId: String!,
 }
 `;
 
+export const removeGuest = `mutation removeGuest($guestId: String!, $eventId: String!) {
+  removeGuest(guestId: $guestId, eventId: $eventId) 
+}
+`;
+
 
 export const addCharge = `mutation addCharge($token: String!) {
     addCharge(token: $token) {

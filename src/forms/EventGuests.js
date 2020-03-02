@@ -21,13 +21,11 @@ class EventGuests extends Component {
             this.setState({"eventId": this.props.eventId});
         }
         if (this.props.attendees) {
-            console.log(this.props.attendees);
             let self = this;
             const attendees = JSON.parse(this.props.attendees);
             Object.keys(attendees).map(function(key, val) {
                 self.state.attendees.push({[key]: attendees[key] })
             });
-            console.log(this.state);
             // this.setState({"attendees": JSON.parse(this.props.attendees)});
         }
     }
@@ -67,7 +65,6 @@ class EventGuests extends Component {
             attendeeEmail: "",
             attendeeName: ""
         });
-        console.log(this.state);
         
         const data = {
             'eventId': this.state.eventId, 
@@ -79,7 +76,6 @@ class EventGuests extends Component {
                 'rsvp_status': rsvpStatus
             })
         }
-        // console.log(data);
         trigger
             .addGuest(data)
             // .then(data => {
@@ -89,10 +85,20 @@ class EventGuests extends Component {
 
     removeAttendee = (key) => {
         let attendees = this.state.attendees;
+        const guest = attendees[key];
+        const guestId = Object.keys(guest)[0];
+
+        const data = {
+            'guestId': guestId,
+            'eventId': this.state.eventId   
+        }
+        
+        trigger.removeGuest(data)
         attendees.splice(key, 1)
         this.setState({
             attendees: attendees,
         });
+    
     };
 
 
@@ -115,9 +121,6 @@ class EventGuests extends Component {
                 <div className="attendees">
 
                     {this.state.attendees.map(function(item, key) {
-                        // @todo: remove these
-                        //console.log(Object.keys(item)[0]);
-                        // console.log(key);
                         const obkectKey = Object.keys(item)[0]
                         return (
 
@@ -129,7 +132,7 @@ class EventGuests extends Component {
                                 {/* <Button size='tiny' color='green'>Send Invitation</Button> */}
                                 {/* </div>     */}
                                 <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
-                                    <Button size='small' color='red' icon='remove' onClick={() => this.removeAttendee(obkectKey)} />
+                                    <Button size='small' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
                                 </div>
                             </div>
                         )
