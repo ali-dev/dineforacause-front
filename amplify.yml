@@ -13,6 +13,9 @@ frontend:
     build:
       commands:
         - yarn run build
+    test:
+      commands:
+        - 'npm test'
   artifacts:
     baseDirectory: build
     files:

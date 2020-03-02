@@ -4,10 +4,27 @@ import EventGuests from './EventGuests';
 import {shallow} from 'enzyme';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import trigger from '../graphql/triggers'
+
+import client from '../api/appSyncClient';
+
+jest.mock('../api/appSyncClient');
 
 Enzyme.configure({ adapter: new Adapter() });
 const wrapper = Enzyme.shallow(<EventGuests eventId="123" />);
-    
+
+// @todo: figure out mocks
+// it('test mock ', () => {
+//     client.mutate.mockResolvedValue({
+//         'guestId': {
+//             'email': 'email@email.com',
+//             'name': 'name',
+//             'status': 'created',
+//             'rsvp_status': 'pending'
+//         }
+//     });
+//     expect(trigger.addGuest({'guestId': {'email': 'test', 'name': 'name'}})).toEqual('My First Album');
+// });
 
 it('should append to guest list when a new guest is added ', () => {
     // const myMock = jest.fn();
