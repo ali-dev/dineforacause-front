@@ -4,14 +4,14 @@ import EventGuests from './EventGuests';
 import {shallow} from 'enzyme';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import trigger from '../graphql/triggers'
+// import trigger from '../graphql/triggers'
 
-import client from '../api/appSyncClient';
+// import client from '../api/appSyncClient';
 
-jest.mock('../api/appSyncClient');
+// jest.mock('../api/appSyncClient');
 
 Enzyme.configure({ adapter: new Adapter() });
-const wrapper = Enzyme.shallow(<EventGuests eventId="123" />);
+
 
 // @todo: figure out mocks
 // it('test mock ', () => {
@@ -31,7 +31,7 @@ it('should append to guest list when a new guest is added ', () => {
     // const a = new myMock();
     // const b = {};
     // const trigger = myMock.bind(b);
-    
+    const wrapper = Enzyme.shallow(<EventGuests eventId="123" />);
     expect(wrapper.find('.attendees').text()).toBe("");
     
     wrapper.setState({ attendeeEmail: 'test@email.com', attendeeName: 'name' });
@@ -49,7 +49,7 @@ it('should append to guest list when a new guest is added ', () => {
 
   it('should remove guest from list when remove button is clicked ', () => {
     
-    
+    const wrapper = Enzyme.shallow(<EventGuests eventId="123" />);
     wrapper.setState(
         { 
             attendeeEmail: 'test@email.com', 
