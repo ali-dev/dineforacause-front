@@ -126,13 +126,13 @@ class EventGuests extends Component {
 
                             <div key={`attendee-${obkectKey}`}>
                                 <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
-                                <div className="fl w-40 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
-                                <div className="fl w-40 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
-                                {/* <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" > */}
-                                {/* <Button size='tiny' color='green'>Send Invitation</Button> */}
-                                {/* </div>     */}
+                                <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
+                                <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
+                                <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" > 
+                                    <Button size='tiny' color='green'>Send Invitation</Button>
+                                </div>    
                                 <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
-                                    <Button size='small' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
+                                    <Button className="removeGuestButton" size='tiny' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
                                 </div>
                             </div>
                         )

@@ -6,7 +6,8 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
-
+const wrapper = Enzyme.shallow(<EventGuests eventId="123" />);
+    
 
 it('should append to guest list when a new guest is added ', () => {
     // const myMock = jest.fn();
@@ -14,7 +15,6 @@ it('should append to guest list when a new guest is added ', () => {
     // const b = {};
     // const trigger = myMock.bind(b);
     
-    const wrapper = Enzyme.shallow(<EventGuests eventId="123" />);
     expect(wrapper.find('.attendees').text()).toBe("");
     
     wrapper.setState({ attendeeEmail: 'test@email.com', attendeeName: 'name' });
@@ -27,5 +27,26 @@ it('should append to guest list when a new guest is added ', () => {
     expect(state.attendees.length).toEqual(1);
     
     expect(wrapper.find('.attendees').text()).not.toBe("");
+    
+  });
+
+  it('should remove guest from list when remove button is clicked ', () => {
+    
+    
+    wrapper.setState(
+        { 
+            attendeeEmail: 'test@email.com', 
+            attendeeName: 'name',
+            attendees: [{'guestId': {'email': 'email@email.com', 'name': 'name', 'status': 'created'}}] 
+        }
+    );
+    expect(wrapper.find('.attendees').text()).not.toBe("");
+    
+    expect(wrapper.find('.removeGuestButton').length).toBe(1);
+    
+    
+    wrapper.find('.removeGuestButton').simulate('click');
+
+    expect(wrapper.find('.attendees').text()).toBe("");
     
   });
