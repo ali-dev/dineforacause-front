@@ -20,24 +20,3 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-
-test:
-  phases:
-    preTest:
-      commands:
-        - npm ci
-        - npm install wait-on
-        - 'npm start & npx wait-on http://localhost:8080'
-    test:
-      commands:
-        - 'npm test'
-        
-    # postTest:
-    #   commands:
-        - #npx mochawesome-merge cypress/report/mochawesome-report/mochawesome*.json > cypress/report/mochawesome.json
-  # artifacts:
-  #   baseDirectory: cypress
-  #   configFilePath: '**/mochawesome.json'
-  #   files:
-  #     - '**/*.png'
-  #     - '**/*.mp4'
