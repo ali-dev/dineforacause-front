@@ -20,3 +20,14 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
+
+test:
+  phases:
+    preTest:
+      commands:
+        - npm ci
+        - npm install wait-on
+        - 'npm start & npx wait-on http://localhost:3000'
+    test:
+      commands:
+        - npm test
