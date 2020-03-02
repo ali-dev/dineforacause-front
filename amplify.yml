@@ -30,4 +30,4 @@ test:
         - 'npm start & npx wait-on http://localhost:3000'
     test:
       commands:
-        - npm test a
+        - npm test a --simple

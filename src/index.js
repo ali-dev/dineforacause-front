@@ -1,5 +1,5 @@
 import React from 'react';
-import Amplify from 'aws-amplify';
+// import Amplify from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import awsconfig from './aws-exports';
 import ReactDOM from 'react-dom';
@@ -28,7 +28,7 @@ import { createBrowserHistory } from 'history';
 import './index.css';
 
 
-Amplify.configure(awsconfig);
+// Amplify.configure(awsconfig);
 
 
 
