@@ -131,3 +131,8 @@ export const addCharge = `mutation addCharge($token: String!) {
   }
 `;
 
+export const sendInvitation = `mutation sendInvitation($data: String!) {
+  sendInvitation(data: $data) 
+}
+`;
+

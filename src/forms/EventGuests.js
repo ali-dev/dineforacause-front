@@ -10,16 +10,25 @@ class EventGuests extends Component {
             attendees: [],
             attendeeEmail: '',
             attendeeName:'',
-            eventId: null
+            eventId: null,
+            eventName: null,
+            hostName: null,
+            hostEmail: null
+
         };
 
         
     }
 
     componentDidMount() {
-        if (this.props.eventId) {
-            this.setState({"eventId": this.props.eventId});
+        
+        if (this.props.event) {
+            this.setState({"eventId": this.props.event.id});
+            this.setState({"eventName": this.props.event.eventName});
+            this.setState({"hostName": this.props.event.hostName});
+            this.setState({"hostEmail": this.props.event.hostEmail});
         }
+        
         if (this.props.attendees) {
             let self = this;
             const attendees = JSON.parse(this.props.attendees);
@@ -28,6 +37,7 @@ class EventGuests extends Component {
             });
             // this.setState({"attendees": JSON.parse(this.props.attendees)});
         }
+        // console.log(this.state);
     }
 
 
@@ -101,9 +111,8 @@ class EventGuests extends Component {
             }
         }
         
-        // attendees[key][guestId] = attendee[guestId]; //@todo add that on success 
         
-        const data = {
+        const eventData = {
             'eventId': this.state.eventId, 
             'guestId': guestId,
             'guestDetails': JSON.stringify({
@@ -115,11 +124,30 @@ class EventGuests extends Component {
         }
 
         trigger
-            .addGuest(data)
+            .addGuest(eventData)
+            // @todo change addGuest response to return only this guest's info so it can be used in invitation
             .then(data => {
-                attendees[key][guestId] = attendee[guestId];
-                //history.push(`/event/manage/${data.data.addEvent.editId}`);
-                this.forceUpdate();
+                //@todo send invitation email
+                let emailData = {
+                    'eventId': this.state.eventId,
+                    'eventName': this.state.eventName,
+                    'hostName': this.state.hostName,
+                    'guestId': guestId,
+                    'eventDetails': this.state.details,
+                    'guestName': eventData.guestDetails.name,
+                    'guestEmail':  eventData.guestDetails.email,
+                    'date': this.state.date
+                }
+                trigger.sendInvitation(emailData).then(data => {
+                    attendees[key][guestId] = attendee[guestId];
+                    this.forceUpdate();
+                });                
+
+                
+                
+                
+
+                // arn:aws:lambda:us-east-1:395974092468:function:sendinblue-dev-sendEventCreatedEmail
             })
     };
 
