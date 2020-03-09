@@ -83,6 +83,46 @@ class EventGuests extends Component {
             // })
     };
 
+
+    sendInvitation = (key) => {
+        let attendees = this.state.attendees;
+        const guest = attendees[key];
+        const guestId = Object.keys(guest)[0];
+        
+        const status = 'invited';
+        const rsvpStatus = 'pending';
+        // attendees[this.state.attendeeEmail] = this.state.attendeeName;
+        const attendee = {
+            [guestId] :{
+                'name': attendees[key][guestId].name,
+                'email': attendees[key][guestId].email,
+                'status': status,
+                'rsvp_status': rsvpStatus 
+            }
+        }
+        
+        // attendees[key][guestId] = attendee[guestId]; //@todo add that on success 
+        
+        const data = {
+            'eventId': this.state.eventId, 
+            'guestId': guestId,
+            'guestDetails': JSON.stringify({
+                'name': attendee[guestId].name,
+                'email': attendee[guestId].email,
+                'status': attendee[guestId].status,
+                'rsvp_status': attendee[guestId].rsvp_status
+            })
+        }
+
+        trigger
+            .addGuest(data)
+            .then(data => {
+                attendees[key][guestId] = attendee[guestId];
+                //history.push(`/event/manage/${data.data.addEvent.editId}`);
+                this.forceUpdate();
+            })
+    };
+
     removeAttendee = (key) => {
         let attendees = this.state.attendees;
         const guest = attendees[key];
@@ -101,7 +141,17 @@ class EventGuests extends Component {
     
     };
 
-
+    invitationButton(status, key) {
+        if (status === 'created') {
+            return (
+                <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" > 
+                    <Button size='tiny' color='green' onClick={() => this.sendInvitation(key)}>Send Invitation</Button>
+                </div>    
+                
+            );
+        }
+        
+    }
     
     render() {
         return (
@@ -128,9 +178,7 @@ class EventGuests extends Component {
                                 <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
                                 <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
                                 <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
-                                <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" > 
-                                    <Button size='tiny' color='green'>Send Invitation</Button>
-                                </div>    
+                                {this.invitationButton(item[obkectKey].status, key ) }
                                 <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
                                     <Button className="removeGuestButton" size='tiny' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
                                 </div>
