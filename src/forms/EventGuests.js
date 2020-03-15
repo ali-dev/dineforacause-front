@@ -27,6 +27,8 @@ class EventGuests extends Component {
             this.setState({"eventName": this.props.event.eventName});
             this.setState({"hostName": this.props.event.hostName});
             this.setState({"hostEmail": this.props.event.hostEmail});
+            this.setState({"date": this.props.event.date});
+            
         }
         
         if (this.props.attendees) {
@@ -47,15 +49,35 @@ class EventGuests extends Component {
         }
       }
     
+    isValidEmail = (email) => { 
+      {
+       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+        {
+          return (true)
+        }
+          return (false)
+      }  
+    }
     addAttendee = () => {
         const attendees = this.state.attendees;
         const attendeeName = this.state.attendeeName;
         const attendeeEmail = this.state.attendeeEmail;
 
-        if (attendees[this.state.attendeeEmail]) {
-            alert(`Email ${this.state.attendeeEmail} already added`);
+        
+        if (!this.isValidEmail(attendeeEmail)) {
+            alert(`Email ${attendeeEmail} is not Valid`);
             return;
         }
+
+        for (let i = 0; i < attendees.length; i++) {
+            const guest = attendees[i];
+            const guestId = Object.keys(guest)[0];
+            if (guest[guestId].email == attendeeEmail) {
+                alert(`Email ${attendeeEmail} already added`);
+                return;
+            }
+        }
+        
         const status = 'created';
         const rsvpStatus = 'pending';
         const guestId = shortid.generate();
@@ -116,8 +138,6 @@ class EventGuests extends Component {
             'eventId': this.state.eventId, 
             'guestId': guestId,
             'guestDetails': JSON.stringify({
-                'name': attendee[guestId].name,
-                'email': attendee[guestId].email,
                 'status': attendee[guestId].status,
                 'rsvp_status': attendee[guestId].rsvp_status
             })
@@ -134,10 +154,12 @@ class EventGuests extends Component {
                     'hostName': this.state.hostName,
                     'guestId': guestId,
                     'eventDetails': this.state.details,
-                    'guestName': eventData.guestDetails.name,
-                    'guestEmail':  eventData.guestDetails.email,
-                    'date': this.state.date
+                    'guestName': attendee[guestId].name,
+                    'guestEmail':  attendee[guestId].email,
+                    'eventDate': this.state.date
                 }
+                console.log(emailData);
+                console.log(attendee[guestId].email);
                 trigger.sendInvitation(emailData).then(data => {
                     attendees[key][guestId] = attendee[guestId];
                     this.forceUpdate();
