@@ -120,31 +120,23 @@ class EventGuests extends Component {
         this.setState({ [btnRef]: true })
 
         let allGuests = this.state.attendees;
-        const guest = allGuests[key];
         
-        const guestId = Object.keys(guest)[0];;
+        
+        const guestId = Object.keys(allGuests[key])[0];
 
-        const status = 'invited';
-        const rsvpStatus = 'pending';
         // attendees[this.state.attendeeEmail] = this.state.attendeeName;
-        const attendee = {
-            [guestId]: {
-                'name': allGuests[key][guestId].name,
-                'email': allGuests[key][guestId].email,
-                'status': status,
-                'rsvp_status': rsvpStatus
-            }
-        }
+        const guest = allGuests[key][guestId];
+        
 
 
         const eventData = {
             'eventId': this.state.eventId,
             'guestId': guestId,
             'guestDetails': JSON.stringify({
-                'status': attendee[guestId].status,
-                'rsvp_status': attendee[guestId].rsvp_status,
-                'email': attendee[guestId].email,
-                'name': attendee[guestId].name
+                'status': 'invited',
+                'rsvp_status': 'pending',
+                'email': guest.email,
+                'name': guest.name
             })
         }
 
@@ -159,12 +151,19 @@ class EventGuests extends Component {
                     'hostName': this.state.hostName,
                     'guestId': guestId,
                     'eventDetails': this.state.details,
-                    'guestName': attendee[guestId].name,
-                    'guestEmail': attendee[guestId].email,
+                    'guestName': guest.name,
+                    'guestEmail': guest.email,
                     'eventDate': this.state.date
                 }
                 trigger.sendInvitation(emailData).then(data => {
-                    allGuests[key][guestId] = attendee[guestId];
+                    allGuests[key][guestId] = {
+                        [guestId]: {
+                            'name': guest.name,
+                            'email': guest.email,
+                            'status': 'invited',
+                            'rsvp_status': 'pending'
+                        }
+                    };
                     this.setState({ [btnRef]: true })
                     // this.forceUpdate();
                 });
@@ -224,12 +223,8 @@ class EventGuests extends Component {
                         const obkectKey = Object.keys(item)[0]
                         if(item[obkectKey].status === 'created' ) { 
                             return (
-                                // <Loader />
                                 
                                 <div  key={`attendee-${obkectKey}`}>
-                                    {/* <div class="content">
-                                        <div class="ui loader active"></div>
-                                    </div> */}
                                     <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
                                     <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
                                     <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
@@ -255,7 +250,6 @@ class EventGuests extends Component {
                         const obkectKey = Object.keys(item)[0]
                         if(item[obkectKey].rsvp_status === 'pending' ) { 
                             return (
-                                // <Loader />
                                 <div  key={`pending-guest-${obkectKey}`}>
                                     <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
                                     <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
