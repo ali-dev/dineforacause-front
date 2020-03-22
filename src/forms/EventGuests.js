@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, } from 'semantic-ui-react'
+import { Button, Form, Loader} from 'semantic-ui-react'
 import trigger from '../graphql/triggers'
 import shortid from 'shortid';
 
@@ -117,6 +117,9 @@ class EventGuests extends Component {
 
 
     sendInvitation = (key) => {
+        const btnRef = `inviteBtnLoading-${key}`;
+        this.setState({[btnRef]: true})
+        
         let attendees = this.state.attendees;
         const guest = attendees[key];
         const guestId = Object.keys(guest)[0];
@@ -139,7 +142,9 @@ class EventGuests extends Component {
             'guestId': guestId,
             'guestDetails': JSON.stringify({
                 'status': attendee[guestId].status,
-                'rsvp_status': attendee[guestId].rsvp_status
+                'rsvp_status': attendee[guestId].rsvp_status,
+                'email': attendee[guestId].email,
+                'name': attendee[guestId].name
             })
         }
 
@@ -158,18 +163,13 @@ class EventGuests extends Component {
                     'guestEmail':  attendee[guestId].email,
                     'eventDate': this.state.date
                 }
-                console.log(emailData);
-                console.log(attendee[guestId].email);
                 trigger.sendInvitation(emailData).then(data => {
                     attendees[key][guestId] = attendee[guestId];
+                    this.setState({[btnRef]: true})    
                     this.forceUpdate();
                 });                
 
-                
-                
-                
-
-                // arn:aws:lambda:us-east-1:395974092468:function:sendinblue-dev-sendEventCreatedEmail
+    
             })
     };
 
@@ -195,7 +195,7 @@ class EventGuests extends Component {
         if (status === 'created') {
             return (
                 <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" > 
-                    <Button size='tiny' color='green' onClick={() => this.sendInvitation(key)}>Send Invitation</Button>
+                    <Button size='tiny'   ref={`inviteBtn-${key}`} loading={this.state[`inviteBtnLoading-${key}`]}color='green' onClick={() => this.sendInvitation(key)}>Send Invitation</Button>
                 </div>    
                 
             );
@@ -204,6 +204,7 @@ class EventGuests extends Component {
     }
     
     render() {
+        console.log(this.state.attendees);
         return (
             <div>
                 {/* <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button> */}
@@ -216,23 +217,27 @@ class EventGuests extends Component {
                     <Form.Field required>
                         <input onChange={this.handleChangeInput}  name="attendeeEmail" className="attendeeEmail" id="attendeeEmail" value={this.state.attendeeEmail} placeholder="Guest Email" />
                     </Form.Field>
-                    <Form.Button content='Add' id="addGuestButton" className="addGuestButton" onClick={this.addAttendee} />
+                    <Form.Button content='Add' id="addGuestButton"  className="addGuestButton" onClick={this.addAttendee} />
                 </Form.Group>
                 <div className="attendees">
 
                     {this.state.attendees.map(function(item, key) {
                         const obkectKey = Object.keys(item)[0]
                         return (
-
-                            <div key={`attendee-${obkectKey}`}>
-                                <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
-                                <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
-                                <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
-                                {this.invitationButton(item[obkectKey].status, key ) }
-                                <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
-                                    <Button className="removeGuestButton" size='tiny' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
-                                </div>
-                            </div>
+                            // <Loader />
+                            <div classNam="ui active transition visible dimmer" key={`attendee-${obkectKey}`}>
+                                {/* <div class="content">
+                                    <div class="ui loader active"></div>
+                                </div> */}
+                                        <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
+                                        <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
+                                        <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
+                                        {this.invitationButton(item[obkectKey].status, key ) }
+                                        <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
+                                            <Button className="removeGuestButton" size='tiny' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
+                                        </div>
+                                    </div>
+                                
                         )
                     }, this)}
 
