@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Loader } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 import trigger from '../graphql/triggers'
 import shortid from 'shortid';
 
@@ -31,15 +31,14 @@ class EventGuests extends Component {
 
         }
 
+
         if (this.props.attendees) {
             let self = this;
             const attendees = JSON.parse(this.props.attendees);
             Object.keys(attendees).map(function (key, val) {
-                self.state.attendees.push({ [key]: attendees[key] })
+                return self.state.attendees.push({ [key]: attendees[key] })
             });
-            // this.setState({"attendees": JSON.parse(this.props.attendees)});
         }
-        // console.log(this.state);
     }
 
 
@@ -50,15 +49,15 @@ class EventGuests extends Component {
     }
 
     isValidEmail = (email) => {
-        {
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-                return (true)
-            }
-            return (false)
+        if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            return true
         }
+        return false        
     }
-    addAttendee = () => {
-        const attendees = this.state.attendees;
+
+
+    addGuest = () => {
+        const allGuests = this.state.attendees;
         const attendeeName = this.state.attendeeName;
         const attendeeEmail = this.state.attendeeEmail;
 
@@ -68,10 +67,10 @@ class EventGuests extends Component {
             return;
         }
 
-        for (let i = 0; i < attendees.length; i++) {
-            const guest = attendees[i];
+        for (let i = 0; i < allGuests.length; i++) {
+            const guest = allGuests[i];
             const guestId = Object.keys(guest)[0];
-            if (guest[guestId].email == attendeeEmail) {
+            if (guest[guestId].email === attendeeEmail) {
                 alert(`Email ${attendeeEmail} already added`);
                 return;
             }
@@ -80,7 +79,7 @@ class EventGuests extends Component {
         const status = 'created';
         const rsvpStatus = 'pending';
         const guestId = shortid.generate();
-        // attendees[this.state.attendeeEmail] = this.state.attendeeName;
+       
         const attendee = {
             [guestId]: {
                 'name': attendeeName,
@@ -89,10 +88,10 @@ class EventGuests extends Component {
                 'rsvp_status': rsvpStatus
             }
         }
-        // console.log(attendee);
-        attendees.push(attendee)
+
+        allGuests.push(attendee)
         this.setState({
-            attendees: attendees,
+            attendees: allGuests,
             attendeeEmail: "",
             attendeeName: ""
         });
@@ -109,9 +108,10 @@ class EventGuests extends Component {
         }
         trigger
             .addGuest(data)
-        // .then(data => {
-        //     //history.push(`/event/manage/${data.data.addEvent.editId}`);
-        // })
+        .then(data => {
+
+            //history.push(`/event/manage/${data.data.addEvent.editId}`);
+        })
     };
 
 
@@ -119,17 +119,18 @@ class EventGuests extends Component {
         const btnRef = `inviteBtnLoading-${key}`;
         this.setState({ [btnRef]: true })
 
-        let attendees = this.state.attendees;
-        const guest = attendees[key];
-        const guestId = Object.keys(guest)[0];
+        let allGuests = this.state.attendees;
+        const guest = allGuests[key];
+        
+        const guestId = Object.keys(guest)[0];;
 
         const status = 'invited';
         const rsvpStatus = 'pending';
         // attendees[this.state.attendeeEmail] = this.state.attendeeName;
         const attendee = {
             [guestId]: {
-                'name': attendees[key][guestId].name,
-                'email': attendees[key][guestId].email,
+                'name': allGuests[key][guestId].name,
+                'email': allGuests[key][guestId].email,
                 'status': status,
                 'rsvp_status': rsvpStatus
             }
@@ -151,7 +152,7 @@ class EventGuests extends Component {
             .addGuest(eventData)
             // @todo change addGuest response to return only this guest's info so it can be used in invitation
             .then(data => {
-                //@todo send invitation email
+                //sends invitation email
                 let emailData = {
                     'eventId': this.state.eventId,
                     'eventName': this.state.eventName,
@@ -163,10 +164,11 @@ class EventGuests extends Component {
                     'eventDate': this.state.date
                 }
                 trigger.sendInvitation(emailData).then(data => {
-                    attendees[key][guestId] = attendee[guestId];
+                    allGuests[key][guestId] = attendee[guestId];
                     this.setState({ [btnRef]: true })
-                    this.forceUpdate();
+                    // this.forceUpdate();
                 });
+                    
 
 
             })
@@ -203,7 +205,6 @@ class EventGuests extends Component {
     }
 
     render() {
-        console.log(this.state.attendees);
         return (
             <div>
                 {/* <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button> */}
@@ -216,35 +217,58 @@ class EventGuests extends Component {
                     <Form.Field required>
                         <input onChange={this.handleChangeInput} name="attendeeEmail" className="attendeeEmail" id="attendeeEmail" value={this.state.attendeeEmail} placeholder="Guest Email" />
                     </Form.Field>
-                    <Form.Button content='Add' id="addGuestButton" className="addGuestButton" onClick={this.addAttendee} />
+                    <Form.Button content='Add' id="addGuestButton" className="addGuestButton" onClick={this.addGuest} />
                 </Form.Group>
                 <div className="attendees">
                     {this.state.attendees.map(function (item, key) {
                         const obkectKey = Object.keys(item)[0]
-                        return (
-                            // <Loader />
-                            <div  key={`attendee-${obkectKey}`}>
-                                {/* <div class="content">
-                                    <div class="ui loader active"></div>
-                                </div> */}
-                                <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
-                                <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
-                                <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
-                                {this.invitationButton(item[obkectKey].status, key)}
-                                <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
-                                    <Button className="removeGuestButton" size='tiny' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
+                        if(item[obkectKey].status === 'created' ) { 
+                            return (
+                                // <Loader />
+                                
+                                <div  key={`attendee-${obkectKey}`}>
+                                    {/* <div class="content">
+                                        <div class="ui loader active"></div>
+                                    </div> */}
+                                    <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
+                                    <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
+                                    <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
+                                    {this.invitationButton(item[obkectKey].status, key)}
+                                    <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
+                                        <Button className="removeGuestButton" size='tiny' color='red' icon='remove' onClick={() => this.removeAttendee(key)} />
+                                    </div>
                                 </div>
-                            </div>
 
-                        )
+                            )
+                        }
                     }, this)}
+                    
 
 
 
                 </div>
                 <br/>    
-                <div className='fl'>
-                    <h3 className="f3 green">Pending Guests</h3>    
+                <div className='fl  w-100 '>
+                    <h3 className="f3 green">Pending Guests</h3>   
+                    <div className="attendees">
+                    {this.state.attendees.map(function (item, key) {
+                        const obkectKey = Object.keys(item)[0]
+                        if(item[obkectKey].rsvp_status === 'pending' ) { 
+                            return (
+                                // <Loader />
+                                <div  key={`pending-guest-${obkectKey}`}>
+                                    <div className="ui divider fl w-100 pt5 pa3 pa2-ns"></div>
+                                    <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].name}</div>
+                                    <div className="fl w-30 pt5 pa3 pa2-ns   bg-white" >{item[obkectKey].email}</div>
+                                </div>
+
+                            )
+                        }
+                    }, this)}
+
+
+
+                </div> 
                 </div>
             </div>
 
