@@ -58,40 +58,37 @@ class EventGuests extends Component {
 
     addGuest = () => {
         const allGuests = this.state.attendees;
-        const attendeeName = this.state.attendeeName;
-        const attendeeEmail = this.state.attendeeEmail;
+        const guestName = this.state.attendeeName;
+        const guestEmail = this.state.attendeeEmail;
 
 
-        if (!this.isValidEmail(attendeeEmail)) {
-            alert(`Email ${attendeeEmail} is not Valid`);
+        if (!this.isValidEmail(guestEmail)) {
+            alert(`Email ${guestEmail} is not Valid`);
             return;
         }
 
         for (let i = 0; i < allGuests.length; i++) {
             const guest = allGuests[i];
             const guestId = Object.keys(guest)[0];
-            if (guest[guestId].email === attendeeEmail) {
-                alert(`Email ${attendeeEmail} already added`);
+            if (guest[guestId].email === guestEmail) {
+                alert(`Email ${guestEmail} already added`);
                 return;
             }
         }
 
-        const status = 'created';
-        const rsvpStatus = 'pending';
         const guestId = shortid.generate();
        
         const attendee = {
             [guestId]: {
-                'name': attendeeName,
-                'email': attendeeEmail,
-                'status': status,
-                'rsvp_status': rsvpStatus
+                'name': guestName,
+                'email': guestEmail,
+                'status': 'created',
+                'rsvp_status': 'pending'
             }
         }
 
         allGuests.push(attendee)
         this.setState({
-            attendees: allGuests,
             attendeeEmail: "",
             attendeeName: ""
         });
@@ -100,10 +97,10 @@ class EventGuests extends Component {
             'eventId': this.state.eventId,
             'guestId': guestId,
             'guestDetails': JSON.stringify({
-                'name': attendeeName,
-                'email': attendeeEmail,
-                'status': status,
-                'rsvp_status': rsvpStatus
+                'name': guestName,
+                'email': guestEmail,
+                'status': 'created',
+                'rsvp_status': 'pending'
             })
         }
         trigger
@@ -121,10 +118,7 @@ class EventGuests extends Component {
 
         let allGuests = this.state.attendees;
         
-        
         const guestId = Object.keys(allGuests[key])[0];
-
-        // attendees[this.state.attendeeEmail] = this.state.attendeeName;
         const guest = allGuests[key][guestId];
         
 
@@ -165,7 +159,6 @@ class EventGuests extends Component {
                         }
                     };
                     this.setState({ [btnRef]: true })
-                    // this.forceUpdate();
                 });
                     
 
