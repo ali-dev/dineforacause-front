@@ -3,7 +3,8 @@ import { Button, Form, } from 'semantic-ui-react'
 import EventCauses from './EventCauses'
 import EventDetails from './EventDetails'
 import trigger from '../graphql/triggers'
-import shortid from 'shortid';
+import { v4 as uuidv4 } from 'uuid';
+
 import { withRouter } from 'react-router-dom';
 
 
@@ -18,9 +19,9 @@ class CreateEventForm extends Component {
             organizationId: '',
             // minDonation: '',
 			recommendedDonation: '',
-			viewId: shortid.generate(),
-            editId: shortid.generate(),
-			rsvpId: shortid.generate(),
+			viewId: uuidv4(),
+            editId: uuidv4(),
+			rsvpId: uuidv4(),
 			eventName: '',
             eventDetails: '',
             hostName: '',

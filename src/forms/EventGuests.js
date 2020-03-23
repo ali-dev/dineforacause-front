@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react'
 import trigger from '../graphql/triggers'
-import shortid from 'shortid';
+import { v4 as uuidv4 } from 'uuid';
 
 class EventGuests extends Component {
     constructor(props) {
@@ -61,7 +61,6 @@ class EventGuests extends Component {
         const guestName = this.state.attendeeName;
         const guestEmail = this.state.attendeeEmail;
 
-
         if (!this.isValidEmail(guestEmail)) {
             alert(`Email ${guestEmail} is not Valid`);
             return;
@@ -76,14 +75,13 @@ class EventGuests extends Component {
             }
         }
 
-        const guestId = shortid.generate();
-       
+        const guestId = uuidv4();
         const attendee = {
             [guestId]: {
                 'name': guestName,
                 'email': guestEmail,
                 'status': 'created',
-                'rsvp_status': 'pending'
+                'rsvp_status': 'created'
             }
         }
 
@@ -100,7 +98,7 @@ class EventGuests extends Component {
                 'name': guestName,
                 'email': guestEmail,
                 'status': 'created',
-                'rsvp_status': 'pending'
+                'rsvp_status': 'created'
             })
         }
         trigger
@@ -151,18 +149,13 @@ class EventGuests extends Component {
                 }
                 trigger.sendInvitation(emailData).then(data => {
                     allGuests[key][guestId] = {
-                        [guestId]: {
                             'name': guest.name,
                             'email': guest.email,
                             'status': 'invited',
                             'rsvp_status': 'pending'
-                        }
-                    };
+                        };
                     this.setState({ [btnRef]: true })
                 });
-                    
-
-
             })
     };
 
