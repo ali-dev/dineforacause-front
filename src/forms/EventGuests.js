@@ -133,31 +133,41 @@ class EventGuests extends Component {
             })
         }
 
-        trigger
+        const emailData = {
+            'viewId': this.state.viewId,
+            'eventName': this.state.eventName,
+            'hostName': this.state.hostName,
+            'guestId': guestId,
+            'eventDetails': this.state.details,
+            'guestName': guest.name,
+            'guestEmail': guest.email,
+            'eventDate': this.state.date
+        }
+        trigger.sendInvitation(emailData).then(response => {
+            const data = JSON.parse(response.data.sendInvitation);
+            
+            if (data.statusCode !== 200 ) {
+                this.setState({ [btnRef]: false })
+                alert('An error occured while trying to invite guest');
+                return;
+            } 
+            trigger
             .addGuest(eventData)
             // @todo change addGuest response to return only this guest's info so it can be used in invitation
             .then(data => {
                 //sends invitation email
-                let emailData = {
-                    'viewId': this.state.viewId,
-                    'eventName': this.state.eventName,
-                    'hostName': this.state.hostName,
-                    'guestId': guestId,
-                    'eventDetails': this.state.details,
-                    'guestName': guest.name,
-                    'guestEmail': guest.email,
-                    'eventDate': this.state.date
-                }
-                trigger.sendInvitation(emailData).then(data => {
-                    allGuests[key][guestId] = {
-                            'name': guest.name,
-                            'email': guest.email,
-                            'status': 'invited',
-                            'rsvp_status': 'pending'
-                        };
-                    this.setState({ [btnRef]: true })
-                });
+                allGuests[key][guestId] = {
+                    'name': guest.name,
+                    'email': guest.email,
+                    'status': 'invited',
+                    'rsvp_status': 'pending'
+                };
+                this.setState({ [btnRef]: false })    
             })
+            
+        });
+
+        
     };
 
     removeAttendee = (key) => {

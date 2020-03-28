@@ -15,12 +15,20 @@ class ComingSoon extends Component {
     
     return (
     
-    <div className="vh-100 dt w-100 coming-soon-image">
-      <header className="App-header">
-        {/* <Header /> */}
+    <div className="vh-100 dt w-100 coming-soon-image   ">
+      {/* <header className="App-header">
                 
-      </header>
-      <h1>COMING SOON</h1>
+      </header> */}
+      <div className="dtc  v-mid o-90">
+        <div className="fl w-20"></div>
+        <div className="fr w-60 bg-white center  pa4 h5 "><h1>COMING SOON</h1></div>
+        <div className="fr w-20 bg-white center pa4  h5"> 
+          <img src='../assets/cause_cuisine_logo.png' width="300px" />
+          {/* <div className="logo-coming-soon">&nbsp;</div> */}
+          
+        </div>
+        
+      </div>
     </div>
     
   	);

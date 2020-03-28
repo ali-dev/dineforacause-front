@@ -68,7 +68,7 @@
 }
 
 .coming-soon-image {
-  background: url(../assets/test13.jpeg); 
+  background: url(../assets/test5.jpeg); 
   /* background-color: palevioletred; */
   /* Set a specific height */
   /*height: 200px; */
@@ -80,6 +80,17 @@
   background-size: cover;
 }
 
+
+.logo-coming-soon {
+  background: url(../assets/cause_cuisine_logo.png); 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  height: 200px;
+  width: 100px;
+}
  
  
 
