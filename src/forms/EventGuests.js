@@ -13,7 +13,8 @@ class EventGuests extends Component {
             eventId: null,
             eventName: null,
             hostName: null,
-            hostEmail: null
+            hostEmail: null,
+            viewId: null
 
         };
 
@@ -24,11 +25,11 @@ class EventGuests extends Component {
 
         if (this.props.event) {
             this.setState({ "eventId": this.props.event.id });
+            this.setState({ "viewId": this.props.event.viewId });
             this.setState({ "eventName": this.props.event.eventName });
             this.setState({ "hostName": this.props.event.hostName });
             this.setState({ "hostEmail": this.props.event.hostEmail });
             this.setState({ "date": this.props.event.date });
-
         }
 
 
@@ -138,7 +139,7 @@ class EventGuests extends Component {
             .then(data => {
                 //sends invitation email
                 let emailData = {
-                    'eventId': this.state.eventId,
+                    'viewId': this.state.viewId,
                     'eventName': this.state.eventName,
                     'hostName': this.state.hostName,
                     'guestId': guestId,

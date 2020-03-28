@@ -3,26 +3,26 @@ import React, { Component } from "react";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
 import { addCharge } from "../graphql/mutations";
-import { requestEventForEdit } from '../actions';
+import { requestEventForView } from '../actions';
 import { connect } from 'react-redux';
 import Payment from "../components/Payment"
 
 const mapStateToProps = state => {
   return {
-    event: state.requestEventForEdit.event, // @todo it should be requestEventForEdit
+    event: state.requestEventForView.event, // @todo it should be requestEventForEdit
     isPending: state.requestEventForEdit
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRequestEvent: editId => dispatch(requestEventForEdit(editId))
+    onRequestEvent: viewId => dispatch(requestEventForView(viewId))
   };
 };
 
 class RSVP extends Component {
   componentDidMount() {
-    this.props.onRequestEvent(this.props.match.params.editId);
+    this.props.onRequestEvent(this.props.match.params.viewId);
   }
 
   onToken = token => {
@@ -38,8 +38,14 @@ class RSVP extends Component {
   };
 
   render() {
-    const { event } = this.props;
-    
+    const { event  } = this.props;
+    if(event !== 'test') {
+      console.log(event)
+      const guests = JSON.parse(event.guests);
+      if (guests[this.props.match.params.guestId]) {
+        alert('found');
+      }
+    }
     let causeDetails = {};
     if (event.causeDetails !== undefined) {
       causeDetails = JSON.parse(event.causeDetails);

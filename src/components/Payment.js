@@ -33,7 +33,7 @@ const CARD_ELEMENT_OPTIONS = {
   }
 };
 const rsvp = [
-  { key: "attending", text: "I will attent", value: "attending" },
+  { key: "attending", text: "I will attend", value: "attending" },
   {
     key: "not_attending_donating",
     text: "Can't make it but will donate",
