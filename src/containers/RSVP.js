@@ -26,28 +26,26 @@ const mapDispatchToProps = dispatch => {
 class RSVP extends Component {
   componentDidMount() {
     this.props.onRequestEvent(this.props.match.params.viewId, this.props.match.params.guestId);
-    // this.props.guestDetails(this.props.event ,this.props.match.params.guestId);
   }
 
-  onToken = token => {
-    client
-      .mutate({
-        mutation: gql(addCharge),
-        variables: {
-          token: JSON.stringify(token)
-        }
-      })
-      .then(data => alert(`We are in business, ${data.email}`))
-      .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
-  };
+  // onToken = token => {
+  //   client
+  //     .mutate({
+  //       mutation: gql(addCharge),
+  //       variables: {
+  //         token: JSON.stringify(token)
+  //       }
+  //     })
+  //     .then(data => alert(`We are in business, ${data.email}`))
+  //     .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
+  // };
 
   render() {
-    const { event, guest, isPending  } = this.props;
+    const { event, guest, guestId, isPending  } = this.props;
     if (isPending === true) {
       return (<div></div>);
     } else {
-    console.log(`test ${isPending}`);
-    
+    console.log(guestId);
     let causeDetails = {};
     if (event.causeDetails !== undefined) {
       causeDetails = JSON.parse(event.causeDetails);
@@ -160,7 +158,7 @@ class RSVP extends Component {
                   
                   </div>
                   <div className="fl w-40 pt5 pa3 pa2-ns   bg-light-gray   ">
-                  <Payment /> 
+                  <Payment guestId={guestId} guest={guest} event={event} /> 
                   
                   </div>
                   

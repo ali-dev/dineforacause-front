@@ -4,6 +4,10 @@ import { loadStripe } from "@stripe/stripe-js";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
 import { addCharge } from "../graphql/queries";
+import {AMOUNT_OPTIONS, RSVP_OPTIONS, CARD_ELEMENT_OPTIONS}  from "../utils/lists.js"
+
+import { connect } from 'react-redux';
+
 import {
   CardElement,
   Elements,
@@ -11,58 +15,10 @@ import {
 } from "@stripe/react-stripe-js";
 import "./stripe.css";
 // Custom styling can be passed to options when creating an Element.
-const CARD_ELEMENT_OPTIONS = {
-  base: {
-    iconColor: "#c4f0ff",
-    color: "#fff",
-    fontWeight: 500,
-    fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-    fontSize: "16px",
-    fontSmoothing: "antialiased",
 
-    ":-webkit-autofill": {
-      color: "#fce883"
-    },
-    "::placeholder": {
-      color: "#87BBFD"
-    }
-  },
-  invalid: {
-    iconColor: "#FFC7EE",
-    color: "#FFC7EE"
-  }
-};
-const rsvp = [
-  { key: "attending", text: "I will attend", value: "attending" },
-  {
-    key: "not_attending_donating",
-    text: "Can't make it but will donate",
-    value: "not_attending_donating"
-  },
-  {
-    key: "not_attending",
-    text: "Can't make it this time",
-    value: "not_attending"
-  }
-];
 
-const amounts = [
-  { key: "10", text: "$10", value: "10" },
-  { key: "15", text: "$15", value: "15" },
-  { key: "20", text: "$20", value: "20" },
-  { key: "30", text: "$30", value: "30" },
-  { key: "40", text: "$40", value: "40" },
-  { key: "50", text: "$50", value: "50" },
-  { key: "60", text: "$60", value: "60" },
-  { key: "70", text: "$70", value: "70" },
-  { key: "80", text: "$80", value: "80" },
-  { key: "100", text: "$100", value: "100" },
-  { key: "120", text: "$120", value: "120" },
-  { key: "140", text: "$140", value: "140" },
-  { key: "160", text: "$160", value: "160" },
-  { key: "180", text: "$180", value: "180" },
-  { key: "200", text: "$200", value: "200" }
-];
+
+
 
 const DEFAULT_STATE = {
   error: null,
@@ -78,12 +34,34 @@ const DEFAULT_STATE = {
   willDonate: false
 };
 
+
+
+const mapStateToProps = state => {
+  return {
+    // event: state.event, 
+    // guest: state.guestId, 
+    // guest: state.requestDataForRSVP.guest, 
+    
+    // isPending: state.requestDataForRSVP.isPending
+  };
+};
+
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
+    // alert(props.guest)
+    // alert(this.props.guestId)
+    console.log(`AFTER PASSING GUEST:${JSON.stringify(props.guest)}`)
+    console.log(`AFTER PASSING GUESTID:${JSON.stringify(props.guestId)}`)
+    console.log(`AFTER PASSING EVENT:${JSON.stringify(props.event)}`)
+  
     this.state = DEFAULT_STATE;
   }
-
+  componentDidMount() {
+    // console.log(`AFTER MOUNT GUEST:${JSON.stringify(this.props.guest)}`)
+    // console.log(`AFTER MOUNT GUESTID:${JSON.stringify(this.props.guestId)}`)
+    // console.log(`THIS IS THE EVENT: ${JSON.stringify(this.props)}`);
+  }
   handleCCChange = (event) => {
     if (event.error) {
       this.setState({ "error": event.error.message });
@@ -126,32 +104,36 @@ class CheckoutForm extends Component {
       // form submission until Stripe.js has loaded.
       return;
     }
+    console.log(JSON.stringify(this.props.event));
+    alert(this.state.rsvp);
 
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
-    const cardElement = elements.getElement(CardElement);
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      amount: this.state.amount,
-      card: cardElement
-    });
-    const { token } = await stripe.createToken(cardElement);
-    if (token) {
-      client
-        .mutate({
-          mutation: gql(addCharge),
-          variables: {
-            token: JSON.stringify(token)
-          }
-        })
-        .then(data => alert(`We are in business, ${data.email}`))
-        .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
-    //   console.log("[PaymentMethod]", paymentMethod);
-    } else if (error) {
-      console.log("[error]", error);
-      this.setState({ "error": error.message });
-    }
+    // // Get a reference to a mounted CardElement. Elements knows how
+    // // to find your CardElement because there can only ever be one of
+    // // each type of element.
+    // const cardElement = elements.getElement(CardElement);
+    // const { error, paymentMethod } = await stripe.createPaymentMethod({
+    //   type: "card",
+    //   amount: this.state.amount,
+    //   card: cardElement
+    // });
+    // const { token } = await stripe.createToken(cardElement);
+    // if (token) {
+    //   client
+    //     .mutate({
+    //       mutation: gql(addCharge),
+    //       variables: {
+    //         token: JSON.stringify(token)
+    //       }
+    //     })
+    //     .then(data => alert(`We are in business, ${data.email}`))
+    //     .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
+    // //   console.log("[PaymentMethod]", paymentMethod);
+    // } else if (error) {
+    //   console.log("[error]", error);
+    //   this.setState({ "error": error.message });
+    // }
+
+
   };
 
   render() {
@@ -173,7 +155,8 @@ class CheckoutForm extends Component {
           <section className="bg-light-gray w-100 center   ">
             <Form.Select
               onChange={this.handleChange}
-              options={rsvp}
+              options={RSVP_OPTIONS}
+              value={this.state.rsvp}
               placeholder="RSVP"
               name="rsvp"
               id="rsvp_input"
@@ -193,7 +176,7 @@ class CheckoutForm extends Component {
             </div>
 
             <Dropdown
-              options={amounts}
+              options={AMOUNT_OPTIONS}
               placeholder="Choose amount"
               name="amount"
               value={this.state.amount}
@@ -222,23 +205,24 @@ class CheckoutForm extends Component {
 // };
 
 
-const InjectedCheckoutForm = () => {
+const InjectedCheckoutForm = (data) => {
   return (
-    <ElementsConsumer>
+    <ElementsConsumer data={data} >
       {({ elements, stripe }) => (
-        <CheckoutForm elements={elements} stripe={stripe} />
+        <CheckoutForm elements={elements} stripe={stripe} guest={data.guest} guestId={data.guestId} event={data.event} />
       )}
     </ElementsConsumer>
   );
 };
 const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
-const Payment = () => {
+const Payment = (data, ) => {
+  console.log(`BEFORE PASSING:${JSON.stringify(data)}`)
   return (
-    <Elements stripe={stripePromise}>
-      <InjectedCheckoutForm />
+    <Elements stripe={stripePromise} >
+      <InjectedCheckoutForm guest={data.guest} guestId={data.guestId} event={data.event} />
     </Elements>
   );
 };
-
-export default Payment;
+export default connect(mapStateToProps)(Payment);
+// export default Payment;

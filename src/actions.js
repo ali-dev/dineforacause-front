@@ -91,18 +91,6 @@ export const requestDataForRSVP = (viewId, guestId) => (dispatch) => {
     .catch(e => dispatch({ type: REQUEST_DATA_FOR_RSVP_FAILED, payload: e }))
 }
 
-export const getGuestFromEvent = (event, guestId) => (dispatch) => {
-  alert(event.eventName);
-  alert(guestId)
-  // dispatch({ type: REQUEST_EVENT_PENDING });
-  // client.query({
-  //   query: gql(getEventForView),
-  //   variables: {
-  //       viewId: viewId
-  //   }
-  // }).then(data => dispatch({ type: REQUEST_EVENT_SUCCESS, payload: data.data.getEventForView }))
-  //   .catch(e => dispatch({ type: REQUEST_EVENT_FAILED, payload: e }))
-}
 
 export const requestEventForEdit = (editId) => (dispatch) => {
   dispatch({ type: REQUEST_EVENT_FOR_EDIT_PENDING });

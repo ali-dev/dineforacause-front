@@ -35,6 +35,63 @@ export const  TIME_LIST = [
     { key: "1130pm", text: "11:30 PM", value: "11:30 PM" }
   ];
 
+
+  export const  AMOUNT_OPTIONS = [
+    { key: "10", text: "$10", value: "10" },
+    { key: "15", text: "$15", value: "15" },
+    { key: "20", text: "$20", value: "20" },
+    { key: "30", text: "$30", value: "30" },
+    { key: "40", text: "$40", value: "40" },
+    { key: "50", text: "$50", value: "50" },
+    { key: "60", text: "$60", value: "60" },
+    { key: "70", text: "$70", value: "70" },
+    { key: "80", text: "$80", value: "80" },
+    { key: "100", text: "$100", value: "100" },
+    { key: "120", text: "$120", value: "120" },
+    { key: "140", text: "$140", value: "140" },
+    { key: "160", text: "$160", value: "160" },
+    { key: "180", text: "$180", value: "180" },
+    { key: "200", text: "$200", value: "200" }
+  ];
+
+ 
+
+  export const RSVP_OPTIONS = [
+    { key: "attending", text: "I will attend", value: "attending" },
+    {
+      key: "not_attending_donating",
+      text: "Can't make it but will donate",
+      value: "not_attending_donating"
+    },
+    {
+      key: "not_attending",
+      text: "Can't make it this time",
+      value: "not_attending"
+    }
+  ];
+
+  export const CARD_ELEMENT_OPTIONS = {
+    base: {
+      iconColor: "#c4f0ff",
+      color: "#fff",
+      fontWeight: 500,
+      fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+      fontSize: "16px",
+      fontSmoothing: "antialiased",
+  
+      ":-webkit-autofill": {
+        color: "#fce883"
+      },
+      "::placeholder": {
+        color: "#87BBFD"
+      }
+    },
+    invalid: {
+      iconColor: "#FFC7EE",
+      color: "#FFC7EE"
+    }
+  };
+
   // @todo decide if we are going to use state/country
 // const states = [
 //     { key: 'n', text: 'New York', value: 'New York City' },
