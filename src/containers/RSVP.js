@@ -3,26 +3,30 @@ import React, { Component } from "react";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
 import { addCharge } from "../graphql/mutations";
-import { requestEventForView } from '../actions';
+import { requestEventForView, requestDataForRSVP } from '../actions';
 import { connect } from 'react-redux';
 import Payment from "../components/Payment"
 
 const mapStateToProps = state => {
   return {
-    event: state.requestEventForView.event, // @todo it should be requestEventForEdit
-    isPending: state.requestEventForEdit
+    event: state.requestDataForRSVP.event, 
+    guestId: state.requestDataForRSVP.guestId, 
+    guest: state.requestDataForRSVP.guest, 
+    
+    isPending: state.requestDataForRSVP.isPending
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRequestEvent: viewId => dispatch(requestEventForView(viewId))
+    onRequestEvent: (viewId, guestId) => dispatch(requestDataForRSVP(viewId, guestId))
   };
 };
 
 class RSVP extends Component {
   componentDidMount() {
-    this.props.onRequestEvent(this.props.match.params.viewId);
+    this.props.onRequestEvent(this.props.match.params.viewId, this.props.match.params.guestId);
+    // this.props.guestDetails(this.props.event ,this.props.match.params.guestId);
   }
 
   onToken = token => {
@@ -38,14 +42,12 @@ class RSVP extends Component {
   };
 
   render() {
-    const { event  } = this.props;
-    if(event !== 'test') {
-      console.log(event)
-      const guests = JSON.parse(event.guests);
-      if (guests[this.props.match.params.guestId]) {
-        alert('found');
-      }
-    }
+    const { event, guest, isPending  } = this.props;
+    if (isPending === true) {
+      return (<div></div>);
+    } else {
+    console.log(`test ${isPending}`);
+    
     let causeDetails = {};
     if (event.causeDetails !== undefined) {
       causeDetails = JSON.parse(event.causeDetails);
@@ -102,20 +104,29 @@ class RSVP extends Component {
               
                 <section className="bg-white w-80 center ">
                   <div className="fl w-60 pt5 pa3 pa2-ns   bg-white     ">
+                  <h3 className="f3 green">Guest Details</h3>
+                  <dl className="lh-title pa1 mt0">
+                    <dt className="f8 b">Guest Name</dt>
+                    <dd className="ml0 gray">{this.props.guest.name}</dd>
+                    <dt className="f8 b mt2">Email</dt>
+                    <dd className="ml0 gray">{this.props.guest.email}</dd>
+                    
+                  </dl>
+
                   <h3 className="f3 green">Event Details</h3>
-                  <dl class="lh-title pa1 mt0">
-                    <dt class="f8 b">Host Name</dt>
-                    <dd class="ml0 gray">{event.hostName}</dd>
-                    <dt class="f8 b mt2">When</dt>
-                    <dd class="ml0 gray">{event.date} @ {event.time}</dd>
-                    <dt class="f8 b mt2">Where</dt>
-                    <dd class="ml0 gray">{event.location}</dd>
-                    <dt class="f8 b mt2">Minimum Donation</dt>
-                    <dd class="ml0 gray">${event.minDonation}</dd>
-                    <dt class="f8 b mt2">Recommended Donation</dt>
-                    <dd class="ml0 gray">${event.recommendedDonation}</dd>
-                    <dt class="f8 b mt2">Event Details</dt>
-                    <dd class="ml0 gray">{event.details}</dd>
+                  <dl className="lh-title pa1 mt0">
+                    <dt className="f8 b">Host Name</dt>
+                    <dd className="ml0 gray">{event.hostName}</dd>
+                    <dt className="f8 b mt2">When</dt>
+                    <dd className="ml0 gray">{event.date} @ {event.time}</dd>
+                    <dt className="f8 b mt2">Where</dt>
+                    <dd className="ml0 gray">{event.location}</dd>
+                    <dt className="f8 b mt2">Minimum Donation</dt>
+                    <dd className="ml0 gray">${event.minDonation}</dd>
+                    <dt className="f8 b mt2">Recommended Donation</dt>
+                    <dd className="ml0 gray">${event.recommendedDonation}</dd>
+                    <dt className="f8 b mt2">Event Details</dt>
+                    <dd className="ml0 gray">{event.details}</dd>
                   </dl>
 
 
@@ -163,6 +174,7 @@ class RSVP extends Component {
       </header>
     </div>
     )
+    }
   
   }
 }

@@ -16,7 +16,7 @@ import RSVP from './containers/RSVP';
 import EventView from './containers/EventView';
 import EventManage from './containers/EventManage';
 import registerServiceWorker from './registerServiceWorker';
-import { requestCauses, requestCause, searchCauses, requestEventForView, requestEventForEdit } from './reducers'
+import { requestCauses, requestCause, searchCauses, requestEventForView, requestEventForEdit, requestDataForRSVP } from './reducers'
 
 
 import { Router } from 'react-router';
@@ -33,7 +33,7 @@ import './index.css';
 
 const logger = createLogger()
 
-const rootReducers = combineReducers({requestCauses, requestCause, searchCauses, requestEventForView, requestEventForEdit})
+const rootReducers = combineReducers({requestCauses, requestCause, searchCauses, requestEventForView, requestEventForEdit, requestDataForRSVP})
 
 const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger)) //@todo disable logger in prod
 const history = createBrowserHistory(); 
