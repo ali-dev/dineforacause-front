@@ -59,11 +59,6 @@ export const  TIME_LIST = [
   export const RSVP_OPTIONS = [
     { key: "attending", text: "I will attend", value: "attending" },
     {
-      key: "not_attending_donating",
-      text: "Can't make it but will donate",
-      value: "not_attending_donating"
-    },
-    {
       key: "not_attending",
       text: "Can't make it this time",
       value: "not_attending"
