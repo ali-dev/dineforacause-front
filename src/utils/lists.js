@@ -78,7 +78,6 @@ export const  TIME_LIST = [
       fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
       fontSize: "16px",
       fontSmoothing: "antialiased",
-  
       ":-webkit-autofill": {
         color: "#fce883"
       },

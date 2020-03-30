@@ -1,5 +1,5 @@
 import React, {  Component } from "react";
-import { Form, Dropdown, Radio } from "semantic-ui-react";
+import { Form, Dropdown, Radio, FormField } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
@@ -59,7 +59,6 @@ class CheckoutForm extends Component {
 
   toggle = () => {
     this.setState({willDonate: !this.state.willDonate})
-    // this.setState((prevState) => ({ checked: !prevState.checked }))
   } 
 
   handleCCChange = (event) => {
@@ -120,38 +119,42 @@ class CheckoutForm extends Component {
         // Get a reference to a mounted CardElement. Elements knows how
         // to find your CardElement because there can only ever be one of
         // each type of element.
-        const cardElement = elements.getElement(CardElement);
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-          type: "card",
-          // amount: this.state.amount,
-          card: cardElement
-        });
-        const { token } = await stripe.createToken(cardElement);
-        // console.log(token);
-        if (token) {
-          // @todo: figure out how to send all of this through addCharge. Added placeholder params for now
-          client
-            .mutate({
-              mutation: gql(addCharge),
-              variables: {
-                token: JSON.stringify(token),
-                eventId: 'eventId',
-                guestId: 'guestId',
-                causeId: 'causeId',
-                amount: 50,
-                rsvp: 'rsvp'
-              }
-            })
-            .then(data => alert(`We are in business, ${data.email}`))
-            .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
-        //   console.log("[PaymentMethod]", paymentMethod);
-        } else if (error) {
-          console.log("[error]", error);
-          this.setState({ "error": error.message });
-        }
+        if (this.state.willDonate == true) {
+          const cardElement = elements.getElement(CardElement);
+          const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            // amount: this.state.amount,
+            card: cardElement
+          });
+          const { token } = await stripe.createToken(cardElement);
+          // console.log(token);
+          if (token) {
+            // @todo: figure out how to send all of this through addCharge. Added placeholder params for now
+            client
+              .mutate({
+                mutation: gql(addCharge),
+                variables: {
+                  token: JSON.stringify(token),
+                  eventId: 'eventId',
+                  guestId: 'guestId',
+                  causeId: 'causeId',
+                  amount: 50,
+                  rsvp: 'rsvp'
+                }
+              })
+              .then(data => alert(`We are in business, ${data.email}`))
+              .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
+            //   console.log("[PaymentMethod]", paymentMethod);
+            } else if (error) {
+              console.log("[error]", error);
+              this.setState({ "error": error.message });
+            }
 
+        } else {
+          // @todo: just redirect to thank you
+        }
+        
       });
-    return;
     
     
     
@@ -163,7 +166,8 @@ class CheckoutForm extends Component {
     // const elements = useElements();
     const {
       error,
-      // willDonate,
+      willDonate,
+      rsvp
       // processing,
       // paymentMethod,
       // name,
@@ -178,24 +182,25 @@ class CheckoutForm extends Component {
             <Form.Select
               onChange={this.handleChange}
               options={RSVP_OPTIONS}
-              value={this.state.rsvp}
+              value={rsvp}
               placeholder="RSVP"
               name="rsvp"
               id="rsvp_input"
             />
              
             <br />
-            <Radio label="Donating?" toggle checked={this.state.willDonate} onClick={this.toggle} value={this}/>
+            <Radio label="Donating?" toggle checked={willDonate} onClick={this.toggle} value={this}/>
             <br />
             <br />
-            
-            <CardElement
+            <section hidden={!willDonate}>
+            <CardElement 
               className=""
               id="card-element"
               options={CARD_ELEMENT_OPTIONS}
               onChange={this.handleCCChange}
             />
-
+            
+            
             <div className="card-errors bg-light-gray" role="alert">
               {error}
             </div>
@@ -209,6 +214,7 @@ class CheckoutForm extends Component {
               fluid
               selection
             />
+            </section>
             <div className="fl w-20 pt5 pa3 pa2-ns   bg-light-gray     ">
               <button className="pay-submit" type="submit">
                 Submit
