@@ -4,8 +4,10 @@ import { loadStripe } from "@stripe/stripe-js";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
 import { addCharge } from "../graphql/queries";
+import trigger  from '../graphql/triggers'
 import {AMOUNT_OPTIONS, RSVP_OPTIONS, CARD_ELEMENT_OPTIONS}  from "../utils/lists.js"
 
+// import {trigger} from "../"
 import { connect } from 'react-redux';
 
 import {
@@ -104,35 +106,57 @@ class CheckoutForm extends Component {
       // form submission until Stripe.js has loaded.
       return;
     }
-    console.log(JSON.stringify(this.props.event));
-    alert(this.state.rsvp);
 
-    // // Get a reference to a mounted CardElement. Elements knows how
-    // // to find your CardElement because there can only ever be one of
-    // // each type of element.
-    // const cardElement = elements.getElement(CardElement);
-    // const { error, paymentMethod } = await stripe.createPaymentMethod({
-    //   type: "card",
-    //   amount: this.state.amount,
-    //   card: cardElement
-    // });
-    // const { token } = await stripe.createToken(cardElement);
-    // if (token) {
-    //   client
-    //     .mutate({
-    //       mutation: gql(addCharge),
-    //       variables: {
-    //         token: JSON.stringify(token)
-    //       }
-    //     })
-    //     .then(data => alert(`We are in business, ${data.email}`))
-    //     .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
-    // //   console.log("[PaymentMethod]", paymentMethod);
-    // } else if (error) {
-    //   console.log("[error]", error);
-    //   this.setState({ "error": error.message });
-    // }
+    const newGuestInfo = {...this.props.guest};
+    newGuestInfo.rsvp_status = this.state.rsvp;
+    const guestData = {
+      'eventId': this.props.event.id,
+      'guestId': this.props.guestId,
+      'guestDetails': JSON.stringify(newGuestInfo)
+    }
 
+    await trigger
+      .addGuest(guestData)
+      // @todo change addGuest response to return only this guest's info so it can be used in invitation
+      .then(async (data)  => {
+        // Get a reference to a mounted CardElement. Elements knows how
+        // to find your CardElement because there can only ever be one of
+        // each type of element.
+        const cardElement = elements.getElement(CardElement);
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+          type: "card",
+          // amount: this.state.amount,
+          card: cardElement
+        });
+        const { token } = await stripe.createToken(cardElement);
+        // console.log(token);
+        if (token) {
+          // @todo: figure out how to send all of this through addCharge. Added placeholder params for now
+          client
+            .mutate({
+              mutation: gql(addCharge),
+              variables: {
+                token: JSON.stringify(token),
+                eventId: 'eventId',
+                guestId: 'guestId',
+                causeId: 'causeId',
+                amount: 50,
+                rsvp: 'rsvp'
+              }
+            })
+            .then(data => alert(`We are in business, ${data.email}`))
+            .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
+        //   console.log("[PaymentMethod]", paymentMethod);
+        } else if (error) {
+          console.log("[error]", error);
+          this.setState({ "error": error.message });
+        }
+
+      });
+    return;
+    
+    
+    
 
   };
 

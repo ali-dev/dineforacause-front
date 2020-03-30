@@ -77,6 +77,7 @@ $guests: AWSJSON
 
 export const getEventForView = `query getEventForView($viewId: String!) {
   getEventForView(viewId: $viewId) {
+    id
     eventName
     hostName
     hostEmail
@@ -124,8 +125,8 @@ export const removeGuest = `mutation removeGuest($guestId: String!, $eventId: St
 `;
 
 
-export const addCharge = `mutation addCharge($token: String!) {
-    addCharge(token: $token) {
+export const addCharge = `mutation addCharge($token: String!, $eventId: String!, $guestId: String!, $causeId: String!, $amount: Int, $rsvp: String!) {
+    addCharge(token: $token, eventId: $eventId, guestId: $guestId, causeId: $causeId, rsvp: $rsvp, amount: $amount) {
       body
     }
   }

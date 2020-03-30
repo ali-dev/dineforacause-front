@@ -108,7 +108,8 @@ class RSVP extends Component {
                     <dd className="ml0 gray">{this.props.guest.name}</dd>
                     <dt className="f8 b mt2">Email</dt>
                     <dd className="ml0 gray">{this.props.guest.email}</dd>
-                    
+                    <dt className="f8 b mt2">RSVP Status</dt>
+                    <dd className="ml0 gray">{this.props.guest.rsvp_status}</dd>
                   </dl>
 
                   <h3 className="f3 green">Event Details</h3>
