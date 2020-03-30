@@ -1,5 +1,5 @@
 import React, {  Component } from "react";
-import { Form, Dropdown } from "semantic-ui-react";
+import { Form, Dropdown, Radio } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
@@ -33,37 +33,35 @@ const DEFAULT_STATE = {
   name: "",
   rsvp: "not_attending",
   amount: null,
-  willDonate: false
+  willDonate: true
 };
 
 
-
-const mapStateToProps = state => {
-  return {
-    // event: state.event, 
-    // guest: state.guestId, 
-    // guest: state.requestDataForRSVP.guest, 
+// @todo do we need this?
+// const mapStateToProps = state => {
+//   return {
+//     // event: state.event, 
+//     // guest: state.guestId, 
+//     // guest: state.requestDataForRSVP.guest, 
     
-    // isPending: state.requestDataForRSVP.isPending
-  };
-};
+//     // isPending: state.requestDataForRSVP.isPending
+//   };
+// };
 
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
-    // alert(props.guest)
-    // alert(this.props.guestId)
-    console.log(`AFTER PASSING GUEST:${JSON.stringify(props.guest)}`)
-    console.log(`AFTER PASSING GUESTID:${JSON.stringify(props.guestId)}`)
-    console.log(`AFTER PASSING EVENT:${JSON.stringify(props.event)}`)
-  
     this.state = DEFAULT_STATE;
   }
-  componentDidMount() {
-    // console.log(`AFTER MOUNT GUEST:${JSON.stringify(this.props.guest)}`)
-    // console.log(`AFTER MOUNT GUESTID:${JSON.stringify(this.props.guestId)}`)
-    // console.log(`THIS IS THE EVENT: ${JSON.stringify(this.props)}`);
-  }
+
+  // @todo: do we need this?
+  // componentDidMount() {}
+
+  toggle = () => {
+    this.setState({willDonate: !this.state.willDonate})
+    // this.setState((prevState) => ({ checked: !prevState.checked }))
+  } 
+
   handleCCChange = (event) => {
     if (event.error) {
       this.setState({ "error": event.error.message });
@@ -100,7 +98,7 @@ class CheckoutForm extends Component {
     event.preventDefault();
 
     const { stripe, elements } = this.props;
-
+    alert(this.state.willDonate);
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
@@ -185,9 +183,12 @@ class CheckoutForm extends Component {
               name="rsvp"
               id="rsvp_input"
             />
-
+             
             <br />
-
+            <Radio label="Donating?" toggle checked={this.state.willDonate} onClick={this.toggle} value={this}/>
+            <br />
+            <br />
+            
             <CardElement
               className=""
               id="card-element"
@@ -220,15 +221,6 @@ class CheckoutForm extends Component {
   }
 }
 
-// const App = () => {
-//   return (
-//     <Elements stripe={stripePromise}>
-//       <CheckoutForm />
-//     </Elements>
-//   );
-// };
-
-
 const InjectedCheckoutForm = (data) => {
   return (
     <ElementsConsumer data={data} >
@@ -241,12 +233,11 @@ const InjectedCheckoutForm = (data) => {
 const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
 const Payment = (data, ) => {
-  console.log(`BEFORE PASSING:${JSON.stringify(data)}`)
   return (
     <Elements stripe={stripePromise} >
       <InjectedCheckoutForm guest={data.guest} guestId={data.guestId} event={data.event} />
     </Elements>
   );
 };
-export default connect(mapStateToProps)(Payment);
-// export default Payment;
+// export default connect(mapStateToProps)(Payment);
+export default Payment;
