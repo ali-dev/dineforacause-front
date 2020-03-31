@@ -1,5 +1,5 @@
 import React, {  Component } from "react";
-import { Form, Dropdown, Radio, FormField } from "semantic-ui-react";
+import { Form, Dropdown, Radio } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
@@ -37,25 +37,11 @@ const DEFAULT_STATE = {
 };
 
 
-// @todo do we need this?
-// const mapStateToProps = state => {
-//   return {
-//     // event: state.event, 
-//     // guest: state.guestId, 
-//     // guest: state.requestDataForRSVP.guest, 
-    
-//     // isPending: state.requestDataForRSVP.isPending
-//   };
-// };
-
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.state = DEFAULT_STATE;
   }
-
-  // @todo: do we need this?
-  // componentDidMount() {}
 
   toggle = () => {
     this.setState({willDonate: !this.state.willDonate})
@@ -82,14 +68,6 @@ class CheckoutForm extends Component {
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
     }
-    if (name === "rsvp") {
-      let willDonate = false;
-      if (value === "attending" || value === "not_attending_donating") {
-        willDonate = true;
-      }
-      this.setState({ "willDonate": willDonate });
-    }
-    // this.props.onChange(name , value);
   };
 
   // Handle form submission.
