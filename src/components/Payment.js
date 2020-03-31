@@ -71,10 +71,10 @@ class CheckoutForm extends Component {
   };
 
   // Handle form submission.
-  handleSubmit = async event => {
-    event.preventDefault();
+  handleSubmit = async e => {
+    e.preventDefault();
 
-    const { stripe, elements } = this.props;
+    const { stripe, elements, event, guestId, guest } = this.props;
     alert(this.state.willDonate);
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
@@ -85,8 +85,8 @@ class CheckoutForm extends Component {
     const newGuestInfo = {...this.props.guest};
     newGuestInfo.rsvp_status = this.state.rsvp;
     const guestData = {
-      'eventId': this.props.event.id,
-      'guestId': this.props.guestId,
+      'eventId': event.id,
+      'guestId': guestId,
       'guestDetails': JSON.stringify(newGuestInfo)
     }
 
@@ -113,11 +113,12 @@ class CheckoutForm extends Component {
                 mutation: gql(addCharge),
                 variables: {
                   token: JSON.stringify(token),
-                  eventId: 'eventId',
-                  guestId: 'guestId',
-                  causeId: 'causeId',
-                  amount: 50,
-                  rsvp: 'rsvp'
+                  eventId: event.eventId,
+                  guestId: guestId,
+                  causeId: 'causeId', // @todo pass that from parent if needed
+                  amount: this.state.amount,
+                  rsvp: 'rsvp' // @rodo probably not needed if we pass guest
+                  //guest: JSON.stringify(guest) // @todo update mutation if guest is needed
                 }
               })
               .then(data => alert(`We are in business, ${data.email}`))
