@@ -90,50 +90,54 @@ class CheckoutForm extends Component {
       'guestDetails': JSON.stringify(newGuestInfo)
     }
 
-    await trigger
-      .addGuest(guestData)
-      // @todo change addGuest response to return only this guest's info so it can be used in invitation
-      .then(async (data)  => {
-        // Get a reference to a mounted CardElement. Elements knows how
-        // to find your CardElement because there can only ever be one of
-        // each type of element.
-        if (this.state.willDonate == true) {
-          const cardElement = elements.getElement(CardElement);
-          const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: "card",
-            // amount: this.state.amount,
-            card: cardElement
-          });
-          const { token } = await stripe.createToken(cardElement);
-          // console.log(token);
-          if (token) {
-            // @todo: figure out how to send all of this through addCharge. Added placeholder params for now
-            client
-              .mutate({
-                mutation: gql(addCharge),
-                variables: {
-                  token: JSON.stringify(token),
-                  eventId: event.eventId,
-                  guestId: guestId,
-                  causeId: 'causeId', // @todo pass that from parent if needed
-                  amount: this.state.amount,
-                  rsvp: 'rsvp' // @rodo probably not needed if we pass guest
-                  //guest: JSON.stringify(guest) // @todo update mutation if guest is needed
-                }
-              })
-              .then(data => alert(`We are in business, ${data.email}`))
-              .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
-            //   console.log("[PaymentMethod]", paymentMethod);
-            } else if (error) {
-              console.log("[error]", error);
-              this.setState({ "error": error.message });
-            }
 
-        } else {
-          // @todo: just redirect to thank you
-        }
-        
+
+    if (this.state.willDonate === true) {
+      const cardElement = elements.getElement(CardElement);
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        // amount: this.state.amount,
+        card: cardElement
       });
+      const { token } = await stripe.createToken(cardElement);
+      // console.log(token);
+      if (token) {
+        // @todo: figure out how to send all of this through addCharge. Added placeholder params for now
+        client
+          .mutate({
+            mutation: gql(addCharge),
+            variables: {
+              token: JSON.stringify(token),
+              eventId: event.id,
+              guestId: guestId,
+              causeId: 'causeId', // @todo pass that from parent if needed
+              amount: this.state.amount,
+              rsvp: 'rsvp', // @rodo probably not needed if we pass guest
+              guest: JSON.stringify(guest) // @todo update mutation if guest is needed
+            }
+          })
+          .then(data => alert(`We are in business, ${data.email}`))
+          .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
+        //   console.log("[PaymentMethod]", paymentMethod);
+        } else if (error) {
+          console.log("[error]", error);
+          this.setState({ "error": error.message });
+        }
+
+    } else {
+      // @todo: just redirect to thank you
+    }
+    
+
+    // await trigger
+    //   .addGuest(guestData)
+    //   // @todo change addGuest response to return only this guest's info so it can be used in invitation
+    //   .then(async (data)  => {
+    //     // Get a reference to a mounted CardElement. Elements knows how
+    //     // to find your CardElement because there can only ever be one of
+    //     // each type of element.
+        
+    //   });
     
     
     
