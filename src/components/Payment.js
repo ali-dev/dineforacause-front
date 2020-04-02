@@ -4,11 +4,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
 import { addCharge } from "../graphql/queries";
-import trigger  from '../graphql/triggers'
 import {AMOUNT_OPTIONS, RSVP_OPTIONS, CARD_ELEMENT_OPTIONS}  from "../utils/lists.js"
 
-// import {trigger} from "../"
-import { connect } from 'react-redux';
 
 import {
   CardElement,
@@ -95,7 +92,7 @@ class CheckoutForm extends Component {
     }
     if (this.state.willDonate === true) {
       newGuestInfo.donated = true;
-      newGuestInfo.donation_amount = this.state.amount;
+      newGuestInfo.donation_amount = this.state.amount; //@todo add validation for amount
 
       const cardElement = elements.getElement(CardElement);
       const { error, paymentMethod } = await stripe.createPaymentMethod({

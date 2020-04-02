@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-// import StripeCheckout from "react-stripe-checkout";
-import client from "../api/appSyncClient";
-import gql from "graphql-tag";
-import { addCharge } from "../graphql/mutations";
-import { requestEventForView, requestDataForRSVP } from '../actions';
+import { requestDataForRSVP } from '../actions';
 import { connect } from 'react-redux';
 import Payment from "../components/Payment"
 
@@ -12,7 +8,6 @@ const mapStateToProps = state => {
     event: state.requestDataForRSVP.event, 
     guestId: state.requestDataForRSVP.guestId, 
     guest: state.requestDataForRSVP.guest, 
-    
     isPending: state.requestDataForRSVP.isPending
   };
 };
@@ -27,18 +22,6 @@ class RSVP extends Component {
   componentDidMount() {
     this.props.onRequestEvent(this.props.match.params.viewId, this.props.match.params.guestId);
   }
-
-  // onToken = token => {
-  //   client
-  //     .mutate({
-  //       mutation: gql(addCharge),
-  //       variables: {
-  //         token: JSON.stringify(token)
-  //       }
-  //     })
-  //     .then(data => alert(`We are in business, ${data.email}`))
-  //     .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
-  // };
 
   render() {
     const { event, guest, guestId, isPending  } = this.props;
