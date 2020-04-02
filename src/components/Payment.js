@@ -38,6 +38,7 @@ class CheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.state = DEFAULT_STATE;
+    this.state.rsvp = this.props.guest.rsvp_status;
   }
 
   toggle = () => {
