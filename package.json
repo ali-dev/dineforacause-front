@@ -10,7 +10,7 @@
     "aws-amplify-react": "^4.1.4",
     "aws-appsync": "^2.0.0",
     "aws-appsync-react": "^2.0.0",
-    "aws-sdk": "^2.653.0",
+    "aws-sdk": "^2.0.0",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.10.1",
     "react": "^16.8.6",
@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2"
+    "enzyme-adapter-react-16": "^1.15.2",
+    "tslib": "^1.10.0"
   }
 }

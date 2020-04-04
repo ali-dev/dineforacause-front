@@ -11,11 +11,12 @@ s3 = new AWS.S3({apiVersion: '2006-03-01'});
 var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: ''};
 
 const directories = ['/build/assets/', '/build/static/css/', '/build/static/js/']
-var files = fs.readdirSync('./build/assets');
+// var files = fs.readdirSync('./build/assets');
 
 
-console.log(files);
-
+// console.log(files);
+// console.log(__dirname);
+// return;
 
 
 for (let i = 0; i < directories.length; i++ ) {
@@ -26,7 +27,7 @@ for (let i = 0; i < directories.length; i++ ) {
         const fullPath = directory+file;
         // Configure the file stream and obtain the upload parameters
         var fs = require('fs');
-        var fileStream = fs.createReadStream('./'+fullPath);
+        var fileStream = fs.createReadStream(__dirname+fullPath);
         fileStream.on('error', function(err) {
         console.log('File Error', err);
         });

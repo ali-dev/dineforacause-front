@@ -13,9 +13,9 @@ frontend:
     build:
       commands:
         - yarn run build
-    # postBuild:
-    #     commands:
-    #     - *enter command*    
+    postBuild:
+        commands:
+        - yarn run upload-assets   
   artifacts:
     baseDirectory: build
     files:
