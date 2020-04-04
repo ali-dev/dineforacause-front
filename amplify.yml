@@ -12,7 +12,7 @@ frontend:
         - yarn install
     build:
       commands:
-        - PUBLIC_URL=http://d347byd6tnwv5o.cloudfront.net/build/ yarn run build
+        - PUBLIC_URL=https://d347byd6tnwv5o.cloudfront.net/build/ yarn run build
     postBuild:
         commands:
         - yarn run upload-assets   
