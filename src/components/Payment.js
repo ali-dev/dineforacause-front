@@ -13,8 +13,7 @@ import {
   ElementsConsumer
 } from "@stripe/react-stripe-js";
 import "./stripe.css";
-// Custom styling can be passed to options when creating an Element.
-
+const stripePromise = loadStripe("pk_test_uo2pgWCmS9OklnawX92zOec600IDnTkg42");
 
 
 
@@ -75,51 +74,94 @@ class CheckoutForm extends Component {
    
 
     const { stripe, elements, event, guestId, guest } = this.props;
-    
+    const { amount, willDonate, rsvp }  = this.state;
     // Stripe.js has not loaded yet. Make sure to disable. form submission until Stripe.js has loaded.
     if (!stripe || !elements) {
       return;
     }
-    const newGuestInfo = {...this.props.guest};
-    newGuestInfo.rsvp_status = this.state.rsvp;
+    const newGuestInfo = {...guest};
+    newGuestInfo.rsvp_status = rsvp;
+    if (willDonate === true) {
+      newGuestInfo.donated = true;
+      newGuestInfo.donation_amount = amount; //@todo add validation for amount
+    }  
+      // todo remove
+      // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      //   type: "card",
+      //   // amount: this.state.amount,
+      //   card: cardElement
+      // });
+      
+      // const { token } = await stripe.createToken(cardElement);
+      
+      // if (token) {
+      //   params.token = JSON.stringify(token);
+      // }
+      //   console.log("[PaymentMethod]", paymentMethod);
+
+        
+     
+
+    
 
 
-    let params = {
+
+
+    const params = {
       eventId: event.id,
       guestId: guestId,
       causeId: 'causeId', // @todo pass that from parent if needed
-      amount: this.state.amount,
-      rsvp: 'rsvp', // @rodo probably not needed if we pass guest
+      amount: amount,
+      willDonate: willDonate,
+      guest: JSON.stringify(newGuestInfo)
     }
-    if (this.state.willDonate === true) {
-      newGuestInfo.donated = true;
-      newGuestInfo.donation_amount = this.state.amount; //@todo add validation for amount
+    
 
-      const cardElement = elements.getElement(CardElement);
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: "card",
-        // amount: this.state.amount,
-        card: cardElement
-      });
-      
-      const { token } = await stripe.createToken(cardElement);
-      
-      if (token) {
-        params.token = JSON.stringify(token);
-      }
-      
-      
-        //   console.log("[PaymentMethod]", paymentMethod);
-    } 
-
-    params.guest = JSON.stringify(newGuestInfo);
     client
           .mutate({
             mutation: gql(addCharge),
             variables: params
           })
-          .then(data => alert(`We are in business, ${data.email}`))
-          .catch(e => console.log(`${e}`));
+          .then(async response => {
+            const data = JSON.parse(response.data.addCharge.body); 
+            
+            if (data.paymentIntent) {
+              const cardElement = elements.getElement(CardElement);
+              const result = await stripe.confirmCardPayment(data.paymentIntent.client_secret, {
+                receipt_email: 'ali@causeandcuisine.com',  
+                payment_method: {
+                  // customer: guestId,
+                  card: cardElement,
+                  type: 'card',
+                  metadata: {
+                    eventId: event.id,
+                    guestId: guestId,
+                    causeId: 'causeId' // @todo update
+                  },
+                  billing_details: {
+                    name: 'Jenny Rosen'
+                  }
+                }
+              })
+
+              if (result.error) {
+                // Show error to your customer (e.g., insufficient funds)
+                console.log(result.error.message);
+              } else {
+                // The payment has been processed!
+                if (result.paymentIntent.status === 'succeeded') {
+                  alert('Success');
+                  // Show a success message to your customer
+                  // There's a risk of the customer closing the window before callback
+                  // execution. Set up a webhook or plugin to listen for the
+                  // payment_intent.succeeded event that handles any business critical
+                  // post-payment actions.
+                }
+              }
+              
+              alert(`We are in business, ${data.email}`)
+            }
+          }).catch(e => console.log(`${e}`));
     // else if (error) {
     //   console.log("[error]", error);
     //   this.setState({ "error": error.message });
@@ -159,7 +201,8 @@ class CheckoutForm extends Component {
             <Radio label="Donating?" toggle checked={willDonate} onClick={this.toggle} value={this}/>
             <br />
             <br />
-            <section hidden={!willDonate}>
+           
+            <section >  {/* hidden={!willDonate || (this.props.guest.donated === true) } */}
             <CardElement 
               className=""
               id="card-element"
@@ -203,7 +246,9 @@ const InjectedCheckoutForm = (data) => {
     </ElementsConsumer>
   );
 };
-const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+
+
+// const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
 const Payment = (data, ) => {
   return (
