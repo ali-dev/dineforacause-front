@@ -82,7 +82,7 @@ class RSVP extends Component {
           
           
             <article data-name="article-full-bleed-background" >
-                <Message icon='check circle' hidden={guest.rsvp_status==='invited'}
+                <Message icon='check circle' hidden={guest.rsvp_status==='pending'}
                     success
                     header="You Responded to this event"
                     // content="You can change your status at any time"
