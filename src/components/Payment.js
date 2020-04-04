@@ -79,8 +79,10 @@ class CheckoutForm extends Component {
     if (!stripe || !elements) {
       return;
     }
+    const cardElement = elements.getElement(CardElement);
     const newGuestInfo = {...guest};
     newGuestInfo.rsvp_status = rsvp;
+              
     if (willDonate === true) {
       if (!amount) {
         this.setState({ "error": 'If you are donating, you must complete payment info'});
@@ -88,7 +90,18 @@ class CheckoutForm extends Component {
       }
       newGuestInfo.donated = true;
       newGuestInfo.donation_amount = amount; //@todo add validation for amount
+
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+          type: "card",
+          // amount: this.state.amount,
+          card: cardElement
+        });
+      if (error) 
+        return;  
     }  
+
+
+    
       // todo remove
       // const { error, paymentMethod } = await stripe.createPaymentMethod({
       //   type: "card",
@@ -130,7 +143,6 @@ class CheckoutForm extends Component {
             const data = JSON.parse(response.data.addCharge.body); 
             
             if (data.paymentIntent) {
-              const cardElement = elements.getElement(CardElement);
               const result = await stripe.confirmCardPayment(data.paymentIntent.client_secret, {
                 receipt_email: 'ali@causeandcuisine.com',  
                 payment_method: {
@@ -143,7 +155,8 @@ class CheckoutForm extends Component {
                     causeId: 'causeId' // @todo update
                   },
                   billing_details: {
-                    name: 'Jenny Rosen'
+                    name: newGuestInfo.name,
+                    email: newGuestInfo.email,
                   }
                 }
               })
