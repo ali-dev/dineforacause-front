@@ -183,6 +183,7 @@ class CheckoutForm extends Component {
       // email,
       // phone
     } = this.state;
+    const donated = this.props.guest.donated;
     return (  
       <div className="bg-light-gray w-100 center  ">
         <h3 className="f3 green">RSVP & Donate</h3>
@@ -198,11 +199,11 @@ class CheckoutForm extends Component {
             />
              
             <br />
-            <Radio label="Donating?" toggle checked={willDonate} onClick={this.toggle} value={this}/>
+            <Radio label="Donating?" toggle disabled={(donated === true)} checked={donated === true ? false : willDonate} onClick={this.toggle} value={this}/>
             <br />
             <br />
            
-            <section >  {/* hidden={!willDonate || (this.props.guest.donated === true) } */}
+            <section hidden={!willDonate || (this.props.guest.donated === true) } >  
             <CardElement 
               className=""
               id="card-element"

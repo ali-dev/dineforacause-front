@@ -85,7 +85,11 @@ class RSVP extends Component {
                 <Message icon='check circle' hidden={guest.rsvp_status==='invited'}
                     success
                     header="You Responded to this event"
-                    content="You can change your status at any time"
+                    // content="You can change your status at any time"
+                    list={[
+                      guest.donated === true ? `You donated $${guest.donation_amount} to this cause`: 'You can still donate to this cause',
+                      'You can change your status at any time',
+                    ]}
                 />  
                 <section className="bg-white w-80 center ">
                   <div className="fl w-60 pt5 pa3 pa2-ns   bg-white     ">
