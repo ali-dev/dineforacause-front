@@ -13,6 +13,9 @@ frontend:
     build:
       commands:
         - yarn run build
+    # postBuild:
+    #     commands:
+    #     - *enter command*    
   artifacts:
     baseDirectory: build
     files:
