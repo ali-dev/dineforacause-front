@@ -21,13 +21,13 @@ const directories = ['build/assets/', 'build/static/css/', 'build/static/js/', '
 
 for (let i = 0; i < directories.length; i++ ) {
     const directory = directories[i];
-    const files = fs.readdirSync(__dirname+directory);
+    const files = fs.readdirSync(__dirname+'/'+directory);
     for (let f = 0; f < files.length; f++) {
         const file = files[f];
         const fullPath = directory+file;
         // Configure the file stream and obtain the upload parameters
         var fs = require('fs');
-        var fileStream = fs.createReadStream(__dirname+fullPath);
+        var fileStream = fs.createReadStream(__dirname+'/'+fullPath);
         fileStream.on('error', function(err) {
         console.log('File Error', err);
         });
