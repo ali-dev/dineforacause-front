@@ -29,6 +29,9 @@ class RSVP extends Component {
     if (isPending === true) {
       return (<div></div>);
     } else {
+    if (!guest || !event) {
+      window.location.href = '/';
+    }  
     let causeDetails = {};
     if (event.causeDetails !== undefined) {
       causeDetails = JSON.parse(event.causeDetails);
