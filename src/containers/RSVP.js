@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { requestDataForRSVP } from '../actions';
 import { connect } from 'react-redux';
-import Payment from "../components/Payment"
+import Payment from "../components/Payment";
+import { Message } from 'semantic-ui-react'
 
 const mapStateToProps = state => {
   return {
@@ -24,11 +25,10 @@ class RSVP extends Component {
   }
 
   render() {
-    const { event, guest, guestId, isPending  } = this.props;
+    const { event, guest, guestId, isPending } = this.props;
     if (isPending === true) {
       return (<div></div>);
     } else {
-    console.log(guestId);
     let causeDetails = {};
     if (event.causeDetails !== undefined) {
       causeDetails = JSON.parse(event.causeDetails);
@@ -82,7 +82,11 @@ class RSVP extends Component {
           
           
             <article data-name="article-full-bleed-background" >
-              
+                <Message icon='check circle' hidden={guest.rsvp_status==='invited'}
+                    success
+                    header="You Responded to this event"
+                    content="You can change your status at any time"
+                />  
                 <section className="bg-white w-80 center ">
                   <div className="fl w-60 pt5 pa3 pa2-ns   bg-white     ">
                   <h3 className="f3 green">Guest Details</h3>
