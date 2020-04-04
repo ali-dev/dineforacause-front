@@ -7,7 +7,7 @@ AWS.config.update({region: 'us-east-1'});
 // Create S3 service object
 s3 = new AWS.S3({apiVersion: '2006-03-01'});
 // call S3 to retrieve upload file to specified bucket
-var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: '', Acl: 'public-read', acl: 'public-read'};
+var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: '', ACL: 'public-read'};
 
 const directories = ['build/assets/', 'build/static/css/', 'build/static/js/', 'build/static/media/']
 
@@ -44,6 +44,13 @@ for (let i = 0; i < directories.length; i++ ) {
             console.log("Upload Success", data.Location);
         }
         });
+
+        // var AclParams = {
+        //     Bucket: 'cause-cuisine-site-assets', /* required */
+        //     Key: 'STRING_VALUE', /* required */
+        //     ACL: private | public-read | public-read-write | authenticated-read | aws-exec-read | bucket-owner-read | bucket-owner-full-control,
+        // }          
+        // s3.putObjectAcl()
 
 
     }
