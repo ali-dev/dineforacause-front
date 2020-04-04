@@ -26,7 +26,7 @@ for (let i = 0; i < directories.length; i++ ) {
         const fullPath = directory+file;
         // Configure the file stream and obtain the upload parameters
         var fs = require('fs');
-        var fileStream = fs.createReadStream('./'+fullPath);
+        var fileStream = fs.createReadStream(fullPath);
         fileStream.on('error', function(err) {
         console.log('File Error', err);
         });
