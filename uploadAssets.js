@@ -8,7 +8,7 @@ AWS.config.update({region: 'us-east-1'});
 s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
 // call S3 to retrieve upload file to specified bucket
-var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: ''};
+var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: '', Acl: 'public-read'};
 
 const directories = ['build/assets/', 'build/static/css/', 'build/static/js/', 'build/static/media/']
 
@@ -64,9 +64,9 @@ for (let f = 0; f < additionalFiles.length; f++) {
     uploadParams.Body = fileStream;
     var path = require('path');
     uploadParams.Key = fullPath;
-
+    
     // call S3 to retrieve upload file to specified bucket
-    s3.upload (uploadParams, function (err, data) {
+    s3.upload(uploadParams, function (err, data) {
     if (err) {
         console.log("Error", err);
     } if (data) {
