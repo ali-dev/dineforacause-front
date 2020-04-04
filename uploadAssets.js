@@ -11,7 +11,9 @@ s3 = new AWS.S3({apiVersion: '2006-03-01'});
 var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: ''};
 
 const directories = ['build/assets/', 'build/static/css/', 'build/static/js/', 'build/static/media/']
-// var files = fs.readdirSync('./build/assets');
+
+const additionalFiles = ['asset-manifest.json', 'favicon.ico', 'index.html', 'manifest.json', 'service-worker.js']
+// var files = fs.readdirSync('./build/');
 
 
 // console.log(files);
@@ -48,6 +50,34 @@ for (let i = 0; i < directories.length; i++ ) {
     }
 
 }
+
+const directory = 'build/';
+for (let f = 0; f < additionalFiles.length; f++) {
+    const file = additionalFiles[f];
+    const fullPath = directory+file;
+    // Configure the file stream and obtain the upload parameters
+    var fs = require('fs');
+    var fileStream = fs.createReadStream(__dirname+'/'+fullPath);
+    fileStream.on('error', function(err) {
+    console.log('File Error', err);
+    });
+    uploadParams.Body = fileStream;
+    var path = require('path');
+    uploadParams.Key = fullPath;
+
+    // call S3 to retrieve upload file to specified bucket
+    s3.upload (uploadParams, function (err, data) {
+    if (err) {
+        console.log("Error", err);
+    } if (data) {
+        console.log("Upload Success", data.Location);
+    }
+    });
+
+
+}
+
+
 
 // var file = './build/assets/coffee.jpg';
 
