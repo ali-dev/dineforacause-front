@@ -11,7 +11,7 @@ s3 = new AWS.S3({apiVersion: '2006-03-01'});
 var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: ''};
 
 const directories = ['build/assets/', 'build/static/css/', 'build/static/js/']
-var files = fs.readdirSync('./build/assets');
+var files = fs.readdirSync('build/assets');
 
 
 console.log(files);
