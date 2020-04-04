@@ -88,7 +88,7 @@ class RSVP extends Component {
                     // content="You can change your status at any time"
                     list={[
                       guest.donated === true ? `You donated $${guest.donation_amount} to this cause`: 'You can still donate to this cause',
-                      'You can change your status at any time',
+                      `You can change your status at any time; Your current status is ${(guest.rsvp_status === 'attending')? 'Attending': 'Not Attending'}`,
                     ]}
                 />  
                 <section className="bg-white w-80 center ">

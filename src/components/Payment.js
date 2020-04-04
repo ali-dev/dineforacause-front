@@ -82,6 +82,10 @@ class CheckoutForm extends Component {
     const newGuestInfo = {...guest};
     newGuestInfo.rsvp_status = rsvp;
     if (willDonate === true) {
+      if (!amount) {
+        this.setState({ "error": 'If you are donating, you must complete payment info'});
+        return;
+      }
       newGuestInfo.donated = true;
       newGuestInfo.donation_amount = amount; //@todo add validation for amount
     }  
@@ -144,23 +148,23 @@ class CheckoutForm extends Component {
                 }
               })
 
-              if (result.error) {
-                // Show error to your customer (e.g., insufficient funds)
-                console.log(result.error.message);
-              } else {
-                // The payment has been processed!
-                if (result.paymentIntent.status === 'succeeded') {
-                  alert('Success');
-                  // Show a success message to your customer
-                  // There's a risk of the customer closing the window before callback
-                  // execution. Set up a webhook or plugin to listen for the
-                  // payment_intent.succeeded event that handles any business critical
-                  // post-payment actions.
-                }
-              }
-              
-              alert(`We are in business, ${data.email}`)
+              // @TODO: show error message 
+              // if (result.error) {
+              //   // Show error to your customer (e.g., insufficient funds)
+              //   console.log(result.error.message);
+              // } else {
+              //   // The payment has been processed!
+              //   if (result.paymentIntent.status === 'succeeded') {
+              //     alert('Success');
+              //     // Show a success message to your customer
+              //     // There's a risk of the customer closing the window before callback
+              //     // execution. Set up a webhook or plugin to listen for the
+              //     // payment_intent.succeeded event that handles any business critical
+              //     // post-payment actions.
+              //   }
+              // }
             }
+            window.location.reload(false);
           }).catch(e => console.log(`${e}`));
     // else if (error) {
     //   console.log("[error]", error);
