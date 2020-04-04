@@ -12,7 +12,7 @@ frontend:
         - yarn install
     build:
       commands:
-        - yarn run build
+        - PUBLIC_URL=https://s3.us-east-1.amazonaws.com/cause-cuisine-site-assets yarn run build
     postBuild:
         commands:
         - yarn run upload-assets   
