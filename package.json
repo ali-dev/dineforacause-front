@@ -7,6 +7,7 @@
     "@stripe/stripe-js": "^1.0.1",
     "apollo-client": "^2.6.4",
     "aws-amplify": "^3.0.5",
+    "aws-amplify-react": "^4.1.4",
     "aws-appsync": "^2.0.0",
     "aws-appsync-react": "^2.0.0",
     "graphql": "^14.5.8",
