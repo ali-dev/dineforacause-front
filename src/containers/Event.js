@@ -26,7 +26,7 @@ class Event extends Component {
   	      <article data-name="article-full-bleed-background">
     	      <div className="cf" >
     	        <div className="fl w-100   black-70 f3  ">
-  	          <CreateEventForm/>
+  	          {/* <CreateEventForm/> */}
   	        </div>
   	      </div>
   	    </article>
