@@ -33,10 +33,12 @@ for (let i = 0; i < directories.length; i++ ) {
         const fullPath = directory+file;
         // Configure the file stream and obtain the upload parameters
         var fs = require('fs');
-        const mimetype = mime.lookup('json');
+        const mimetype = mime.lookup(fullPath);
+        
         if (mimetype) {
             uploadParams.ContentType = mimetype;
         }    
+
         var fileStream = fs.createReadStream(__dirname+'/'+fullPath);
         fileStream.on('error', function(err) {
         console.log('File Error', err);
