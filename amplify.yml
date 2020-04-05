@@ -15,6 +15,7 @@ frontend:
         - PUBLIC_URL=https://d347byd6tnwv5o.cloudfront.net/build/ yarn run build
     postBuild:
         commands:
+        - aws s3 rm s3://cause-cuisine-site-assets/ --recursive
         - yarn run upload-assets   
   artifacts:
     baseDirectory: build
