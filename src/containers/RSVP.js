@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 // import StripeCheckout from "react-stripe-checkout";
-import client from "../api/appSyncClient";
-import gql from "graphql-tag";
-import { addCharge } from "../graphql/mutations";
-import { requestEventForView, requestDataForRSVP } from '../actions';
+import { requestDataForRSVP } from '../actions';
 import { connect } from 'react-redux';
 import Payment from "../components/Payment"
 

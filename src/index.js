@@ -6,9 +6,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import 'tachyons';
+// import 'tachyons';
 
-import App from './containers/App';
+import App from './containers/OldApp';
 import ComingSoon from './containers/ComingSoon';
 
 import Event from './containers/Event';
@@ -24,7 +24,7 @@ import { Route} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 
-import './index.css';
+// import './index.css';
 
 
 // Amplify.configure(awsconfig);
