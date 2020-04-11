@@ -8,7 +8,7 @@ AWS.config.update({region: 'us-east-1'});
 // Create S3 service object
 s3 = new AWS.S3({apiVersion: '2006-03-01'});
 // call S3 to retrieve upload file to specified bucket
-var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: '', ACL: 'public-read'};
+var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: '', ACL: 'public-read', CacheControl: 'max-age=31536000'};
 
 const directories = ['build/assets/', 'build/static/css/', 'build/static/js/', 'build/static/media/', 'build/']
 
