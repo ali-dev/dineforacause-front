@@ -24,12 +24,6 @@ import { Route} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 
-// import './index.css';
-
-
-// Amplify.configure(awsconfig);
-
-
 
 const logger = createLogger()
 

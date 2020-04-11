@@ -4,10 +4,6 @@ import { setSearchField, requestCauses } from "../actions";
 // import './App.css';
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
-// var $ = require('../assets/js/jquery-1.9.1.min.js');
-
-// require('../assets/js/all-custom.js');
-// import $ from "../assets/js/jquery-1.9.1 .min.js";
 
 // import {Link} from 'react-router-dom';
 // import Header from '../components/Header'
