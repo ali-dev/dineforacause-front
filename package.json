@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@stripe/react-stripe-js": "^1.0.2",
     "@stripe/stripe-js": "^1.0.1",
     "apollo-client": "^2.6.4",
@@ -31,9 +30,13 @@
     "uuid": "^7.0.2"
   },
   "scripts": {
+<<<<<<< HEAD
     "start": "webpack-dev-server --mode production --open",
+=======
+    "start": "react-scripts start",
+>>>>>>> d0682dcb06defbb91146b8b458dd29a620a2b45e
     "start-prod": "NODE_ENV=production react-scripts start",
-    "build": "webpack --mode production",
+    "build": "react-scripts build",
     "upload-assets": "node ./uploadAssets.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
