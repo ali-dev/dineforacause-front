@@ -18,7 +18,7 @@ frontend:
         - aws s3 rm s3://cause-cuisine-site-assets/ --recursive
         - yarn run upload-assets   
   artifacts:
-    baseDirectory: build
+    baseDirectory: dist
     files:
       - '**/*'
   cache:
