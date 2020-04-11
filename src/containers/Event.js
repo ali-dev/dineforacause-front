@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CreateEventForm from '../forms/CreateEventForm'
-
+import 'tachyons';
 
   
 

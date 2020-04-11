@@ -6,7 +6,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-// import 'tachyons';
+
 
 import App from './containers/OldApp';
 import ComingSoon from './containers/ComingSoon';
