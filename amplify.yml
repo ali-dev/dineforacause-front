@@ -12,7 +12,7 @@ frontend:
         - yarn install
     build:
       commands:
-        - PUBLIC_URL=https://assets-staging.causeandcuisine.com/build/ yarn run build
+        - PUBLIC_URL=https://assets-staging.causeandcuisine.com/dist/ yarn run build
     postBuild:
         commands:
         - aws s3 rm s3://cause-cuisine-site-assets/ --recursive
