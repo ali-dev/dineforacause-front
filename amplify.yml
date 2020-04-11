@@ -1,10 +1,4 @@
 version: 0.1
-backend:
-  phases:
-    build:
-      commands:
-        - '# Execute Amplify CLI with the helper script'
-        - '#amplifyPush --simple'
 frontend:
   phases:
     preBuild:
@@ -12,7 +6,7 @@ frontend:
         - npm install
     build:
       commands:
-        - PUBLIC_URL=https://assets-staging.causeandcuisine.com/dist/ npm run build
+        - PUBLIC_URL=https://assets-staging.causeandcuisine.com/build/ npm run build
     postBuild:
         commands:
         - aws s3 rm s3://cause-cuisine-site-assets/ --recursive
