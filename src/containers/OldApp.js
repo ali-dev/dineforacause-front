@@ -10,6 +10,14 @@ import "../assets/css/responsive.css";
 // import CardList from '../components/CardList'
 // import SearchBox from '../components/SearchBox'
 
+import banner from '../assets/images/banner-img.jpg';
+import logo from '../assets/images/logo.png';
+import downImage from '../assets/images/down-img.png'
+import stepOne from '../assets/images/step-1.png'
+import stepTwo from '../assets/images/step-2.png'
+import stepThree from '../assets/images/step-3.png'
+
+
 // parameter state comes from index.js provider store state(rootReducers)
 const mapStateToProps = (state) => {
   return {
@@ -67,7 +75,7 @@ class OldApp extends Component {
         <header className={this.state.headerClass}>
           <div className="main-wrapper">
             <a className="lft logo" href="index.html">
-              <img src="assets/images/logo.png" alt="logo" />
+              <img src={logo} alt="logo" />
               {/* require("../assets/images/logo.png")  */}
             </a>
 
@@ -107,8 +115,9 @@ class OldApp extends Component {
         </header>
 
         <section className="banner-area">
+        {/* "assets/images/banner-img.jpg" */}
           <img
-            src="assets/images/banner-img.jpg" //"static/media/banner-img.jpg" //"./dist/static/media/banner-img.jpg"
+            src={banner} 
             alt="banner image"
           />
 
@@ -122,7 +131,7 @@ class OldApp extends Component {
           </div>
 
           <a href="javascript:void(0);" className="scroll-down">
-            <img src={require("../assets/images/down-img.png")} alt="image" />
+            <img src={downImage} alt="image" />
           </a>
         </section>
      
@@ -140,7 +149,7 @@ class OldApp extends Component {
 
         	<div className="icon-area">
 
-            	<img src={require("../assets/images/step-1.png")} alt="icon" />
+            	<img src={stepOne} alt="icon" />
 
             </div>
 
@@ -160,7 +169,7 @@ class OldApp extends Component {
 
         	<div className="icon-area">
 
-            	<img src={require("../assets/images/step-2.png")} alt="icon" />
+            	<img src={stepTwo} alt="icon" />
 
             </div>
 
@@ -180,7 +189,7 @@ class OldApp extends Component {
 
         	<div className="icon-area">
 
-            	<img src={require("../assets/images/step-3.png")} alt="icon" />
+            	<img src={stepThree} alt="icon" />
 
             </div>
 

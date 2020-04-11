@@ -17,7 +17,7 @@ module.exports = (_env, argv) => {
     //     app: './src/index.js',
     //  },
     devServer: {
-        contentBase: './src',
+        contentBase: isProduction ? './dist': './src',
     },
     // output: {
         // path: path.resolve('dist'),
@@ -70,7 +70,7 @@ module.exports = (_env, argv) => {
           loader: require.resolve("file-loader"),
           options: {
             outputPath: 'assets/images/',
-            publicPath: 'assets/images/',
+            // publicPath: 'assets/images/',
             name: "[name].[ext]",
           },
         },

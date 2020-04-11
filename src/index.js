@@ -11,11 +11,11 @@ import { createLogger } from 'redux-logger';
 import App from './containers/OldApp';
 import ComingSoon from './containers/ComingSoon';
 
-import Event from './containers/Event';
-import RSVP from './containers/RSVP';
-import EventView from './containers/EventView';
-import EventManage from './containers/EventManage';
-import registerServiceWorker from './registerServiceWorker';
+// import Event from './containers/Event';
+// import RSVP from './containers/RSVP';
+// import EventView from './containers/EventView';
+// import EventManage from './containers/EventManage';
+// import registerServiceWorker from './registerServiceWorker';
 import { requestCauses, requestCause, searchCauses, requestEventForView, requestEventForEdit, requestDataForRSVP } from './reducers'
 // import png from './image.png';
 
@@ -50,11 +50,11 @@ if (isReleased) {
     <Provider store={store}>
     <Router history={history}>
         <Route exact={true} path="/" component={App} />
-        <Route path="/event/create/" component={Event} />
+        {/* <Route path="/event/create/" component={Event} />
         <Route path="/rsvp/:viewId/:guestId" component={RSVP} />
         <Route path="/event/view/:viewId" component={EventView} />
         <Route path="/event/manage/:editId" component={EventManage} />
-        
+         */}
         
     </Router>
     </Provider>
