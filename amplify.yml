@@ -9,14 +9,14 @@ frontend:
   phases:
     preBuild:
       commands:
-        - yarn install
+        - npm install
     build:
       commands:
-        - PUBLIC_URL=https://assets-staging.causeandcuisine.com/dist/ yarn run build
+        - PUBLIC_URL=https://assets-staging.causeandcuisine.com/dist/ npm run build
     postBuild:
         commands:
         - aws s3 rm s3://cause-cuisine-site-assets/ --recursive
-        - yarn run upload-assets   
+        - npm run upload-assets   
   artifacts:
     baseDirectory: dist
     files:
