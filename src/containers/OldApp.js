@@ -108,7 +108,7 @@ class OldApp extends Component {
 
         <section className="banner-area">
           <img
-            src="../assets/images/banner-img.jpg" //"static/media/banner-img.jpg" //"./dist/static/media/banner-img.jpg"
+            src="assets/images/banner-img.jpg" //"static/media/banner-img.jpg" //"./dist/static/media/banner-img.jpg"
             alt="banner image"
           />
 

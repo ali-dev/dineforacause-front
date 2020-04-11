@@ -1,6 +1,6 @@
 import React from 'react';
 // import Amplify from 'aws-amplify';
-// import { withAuthenticator } from 'aws-amplify-react';
+import { withAuthenticator } from 'aws-amplify-react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -68,9 +68,9 @@ const Index = () => {
 ReactDOM.render(routing, document.getElementById('root'));
 
 // registerServiceWorker();
-// let componentToRender = App;
-// if (!isReleased) {
-//   componentToRender = ComingSoon;
-// }
+let componentToRender = App;
+if (!isReleased) {
+  componentToRender = ComingSoon;
+}
 // export default componentToRender; 
 export default withAuthenticator(componentToRender, true);
