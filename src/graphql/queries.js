@@ -125,8 +125,8 @@ export const removeGuest = `mutation removeGuest($guestId: String!, $eventId: St
 `;
 
 
-export const addCharge = `mutation addCharge($token: String!, $eventId: String!, $guestId: String!, $causeId: String!, $amount: Int, $rsvp: String!, $guest: String!) {
-    addCharge(token: $token, eventId: $eventId, guestId: $guestId, causeId: $causeId, rsvp: $rsvp, amount: $amount, guest: $guest) {
+export const addCharge = `mutation addCharge($eventId: String!, $guestId: String!, $causeId: String!, $amount: Int, $willDonate: Boolean!, $guest: String!) {
+    addCharge(eventId: $eventId, guestId: $guestId, causeId: $causeId, amount: $amount, guest: $guest, willDonate: $willDonate) {
       body
     }
   }

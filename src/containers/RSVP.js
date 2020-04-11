@@ -1,15 +1,18 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 // import StripeCheckout from "react-stripe-checkout";
+=======
+>>>>>>> develop
 import { requestDataForRSVP } from '../actions';
 import { connect } from 'react-redux';
-import Payment from "../components/Payment"
+import Payment from "../components/Payment";
+import { Message } from 'semantic-ui-react'
 
 const mapStateToProps = state => {
   return {
     event: state.requestDataForRSVP.event, 
     guestId: state.requestDataForRSVP.guestId, 
     guest: state.requestDataForRSVP.guest, 
-    
     isPending: state.requestDataForRSVP.isPending
   };
 };
@@ -25,24 +28,14 @@ class RSVP extends Component {
     this.props.onRequestEvent(this.props.match.params.viewId, this.props.match.params.guestId);
   }
 
-  // onToken = token => {
-  //   client
-  //     .mutate({
-  //       mutation: gql(addCharge),
-  //       variables: {
-  //         token: JSON.stringify(token)
-  //       }
-  //     })
-  //     .then(data => alert(`We are in business, ${data.email}`))
-  //     .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
-  // };
-
   render() {
-    const { event, guest, guestId, isPending  } = this.props;
+    const { event, guest, guestId, isPending } = this.props;
     if (isPending === true) {
       return (<div></div>);
     } else {
-    console.log(guestId);
+    if (!guest || !event) {
+      window.location.href = '/';
+    }  
     let causeDetails = {};
     if (event.causeDetails !== undefined) {
       causeDetails = JSON.parse(event.causeDetails);
@@ -96,7 +89,15 @@ class RSVP extends Component {
           
           
             <article data-name="article-full-bleed-background" >
-              
+                <Message icon='check circle' hidden={guest.rsvp_status==='pending'}
+                    success
+                    header="You Responded to this event"
+                    // content="You can change your status at any time"
+                    list={[
+                      guest.donated === true ? `You donated $${guest.donation_amount} to this cause`: 'You can still donate to this cause',
+                      `You can change your status at any time; Your current status is ${(guest.rsvp_status === 'attending')? 'Attending': 'Not Attending'}`,
+                    ]}
+                />  
                 <section className="bg-white w-80 center ">
                   <div className="fl w-60 pt5 pa3 pa2-ns   bg-white     ">
                   <h3 className="f3 green">Guest Details</h3>

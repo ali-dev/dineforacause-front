@@ -4,11 +4,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import client from "../api/appSyncClient";
 import gql from "graphql-tag";
 import { addCharge } from "../graphql/queries";
-import trigger  from '../graphql/triggers'
 import {AMOUNT_OPTIONS, RSVP_OPTIONS, CARD_ELEMENT_OPTIONS}  from "../utils/lists.js"
 
-// import {trigger} from "../"
-import { connect } from 'react-redux';
 
 import {
   CardElement,
@@ -16,8 +13,7 @@ import {
   ElementsConsumer
 } from "@stripe/react-stripe-js";
 import "./stripe.css";
-// Custom styling can be passed to options when creating an Element.
-
+const stripePromise = loadStripe("pk_test_uo2pgWCmS9OklnawX92zOec600IDnTkg42");
 
 
 
@@ -41,6 +37,7 @@ class CheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.state = DEFAULT_STATE;
+    this.state.rsvp = this.props.guest.rsvp_status;
   }
 
   toggle = () => {
@@ -74,74 +71,120 @@ class CheckoutForm extends Component {
   handleSubmit = async e => {
     e.preventDefault();
 
+   
+
     const { stripe, elements, event, guestId, guest } = this.props;
-    alert(this.state.willDonate);
+    const { amount, willDonate, rsvp }  = this.state;
+    // Stripe.js has not loaded yet. Make sure to disable. form submission until Stripe.js has loaded.
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
+    const cardElement = elements.getElement(CardElement);
+    const newGuestInfo = {...guest};
+    newGuestInfo.rsvp_status = rsvp;
+              
+    if (willDonate === true) {
+      if (!amount) {
+        this.setState({ "error": 'If you are donating, you must complete payment info'});
+        return;
+      }
+      newGuestInfo.donated = true;
+      newGuestInfo.donation_amount = amount; //@todo add validation for amount
 
-    const newGuestInfo = {...this.props.guest};
-    newGuestInfo.rsvp_status = this.state.rsvp;
-    const guestData = {
-      'eventId': event.id,
-      'guestId': guestId,
-      'guestDetails': JSON.stringify(newGuestInfo)
-    }
-
-
-
-    if (this.state.willDonate === true) {
-      const cardElement = elements.getElement(CardElement);
       const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: "card",
-        // amount: this.state.amount,
-        card: cardElement
-      });
-      const { token } = await stripe.createToken(cardElement);
-      // console.log(token);
-      if (token) {
-        // @todo: figure out how to send all of this through addCharge. Added placeholder params for now
-        client
+          type: "card",
+          // amount: this.state.amount,
+          card: cardElement
+        });
+      if (error) 
+        return;  
+    }  
+
+
+    
+      // todo remove
+      // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      //   type: "card",
+      //   // amount: this.state.amount,
+      //   card: cardElement
+      // });
+      
+      // const { token } = await stripe.createToken(cardElement);
+      
+      // if (token) {
+      //   params.token = JSON.stringify(token);
+      // }
+      //   console.log("[PaymentMethod]", paymentMethod);
+
+        
+     
+
+    
+
+
+
+
+    const params = {
+      eventId: event.id,
+      guestId: guestId,
+      causeId: 'causeId', // @todo pass that from parent if needed
+      amount: amount,
+      willDonate: willDonate,
+      guest: JSON.stringify(newGuestInfo)
+    }
+    
+
+    client
           .mutate({
             mutation: gql(addCharge),
-            variables: {
-              token: JSON.stringify(token),
-              eventId: event.id,
-              guestId: guestId,
-              causeId: 'causeId', // @todo pass that from parent if needed
-              amount: this.state.amount,
-              rsvp: 'rsvp', // @rodo probably not needed if we pass guest
-              guest: JSON.stringify(guest) // @todo update mutation if guest is needed
-            }
+            variables: params
           })
-          .then(data => alert(`We are in business, ${data.email}`))
-          .catch(e => console.log(`${e} token = ${JSON.stringify(token)}`));
-        //   console.log("[PaymentMethod]", paymentMethod);
-        } else if (error) {
-          console.log("[error]", error);
-          this.setState({ "error": error.message });
-        }
+          .then(async response => {
+            const data = JSON.parse(response.data.addCharge.body); 
+            
+            if (data.paymentIntent) {
+              const result = await stripe.confirmCardPayment(data.paymentIntent.client_secret, {
+                receipt_email: 'ali@causeandcuisine.com',  
+                payment_method: {
+                  // customer: guestId,
+                  card: cardElement,
+                  type: 'card',
+                  metadata: {
+                    eventId: event.id,
+                    guestId: guestId,
+                    causeId: 'causeId' // @todo update
+                  },
+                  billing_details: {
+                    name: newGuestInfo.name,
+                    email: newGuestInfo.email,
+                  }
+                }
+              })
 
-    } else {
-      // @todo: just redirect to thank you
-    }
-    
-
-    // await trigger
-    //   .addGuest(guestData)
-    //   // @todo change addGuest response to return only this guest's info so it can be used in invitation
-    //   .then(async (data)  => {
-    //     // Get a reference to a mounted CardElement. Elements knows how
-    //     // to find your CardElement because there can only ever be one of
-    //     // each type of element.
-        
-    //   });
-    
-    
-    
-
+              // @TODO: show error message 
+              // if (result.error) {
+              //   // Show error to your customer (e.g., insufficient funds)
+              //   console.log(result.error.message);
+              // } else {
+              //   // The payment has been processed!
+              //   if (result.paymentIntent.status === 'succeeded') {
+              //     alert('Success');
+              //     // Show a success message to your customer
+              //     // There's a risk of the customer closing the window before callback
+              //     // execution. Set up a webhook or plugin to listen for the
+              //     // payment_intent.succeeded event that handles any business critical
+              //     // post-payment actions.
+              //   }
+              // }
+            }
+            window.location.reload(false);
+          }).catch(e => console.log(`${e}`));
+    // else if (error) {
+    //   console.log("[error]", error);
+    //   this.setState({ "error": error.message });
+    // }
+      
+      
   };
 
   render() {
@@ -157,6 +200,7 @@ class CheckoutForm extends Component {
       // email,
       // phone
     } = this.state;
+    const donated = this.props.guest.donated;
     return (  
       <div className="bg-light-gray w-100 center  ">
         <h3 className="f3 green">RSVP & Donate</h3>
@@ -172,10 +216,11 @@ class CheckoutForm extends Component {
             />
              
             <br />
-            <Radio label="Donating?" toggle checked={willDonate} onClick={this.toggle} value={this}/>
+            <Radio label="Donating?" toggle disabled={(donated === true)} checked={donated === true ? false : willDonate} onClick={this.toggle} value={this}/>
             <br />
             <br />
-            <section hidden={!willDonate}>
+           
+            <section hidden={!willDonate || (this.props.guest.donated === true) } >  
             <CardElement 
               className=""
               id="card-element"
@@ -219,7 +264,9 @@ const InjectedCheckoutForm = (data) => {
     </ElementsConsumer>
   );
 };
-const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+
+
+// const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 
 const Payment = (data, ) => {
   return (
