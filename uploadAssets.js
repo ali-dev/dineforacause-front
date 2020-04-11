@@ -10,7 +10,7 @@ s3 = new AWS.S3({apiVersion: '2006-03-01'});
 // call S3 to retrieve upload file to specified bucket
 var uploadParams = {Bucket: 'cause-cuisine-site-assets', Key: '', Body: '', ACL: 'public-read', CacheControl: 'max-age=31536000'};
 
-const directories = ['build/assets/', 'build/static/css/', 'build/static/js/', 'build/static/media/', 'build/']
+const directories = ['dist/assets/css/', 'dist/static/media/','dist/',  'build/assets/', 'build/static/css/', 'build/static/js/', 'build/static/media/', 'build/']
 
 // const additionalFiles = ['asset-manifest.json', 'favicon.ico', 'index.html', 'manifest.json', 'service-worker.js']
 // var files = fs.readdirSync('./build/');
@@ -28,6 +28,9 @@ for (let i = 0; i < directories.length; i++ ) {
             
         const file = files[f];
         if (directory === 'build' && (file === 'static' || file === 'assets')) {
+            continue;
+        }
+        if (directory === 'dist' && (file === 'static' || file === 'assets')) {
             continue;
         }
         const fullPath = directory+file;
