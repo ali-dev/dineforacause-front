@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-// import StripeCheckout from "react-stripe-checkout";
-=======
->>>>>>> develop
 import { requestDataForRSVP } from '../actions';
 import { connect } from 'react-redux';
 import Payment from "../components/Payment";
