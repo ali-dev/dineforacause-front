@@ -30,13 +30,9 @@
     "uuid": "^7.0.2"
   },
   "scripts": {
-<<<<<<< HEAD
     "start": "webpack-dev-server --mode production --open",
-=======
-    "start": "react-scripts start",
->>>>>>> d0682dcb06defbb91146b8b458dd29a620a2b45e
     "start-prod": "NODE_ENV=production react-scripts start",
-    "build": "react-scripts build",
+    "build": "webpack --mode production",
     "upload-assets": "node ./uploadAssets.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

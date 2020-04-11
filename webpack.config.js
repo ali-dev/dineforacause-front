@@ -49,27 +49,29 @@ module.exports = (_env, argv) => {
             "css-loader",
           ],
         },
-        {
-          test: /\.(png|jpe?g|gif)$/i,
-          use: {
-            loader: "url-loader",
-            options: {
-              limit: 8192,
-              outputPath: 'static/assets/',
-              publicPath: 'static/assets/',
-              name: "[name].[ext]",
-            },
-          },
-        },
+        // {
+        //   test: /\.(png|jpeg|jpg|gif)$/i,
+        //   use: {
+        //     loader: "url-loader",
+        //     options: {
+        //       limit: 8192,
+        //       outputPath: 'assets/images/',
+        //       publicPath: 'assets/images/',
+        //       name: "[name].[ext]",
+        //     },
+        //   },
+        // },
         {
           test: /\.svg$/,
           use: ["@svgr/webpack"],
         },
         {
-          test: /\.(eot|otf|ttf|woff|woff2)$/,
+          test: /\.(eot|otf|ttf|woff|woff2|png|jpg|gif)$/,
           loader: require.resolve("file-loader"),
           options: {
-            name: "static/media/[name].[hash:8].[ext]",
+            outputPath: 'assets/images/',
+            publicPath: 'assets/images/',
+            name: "[name].[ext]",
           },
         },
       ],
