@@ -4,7 +4,7 @@ import { setSearchField, requestCauses } from "../actions";
 // import './App.css';
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
-
+// import img from "./static/assets/banner-img"; //static/assets/banner-img.4538277e.jpg
 // import {Link} from 'react-router-dom';
 // import Header from '../components/Header'
 // import CardList from '../components/CardList'
@@ -67,7 +67,8 @@ class OldApp extends Component {
         <header className={this.state.headerClass}>
           <div className="main-wrapper">
             <a className="lft logo" href="index.html">
-              <img src={require("../assets/images/logo.png")} alt="logo" />
+              <img src="assets/images/logo.png" alt="logo" />
+              {/* require("../assets/images/logo.png")  */}
             </a>
 
             <nav className="lft">
@@ -107,7 +108,7 @@ class OldApp extends Component {
 
         <section className="banner-area">
           <img
-            src={require("../assets/images/banner-img.jpg")}
+            src="../assets/images/banner-img.jpg" //"static/media/banner-img.jpg" //"./dist/static/media/banner-img.jpg"
             alt="banner image"
           />
 
