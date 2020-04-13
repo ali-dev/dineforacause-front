@@ -34,8 +34,8 @@ module.exports = (_env, argv) => {
         // publicPath: 'static/media'
       },
     plugins: [
-          new Dotenv(),
-        //   definePlugin,
+        //   new Dotenv(),
+          definePlugin,
           new MiniCssExtractPlugin({
             filename: "assets/css/[name].[contenthash:8].css",
             chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
