@@ -46,7 +46,9 @@ module.exports = (_env, argv) => {
           }),
           htmlPlugin,
       ].filter(Boolean),
-      
+    devServer: {
+        historyApiFallback: true
+    },  
     module: {
       rules: [
         {
