@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import CreateEventForm from '../forms/CreateEventForm'
-import 'tachyons';
-
-  
+// import 'tachyons';
+import 'tachyons/css/tachyons.min.css'
 
 class Event extends Component {
   

@@ -42,16 +42,12 @@ module.exports = (_env, argv) => {
         // publicPath: 'static/media'
       },
     plugins: [
-          envVars, 
-        //   new Dotenv(),
-        //   definePlugin,
+          isProduction ? envVars : new Dotenv(), 
           new MiniCssExtractPlugin({
             filename: "assets/css/[name].[contenthash:8].css",
             chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
           }),
           htmlPlugin,
-        //   definePlugin,
-          
       ].filter(Boolean),
       
     module: {
@@ -65,7 +61,7 @@ module.exports = (_env, argv) => {
         },
         {
           test: /\.css$/,
-          exclude: /node_modules/,
+        //   exclude: /node_modules/,
           use: [
             //  "extract-loader", 
             MiniCssExtractPlugin.loader, //isProduction ? MiniCssExtractPlugin.loader : "style-loader" 
