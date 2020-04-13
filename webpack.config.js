@@ -28,8 +28,7 @@ module.exports = (_env, argv) => {
   return {
     
     entry: {
-        app: './src/index.js',
-        event: './src/containers/Event.js'
+        app: './src/index.js'
      },
     devServer: {
         // contentBase: isProduction ? './dist': './src',
