@@ -73,7 +73,7 @@ class EventCauses extends Component {
     const { causeList } = this.props;
     const { cause } = this.state;
     const imagePath = "https://dfac-main.s3.amazonaws.com/app";
-
+    //@todo handle link to s3 better
     let causes = [];
     for (let i = 0; i < causeList.length; i++) {
       causes.push({
@@ -85,7 +85,7 @@ class EventCauses extends Component {
 
     return (
       <div>
-        <Form.Group widths="equal">
+        <Form.Group widths="equal" className="form-group">
         
           <Form.Field required>
             <label>Cause</label>  
@@ -122,8 +122,8 @@ class EventCauses extends Component {
         </Form.Group>
 
         {cause !== false ? (
-          <div>
-            <div className="fl w-50 w-100-m w-50-l pa2">
+          <div className="dib">
+            <div className="fl w-50 w-100-m w-50-l pa2 ">
               <img
                 className="w-100 db outline black-10"
                 alt="cause"

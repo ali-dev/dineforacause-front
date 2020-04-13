@@ -74,16 +74,7 @@ class CreateEventForm extends Component {
   render() {
     return (
       <div>
-        <Form.Group widths="equal">
-          <Form.Field required>
-            <label>Your Name</label>
-            <input onChange={this.handleChangeInput} value={this.state.hostName} name="hostName" />
-          </Form.Field>
-          <Form.Field required>
-            <label>Email</label>
-            <input onChange={this.handleChangeInput} value={this.state.hostEmail} name="hostEmail" />
-          </Form.Field>
-        </Form.Group>
+        <Form.Group widths="equal" className="form-group">
         <Form.Field required>
           <label>Event Name</label>
           <input
@@ -93,8 +84,18 @@ class CreateEventForm extends Component {
             placeholder="Add a short, clear name"
           />
         </Form.Field>
-
-        <Form.Group widths="equal">
+          <Form.Field required>
+            <label>Your Name</label>
+            <input onChange={this.handleChangeInput} value={this.state.hostName} name="hostName" />
+          </Form.Field>
+          <Form.Field required>
+            <label>Email</label>
+            <input onChange={this.handleChangeInput} value={this.state.hostEmail} name="hostEmail" />
+          </Form.Field>
+        
+        
+        </Form.Group>
+        <Form.Group widths="equal" className="form-group">
           <Form.Field required>
             <label>Date</label>
 
