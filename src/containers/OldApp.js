@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { setSearchField, requestCauses } from "../actions";
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
-// import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 // import Header from '../components/Header'
 // import CardList from '../components/CardList'
 // import SearchBox from '../components/SearchBox'
@@ -102,11 +102,10 @@ class OldApp extends Component {
                 </li>
               </ul>
             </nav>
-
-            <a href="/event/create" className="btn rgt">
+            <Link to="/event/create" className="btn rgt">
               <img src={userIcon} alt="image" />
               <span>Create Event</span>
-            </a>
+            </Link>
 
             <div className="hamber-menu">
               <span></span>
