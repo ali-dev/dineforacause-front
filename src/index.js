@@ -60,9 +60,7 @@ if (isReleased) {
   )
     
 }
-const Index = () => {
-  return <div>Hello React!</div>;
-};
+
 
 ReactDOM.render(routing, document.getElementById('root'));
 
