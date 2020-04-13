@@ -17,7 +17,6 @@ import ComingSoon from './containers/ComingSoon';
 // import EventManage from './containers/EventManage';
 // import registerServiceWorker from './registerServiceWorker';
 import { requestCauses, requestCause, searchCauses, requestEventForView, requestEventForEdit, requestDataForRSVP } from './reducers'
-// import png from './image.png';
 
 import { Router } from 'react-router';
 import { Route} from 'react-router-dom';
