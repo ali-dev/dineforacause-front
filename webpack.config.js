@@ -46,6 +46,12 @@ module.exports = (_env, argv) => {
           }),
           htmlPlugin,
       ].filter(Boolean),
+    optimization: {
+      splitChunks: {
+        // include all types of chunks
+        chunks: 'all'
+      }
+    },
     devServer: {
         historyApiFallback: true
     },
