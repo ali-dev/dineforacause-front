@@ -31,8 +31,9 @@
     "uuid": "^7.0.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "start-prod": "webpack-dev-server --mode production --open",
+    "start": "webpack-dev-server --mode development",
+    "start-prod": "webpack-dev-server --mode production",
+    "watch": "webpack watch",
     "build": "webpack --mode production",
     "upload-assets": "node ./uploadAssets.js",
     "test": "react-scripts test",

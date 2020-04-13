@@ -13,17 +13,19 @@ module.exports = (_env, argv) => {
   const isProduction = argv.mode === "production";
   return {
     
-    // entry: {
-    //     app: './src/index.js',
-    //  },
+    entry: {
+        app: './src/index.js',
+     },
     devServer: {
-        contentBase: isProduction ? './dist': './src',
+        // contentBase: isProduction ? './dist': './src',
+        contentBase: path.resolve(__dirname, 'dist')
     },
-    // output: {
+    output: {
         // path: path.resolve('dist'),
-        // filename: 'bundled.js',
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundled.js',
         // publicPath: 'static/media'
-    //   },
+      },
     plugins: [
           new MiniCssExtractPlugin({
             filename: "assets/css/[name].[contenthash:8].css",
@@ -44,9 +46,13 @@ module.exports = (_env, argv) => {
         },
         {
           test: /\.css$/,
+          exclude: /node_modules/,
           use: [
-            isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+            //  "extract-loader", 
+            MiniCssExtractPlugin.loader, //isProduction ? MiniCssExtractPlugin.loader : "style-loader" 
             "css-loader",
+            // 'postcss-loader'
+            // "resolve-url",
           ],
         },
         // {
@@ -66,7 +72,7 @@ module.exports = (_env, argv) => {
           use: ["@svgr/webpack"],
         },
         {
-          test: /\.(eot|otf|ttf|woff|woff2|png|jpg|gif)$/,
+          test: /\.(png|jpg|gif)$/,
           loader: require.resolve("file-loader"),
           options: {
             outputPath: 'assets/images/',
@@ -74,6 +80,18 @@ module.exports = (_env, argv) => {
             name: "[name].[ext]",
           },
         },
+        // {
+        //     test: /\.(eot|otf|ttf|woff|woff2)$/,
+        //     loader: "file-loader",
+        //     options: {
+        //       outputPath: 'assets/fonts/',
+        //       //   publicPath: './assets/fonts/',
+        //       publicPath: '../fonts/',
+              
+        //       name: "[name].[ext]",
+        //     },
+        //   },
+        { test: /\.(woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' } 
       ],
     }
   };

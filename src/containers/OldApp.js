@@ -12,11 +12,17 @@ import "../assets/css/responsive.css";
 
 import banner from '../assets/images/banner-img.jpg';
 import logo from '../assets/images/logo.png';
-import downImage from '../assets/images/down-img.png'
-import stepOne from '../assets/images/step-1.png'
-import stepTwo from '../assets/images/step-2.png'
-import stepThree from '../assets/images/step-3.png'
-
+import downImage from '../assets/images/down-img.png';
+import stepOne from '../assets/images/step-1.png';
+import stepTwo from '../assets/images/step-2.png';
+import stepThree from '../assets/images/step-3.png';
+import plate from '../assets/images/plate.png';
+import aboutBg from '../assets/images/about-bg.png';
+import aboutLeft from '../assets/images/abut-left-img.png';
+import aboutMobile from '../assets/images/about-mobile-img.png';
+import colorLine from '../assets/images/color-line.png';
+import footerLogo from '../assets/images/footer-logo.png';
+import userIcon from "../assets/images/user(1).svg";
 
 // parameter state comes from index.js provider store state(rootReducers)
 const mapStateToProps = (state) => {
@@ -100,7 +106,7 @@ class OldApp extends Component {
             </nav>
 
             <a href="/event/create" className="btn rgt">
-              <img src={require("../assets/images/user(1).svg")} alt="image" />
+              <img src={userIcon} alt="image" />
               <span>Sign Up</span>
             </a>
 
@@ -214,13 +220,13 @@ class OldApp extends Component {
 {/* ABOUT US  */}
 <section className="about-us">
 
-<img className="plate" src={require("../assets/images/plate.png")} alt="image" />
+<img className="plate" src={plate} alt="image" />
 
-<img className="about-bg" src={require("../assets/images/about-bg.png")} alt="iamges" />
+<img className="about-bg" src={aboutBg} alt="iamges" />
 
-  <img className="heart-img" src={require("../assets/images/abut-left-img.png")} alt="images" />
+  <img className="heart-img" src={aboutLeft} alt="images" />
 
-<img className="aboout-mobile" src={require("../assets/images/about-mobile-img.png")} alt="images" />
+<img className="aboout-mobile" src={aboutMobile} alt="images" />
 
 <div className="main-wrapper about-inner">
 
@@ -253,14 +259,14 @@ class OldApp extends Component {
   </main>
 
 
-<img src={require("../assets/images/color-line.png")} alt="line" className="colored-line" />  
+<img src={colorLine} alt="line" className="colored-line" />  
 <footer>
 
 <div className="main-wrapper">
 
       <figure className="lft">
 
-          <a href="index.html"><img src={require("../assets/images/footer-logo.png")} alt="image" /></a>
+          <a href="index.html"><img src={footerLogo} alt="image" /></a>
 
           <figcaption>
 
