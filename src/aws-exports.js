@@ -3,9 +3,9 @@
 // console.log(process.env.REACT_APP_APPSYNC_URL);
 const awsmobile =  {
     "aws_appsync_graphqlEndpoint": process.env.REACT_APP_APPSYNC_URL,
+    "aws_appsync_apiKey": process.env.REACT_APP_APPSYNC_API_KEY,
     "aws_appsync_region": "us-east-1",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": process.env.REACT_APP_APPSYNC_API_KEY,
 };
 
 export default awsmobile;
