@@ -37,6 +37,7 @@ module.exports = (_env, argv) => {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundled.js',
+        publicPath: '/',
       },
     plugins: [
           isProduction ? envVars : new Dotenv(), 
