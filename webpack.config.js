@@ -48,7 +48,7 @@ module.exports = (_env, argv) => {
       ].filter(Boolean),
     devServer: {
         historyApiFallback: true
-    },  
+    },
     module: {
       rules: [
         {
@@ -65,13 +65,13 @@ module.exports = (_env, argv) => {
             "css-loader",
           ],
         },
+        // {
+        //   test: /\.svg$/,
+        //   use: ["@svgr/webpack"],
+        // },
         {
-          test: /\.svg$/,
-          use: ["@svgr/webpack"],
-        },
-        {
-          test: /\.(png|jpg|gif)$/,
-          loader: require.resolve("file-loader"),
+          test: /\.(png|jpg|gif|svg)$/,
+          loader: 'url-loader?limit=100000', //require.resolve("file-loader")
           options: {
             outputPath: 'assets/images/',
             // publicPath: 'assets/images/',

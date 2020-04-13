@@ -51,15 +51,17 @@ class CreateEventForm extends Component {
 	
 	render() {
 		return (
+			
+			// className="form-wrapper"
 			<Form size='small'>
-				<section className="bg-white w-80 center  ">
-					<div className="fl w-50 pt5 pa3 pa2-ns   bg-white   ">
-						<h3 className="f3 green">Choose your Cause</h3>
+				<section className="bg-white w-80 center">
+					<div className="fl w-50 pt5 pa3 pa2-ns   bg-white  event-part ">
+						<h3 className="h6 pa3">Choose your Cause</h3>
 						<EventCauses onChange={this.handleFieldChange} />
 					</div>
 
-					<div className="fl w-50  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">
-						<h3 className="f3 green">Event Details</h3>
+					<div className="fl w-50  pt5 o-90 pa3 pa2-ns  pb4 bg-white event-part ">
+						<h3 className="h6 pa3">Event Details</h3>
 						<EventDetails onChange={this.handleFieldChange} />
 					</div>
 					 <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button>
