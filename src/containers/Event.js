@@ -40,8 +40,8 @@ class Event extends Component {
     </div>
   </header>
     <div className="extra-div gry-bg"></div>
-    <main>
-      <div className="event-area">
+    <main >
+      <div className="event-area ">
             {/* <div className=""> */}
               {/* <header className="bb b--black-40 pv4 bg-white">
                 <h3   className="f2 fw7 ttu tracked lh-title mt0 mb3  ml2 mr2 ">Create Event</h3>
