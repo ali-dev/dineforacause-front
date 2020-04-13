@@ -1,11 +1,18 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const Dotenv = require('dotenv-webpack');
-const path = require('path')
+const path = require('path');
+const webpack = require('webpack');
 const htmlPlugin = new HtmlWebPackPlugin({
     template: path.resolve(__dirname, "src/index.html"),
     inject: true
 });
+
+const definePlugin = new webpack.DefinePlugin({
+    'process.env.REACT_APP_APPSYNC_URL': process.env.REACT_APP_APPSYNC_URL,
+    'process.env.REACT_APP_APPSYNC_API_KEY': process.env.REACT_APP_APPSYNC_API_KEY,
+    'process.env.REACT_APP_IS_RELEASED': process.env.REACT_APP_IS_RELEASED,
+  });
 
 
 // module.exports = {
@@ -27,12 +34,15 @@ module.exports = (_env, argv) => {
         // publicPath: 'static/media'
       },
     plugins: [
+          new Dotenv(),
+          definePlugin,
           new MiniCssExtractPlugin({
             filename: "assets/css/[name].[contenthash:8].css",
             chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
           }),
           htmlPlugin,
-          new Dotenv()
+        //   definePlugin,
+          
       ].filter(Boolean),
       
     module: {
@@ -41,7 +51,7 @@ module.exports = (_env, argv) => {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader",
+            loader: "babel-loader"            
           },
         },
         {
