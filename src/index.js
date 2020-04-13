@@ -1,5 +1,4 @@
 import React from 'react';
-// import Amplify from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';

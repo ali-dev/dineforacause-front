@@ -16,10 +16,9 @@ const envVars = new webpack.EnvironmentPlugin({
   });
 
 
+  // @todo maybe needed for public url?
 // const definePlugin = new webpack.DefinePlugin({
-//     'process.env.REACT_APP_APPSYNC_URL': process.env.REACT_APP_APPSYNC_URL,
-//     'process.env.REACT_APP_APPSYNC_API_KEY': process.env.REACT_APP_APPSYNC_API_KEY,
-//     'process.env.REACT_APP_IS_RELEASED': process.env.REACT_APP_IS_RELEASED,
+//     'process.env.PUBLIC_URL': process.env.PUBLIC_URL,
 //   });
 
 
@@ -36,10 +35,8 @@ module.exports = (_env, argv) => {
         contentBase: path.resolve(__dirname, 'dist')
     },
     output: {
-        // path: path.resolve('dist'),
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundled.js',
-        // publicPath: 'static/media'
       },
     plugins: [
           isProduction ? envVars : new Dotenv(), 
@@ -61,27 +58,11 @@ module.exports = (_env, argv) => {
         },
         {
           test: /\.css$/,
-        //   exclude: /node_modules/,
           use: [
-            //  "extract-loader", 
             MiniCssExtractPlugin.loader, //isProduction ? MiniCssExtractPlugin.loader : "style-loader" 
             "css-loader",
-            // 'postcss-loader'
-            // "resolve-url",
           ],
         },
-        // {
-        //   test: /\.(png|jpeg|jpg|gif)$/i,
-        //   use: {
-        //     loader: "url-loader",
-        //     options: {
-        //       limit: 8192,
-        //       outputPath: 'assets/images/',
-        //       publicPath: 'assets/images/',
-        //       name: "[name].[ext]",
-        //     },
-        //   },
-        // },
         {
           test: /\.svg$/,
           use: ["@svgr/webpack"],
@@ -95,17 +76,6 @@ module.exports = (_env, argv) => {
             name: "[name].[ext]",
           },
         },
-        // {
-        //     test: /\.(eot|otf|ttf|woff|woff2)$/,
-        //     loader: "file-loader",
-        //     options: {
-        //       outputPath: 'assets/fonts/',
-        //       //   publicPath: './assets/fonts/',
-        //       publicPath: '../fonts/',
-              
-        //       name: "[name].[ext]",
-        //     },
-        //   },
         { test: /\.(woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' } 
       ],
     }

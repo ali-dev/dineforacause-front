@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setSearchField, requestCauses } from "../actions";
-// import './App.css';
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
-// import img from "./static/assets/banner-img"; //static/assets/banner-img.4538277e.jpg
 // import {Link} from 'react-router-dom';
 // import Header from '../components/Header'
 // import CardList from '../components/CardList'
@@ -107,7 +105,7 @@ class OldApp extends Component {
 
             <a href="/event/create" className="btn rgt">
               <img src={userIcon} alt="image" />
-              <span>Sign Up</span>
+              <span>Create Event</span>
             </a>
 
             <div className="hamber-menu">
