@@ -8,11 +8,19 @@ const htmlPlugin = new HtmlWebPackPlugin({
     inject: true
 });
 
-const definePlugin = new webpack.DefinePlugin({
-    'process.env.REACT_APP_APPSYNC_URL': process.env.REACT_APP_APPSYNC_URL,
-    'process.env.REACT_APP_APPSYNC_API_KEY': process.env.REACT_APP_APPSYNC_API_KEY,
-    'process.env.REACT_APP_IS_RELEASED': process.env.REACT_APP_IS_RELEASED,
+
+const envVars = new webpack.EnvironmentPlugin({
+    REACT_APP_APPSYNC_URL: process.env.REACT_APP_APPSYNC_URL, // use 'development' unless process.env.NODE_ENV is defined
+    REACT_APP_APPSYNC_API_KEY: process.env.REACT_APP_APPSYNC_API_KEY,
+    REACT_APP_IS_RELEASED: process.env.REACT_APP_IS_RELEASED,
   });
+
+
+// const definePlugin = new webpack.DefinePlugin({
+//     'process.env.REACT_APP_APPSYNC_URL': process.env.REACT_APP_APPSYNC_URL,
+//     'process.env.REACT_APP_APPSYNC_API_KEY': process.env.REACT_APP_APPSYNC_API_KEY,
+//     'process.env.REACT_APP_IS_RELEASED': process.env.REACT_APP_IS_RELEASED,
+//   });
 
 
 // module.exports = {
@@ -34,6 +42,7 @@ module.exports = (_env, argv) => {
         // publicPath: 'static/media'
       },
     plugins: [
+          envVars, 
         //   new Dotenv(),
         //   definePlugin,
           new MiniCssExtractPlugin({
