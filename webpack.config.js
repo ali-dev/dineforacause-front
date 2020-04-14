@@ -53,7 +53,7 @@ module.exports = (_env, argv) => {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "[name].js",
-        publicPath: isProduction ? 'https://assets-staging.causeandcuisine.com/dist/' : path.resolve(__dirname, '/'),
+        // publicPath: isProduction ? 'https://assets-staging.causeandcuisine.com/dist/' : path.resolve(__dirname, '/'),
       },
     plugins: [
           isProduction ? envVars : new Dotenv(), 
