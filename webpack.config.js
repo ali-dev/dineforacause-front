@@ -53,10 +53,10 @@ module.exports = (_env, argv) => {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "[name].js",
-        publicPath: isProduction ? path.resolve(__dirname, '/') : path.resolve(__dirname, '/'),
+        publicPath: isProduction ? 'https://assets-staging.causeandcuisine.com/dist/' : path.resolve(__dirname, '/'),
       },
     plugins: [
-          isProduction ? new Dotenv() : new Dotenv(), 
+          isProduction ? envVars : new Dotenv(), 
           new MiniCssExtractPlugin({
             filename: "assets/css/[name].[contenthash:8].css",
             chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
