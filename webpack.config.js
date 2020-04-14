@@ -3,10 +3,26 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
 const webpack = require('webpack');
+const HtmlCriticalWebpackPlugin = require("html-critical-webpack-plugin");
+
 const htmlPlugin = new HtmlWebPackPlugin({
     template: path.resolve(__dirname, "src/index.html"),
     inject: true
 });
+
+const criticalPlugin = new HtmlCriticalWebpackPlugin({
+  base: path.resolve(__dirname, 'dist'),
+  src: 'index.html',
+  dest: 'index.html',
+  inline: true,
+  minify: true,
+  extract: true,
+  width: 375,
+  height: 565,
+  penthouse: {
+    blockJSRequests: false,
+  }
+})
 
 
 const envVars = new webpack.EnvironmentPlugin({
@@ -37,7 +53,7 @@ module.exports = (_env, argv) => {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "[name].js",
-        // publicPath: '/',
+        publicPath: isProduction ? 'https://assets-staging.causeandcuisine.com/dist/' : path.resolve(__dirname, '/'),
       },
     plugins: [
           isProduction ? envVars : new Dotenv(), 
@@ -46,6 +62,7 @@ module.exports = (_env, argv) => {
             chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
           }),
           htmlPlugin,
+          // criticalPlugin
       ].filter(Boolean),
     optimization: {
       splitChunks: {
@@ -77,7 +94,7 @@ module.exports = (_env, argv) => {
         //   use: ["@svgr/webpack"],
         // },
         {
-          test: /\.(png|jpg|gif|svg)$/,
+          test: /\.(png|jpg|jpf|gif|svg)$/,
           loader: 'url-loader', //require.resolve("file-loader")
           options: {
             outputPath: 'assets/images/',

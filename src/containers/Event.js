@@ -6,7 +6,7 @@ import logo from '../assets/images/logo.png';
 import userIcon from "../assets/images/user(1).svg";
 import eventCurve from "../assets/images/event-carv.png";
 import colorLine from '../assets/images/color-line.png';
-import footerLogo from '../assets/images/footer-logo.png';
+import footerLogo from '../assets/images/footer-logo.jpg';
 class Event extends Component {
   
 

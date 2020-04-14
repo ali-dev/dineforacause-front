@@ -19,7 +19,7 @@ import aboutBg from '../assets/images/about-bg.png';
 import aboutLeft from '../assets/images/abut-left-img.png';
 import aboutMobile from '../assets/images/about-mobile-img.png';
 import colorLine from '../assets/images/color-line.png';
-import footerLogo from '../assets/images/footer-logo.png';
+import footerLogo from '../assets/images/footer-logo.jpg';
 import userIcon from "../assets/images/user(1).svg";
 
 // parameter state comes from index.js provider store state(rootReducers)
