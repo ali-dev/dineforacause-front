@@ -36,8 +36,8 @@ module.exports = (_env, argv) => {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundled.js',
-        publicPath: '/',
+        filename: "[name].js",
+        // publicPath: '/',
       },
     plugins: [
           isProduction ? envVars : new Dotenv(), 
@@ -59,7 +59,7 @@ module.exports = (_env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(js|jsx|json)$/,
           exclude: /node_modules/,
           use: {
             loader: "babel-loader"            
@@ -78,10 +78,11 @@ module.exports = (_env, argv) => {
         // },
         {
           test: /\.(png|jpg|gif|svg)$/,
-          loader: 'url-loader?limit=100000', //require.resolve("file-loader")
+          loader: 'url-loader', //require.resolve("file-loader")
           options: {
             outputPath: 'assets/images/',
             // publicPath: 'assets/images/',
+            limit: 8192,
             name: "[name].[ext]",
           },
         },
