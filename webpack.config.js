@@ -12,12 +12,12 @@ const htmlPlugin = new HtmlWebPackPlugin({
 });
 
 const s3Plugin = new S3Uploader({
-  // s3Options: {
-  //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  //   region: 'us-west-1',
-  //   sessionToken: 'asdsaad' // the optional AWS session token to sign requests with
-  // },
+  s3Options: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: 'us-east-1',
+    // sessionToken: 'asdsaad' // the optional AWS session token to sign requests with
+  },
   s3UploadOptions: {
     Bucket: 'cause-cuisine-site-assets'
   },
@@ -74,6 +74,7 @@ module.exports = (_env, argv) => {
             chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
           }),
           htmlPlugin,
+          s3Plugin
           // criticalPlugin
       ].filter(Boolean),
     optimization: {
