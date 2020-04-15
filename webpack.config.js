@@ -19,7 +19,8 @@ const s3Plugin = new S3Uploader({
     // sessionToken: 'asdsaad' // the optional AWS session token to sign requests with
   },
   s3UploadOptions: {
-    Bucket: 'cause-cuisine-site-assets'
+    Bucket: 'cause-cuisine-site-assets',
+    CacheControl: 'max-age=315360000, no-transform, public',
   },
 })
 const criticalPlugin = new HtmlCriticalWebpackPlugin({
