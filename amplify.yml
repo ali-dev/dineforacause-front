@@ -7,11 +7,11 @@ frontend:
     build:
       commands:
         # -  PUBLIC_URL=https://assets-staging.causeandcuisine.com/dist/
-        -  REACT_APP_APPSYNC_API_KEY=$REACT_APP_APPSYNC_API_KEY REACT_APP_APPSYNC_URL=$REACT_APP_APPSYNC_URL REACT_APP_IS_RELEASED=$REACT_APP_IS_RELEASED yarn run build
+        -  yarn run build
     postBuild:
         commands:
-        #-  aws s3 rm s3://cause-cuisine-site-assets/ --recursive
-        #-  yarn run upload-assets   
+        # -  aws s3 rm s3://cause-cuisine-site-assets/ --recursive
+        # -  yarn run upload-assets   
   artifacts:
     baseDirectory: dist
     files:

@@ -4,12 +4,24 @@ const Dotenv = require('dotenv-webpack');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlCriticalWebpackPlugin = require("html-critical-webpack-plugin");
+const S3Uploader = require('webpack-s3-uploader');
 
 const htmlPlugin = new HtmlWebPackPlugin({
     template: path.resolve(__dirname, "src/index.html"),
     inject: true
 });
 
+const s3Plugin = new S3Uploader({
+  // s3Options: {
+  //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  //   region: 'us-west-1',
+  //   sessionToken: 'asdsaad' // the optional AWS session token to sign requests with
+  // },
+  s3UploadOptions: {
+    Bucket: 'cause-cuisine-site-assets'
+  },
+})
 const criticalPlugin = new HtmlCriticalWebpackPlugin({
   base: path.resolve(__dirname, 'dist'),
   src: 'index.html',
@@ -53,7 +65,7 @@ module.exports = (_env, argv) => {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "[name].js",
-        // publicPath: isProduction ? 'https://assets-staging.causeandcuisine.com/dist/' : path.resolve(__dirname, '/'),
+        publicPath: isProduction ? 'https://assets-staging.causeandcuisine.com/' : path.resolve(__dirname, '/'),
       },
     plugins: [
           isProduction ? envVars : new Dotenv(), 
