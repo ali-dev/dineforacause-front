@@ -113,7 +113,7 @@ module.exports = (_env, argv) => {
           options: {
             outputPath: 'assets/images/',
             // publicPath: 'assets/images/',
-            limit: 50000,
+            limit: 8192, //50000,
             name: "[name].[ext]",
           },
         },
@@ -121,7 +121,7 @@ module.exports = (_env, argv) => {
           test: /\.(woff|woff2|eot|ttf|svg)$/, 
           loader: 'url-loader', //?limit=100000
           options: {
-            limit: 50000
+            limit: 8192//50000
           }, 
         } 
       ],
