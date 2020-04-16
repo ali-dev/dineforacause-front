@@ -18,7 +18,7 @@ export const getCauseInfo = `query GetCauseInfo($organizationId: String!, $id: S
 }
 `;
 
-export const getCauses = `query causes {
+export const getAllCauses = `query causes {
    getAllCauses {
       causes {
         id
@@ -39,16 +39,18 @@ $eventName: String!,
 $cause: String!, 
 $organizationId: String!, 
 $location: String! , 
-$minDonation: Int!,
 $hostName: String!, 
 $hostEmail: String!,
 $recommendedDonation: Int,
 $date: String!, 
 $time: String!,
-$maxCapacity: Int
+$endTime: String,
+$eventDetails: String!,
 $viewId: String!,
 $editId: String!,
-$rsvpId: String!
+$rsvpId: String!,
+$guests: AWSJSON
+
 ) {
    addEvent(
    eventName: $eventName,
@@ -57,14 +59,15 @@ $rsvpId: String!
    hostName: $hostName, 
    hostEmail: $hostEmail, 
    location: $location, 
-   minDonation: $minDonation, 
    recommendedDonation: $recommendedDonation,
-   maxCapacity: $maxCapacity,
    date: $date,
    time: $time,
+   endTime: $endTime,
+   eventDetails: $eventDetails,
    viewId: $viewId,
    editId: $editId,
-   rsvpId: $rsvpId
+   rsvpId: $rsvpId,
+   guests: $guests
    ) {
     eventName
     editId
@@ -74,11 +77,11 @@ $rsvpId: String!
 
 export const getEventForView = `query getEventForView($viewId: String!) {
   getEventForView(viewId: $viewId) {
+    id
     eventName
     hostName
     hostEmail
     causeDetails
-    minDonation
     recommendedDonation
     location
     date
@@ -86,18 +89,19 @@ export const getEventForView = `query getEventForView($viewId: String!) {
     viewId
     editId
     rsvpId
+    guests
   }
 }
 `
 
 export const getEventForEdit = `query getEventForEdit($editId: String!) {
   getEventForEdit(editId: $editId) {
+    id
     eventName
     cause
     causeDetails
     hostName
     hostEmail
-    minDonation
     recommendedDonation
     location
     date
@@ -105,18 +109,31 @@ export const getEventForEdit = `query getEventForEdit($editId: String!) {
     viewId
     editId
     rsvpId
+    guests
   }
 }
 `
 
+export const addGuest = `mutation addGuest($guestId: String!, $eventId: String!, $guestDetails: AWSJSON!) {
+  addGuest(guestId: $guestId, eventId: $eventId, guestDetails: $guestDetails) 
+}
+`;
 
-export const addCharge = `mutation addCharge($token: String!) {
-    addCharge(token: $token) {
+export const removeGuest = `mutation removeGuest($guestId: String!, $eventId: String!) {
+  removeGuest(guestId: $guestId, eventId: $eventId) 
+}
+`;
+
+
+export const addCharge = `mutation addCharge($eventId: String!, $guestId: String!, $causeId: String!, $amount: Int, $willDonate: Boolean!, $guest: String!) {
+    addCharge(eventId: $eventId, guestId: $guestId, causeId: $causeId, amount: $amount, guest: $guest, willDonate: $willDonate) {
       body
     }
   }
 `;
 
-
-
+export const sendInvitation = `mutation sendInvitation($data: String!) {
+  sendInvitation(data: $data) 
+}
+`;
 

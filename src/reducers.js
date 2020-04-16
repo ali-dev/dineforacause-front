@@ -11,7 +11,10 @@ import {
   REQUEST_EVENT_FAILED,
   REQUEST_EVENT_FOR_EDIT_PENDING,
   REQUEST_EVENT_FOR_EDIT_SUCCESS,
-  REQUEST_EVENT_FOR_EDIT_FAILED,  
+  REQUEST_EVENT_FOR_EDIT_FAILED,
+  REQUEST_DATA_FOR_RSVP_PENDING,
+  REQUEST_DATA_FOR_RSVP_SUCCESS,
+  REQUEST_DATA_FOR_RSVP_FAILED  
  } from './constants';
 
 const initialStateSearch = {
@@ -81,6 +84,27 @@ export const requestEventForView = (state=initialStateEventView, action={}) => {
       return state  
   }
 }
+
+
+const initialStateDataForRSVP = {
+  event: "test",
+  guest: null,
+  guestId: null,
+  isPending: true
+}
+export const requestDataForRSVP = (state=initialStateDataForRSVP, action={}) => {
+  switch (action.type) {
+    case REQUEST_DATA_FOR_RSVP_PENDING:
+      return Object.assign({}, state, {isPending: true})
+    case REQUEST_DATA_FOR_RSVP_SUCCESS:
+      return Object.assign({}, state, {event: action.payload.event, guest: action.payload.guest, guestId: action.payload.guestId, isPending: false})
+    case REQUEST_DATA_FOR_RSVP_FAILED:
+      return Object.assign({}, state, {error: action.payload})
+    default:
+      return state  
+  }
+}
+
 
 const initialStateEventEdit = {
   event: "test",

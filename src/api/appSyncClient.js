@@ -1,8 +1,5 @@
 import AWSAppSyncClient, { AUTH_TYPE } from 'aws-appsync';
 import awsconfig from '../aws-exports';
-import Amplify from 'aws-amplify';
-Amplify.configure(awsconfig);
-
 
 const client = new AWSAppSyncClient({
   url: awsconfig.aws_appsync_graphqlEndpoint,
@@ -10,7 +7,8 @@ const client = new AWSAppSyncClient({
   auth: {
     type: AUTH_TYPE.API_KEY, // or type: awsconfig.aws_appsync_authenticationType,
     apiKey: awsconfig.aws_appsync_apiKey,
-  }
+  },
+  disableOffline: true
 });
 
 export default client;

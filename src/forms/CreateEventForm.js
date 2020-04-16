@@ -3,17 +3,10 @@ import { Button, Form, } from 'semantic-ui-react'
 import EventCauses from './EventCauses'
 import EventDetails from './EventDetails'
 import trigger from '../graphql/triggers'
-import shortid from 'shortid';
-import { withRouter } from 'react-router-dom';
-// const states = [
-//  {key: 'n', text: 'New York', value: 'New York City' },
-//  { key: 'm', text: 'Minnesota', value: 'Minnesota' },
-//  ];
+import { v4 as uuidv4 } from 'uuid';
 
-// const countries = [
-// {key: 'u', text: 'United States', value: 'United States' },
-// { key: 'j', text: 'Jordan', value: 'Jordan' },
-// ];
+import { withRouter } from 'react-router-dom';
+
 
 
 
@@ -24,11 +17,11 @@ class CreateEventForm extends Component {
 		this.state = {
 			cause: '',
             organizationId: '',
-            minDonation: '',
+            // minDonation: '',
 			recommendedDonation: '',
-			viewId: shortid.generate(),
-            editId: shortid.generate(),
-			rsvpId: shortid.generate(),
+			viewId: uuidv4(),
+            editId: uuidv4(),
+			rsvpId: uuidv4(),
 			eventName: '',
             eventDetails: '',
             hostName: '',
@@ -36,6 +29,8 @@ class CreateEventForm extends Component {
             location: '',
             date: '',
 			time: '',
+			endTime:'',
+			guests: '{}'
         };
 		this.handleFieldChange = this.handleFieldChange.bind(this);
 	}
@@ -56,15 +51,18 @@ class CreateEventForm extends Component {
 	
 	render() {
 		return (
-			<Form size='small'>
-				<section className="bg-white w-80 center  ">
-					<div className="fl w-50 pt5 pa3 pa2-ns   bg-white   ">
-						<h3 className="f3 green">Choose your Cause</h3>
+			
+			// className="form-wrapper"
+			<Form size='small' className="form-wrapper">
+				<section className="event-part ">
+					{/* <div className="fl w-100 pt5 pa3 pa2-ns   bg-white   "> */}
+						<h3 className="h6 pa3">Choose your Cause</h3>
 						<EventCauses onChange={this.handleFieldChange} />
-					</div>
-
-					<div className="fl w-50  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">
-						<h3 className="f3 green">Event Details</h3>
+					{/* </div> */}
+				</section>
+				<section className="bg-white w-100 center event-part ">
+					<div className="fl w-100  pt5 o-90 pa3 pa2-ns  pb4 bg-white">
+						<h3 className="h6 pa3">Event Details</h3>
 						<EventDetails onChange={this.handleFieldChange} />
 					</div>
 					 <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button>

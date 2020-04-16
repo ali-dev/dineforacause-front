@@ -1,0 +1,21 @@
+version: 0.1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yarn install
+    build:
+      commands:
+        # -  PUBLIC_URL=https://assets-staging.causeandcuisine.com/dist/
+        -  yarn run build
+    postBuild:
+        commands:
+        # -  aws s3 rm s3://cause-cuisine-site-assets/ --recursive
+        # -  yarn run upload-assets   
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
