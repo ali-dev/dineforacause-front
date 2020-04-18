@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setSearchField, requestCauses } from "../actions";
+
+import "../assets/css/font-awesome.min.css";
+
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
 import {Link} from 'react-router-dom';
