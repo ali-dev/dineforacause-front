@@ -40,7 +40,9 @@ class CreateEventForm extends Component {
 	}
 
 	handleSubmit(event) {
+		// alert(1);
 		event.preventDefault();
+		alert(1);
 		const { history } = this.props;
 		trigger
             .createEvent(this.state)
@@ -55,18 +57,19 @@ class CreateEventForm extends Component {
 			// className="form-wrapper"
 			<Form size='small' className="form-wrapper">
 				<section className="event-part ">
-					{/* <div className="fl w-100 pt5 pa3 pa2-ns   bg-white   "> */}
 						<h3 className="h6 pa3">Choose your Cause</h3>
 						<EventCauses onChange={this.handleFieldChange} />
-					{/* </div> */}
 				</section>
-				<section className="bg-white w-100 center event-part ">
-					<div className="fl w-100  pt5 o-90 pa3 pa2-ns  pb4 bg-white">
+				<section className="event-part ">
 						<h3 className="h6 pa3">Event Details</h3>
 						<EventDetails onChange={this.handleFieldChange} />
-					</div>
-					 <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button>
 				</section>
+				
+				<div class="form-group">
+
+					<button type="submit" onClick={this.handleSubmit.bind(this)} >submit now</button>
+
+				</div>
 			</Form>
 		)
 	}
