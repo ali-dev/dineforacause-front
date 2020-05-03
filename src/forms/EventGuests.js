@@ -204,7 +204,8 @@ class EventGuests extends Component {
         return (
             <div>
                 {/* <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button> */}
-                <h3 className="f3 green">Guests</h3>
+                {/* <h3 className="f3 green">Guests</h3> */}
+                <h6 className="h3">Guests</h6>
                 <Form.Group>
                     <Form.Field required>
 

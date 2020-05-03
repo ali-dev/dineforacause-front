@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Form, } from 'semantic-ui-react'
-import EventDetails from './EventDetails'
+// import EventDetails from './EventDetails'
+import EventDetailsView from '../components/EventDetailsView'
+
 import EventGuests from './EventGuests'
 import trigger from '../graphql/triggers'
 // import { withRouter } from 'react-router-dom';
@@ -50,15 +52,16 @@ class EditEventForm extends Component {
         return (
 			<Form size='small'>
 				<section className="bg-white w-80 center  ">
-					<div className="fl w-50 pt5 pa3 pa2-ns   bg-white   ">
+					<div className="fl w-60 pt5 pa3 pa2-ns   bg-white   ">
 						<EventGuests event={this.state} eventId={this.state.id} attendees={this.state.guests} />
 					</div>
 
-					<div className="fl w-50  pt5 o-90 pa3 pa2-ns  pb4 bg-white   ">
-						<h3 className="f3 green">Event Details</h3>
-						<EventDetails eventToEdit={this.state} onChange={this.handleFieldChange} />
+					<div className="fl w-40     ">
+						{/* <h3 className="f3 green">Event Details</h3> */}
+            <EventDetailsView eventToEdit={this.state} />
+						{/* <EventDetails eventToEdit={this.state} onChange={this.handleFieldChange} /> */}
                         
-                        <h3 className="f3 green">Cause Details</h3>
+                        {/* <h3 className="f3 green">Cause Details</h3>
                         <div className="fl w-100 w-50-m w-50-l pa2">
                         
                         <img
@@ -81,7 +84,7 @@ class EditEventForm extends Component {
                         <div className="fl w-50 w-50-m w-50-r pa2">
                         {causeDetails.details}
                         </div>
-                
+                 */}
 					</div>
 					 <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button>
 				</section>
