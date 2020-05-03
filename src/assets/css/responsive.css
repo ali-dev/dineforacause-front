@@ -198,7 +198,7 @@
 
 @media screen and (max-width: 1200px){
 
-	.wrapper {width: 95%;}
+	.main-wrapper {width: 95%;}
 
 	header .btn {margin-left: 27px;}
 
@@ -922,7 +922,7 @@
 
 	}
 
-	.wrapper {
+	.main-wrapper {
 
 		width: 90%;
 
