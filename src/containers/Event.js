@@ -1,146 +1,146 @@
 import React, { Component } from 'react';
-import CreateEventForm from '../forms/CreateEventForm'
+import CreateEventForm from '../forms/CreateEventForm';
 // import 'tachyons';
-import 'tachyons/css/tachyons.min.css'
-import logo from '../assets/images/logo.png'; 
-import userIcon from "../assets/images/user(1).svg";
-import eventCurve from "../assets/images/event-carv.png";
+import 'tachyons/css/tachyons.min.css';
+import logo from '../assets/images/logo.png';
+import userIcon from '../assets/images/user(1).svg';
+import eventCurve from '../assets/images/event-carv.png';
 import colorLine from '../assets/images/color-line.png';
 import footerLogo from '../assets/images/footer-logo.jpg';
 class Event extends Component {
-  
+
 
   render() {
-  	
+
     return (
-    <div>
-      <header className="inner_header">
-        <div className="main-wrapper"><a className="lft logo" href="/"><img src={logo} alt="logo" /></a>
-        <nav className="lft">
+      <div>
+        <header className="inner_header">
+          <div className="main-wrapper"><a className="lft logo" href="/"><img src={logo} alt="logo" /></a>
+            <nav className="lft">
 
-        <ul>
+              <ul>
 
-          <li><a href="#">About Us</a></li>
+                <li><a href="#">About Us</a></li>
 
-          <li><a href="#">Causes</a></li>
+                <li><a href="#">Causes</a></li>
 
-          <li><a href="#">Organizations</a></li>
+                <li><a href="#">Organizations</a></li>
 
-          <li><a href="#">How it Works</a></li>
+                <li><a href="#">How it Works</a></li>
 
-        </ul>
+              </ul>
 
-        </nav>
-        <a href="#" className="btn rgt"><img src={userIcon} alt="iamge" /><span>Sign Up</span></a>
+            </nav>
+            <a href="#" className="btn rgt"><img src={userIcon} alt="iamge" /><span>Sign Up</span></a>
 
-    <div className="hamber-menu"><span></span><span></span><span></span></div>
+            <div className="hamber-menu"><span></span><span></span><span></span></div>
 
-    <div className="clear"></div>
+            <div className="clear"></div>
 
-    </div>
-  </header>
-    <div className="extra-div gry-bg"></div>
-    <main >
-      <div className="event-area ">
+          </div>
+        </header>
+        <div className="extra-div gry-bg"></div>
+        <main >
+          <div className="event-area ">
             {/* <div className=""> */}
-              {/* <header className="bb b--black-40 pv4 bg-white">
+            {/* <header className="bb b--black-40 pv4 bg-white">
                 <h3   className="f2 fw7 ttu tracked lh-title mt0 mb3  ml2 mr2 ">Create Event</h3>
               </header> */}
-              {/* <article data-name="article-full-bleed-background"> */}
-                {/* <div className="cf" >
+            {/* <article data-name="article-full-bleed-background"> */}
+            {/* <div className="cf" >
                   <div className="fl w-100   black-70 f3  "> */}
-                  <CreateEventForm/>
-                  <img className="event-carv" src={eventCurve} alt="iamgee"  />
-                {/* </div>
+            <CreateEventForm />
+            <img className="event-carv" src={eventCurve} alt="iamgee" />
+            {/* </div>
               </div> */}
             {/* </article> */}
-          {/* </div> */}
-        </div>
-      </main>
+            {/* </div> */}
+          </div>
+        </main>
 
-      {/* @todo Add Footer Component */}
-      
-<img src={colorLine} alt="line" className="colored-line" />
+        {/* @todo Add Footer Component */}
 
-<footer>
+        <img src={colorLine} alt="line" className="colored-line" />
 
-  <div className="main-wrapper">
+        <footer>
 
-    <figure className="lft"> <a href="index.html"><img src={footerLogo} alt="image" /></a>
+          <div className="main-wrapper">
 
-      <figcaption> <a href="#"><i className="fa fa-facebook"></i></a> <a href="#"><i className="fa fa-twitter"></i></a> <a href="#"><i className="fa fa-instagram"></i></a> </figcaption>
+            <figure className="lft"> <a href="index.html"><img src={footerLogo} alt="image" /></a>
 
-    </figure>
+              <figcaption> <a href="#"><i className="fa fa-facebook"></i></a> <a href="#"><i className="fa fa-twitter"></i></a> <a href="#"><i className="fa fa-instagram"></i></a> </figcaption>
 
-    <div className="quick-link lft">
+            </figure>
 
-      <h5>Quick Link</h5>
+            <div className="quick-link lft">
 
-      <ul>
+              <h5>Quick Link</h5>
 
-        <li><a href="#">About Us</a></li>
+              <ul>
 
-        <li><a href="#">Causes</a></li>
+                <li><a href="#">About Us</a></li>
 
-        <li><a href="#">Organizations</a></li>
+                <li><a href="#">Causes</a></li>
 
-        <li><a href="#">How it Works</a></li>
+                <li><a href="#">Organizations</a></li>
 
-      </ul>
+                <li><a href="#">How it Works</a></li>
 
-    </div>
+              </ul>
 
-    <div className="footer-how lft">
+            </div>
 
-      <h5>How It work</h5>
+            <div className="footer-how lft">
 
-      <ul>
+              <h5>How It work</h5>
 
-        <li><a href="#">Choose your causes</a></li>
+              <ul>
 
-        <li><a href="#">Create your event</a></li>
+                <li><a href="#">Choose your causes</a></li>
 
-        <li><a href="#">Invite guests</a></li>
+                <li><a href="#">Create your event</a></li>
 
-      </ul>
+                <li><a href="#">Invite guests</a></li>
 
-    </div>
+              </ul>
 
-    <div className="Community rgt">
+            </div>
 
-      <h5>Join Our Community</h5>
+            <div className="Community rgt">
 
-      <p>Events can be public or private, <br/>
+              <h5>Join Our Community</h5>
 
-        small groups or large events. You can <br/>
+              <p>Events can be public or private, <br />
 
-        send your invitations by email.</p>
+                small groups or large events. You can <br />
 
-      <a href="#" className="btn-new">join our community</a> </div>
+                send your invitations by email.</p>
 
-    <div className="clear"></div>
+              <a href="#" className="btn-new">join our community</a> </div>
 
-    <div className="center-copy">
+            <div className="clear"></div>
 
-      <p>Copyright © 2020 Cause & Cuisine. All rights reserved.</p>
+            <div className="center-copy">
 
-    </div>
+              <p>Copyright © 2020 Cause & Cuisine. All rights reserved.</p>
 
-  </div>
+            </div>
 
-</footer>
+          </div>
 
-<a className="scroll-top" href="javascript:void(0);"><i className="fa fa-caret-up"></i></a> 
+        </footer>
 
-
+        <a className="scroll-top" href="javascript:void(0);"><i className="fa fa-caret-up"></i></a>
 
 
 
-  </div>
-        
-      
-    
-  	);
+
+
+      </div>
+
+
+
+    );
   }
 }
 
