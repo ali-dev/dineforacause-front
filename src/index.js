@@ -22,6 +22,11 @@ import { Route} from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 
+// import "./assets/css/font-awesome.min.css";
+
+// import "./assets/css/style.css";
+// import "./assets/css/responsive.css";
+
 
 const logger = createLogger()
 

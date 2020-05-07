@@ -1392,13 +1392,13 @@ header.inner_header.fixed {
 
 /*---event -dtails-------------*/
 
-.event-deatils-area{
+/* .event-deatils-area{
 	position:relative;
     padding: 80px 0 250px 0;
     text-align: center;
 	background:url('../images/event-dtl-bg.jpg') no-repeat 0 0;
 	background-size:cover;
-}
+} */
 .event-deatils-area h1{
 	color:#3c403f;
 	font-size:60px;
@@ -1608,7 +1608,7 @@ header.inner_header.fixed {
 .cause-dtl-rgt ul{
 	margin-top:20px;
 }
-.cause-dtl-rgt ul li {
+/* .cause-dtl-rgt ul li {
 	font-family: 'Graphik-Medium';
 	font-size: 15px;
 	line-height: 19px;
@@ -1616,7 +1616,7 @@ header.inner_header.fixed {
 	margin-bottom: 12px;
 	padding-left: 25px;
 	background: url('../images/tick.png') no-repeat left 3px;
-}
+} */
 .cause-dtl-rgt .progress-area {
 	margin-top: 30px;
 }
@@ -1687,14 +1687,14 @@ header.inner_header.fixed {
 	width:100%;
 	padding: 40px 15px 25px 15px;
 }
-.card-name{
+/* .card-name{
     background: #fcfcfc url('../images/card-name.png') no-repeat ;
     background-position: 90% center;
 }
 .card-number{
     background: #fcfcfc url('../images/card-number.png') no-repeat ;
     background-position: 90% center;
-}
+} */
 #cvv-details {
 	cursor: pointer;
 }
