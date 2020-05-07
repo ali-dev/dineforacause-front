@@ -1,11 +1,17 @@
 import gql from 'graphql-tag';
 import client from '../api/appSyncClient';
-import { addEvent, addGuest, removeGuest, sendInvitation} from './queries'; // @todo: maybe include getCauseInfo, getCauses, addCharge,
+import { addEvent, addGuest, removeGuest, sendInvitation, createVirtualEvent} from './queries'; // @todo: maybe include getCauseInfo, getCauses, addCharge,
 
 const trigger = {
     createEvent(eventData) { 
     	return client.mutate({
 		    mutation: gql(addEvent),
+		    variables: eventData
+	  })
+	},
+	createVirtualEvent(eventData) {
+		return client.mutate({
+		    mutation: gql(createVirtualEvent),
 		    variables: eventData
 	  })
 	},

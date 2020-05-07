@@ -39,16 +39,31 @@ class CreateEventForm extends Component {
 		this.setState({ [name]: value });
 	}
 
-	handleSubmit(event) {
+	async handleSubmit(event) {
 		// alert(1);
 		event.preventDefault();
-		alert(1);
+		
 		const { history } = this.props;
-		trigger
+		
+		if (parseInt(process.env.REACT_APP_COVID19) === 1) {
+			trigger
+			.createVirtualEvent(this.state)
+			.then((data) => {
+				history.push(`/event/manage/${this.state.editId}`);
+				zoomLink = data.link;
+			});
+			 
+		} else {
+			alert('not zoom');
+			trigger
             .createEvent(this.state)
             .then(data => {
                 history.push(`/event/manage/${data.data.addEvent.editId}`);
             })
+		}
+
+
+		
 	}
 	
 	render() {

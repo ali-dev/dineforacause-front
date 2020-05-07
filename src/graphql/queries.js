@@ -75,6 +75,46 @@ $guests: AWSJSON
   }
 `;
 
+
+export const createVirtualEvent = `mutation createVirtualEvent(
+  $eventName: String!, 
+  $cause: String!, 
+  $organizationId: String!, 
+  $location: String! , 
+  $hostName: String!, 
+  $hostEmail: String!,
+  $recommendedDonation: Int,
+  $date: String!, 
+  $time: String!,
+  $endTime: String,
+  $eventDetails: String!,
+  $viewId: String!,
+  $editId: String!,
+  $rsvpId: String!,
+  $guests: AWSJSON
+  
+  ) {
+    createVirtualEvent(
+     eventName: $eventName,
+     cause: $cause, 
+     organizationId: $organizationId, 
+     hostName: $hostName, 
+     hostEmail: $hostEmail, 
+     location: $location, 
+     recommendedDonation: $recommendedDonation,
+     date: $date,
+     time: $time,
+     endTime: $endTime,
+     eventDetails: $eventDetails,
+     viewId: $viewId,
+     editId: $editId,
+     rsvpId: $rsvpId,
+     guests: $guests
+     )
+    }
+  `;
+
+
 export const getEventForView = `query getEventForView($viewId: String!) {
   getEventForView(viewId: $viewId) {
     id
