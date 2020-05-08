@@ -189,26 +189,52 @@ class EventGuests extends Component {
     }
   }
 
-  getGuestCount(type = 'created') {
-      const guestList = this.state.attendees.filter((item, key) => {
-        const objectKey = Object.keys(item)[0]
-        if (type === 'created') {
-            return item[objectKey].status === 'created';
-        }  
-        return item[objectKey].rsvp_status === type;
-      });
-      return guestList.length;
+  getGuestCount(type = "created") {
+    const guestList = this.state.attendees.filter((item, key) => {
+      const objectKey = Object.keys(item)[0];
+      if (type === "created") {
+        return item[objectKey].status === "created";
+      }
+      return item[objectKey].rsvp_status === type;
+    });
+    return guestList.length;
+  }
+
+  getGuestList(type = 'pending') {
+      return (
+        <div className="attendees">
+              <List divided relaxed>
+                {this.state.attendees.map((item, key) => {
+                  const obkectKey = Object.keys(item)[0];
+                  if (item[obkectKey].rsvp_status === type) {
+                    return (
+                      <List.Item>
+                        <List.Content floated="left">
+                          {item[obkectKey].name}
+                        </List.Content>
+                        <List.Content>{item[obkectKey].email}</List.Content>
+                      </List.Item>
+                    );
+                  }
+                })}
+              </List>
+            </div>
+      );
   }
   render() {
-    this.getGuestCount();  
+    this.getGuestCount();
     const panes = [
       {
-        menuItem: { key: "new", icon: "list", content: `Guests (${this.getGuestCount('created')})`,  },
+        menuItem: {
+          key: "new",
+          icon: "list",
+          content: `Guests (${this.getGuestCount("created")})`,
+        },
         render: () => (
-          <Tab.Pane size="small"> 
+          <Tab.Pane size="small">
             <div className="attendees">
               <List divided relaxed>
-                {this.state.attendees.map( (item, key) => {
+                {this.state.attendees.map((item, key) => {
                   const obkectKey = Object.keys(item)[0];
                   if (item[obkectKey].status === "created") {
                     return (
@@ -220,11 +246,13 @@ class EventGuests extends Component {
                             color="red"
                             onClick={() => this.removeAttendee(key)}
                           >
-                            Remove{" "}
+                            Remove
                           </Button>
                           {this.invitationButton(item[obkectKey].status, key)}
                         </List.Content>
-                        <List.Content floated="left">{item[obkectKey].name}</List.Content>
+                        <List.Content floated="left">
+                          {item[obkectKey].name}
+                        </List.Content>
                         <List.Content>{item[obkectKey].email}</List.Content>
                         {/* <List.Content>
                         <List.Header as='a'>{item[obkectKey].name}</List.Header>
@@ -240,25 +268,14 @@ class EventGuests extends Component {
         ),
       },
       {
-        menuItem: { key: "pending", icon: "clock", content: `Pending (${this.getGuestCount('pending')})`,  },
+        menuItem: {
+          key: "pending",
+          icon: "clock",
+          content: `Pending (${this.getGuestCount("pending")})`,
+        },
         render: () => (
-          <Tab.Pane size="small" >
-
-<div className="attendees">
-              <List divided relaxed>
-                {this.state.attendees.map((item, key) => {
-                  const obkectKey = Object.keys(item)[0];
-                  if (item[obkectKey].rsvp_status === 'pending') {
-                    return (
-                      <List.Item>
-                        <List.Content floated="left">{item[obkectKey].name}</List.Content>
-                        <List.Content>{item[obkectKey].email}</List.Content>
-                      </List.Item>
-                    );
-                  }
-                })}
-              </List>
-            </div>
+          <Tab.Pane size="small">
+            {this.getGuestList('pending')}
           </Tab.Pane>
         ),
       },
@@ -266,25 +283,25 @@ class EventGuests extends Component {
         menuItem: {
           key: "attending",
           icon: "thumbs up",
-          content: "Attending",
-          color:"green"
+          content: `Attending (${this.getGuestCount("attending")})`,
+          color: "green",
         },
-        render: () => (
-          <Tab.Pane size="small" color="green">
-          </Tab.Pane>
-        ),
+        render: () => 
+            <Tab.Pane size="small" color="green">
+                {this.getGuestList('attending')}
+            </Tab.Pane>,
       },
       {
         menuItem: {
           key: "not_attending",
           icon: "thumbs down",
           content: "Not Attending",
-          color:"red"
+          color: "red",
         },
-        render: () => (
-          <Tab.Pane size="small" color="red">
-          </Tab.Pane>
-        ),
+        render: () => 
+        <Tab.Pane size="small" color="red">
+            {this.getGuestList('not_attending')}
+        </Tab.Pane>,
       },
     ];
 
