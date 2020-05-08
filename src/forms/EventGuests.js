@@ -192,9 +192,9 @@ class EventGuests extends Component {
   render() {
     const panes = [
       {
-        menuItem: { key: "new", icon: "list", content: "Guests" },
+        menuItem: { key: "new", icon: "list", content: `Guests (${this.state.attendees.length})`,  },
         render: () => (
-          <Tab.Pane size="small">
+          <Tab.Pane size="small"> 
             <div className="attendees">
               <List divided relaxed>
                 {this.state.attendees.map( (item, key) => {
@@ -229,9 +229,9 @@ class EventGuests extends Component {
         ),
       },
       {
-        menuItem: { key: "pending", icon: "clock", content: "Pending" },
+        menuItem: { key: "pending", icon: "clock", content: "Pending",  },
         render: () => (
-          <Tab.Pane size="small">
+          <Tab.Pane size="small" >
 
 <div className="attendees">
               <List divided relaxed>
@@ -256,9 +256,10 @@ class EventGuests extends Component {
           key: "attending",
           icon: "thumbs up",
           content: "Attending",
+          color:"green"
         },
         render: () => (
-          <Tab.Pane size="small">
+          <Tab.Pane size="small" color="green">
             {/* <EditEventForm eventToEdit={event} /> */}
           </Tab.Pane>
         ),
@@ -268,9 +269,10 @@ class EventGuests extends Component {
           key: "not_attending",
           icon: "thumbs down",
           content: "Not Attending",
+          color:"red"
         },
         render: () => (
-          <Tab.Pane size="small">
+          <Tab.Pane size="small" color="red">
             {/* <EditEventForm eventToEdit={event} /> */}
           </Tab.Pane>
         ),
