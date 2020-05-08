@@ -189,10 +189,21 @@ class EventGuests extends Component {
     }
   }
 
+  getGuestCount(type = 'created') {
+      const guestList = this.state.attendees.filter((item, key) => {
+        const objectKey = Object.keys(item)[0]
+        if (type === 'created') {
+            return item[objectKey].status === 'created';
+        }  
+        return item[objectKey].rsvp_status === type;
+      });
+      return guestList.length;
+  }
   render() {
+    this.getGuestCount();  
     const panes = [
       {
-        menuItem: { key: "new", icon: "list", content: `Guests (${this.state.attendees.length})`,  },
+        menuItem: { key: "new", icon: "list", content: `Guests (${this.getGuestCount('created')})`,  },
         render: () => (
           <Tab.Pane size="small"> 
             <div className="attendees">
@@ -229,7 +240,7 @@ class EventGuests extends Component {
         ),
       },
       {
-        menuItem: { key: "pending", icon: "clock", content: "Pending",  },
+        menuItem: { key: "pending", icon: "clock", content: `Pending (${this.getGuestCount('pending')})`,  },
         render: () => (
           <Tab.Pane size="small" >
 
@@ -260,7 +271,6 @@ class EventGuests extends Component {
         },
         render: () => (
           <Tab.Pane size="small" color="green">
-            {/* <EditEventForm eventToEdit={event} /> */}
           </Tab.Pane>
         ),
       },
@@ -273,7 +283,6 @@ class EventGuests extends Component {
         },
         render: () => (
           <Tab.Pane size="small" color="red">
-            {/* <EditEventForm eventToEdit={event} /> */}
           </Tab.Pane>
         ),
       },
