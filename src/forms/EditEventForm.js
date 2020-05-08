@@ -52,11 +52,8 @@ class EditEventForm extends Component {
         return (
 			<Form size='small'>
 				<section className="bg-white w-80 center  ">
-					<div className="fl w-60 pt5 pa3 pa2-ns   bg-white   ">
-						<EventGuests event={this.state} eventId={this.state.id} attendees={this.state.guests} />
-					</div>
-
-					<div className="fl w-40     ">
+					
+					<div className="fl w-100">
 						{/* <h3 className="f3 green">Event Details</h3> */}
             <EventDetailsView eventToEdit={this.state} />
 						{/* <EventDetails eventToEdit={this.state} onChange={this.handleFieldChange} /> */}

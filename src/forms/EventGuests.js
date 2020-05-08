@@ -191,7 +191,7 @@ class EventGuests extends Component {
     invitationButton(status, key) {
         if (status === 'created') {
             return (
-                <div className="fl w-20 pt5 pa3 pa2-ns   bg-white" >
+                <div className="w-20 pt5 pa3 pa2-ns   bg-white" >
                     <Button size='tiny' ref={`inviteBtn-${key}`} loading={this.state[`inviteBtnLoading-${key}`]} color='green' onClick={() => this.sendInvitation(key)}>Send Invitation</Button>
                 </div>
 
@@ -241,7 +241,7 @@ class EventGuests extends Component {
 
                 </div>
                 <br/>    
-                <div className='fl  w-100 '>
+                <div className='  w-100 '>
                     <h3 className="f3 green">Pending Guests</h3>   
                     <div className="attendees">
                     {this.state.attendees.map(function (item, key) {
