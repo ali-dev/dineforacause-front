@@ -202,13 +202,11 @@ class EventGuests extends Component {
 
     render() {
         return (
-            <div>
+            <div className="w-100">
                 {/* <Button type='submit' onClick={this.handleSubmit.bind(this)} >Submit</Button> */}
                 {/* <h3 className="f3 green">Guests</h3> */}
-                <h6 className="h3">Guests</h6>
                 <Form.Group>
                     <Form.Field required>
-
                         <input onChange={this.handleChangeInput} name="attendeeName" ref="attendeeName" id="attendeeName" value={this.state.attendeeName} placeholder="Guest Name" />
                     </Form.Field>
                     <Form.Field required>

@@ -43,14 +43,11 @@ class EventManage extends Component {
     const panes = [
       
       { menuItem: {key: 'guests-tab', icon: 'users', content: 'Guests'},  render: () => <Tab.Pane size="small">
-          <Form size='small' className="w-80">
-            <section className="bg-white w-80 center  ">
-              <div className="w-60  pt5 pa3 pa2-ns   bg-white "> 
-              {/* fl w-60 pt5 pa3 pa2-ns   bg-white */}
-                
+          <Form size='small'>
+            <section className="bg-white  w-80 center  ">
+              <div className=" pt5 pa3 pa2-ns   bg-white "> 
                 <EventGuests event={event} eventId={event.id} attendees={event.guests} />
               </div>
-
           </section>
            </Form>
         </Tab.Pane> },
