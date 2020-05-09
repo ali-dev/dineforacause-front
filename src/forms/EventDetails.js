@@ -100,6 +100,7 @@ class CreateEventForm extends Component {
             <label>Date</label>
 
             <DateInput
+              closable
               name="date"
               iconPosition="left"
               value={this.state.date}
