@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, } from 'semantic-ui-react'
-// import EventDetails from './EventDetails'
+import EventDetails from './EventDetails'
 import EventDetailsView from '../components/EventDetailsView'
 
 import EventGuests from './EventGuests'
@@ -54,9 +54,9 @@ class EditEventForm extends Component {
 				<section className="bg-white w-80 center  ">
 					
 					<div className="fl w-100">
-						{/* <h3 className="f3 green">Event Details</h3> */}
-            <EventDetailsView eventToEdit={this.state} />
-						{/* <EventDetails eventToEdit={this.state} onChange={this.handleFieldChange} /> */}
+						<h3 className="f3 green">Event Details</h3>
+            {/* <EventDetailsView eventToEdit={this.state} /> */}
+						<EventDetails eventToEdit={this.state} onChange={this.handleFieldChange} />
                         
                         {/* <h3 className="f3 green">Cause Details</h3>
                         <div className="fl w-100 w-50-m w-50-l pa2">
