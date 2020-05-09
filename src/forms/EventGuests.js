@@ -1,5 +1,17 @@
 import React, { Component } from "react";
-import { Button, Form, Tab, List, Icon } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Tab,
+  List,
+  Table,
+  Icon,
+  Segment,
+  Loader,
+  Dimmer,
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
+
 import trigger from "../graphql/triggers";
 import { v4 as uuidv4 } from "uuid";
 
@@ -174,16 +186,23 @@ class EventGuests extends Component {
   invitationButton(status, key) {
     if (status === "created") {
       return (
-        // <div className="w-20 pt5 pa3 pa2-ns   bg-white" >
-        <Button
-          size="tiny"
-          ref={`inviteBtn-${key}`}
-          loading={this.state[`inviteBtnLoading-${key}`]}
-          color="green"
-          onClick={() => this.sendInvitation(key)}
-        >
-          Send Invitation
-        </Button>
+        <div>
+          <a ref={`inviteBtn-${key}`} onClick={() => this.sendInvitation(key)}>
+            <Icon disabled name="mail" />
+            Send Invitation
+            <Loader active={this.state[`inviteBtnLoading-${key}`]}></Loader>
+          </a>
+        </div>
+
+        // <Button
+        //   size="tiny"
+        //   ref={`inviteBtn-${key}`}
+        //   loading={this.state[`inviteBtnLoading-${key}`]}
+        //   color="green"
+        //   onClick={() => this.sendInvitation(key)}
+        // >
+        //   Send Invitation
+        // </Button>
         // </div>
       );
     }
@@ -200,26 +219,26 @@ class EventGuests extends Component {
     return guestList.length;
   }
 
-  getGuestList(type = 'pending') {
-      return (
-        <div className="attendees">
-              <List divided relaxed>
-                {this.state.attendees.map((item, key) => {
-                  const obkectKey = Object.keys(item)[0];
-                  if (item[obkectKey].rsvp_status === type) {
-                    return (
-                      <List.Item>
-                        <List.Content floated="left">
-                          {item[obkectKey].name}
-                        </List.Content>
-                        <List.Content>{item[obkectKey].email}</List.Content>
-                      </List.Item>
-                    );
-                  }
-                })}
-              </List>
-            </div>
-      );
+  getGuestList(type = "pending") {
+    return (
+      <div className="attendees">
+        <List divided relaxed>
+          {this.state.attendees.map((item, key) => {
+            const obkectKey = Object.keys(item)[0];
+            if (item[obkectKey].rsvp_status === type) {
+              return (
+                <List.Item>
+                  <List.Content floated="left">
+                    {item[obkectKey].name}
+                  </List.Content>
+                  <List.Content>{item[obkectKey].email}</List.Content>
+                </List.Item>
+              );
+            }
+          })}
+        </List>
+      </div>
+    );
   }
   render() {
     this.getGuestCount();
@@ -233,36 +252,36 @@ class EventGuests extends Component {
         render: () => (
           <Tab.Pane size="small">
             <div className="attendees">
-              <List divided relaxed>
-                {this.state.attendees.map((item, key) => {
-                  const obkectKey = Object.keys(item)[0];
-                  if (item[obkectKey].status === "created") {
-                    return (
-                      <List.Item>
-                        <List.Content floated="right">
-                          <Button
-                            className="removeGuestButton"
-                            size="tiny"
-                            color="red"
-                            onClick={() => this.removeAttendee(key)}
-                          >
-                            Remove
-                          </Button>
-                          {this.invitationButton(item[obkectKey].status, key)}
-                        </List.Content>
-                        <List.Content floated="left">
-                          {item[obkectKey].name}
-                        </List.Content>
-                        <List.Content>{item[obkectKey].email}</List.Content>
-                        {/* <List.Content>
-                        <List.Header as='a'>{item[obkectKey].name}</List.Header>
-                        <List.Description as='a'>{item[obkectKey].email}</List.Description>
-                    </List.Content> */}
-                      </List.Item>
-                    );
-                  }
-                })}
-              </List>
+              <Table>
+                <Table.Body>
+                  {this.state.attendees.map((item, key) => {
+                    const obkectKey = Object.keys(item)[0];
+                    if (item[obkectKey].status === "created") {
+                      return (
+                        <Table.Row>
+                          <Table.Cell>{item[obkectKey].name}</Table.Cell>
+                          <Table.Cell>{item[obkectKey].email}</Table.Cell>
+                          <Table.Cell selectable positive>
+                            {this.invitationButton(item[obkectKey].status, key)}{" "}
+                          </Table.Cell>
+
+                          <Table.Cell selectable error>
+                            <a onClick={() => this.removeAttendee(key)}>
+                              {" "}
+                              <Icon disabled name="delete" /> Remove
+                            </a>{" "}
+                          </Table.Cell>
+                          {/* 
+                                <Table.Cell>
+                                <Button className="removeGuestButton" size="tiny" color="red" onClick={() => this.removeAttendee(key)}>Remove</Button>
+                                {this.invitationButton(item[obkectKey].status, key)}
+                          </Table.Cell> */}
+                        </Table.Row>
+                      );
+                    }
+                  })}
+                </Table.Body>
+              </Table>
             </div>
           </Tab.Pane>
         ),
@@ -274,9 +293,7 @@ class EventGuests extends Component {
           content: `Pending (${this.getGuestCount("pending")})`,
         },
         render: () => (
-          <Tab.Pane size="small">
-            {this.getGuestList('pending')}
-          </Tab.Pane>
+          <Tab.Pane size="small">{this.getGuestList("pending")}</Tab.Pane>
         ),
       },
       {
@@ -286,10 +303,11 @@ class EventGuests extends Component {
           content: `Attending (${this.getGuestCount("attending")})`,
           color: "green",
         },
-        render: () => 
-            <Tab.Pane size="small" color="green">
-                {this.getGuestList('attending')}
-            </Tab.Pane>,
+        render: () => (
+          <Tab.Pane size="small" color="green">
+            {this.getGuestList("attending")}
+          </Tab.Pane>
+        ),
       },
       {
         menuItem: {
@@ -298,10 +316,11 @@ class EventGuests extends Component {
           content: "Not Attending",
           color: "red",
         },
-        render: () => 
-        <Tab.Pane size="small" color="red">
-            {this.getGuestList('not_attending')}
-        </Tab.Pane>,
+        render: () => (
+          <Tab.Pane size="small" color="red">
+            {this.getGuestList("not_attending")}
+          </Tab.Pane>
+        ),
       },
     ];
 
