@@ -222,24 +222,25 @@ class EventGuests extends Component {
   getGuestList(type = "pending") {
     return (
       <div className="attendees">
-        <List divided relaxed>
-          {this.state.attendees.map((item, key) => {
+          <Table>
+            <Table.Body>
+            {this.state.attendees.map((item, key) => {
             const obkectKey = Object.keys(item)[0];
             if (item[obkectKey].rsvp_status === type) {
               return (
-                <List.Item>
-                  <List.Content floated="left">
-                    {item[obkectKey].name}
-                  </List.Content>
-                  <List.Content>{item[obkectKey].email}</List.Content>
-                </List.Item>
-              );
-            }
-          })}
-        </List>
+                <Table.Row>
+                <Table.Cell>{item[obkectKey].name}</Table.Cell>
+                <Table.Cell>{item[obkectKey].email}</Table.Cell>
+              </Table.Row>
+                );
+                }
+            })}
+            </Table.Body>
+          </Table>
       </div>
     );
   }
+
   render() {
     this.getGuestCount();
     const panes = [
@@ -313,7 +314,7 @@ class EventGuests extends Component {
         menuItem: {
           key: "not_attending",
           icon: "thumbs down",
-          content: "Not Attending",
+          content: `Not Attending (${this.getGuestCount("not_attending")})`,
           color: "red",
         },
         render: () => (
