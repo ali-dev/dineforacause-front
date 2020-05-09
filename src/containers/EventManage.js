@@ -58,10 +58,13 @@ class EventManage extends Component {
     return (
       <div className="App ">
         <InnerHeader />
+        
         <div className="extra-div gry-bg"></div>
         <main >
+        
           <div className="event-area  ">
-          <section class="mw5 mw7-ns center">
+          
+          <section class="mw5 mw8-ns center">
           
         <Tab 
            menu={{ color:'orange', inverted: true, attached: true, tabular: false }}
