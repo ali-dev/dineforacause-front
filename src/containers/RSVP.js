@@ -3,6 +3,8 @@ import { requestDataForRSVP } from '../actions';
 import { connect } from 'react-redux';
 import Payment from '../components/Payment';
 import { Message } from 'semantic-ui-react';
+import EventDetailsView from '../components/EventDetailsView' 
+import InnerHeader from '../components/InnerHeader'
 
 const mapStateToProps = state => {
   return {
@@ -26,6 +28,7 @@ class RSVP extends Component {
 
   render() {
     const { event, guest, guestId, isPending } = this.props;
+
     if (isPending === true) {
       return (<div></div>);
     } else {
@@ -39,52 +42,19 @@ class RSVP extends Component {
       const imagePath = 'https://dfac-main.s3.amazonaws.com/app';
       return (
         <div className="App ">
-          <header className="App-header ">
-            <nav className="dt w-100  center bg-white o-90 mt0">
-              <div className=" v-mid tr pa3 ">
-                <a
-                  className="f8 fw6 hover-red  no-underline gray dn dib-ns pv2 ph3"
-                  href="/"
-                >
-                  How it Works
-                </a>
-                <a
-                  className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
-                  href="/"
-                >
-                  Causes
-                </a>
-                <a
-                  className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
-                  href="/"
-                >
-                  Organizations
-                </a>
-                <a
-                  className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
-                  href="/"
-                >
-                  Partners
-                </a>
-                <a
-                  className="f8 fw6 hover-red no-underline gray dib ml2 pv2 ph3 ba"
-                  href="/"
-                >
-                  Sign Up
-                </a>
-              </div>
-            </nav>
-            <div className="">
-              <header className="bb b--black-40 pv4 bg-white ">
-                <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3  ml2 mr2 center">
+          <InnerHeader />
+          <div class="extra-div gry-bg"></div>
+          <main>
+          <div className="event-deatils-area">
+        
+          <EventDetailsView event={event} guest={guest} guestId={guestId} />
+          <Payment guestId={guestId} guest={guest} event={event} />
+          </div>
+          
+          
+          </main>
 
-                  {event.eventName}
-                </h3>
-
-              </header>
-
-
-              <article data-name="article-full-bleed-background" >
+              {/* <article data-name="article-full-bleed-background" >
                 <Message icon='check circle' hidden={guest.rsvp_status === 'pending'}
                   success
                   header="You Responded to this event"
@@ -93,37 +63,13 @@ class RSVP extends Component {
                     guest.donated === true ? `You donated $${guest.donation_amount} to this cause` : 'You can still donate to this cause',
                     `You can change your status at any time; Your current status is ${(guest.rsvp_status === 'attending') ? 'Attending' : 'Not Attending'}`,
                   ]}
-                />
-                <section className="bg-white w-80 center ">
-                  <div className="fl w-60 pt5 pa3 pa2-ns   bg-white     ">
-                    <h3 className="f3 green">Guest Details</h3>
-                    <dl className="lh-title pa1 mt0">
-                      <dt className="f8 b">Guest Name</dt>
-                      <dd className="ml0 gray">{this.props.guest.name}</dd>
-                      <dt className="f8 b mt2">Email</dt>
-                      <dd className="ml0 gray">{this.props.guest.email}</dd>
-                      <dt className="f8 b mt2">RSVP Status</dt>
-                      <dd className="ml0 gray">{this.props.guest.rsvp_status}</dd>
-                    </dl>
-
-                    <h3 className="f3 green">Event Details</h3>
-                    <dl className="lh-title pa1 mt0">
-                      <dt className="f8 b">Host Name</dt>
-                      <dd className="ml0 gray">{event.hostName}</dd>
-                      <dt className="f8 b mt2">When</dt>
-                      <dd className="ml0 gray">{event.date} @ {event.time}</dd>
-                      <dt className="f8 b mt2">Where</dt>
-                      <dd className="ml0 gray">{event.location}</dd>
-                      <dt className="f8 b mt2">Minimum Donation</dt>
-                      <dd className="ml0 gray">${event.minDonation}</dd>
-                      <dt className="f8 b mt2">Recommended Donation</dt>
-                      <dd className="ml0 gray">${event.recommendedDonation}</dd>
-                      <dt className="f8 b mt2">Event Details</dt>
-                      <dd className="ml0 gray">{event.details}</dd>
-                    </dl>
+                /> */}
+                {/* <section className="bg-white w-80 center ">
+                  <div className="fl w-60 pt5 pa3 pa2-ns   bg-white     "> */}
+                    
 
 
-                    <section className="bg-white w-100   ">
+                    {/* <section className="bg-white w-100   ">
                       <h3 className="f3 green">Cause Details</h3>
                       <div className="fl w-30 w-100-m w-50-l pa2">
                         <img
@@ -149,23 +95,20 @@ class RSVP extends Component {
 
                       </div>
 
-                    </section>
+                    </section> */}
 
-                  </div>
-                  <div className="fl w-40 pt5 pa3 pa2-ns   bg-light-gray   ">
-                    <Payment guestId={guestId} guest={guest} event={event} />
+                  {/* </div>
+                  <div className="fl w-40 pt5 pa3 pa2-ns   bg-light-gray   "> */}
+                    {/* <Payment guestId={guestId} guest={guest} event={event} /> */}
 
-                  </div>
+                  {/* </div>
 
                 </section>
 
 
-              </article>
+              </article> */}
 
             </div>
-
-          </header>
-        </div>
       );
     }
 
