@@ -3,7 +3,11 @@ import { requestDataForRSVP } from '../actions';
 import { connect } from 'react-redux';
 import Payment from '../components/Payment';
 import { Message } from 'semantic-ui-react';
-
+import EventDetailsView from '../components/EventDetailsView' 
+import InnerHeader from '../components/InnerHeader'
+import footerLogo from '../assets/images/footer-logo.jpg';
+import colorLine from '../assets/images/color-line.png';
+import curve from '../assets/images/event-carv.png'
 const mapStateToProps = state => {
   return {
     event: state.requestDataForRSVP.event,
@@ -12,6 +16,9 @@ const mapStateToProps = state => {
     isPending: state.requestDataForRSVP.isPending
   };
 };
+
+
+
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -24,8 +31,29 @@ class RSVP extends Component {
     this.props.onRequestEvent(this.props.match.params.viewId, this.props.match.params.guestId);
   }
 
+  handleScroll(event) {
+
+    // if ($(this).scrollTop() > 200) {
+    //   $('.scroll-top').fadeIn();
+    // } else {
+    //   $('.scroll-top').fadeOut();
+    // }
+
+
+    if (window.scrollY > 50) {
+      this.setState({
+        headerClass: 'fixed'
+      });
+    } else {
+      this.setState({
+        headerClass: ''
+      });
+    }
+  }
+
   render() {
     const { event, guest, guestId, isPending } = this.props;
+
     if (isPending === true) {
       return (<div></div>);
     } else {
@@ -38,53 +66,108 @@ class RSVP extends Component {
       }
       const imagePath = 'https://dfac-main.s3.amazonaws.com/app';
       return (
-        <div className="App ">
-          <header className="App-header ">
-            <nav className="dt w-100  center bg-white o-90 mt0">
-              <div className=" v-mid tr pa3 ">
-                <a
-                  className="f8 fw6 hover-red  no-underline gray dn dib-ns pv2 ph3"
-                  href="/"
-                >
-                  How it Works
-                </a>
-                <a
-                  className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
-                  href="/"
-                >
-                  Causes
-                </a>
-                <a
-                  className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
-                  href="/"
-                >
-                  Organizations
-                </a>
-                <a
-                  className="f8 fw6 hover-red no-underline gray dn dib-ns pv2 ph3"
-                  href="/"
-                >
-                  Partners
-                </a>
-                <a
-                  className="f8 fw6 hover-red no-underline gray dib ml2 pv2 ph3 ba"
-                  href="/"
-                >
-                  Sign Up
-                </a>
-              </div>
-            </nav>
-            <div className="">
-              <header className="bb b--black-40 pv4 bg-white ">
-                <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3  ml2 mr2 center">
+        <div>
+          <InnerHeader />
+          <div class="extra-div gry-bg"></div>
+          <main>
+          <div className="event-deatils-area">
+          <div className="main-wrapper">
+          <h1>RVSP</h1>
+          
+        
+          <EventDetailsView event={event} guest={guest} guestId={guestId} />
+          <Payment guestId={guestId} guest={guest} event={event} />
+          {/* <div className="dtl-rgt rgt">
+          <aside class="event-part"></aside>
+          </div> */}
+          <div className="clear"></div>
+          
+          </div>
 
-                  {event.eventName}
-                </h3>
-
-              </header>
+          <img class="event-carv" src={curve} alt="iamgee"  />
+          </div>
+          </main>
 
 
-              <article data-name="article-full-bleed-background" >
+<img src={colorLine} alt="line" className="colored-line" />  
+<footer>
+
+<div className="main-wrapper">
+
+      <figure className="lft">
+
+          <a href="index.html"><img src={footerLogo} alt="image" /></a>
+
+          <figcaption>
+
+              <a href="#"><i className="fa fa-facebook"></i></a>
+
+              <a href="#"><i className="fa fa-twitter"></i></a>
+
+              <a href="#"><i className="fa fa-instagram"></i></a>
+
+          </figcaption>
+
+      </figure>
+
+      <div className="quick-link lft">
+
+        <h5>Quick Link</h5>
+
+          <ul>
+
+            <li><a href="#">About Us</a></li>
+
+              <li><a href="#">Causes</a></li>
+
+              <li><a href="#">Organizations</a></li>
+
+              <li><a href="#">How it Works</a></li>
+
+          </ul>
+
+      </div>
+
+      <div className="footer-how lft">
+
+          <h5>How It work</h5>
+
+          <ul>
+
+            <li><a href="#">Choose your causes</a></li>
+
+              <li><a href="#">Create your event</a></li>
+
+              <li><a href="#">Invite guests</a></li>
+
+             
+
+          </ul>
+
+      </div>
+
+      <div className="Community rgt">
+
+          <h5>Join Our Community</h5>
+
+          <p>Events can be public or private, <br/>small groups or large events. You can <br/>send your invitations by email.</p>
+
+          <a href="#" className="btn-new">join our community</a>
+
+      </div>
+
+      <div className="clear"></div>
+
+      
+
+      <div className="center-copy"> <p>Copyright © 2020 Cause & Cuisine. All rights reserved.</p> </div>
+
+  </div>
+
+</footer>
+<a className="scroll-top" href="javascript:void(0);"><i className="fa fa-caret-up"></i></a>
+
+              {/* <article data-name="article-full-bleed-background" >
                 <Message icon='check circle' hidden={guest.rsvp_status === 'pending'}
                   success
                   header="You Responded to this event"
@@ -93,37 +176,13 @@ class RSVP extends Component {
                     guest.donated === true ? `You donated $${guest.donation_amount} to this cause` : 'You can still donate to this cause',
                     `You can change your status at any time; Your current status is ${(guest.rsvp_status === 'attending') ? 'Attending' : 'Not Attending'}`,
                   ]}
-                />
-                <section className="bg-white w-80 center ">
-                  <div className="fl w-60 pt5 pa3 pa2-ns   bg-white     ">
-                    <h3 className="f3 green">Guest Details</h3>
-                    <dl className="lh-title pa1 mt0">
-                      <dt className="f8 b">Guest Name</dt>
-                      <dd className="ml0 gray">{this.props.guest.name}</dd>
-                      <dt className="f8 b mt2">Email</dt>
-                      <dd className="ml0 gray">{this.props.guest.email}</dd>
-                      <dt className="f8 b mt2">RSVP Status</dt>
-                      <dd className="ml0 gray">{this.props.guest.rsvp_status}</dd>
-                    </dl>
-
-                    <h3 className="f3 green">Event Details</h3>
-                    <dl className="lh-title pa1 mt0">
-                      <dt className="f8 b">Host Name</dt>
-                      <dd className="ml0 gray">{event.hostName}</dd>
-                      <dt className="f8 b mt2">When</dt>
-                      <dd className="ml0 gray">{event.date} @ {event.time}</dd>
-                      <dt className="f8 b mt2">Where</dt>
-                      <dd className="ml0 gray">{event.location}</dd>
-                      <dt className="f8 b mt2">Minimum Donation</dt>
-                      <dd className="ml0 gray">${event.minDonation}</dd>
-                      <dt className="f8 b mt2">Recommended Donation</dt>
-                      <dd className="ml0 gray">${event.recommendedDonation}</dd>
-                      <dt className="f8 b mt2">Event Details</dt>
-                      <dd className="ml0 gray">{event.details}</dd>
-                    </dl>
+                /> */}
+                {/* <section className="bg-white w-80 center ">
+                  <div className="fl w-60 pt5 pa3 pa2-ns   bg-white     "> */}
+                    
 
 
-                    <section className="bg-white w-100   ">
+                    {/* <section className="bg-white w-100   ">
                       <h3 className="f3 green">Cause Details</h3>
                       <div className="fl w-30 w-100-m w-50-l pa2">
                         <img
@@ -149,23 +208,20 @@ class RSVP extends Component {
 
                       </div>
 
-                    </section>
+                    </section> */}
 
-                  </div>
-                  <div className="fl w-40 pt5 pa3 pa2-ns   bg-light-gray   ">
-                    <Payment guestId={guestId} guest={guest} event={event} />
+                  {/* </div>
+                  <div className="fl w-40 pt5 pa3 pa2-ns   bg-light-gray   "> */}
+                    {/* <Payment guestId={guestId} guest={guest} event={event} /> */}
 
-                  </div>
+                  {/* </div>
 
                 </section>
 
 
-              </article>
+              </article> */}
 
             </div>
-
-          </header>
-        </div>
       );
     }
 
