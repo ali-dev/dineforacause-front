@@ -5,7 +5,7 @@ import logo from '../assets/images/logo.png';
 import userIcon from "../assets/images/user(1).svg";
 function InnerHeader() {
   return (
-    <div>  
+      
     <header className="inner_header">
         <div className="main-wrapper"><a className="lft logo" href="/"><img src={logo} alt="logo" /></a>
         <nav className="lft">
@@ -31,7 +31,7 @@ function InnerHeader() {
 
     </div>
   </header>
-  </div>
+  
   );
 }
 

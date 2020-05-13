@@ -6,7 +6,7 @@ frontend:
         - yarn install
     build:
       commands:
-        # -  PUBLIC_URL=https://assets-staging.causeandcuisine.com/dist/
+        -  PUBLIC_URL=https://assets-staging.causeandcuisine.com/dist/
         -  yarn run build
     postBuild:
         commands:

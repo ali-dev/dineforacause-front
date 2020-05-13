@@ -194,7 +194,7 @@ class CheckoutForm extends Component {
         <label class="container">
           Donate?
           <input type="checkbox" checked="checked" />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
         {/* <h3 className="f3 green">RSVP & Donate</h3> */}
         {/* className="payment-form" */}
@@ -251,7 +251,10 @@ class CheckoutForm extends Component {
             </div>
             {/* </section> */}
           </aside>
+        
         </form>
+        
+          
       </div>
     );
   }
