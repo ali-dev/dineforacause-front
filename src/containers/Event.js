@@ -7,11 +7,16 @@ import 'tachyons/css/tachyons.min.css'
 import eventCurve from "../assets/images/event-carv.png";
 import colorLine from '../assets/images/color-line.png';
 import footerLogo from '../assets/images/footer-logo.jpg';
+// import { Auth } from 'aws-amplify';
+
 class Event extends Component {
   
 
+
   render() {
-  	
+    // let user = await Auth.currentAuthenticatedUser();
+    // // console.log(Auth.currentAuthenticatedUser());
+    // console.log(user);
     return (
     <div>
       <InnerHeader />

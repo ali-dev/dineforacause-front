@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 // import Header from '../components/Header'
 // import CardList from '../components/CardList'
 // import SearchBox from '../components/SearchBox'
-
+import SignUpModal from '../components/SignUpModal';
 import banner from '../assets/images/banner-img.jpg';
 import logo from '../assets/images/logo.png';
 import downImage from '../assets/images/down-img.png';
@@ -47,7 +47,8 @@ class OldApp extends Component {
   constructor(props) {
 		super(props)
 		this.state = {
-			headerClass: ''
+      headerClass: '',
+      signUpModalOpen: false
 		}
 	}
   componentDidMount() {
@@ -71,6 +72,13 @@ class OldApp extends Component {
       });
     }
   }
+
+  createEventAction() {
+    this.setState({
+      signUpModalOpen: true
+    });
+    
+  }
   render() {
     const { causes, searchField, onSearchChange } = this.props;
 
@@ -79,6 +87,7 @@ class OldApp extends Component {
     // });
     return (
       <div >
+        <SignUpModal open={this.state.signUpModalOpen}/>
         <header className={this.state.headerClass}>
           <div className="main-wrapper">
             <a className="lft logo" href="index.html">
@@ -105,7 +114,7 @@ class OldApp extends Component {
                 </li>
               </ul>
             </nav>
-            <Link to="/event/create" className="btn rgt">
+            <Link onClick={() => this.createEventAction()}  className="btn rgt">
               <img src={userIcon} alt="image" />
               <span>Create Event</span>
             </Link>
