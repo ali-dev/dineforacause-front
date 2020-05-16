@@ -69,7 +69,7 @@ class SignUp extends Component {
           .then((result) => {
               console.log(result);
             Auth.signIn(email, password).then((user) =>{
-                localStorage.setItem(AUTH_USER_TOKEN_KEY, user.signInUserSession.accessToken.jwtToken);
+                // localStorage.setItem(AUTH_USER_TOKEN_KEY, user.signInUserSession.accessToken.jwtToken);
                 console.log('success'); 
             })
             .catch((e) => {

@@ -19,6 +19,7 @@ import { requestCauses, requestCause, searchCauses, requestEventForView, request
 
 import { Router } from 'react-router';
 import { Route} from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 import { createBrowserHistory } from 'history';
 
 
@@ -52,11 +53,13 @@ if (isReleased) {
   routing = (
     <Provider store={store}>
     <Router history={history}>
+    
         <Route exact={true} path="/" component={App} />
-        <Route path="/event/create/" component={Event} />
+        {/* <Route path="/event/create/" component={Event} /> */}
         <Route path="/rsvp/:viewId/:guestId" component={RSVP} />
         <Route path="/event/view/:viewId" component={EventView} />
         <Route path="/event/manage/:editId" component={EventManage} />
+        <PrivateRoute path="/event/create/" component={Event} />
     </Router>
     </Provider>
   )
