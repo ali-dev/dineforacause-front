@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Image, Modal } from "semantic-ui-react";
+import { Modal, Header, Embed } from "semantic-ui-react";
 import SignUp from "../containers/SignUp";
 class SignUpModal extends Component {
   state = {
@@ -20,6 +20,7 @@ class SignUpModal extends Component {
       <Modal open={this.state.modalOpen} onClose={this.handleClose}>
         <Modal.Header>Sign Up</Modal.Header>
         <Modal.Content >
+        
           <Modal.Description>
             <Header>Default Profile Image</Header>
             <SignUp />

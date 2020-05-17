@@ -25,6 +25,7 @@ import colorLine from '../assets/images/color-line.png';
 import footerLogo from '../assets/images/footer-logo.jpg';
 import userIcon from "../assets/images/user(1).svg";
 import currentUser from "../services/AuthService";
+
 // parameter state comes from index.js provider store state(rootReducers)
 const mapStateToProps = (state) => {
   return {
@@ -56,8 +57,12 @@ class OldApp extends Component {
     this.props.onRequestCauses();
     window.addEventListener('scroll', this.handleScroll.bind(this));
     
-    currentUser().then((u) =>{
+    currentUser().then((u) => {
+      alert(1);
+      alert(u);
       this.setState({user: u});
+    }).catch((error) => {
+      alert(error);
     });
     
     
@@ -80,12 +85,15 @@ class OldApp extends Component {
   }
 
   createEventAction() {
+    alert(this.state.user);
     if (this.state.user) {
       window.location.href = "/event/create";
     } else {
-      this.setState({
-        signUpModalOpen: true
-      });
+      window.location.href = process.env.REACT_APP_CREATE_EVENT_URL;
+      
+      // this.setState({
+      //   signUpModalOpen: true
+      // });
     }
 
     
@@ -126,10 +134,11 @@ class OldApp extends Component {
                 </li>
               </ul>
             </nav>
-            <Link onClick={() => this.createEventAction()}  className="btn rgt">
+            <a href="/event/create"   className="btn rgt">
+            {/* onClick={() => this.createEventAction()} */}
               <img src={userIcon} alt="image" />
               <span>Create Event</span>
-            </Link>
+            </a>
 
             <div className="hamber-menu">
               <span></span>

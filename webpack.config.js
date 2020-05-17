@@ -5,6 +5,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlCriticalWebpackPlugin = require("html-critical-webpack-plugin");
 const S3Uploader = require('webpack-s3-uploader');
+const fs = require('fs');
 
 const htmlPlugin = new HtmlWebPackPlugin({
     template: path.resolve(__dirname, "src/index.html"),
@@ -138,6 +139,12 @@ module.exports = (_env, argv) => {
        },
       devServer: {
           // contentBase: isProduction ? './dist': './src',
+          http2: true,
+          https: {
+            key: fs.readFileSync('/Users/aliabuelhaj/.localhost-ssl/localhost.key'),
+            cert: fs.readFileSync('/Users/aliabuelhaj/.localhost-ssl/localhost.crt'),
+            // ca: fs.readFileSync('/path/to/ca.pem'),
+          },
           contentBase: path.resolve(__dirname, 'dist')
       },
       output: {

@@ -59,7 +59,7 @@ if (isReleased) {
         <Route path="/rsvp/:viewId/:guestId" component={RSVP} />
         <Route path="/event/view/:viewId" component={EventView} />
         <Route path="/event/manage/:editId" component={EventManage} />
-        <PrivateRoute path="/event/create/" component={Event} />
+        <Route path="/event/create/" component={Event} />
     </Router>
     </Provider>
   )
