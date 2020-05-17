@@ -24,7 +24,7 @@ import aboutMobile from '../assets/images/about-mobile-img.png';
 import colorLine from '../assets/images/color-line.png';
 import footerLogo from '../assets/images/footer-logo.jpg';
 import userIcon from "../assets/images/user(1).svg";
-
+import currentUser from "../services/AuthService";
 // parameter state comes from index.js provider store state(rootReducers)
 const mapStateToProps = (state) => {
   return {
@@ -48,12 +48,18 @@ class OldApp extends Component {
 		super(props)
 		this.state = {
       headerClass: '',
-      signUpModalOpen: false
+      signUpModalOpen: false,
+      user: false
 		}
 	}
   componentDidMount() {
     this.props.onRequestCauses();
     window.addEventListener('scroll', this.handleScroll.bind(this));
+    
+    currentUser().then((u) =>{
+      this.setState({user: u});
+    });
+    
     
   }
   componentWillUnmount() {
@@ -74,9 +80,15 @@ class OldApp extends Component {
   }
 
   createEventAction() {
-    this.setState({
-      signUpModalOpen: true
-    });
+    if (this.state.user) {
+      window.location.href = "/event/create";
+    } else {
+      this.setState({
+        signUpModalOpen: true
+      });
+    }
+
+    
     
   }
   render() {

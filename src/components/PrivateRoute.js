@@ -4,7 +4,6 @@
 // If they are: they proceed to the page
 // If not: they are redirected to the login page.
 import React, {useState, useEffect} from "react";
-import currentUser from "../services/AuthService";
 import { Redirect, Route } from "react-router-dom";
 import { Auth } from 'aws-amplify';
 
