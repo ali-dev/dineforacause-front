@@ -12,7 +12,7 @@ import footerLogo from '../assets/images/footer-logo.jpg';
 import '@aws-amplify/ui/dist/style.css';
 import { withAuthenticator } from 'aws-amplify-react';
 
-import AuthTheme from '../components/AuthTheme';
+import AuthTheme from '../config/AuthTheme';
 import { signUpConfig } from '../config/AuthConfig';
 
 
