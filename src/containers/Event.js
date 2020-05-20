@@ -8,7 +8,15 @@ import eventCurve from "../assets/images/event-carv.png";
 import colorLine from '../assets/images/color-line.png';
 import footerLogo from '../assets/images/footer-logo.jpg';
 // import { Auth } from 'aws-amplify';
-import { withAuthenticator } from '@aws-amplify/ui-react';
+// import '@aws-amplify/ui-react';
+import '@aws-amplify/ui/dist/style.css';
+import { withAuthenticator } from 'aws-amplify-react';
+
+import AuthTheme from '../components/AuthTheme';
+import { signUpConfig } from '../config/AuthConfig';
+
+
+;
 class Event extends Component {
   
 
@@ -114,4 +122,4 @@ class Event extends Component {
   }
 }
 
-export default withAuthenticator(Event);
+export default withAuthenticator(Event, true, [], null, AuthTheme, signUpConfig);

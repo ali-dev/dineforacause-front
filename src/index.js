@@ -75,4 +75,9 @@ if (!isReleased) {
   componentToRender = ComingSoon;
 }
 // export default componentToRender; 
-export default withAuthenticator(componentToRender, true);
+
+export default componentToRender
+// export default withAuthenticator(componentToRender, {
+//   signUpConfig: {
+//     hiddenDefaults: ['phone_number']
+//   }});
