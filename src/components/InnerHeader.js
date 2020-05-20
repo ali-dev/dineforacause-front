@@ -1,12 +1,20 @@
 import React, {useState, useLayoutEffect} from 'react';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
-
+import {Link} from 'react-router-dom';
 // import 'tachyons';
 
 import logo from '../assets/images/logo.png'; 
 import userIcon from "../assets/images/user(1).svg";
 import currentUser from "../services/AuthService";
+
+const signOut = () => {
+  Auth.signOut()
+  .then(data => window.location.href="/")
+  .catch(err => console.log(err));
+}
+
+
 function InnerHeader() {
   const [signout, setSignout] = useState(false);
   
@@ -22,11 +30,7 @@ function InnerHeader() {
   })
   }, []);
 
-  const signOut = () => {
-    Auth.signOut()
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-  }
+  
   return (
       
     <header className="inner_header">
@@ -47,7 +51,7 @@ function InnerHeader() {
 
         </nav>
         {/* <AmplifySignOut/> */}
-  {/* <a href="#" onClick={signOut()} className="btn rgt"><img   src={userIcon} alt="iamge" /><span>{signout === true ? "Sign Out" : "Sign Up"}</span></a> */}
+  <Link to="#" onClick={() => {signOut()}} className="btn rgt"><img   src={userIcon} alt="iamge" /><span>{signout === true ? "Sign Out" : "Sign Up"}</span></Link>
 
     <div className="hamber-menu"><span></span><span></span><span></span></div>
 
