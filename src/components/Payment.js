@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Dropdown, Radio } from "semantic-ui-react";
 import { loadStripe } from "@stripe/stripe-js";
-import client from "../api/appSyncClient";
+import {client} from "../api/appSyncClient";
 import gql from "graphql-tag";
 import { addCharge } from "../graphql/queries";
 import {

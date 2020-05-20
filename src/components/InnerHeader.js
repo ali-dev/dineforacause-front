@@ -11,8 +11,9 @@ function InnerHeader() {
   const [signout, setSignout] = useState(false);
   
   useLayoutEffect( () => {
-  currentUser().then(() => {
+  currentUser().then((u) => {
     setSignout(true);
+    console.log(u)
     // this.setState({signout: true})
   }).catch((error) => {
     setSignout(false);

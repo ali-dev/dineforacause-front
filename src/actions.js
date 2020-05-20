@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import {getCauseInfo, getAllCauses, getEventForView, getEventForEdit} from './graphql/queries';//addCharge, 
-import client from './api/appSyncClient'
+import {client} from './api/appSyncClient'
 import {
   CHANGE_SEARCHFIELD,
   REQUEST_CAUSES_PENDING,

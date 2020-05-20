@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import client from '../api/appSyncClient';
+import {client, privateClient } from '../api/appSyncClient';
 import { addEvent, addGuest, removeGuest, sendInvitation, createVirtualEvent} from './queries'; // @todo: maybe include getCauseInfo, getCauses, addCharge,
 
 const trigger = {
@@ -10,7 +10,7 @@ const trigger = {
 	  })
 	},
 	createVirtualEvent(eventData) {
-		return client.mutate({
+		return privateClient.mutate({
 		    mutation: gql(createVirtualEvent),
 		    variables: eventData
 	  })
