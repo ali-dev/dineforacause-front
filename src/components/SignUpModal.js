@@ -9,7 +9,6 @@ class SignUpModal extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({modalOpen: nextProps.open})  
-    console.log('componentWillReceiveProps', nextProps);
     }
 
 
