@@ -16,7 +16,7 @@ const trigger = {
 	  })
 	},
 	addGuest(data) {
-		return client.mutate({
+		return privateClient.mutate({
 			mutation: gql(addGuest),
 			variables: data
 		})
