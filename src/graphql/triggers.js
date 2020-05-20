@@ -4,7 +4,7 @@ import { addEvent, addGuest, removeGuest, sendInvitation, createVirtualEvent} fr
 
 const trigger = {
     createEvent(eventData) { 
-    	return client.mutate({
+    	return privateClient.mutate({
 		    mutation: gql(addEvent),
 		    variables: eventData
 	  })
@@ -22,15 +22,14 @@ const trigger = {
 		})
 	},
 	removeGuest(data) {
-		return client.mutate({
+		return privateClient.mutate({
 			mutation: gql(removeGuest),
 			variables: data
 		})
 	},
 
 	sendInvitation(data) {
-		console.log(data);
-		return client.mutate({
+		return privateClient.mutate({
 			mutation: gql(sendInvitation),
 			variables: {
 				data: JSON.stringify(data)

@@ -49,22 +49,12 @@ class OldApp extends Component {
 		super(props)
 		this.state = {
       headerClass: '',
-      signUpModalOpen: false,
       user: false
 		}
 	}
   componentDidMount() {
     this.props.onRequestCauses();
     window.addEventListener('scroll', this.handleScroll.bind(this));
-    
-    currentUser().then((u) => {
-      alert(1);
-      alert(u);
-      this.setState({user: u});
-    }).catch((error) => {
-      alert(error);
-    });
-    
     
   }
   componentWillUnmount() {
@@ -91,9 +81,6 @@ class OldApp extends Component {
     } else {
       window.location.href = process.env.REACT_APP_CREATE_EVENT_URL;
       
-      // this.setState({
-      //   signUpModalOpen: true
-      // });
     }
 
     
@@ -101,13 +88,8 @@ class OldApp extends Component {
   }
   render() {
     const { causes, searchField, onSearchChange } = this.props;
-
-    // const filteredCauses = causes.filter((cause) => {
-    //   return cause.details.toLowerCase().includes(searchField.toLowerCase());
-    // });
     return (
       <div >
-        <SignUpModal open={this.state.signUpModalOpen}/>
         <header className={this.state.headerClass}>
           <div className="main-wrapper">
             <a className="lft logo" href="index.html">
