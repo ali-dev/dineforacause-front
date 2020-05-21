@@ -74,10 +74,5 @@ let componentToRender = App;
 if (!isReleased) {
   componentToRender = ComingSoon;
 }
-// export default componentToRender; 
 
 export default componentToRender
-// export default withAuthenticator(componentToRender, {
-//   signUpConfig: {
-//     hiddenDefaults: ['phone_number']
-//   }});

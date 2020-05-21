@@ -10,7 +10,6 @@ import {Link} from 'react-router-dom';
 // import Header from '../components/Header'
 // import CardList from '../components/CardList'
 // import SearchBox from '../components/SearchBox'
-import SignUpModal from '../components/SignUpModal';
 import banner from '../assets/images/banner-img.jpg';
 import logo from '../assets/images/logo.png';
 import downImage from '../assets/images/down-img.png';
