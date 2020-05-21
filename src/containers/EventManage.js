@@ -7,7 +7,7 @@ import InnerHeader from '../components/InnerHeader'
 // const logger = createLogger()
 import EventGuests from '../forms/EventGuests'
 import { Tab, Form } from 'semantic-ui-react'
-
+import { protectedPage } from '../protected';
 const mapStateToProps = state => {
   return {
     event: state.requestEventForEdit.event,
@@ -83,4 +83,4 @@ class EventManage extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventManage);
+export default connect(mapStateToProps, mapDispatchToProps)(protectedPage(EventManage));

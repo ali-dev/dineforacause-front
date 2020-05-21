@@ -10,13 +10,8 @@ import footerLogo from '../assets/images/footer-logo.jpg';
 // import { Auth } from 'aws-amplify';
 // import '@aws-amplify/ui-react';
 import '@aws-amplify/ui/dist/style.css';
-import { withAuthenticator } from 'aws-amplify-react';
+import { protectedPage } from '../protected';
 
-import AuthTheme from '../config/AuthTheme';
-import { signUpConfig } from '../config/AuthConfig';
-
-
-;
 class Event extends Component {
   
 
@@ -122,4 +117,4 @@ class Event extends Component {
   }
 }
 
-export default withAuthenticator(Event, true, [], null, AuthTheme, signUpConfig);
+export default protectedPage(Event);
