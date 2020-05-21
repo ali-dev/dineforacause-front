@@ -21,7 +21,10 @@ import { Router } from 'react-router';
 import { Route} from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import { createBrowserHistory } from 'history';
+import { Auth } from 'aws-amplify';
+import awsconfig from './aws-exports';
 
+Auth.configure(awsconfig);
 
 // import "./assets/css/font-awesome.min.css";
 

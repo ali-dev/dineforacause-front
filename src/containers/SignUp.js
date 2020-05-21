@@ -27,6 +27,7 @@ import awsconfig from '../aws-exports';
 //   .digits()
 //   .has()
 //   .symbols();
+// TODO: remove this file
 Auth.configure(awsconfig);
 
 class SignUp extends Component {

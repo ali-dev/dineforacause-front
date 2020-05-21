@@ -7,8 +7,6 @@ import 'tachyons/css/tachyons.min.css'
 import eventCurve from "../assets/images/event-carv.png";
 import colorLine from '../assets/images/color-line.png';
 import footerLogo from '../assets/images/footer-logo.jpg';
-// import { Auth } from 'aws-amplify';
-// import '@aws-amplify/ui-react';
 import '@aws-amplify/ui/dist/style.css';
 import { protectedPage } from '../protected';
 
@@ -116,5 +114,6 @@ class Event extends Component {
   	);
   }
 }
+
 
 export default protectedPage(Event);
