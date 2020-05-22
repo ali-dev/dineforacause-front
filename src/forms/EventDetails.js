@@ -159,16 +159,7 @@ class CreateEventForm extends Component {
           </Form.Field>
         </Form.Group>
         {this.getLocationField()}
-        {/* <div className="ui divider"></div>
-        <Form.TextArea 
-            required
-            label="Where"
-            onChange={this.handleChangeInput}
-            name="location"
-            value={this.state.location}
-            placeholder="Add an address or location"
-          
-        /> */}
+        
 
         <div className="ui divider"></div>
         <Form.TextArea

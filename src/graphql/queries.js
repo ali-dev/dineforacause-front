@@ -80,7 +80,7 @@ export const createVirtualEvent = `mutation createVirtualEvent(
   $eventName: String!, 
   $cause: String!, 
   $organizationId: String!, 
-  $location: String! , 
+  $location: String, 
   $hostName: String!, 
   $hostEmail: String!,
   $recommendedDonation: Int,
@@ -138,6 +138,7 @@ export const getEventForEdit = `query getEventForEdit($editId: String!) {
   getEventForEdit(editId: $editId) {
     id
     eventName
+    eventDetails
     cause
     causeDetails
     hostName

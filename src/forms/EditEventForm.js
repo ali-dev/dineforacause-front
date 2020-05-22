@@ -44,7 +44,6 @@ class EditEventForm extends Component {
     const cause = this.state.causeDetails;
     const causeDetails = JSON.parse(cause);
     const imagePath = "https://dfac-main.s3.amazonaws.com/app";
-
     return (
       <Form size="small">
         <section className="bg-white w-80 center  event-part">
