@@ -23,8 +23,8 @@ import aboutMobile from '../assets/images/about-mobile-img.png';
 import colorLine from '../assets/images/color-line.png';
 import footerLogo from '../assets/images/footer-logo.jpg';
 import userIcon from "../assets/images/user(1).svg";
-import currentUser from "../services/AuthService";
-
+import SiteConfig from "../config/SiteConfig";
+const config = new SiteConfig();
 // parameter state comes from index.js provider store state(rootReducers)
 const mapStateToProps = (state) => {
   return {
@@ -118,7 +118,7 @@ class OldApp extends Component {
             <a href="/event/create"   className="btn rgt">
             {/* onClick={() => this.createEventAction()} */}
               <img src={userIcon} alt="image" />
-              <span>Create Event</span>
+              <span>{config.createEventLabel}</span>
             </a>
 
             <div className="hamber-menu">

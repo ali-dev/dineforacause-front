@@ -6,6 +6,8 @@ import trigger from '../graphql/triggers'
 import { v4 as uuidv4 } from 'uuid';
 
 import { withRouter } from 'react-router-dom';
+import SiteConfig from "../config/SiteConfig";
+const config = new SiteConfig();
 
 
 
@@ -45,24 +47,11 @@ class CreateEventForm extends Component {
 		
 		const { history } = this.props;
 		
-		if (parseInt(process.env.REACT_APP_COVID19) === 1) {
-			trigger
-			.createVirtualEvent(this.state)
+		const eventTrigger = config.getCreateEventTrigger;
+		eventTrigger(this.state)
 			.then((data) => {
 				history.push(`/event/manage/${this.state.editId}`);
-				zoomLink = data.link;
-			});
-			 
-		} else {
-			trigger
-            .createEvent(this.state)
-            .then(data => {
-                history.push(`/event/manage/${data.data.addEvent.editId}`);
-            })
-		}
-
-
-		
+			}); 
 	}
 	
 	render() {

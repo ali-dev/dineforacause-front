@@ -24,6 +24,9 @@ import { createBrowserHistory } from 'history';
 import { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 
+import SiteConfig from "./config/SiteConfig";
+const config = new SiteConfig();
+
 Auth.configure(awsconfig);
 
 // import "./assets/css/font-awesome.min.css";
@@ -61,7 +64,7 @@ if (isReleased) {
         {/* <Route path="/event/create/" component={Event} /> */}
         <Route path="/rsvp/:viewId/:guestId" component={RSVP} />
         <Route path="/event/view/:viewId" component={EventView} />
-        <Route path="/event/manage/:editId" component={EventManage} />
+        <Route config={config} path="/event/manage/:editId" component={EventManage} />
         <Route path="/event/create/" component={Event} />
     </Router>
     </Provider>
