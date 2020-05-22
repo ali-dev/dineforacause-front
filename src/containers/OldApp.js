@@ -10,7 +10,6 @@ import {Link} from 'react-router-dom';
 // import Header from '../components/Header'
 // import CardList from '../components/CardList'
 // import SearchBox from '../components/SearchBox'
-
 import banner from '../assets/images/banner-img.jpg';
 import logo from '../assets/images/logo.png';
 import downImage from '../assets/images/down-img.png';
@@ -24,6 +23,7 @@ import aboutMobile from '../assets/images/about-mobile-img.png';
 import colorLine from '../assets/images/color-line.png';
 import footerLogo from '../assets/images/footer-logo.jpg';
 import userIcon from "../assets/images/user(1).svg";
+import currentUser from "../services/AuthService";
 
 // parameter state comes from index.js provider store state(rootReducers)
 const mapStateToProps = (state) => {
@@ -47,7 +47,8 @@ class OldApp extends Component {
   constructor(props) {
 		super(props)
 		this.state = {
-			headerClass: ''
+      headerClass: '',
+      user: false
 		}
 	}
   componentDidMount() {
@@ -71,12 +72,21 @@ class OldApp extends Component {
       });
     }
   }
+
+  createEventAction() {
+    alert(this.state.user);
+    if (this.state.user) {
+      window.location.href = "/event/create";
+    } else {
+      window.location.href = process.env.REACT_APP_CREATE_EVENT_URL;
+      
+    }
+
+    
+    
+  }
   render() {
     const { causes, searchField, onSearchChange } = this.props;
-
-    // const filteredCauses = causes.filter((cause) => {
-    //   return cause.details.toLowerCase().includes(searchField.toLowerCase());
-    // });
     return (
       <div >
         <header className={this.state.headerClass}>
@@ -105,10 +115,11 @@ class OldApp extends Component {
                 </li>
               </ul>
             </nav>
-            <Link to="/event/create" className="btn rgt">
+            <a href="/event/create"   className="btn rgt">
+            {/* onClick={() => this.createEventAction()} */}
               <img src={userIcon} alt="image" />
               <span>Create Event</span>
-            </Link>
+            </a>
 
             <div className="hamber-menu">
               <span></span>

@@ -7,11 +7,17 @@ import 'tachyons/css/tachyons.min.css'
 import eventCurve from "../assets/images/event-carv.png";
 import colorLine from '../assets/images/color-line.png';
 import footerLogo from '../assets/images/footer-logo.jpg';
+import '@aws-amplify/ui/dist/style.css';
+import { protectedPage } from '../protected';
+
 class Event extends Component {
   
 
+
   render() {
-  	
+    // let user = await Auth.currentAuthenticatedUser();
+    // // console.log(Auth.currentAuthenticatedUser());
+    // console.log(user);
     return (
     <div>
       <InnerHeader />
@@ -109,4 +115,5 @@ class Event extends Component {
   }
 }
 
-export default Event;
+
+export default protectedPage(Event);

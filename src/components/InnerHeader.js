@@ -1,9 +1,36 @@
-import React from 'react';
+import React, {useState, useLayoutEffect} from 'react';
+import { AmplifySignOut } from '@aws-amplify/ui-react';
+import { Auth } from 'aws-amplify';
+import {Link} from 'react-router-dom';
 // import 'tachyons';
 
 import logo from '../assets/images/logo.png'; 
 import userIcon from "../assets/images/user(1).svg";
+import currentUser from "../services/AuthService";
+
+const signOut = () => {
+  Auth.signOut()
+  .then(data => window.location.href="/")
+  .catch(err => console.log(err));
+}
+
+
 function InnerHeader() {
+  const [signout, setSignout] = useState(false);
+  
+  useLayoutEffect( () => {
+  currentUser().then((u) => {
+    setSignout(true);
+    console.log(u)
+    // this.setState({signout: true})
+  }).catch((error) => {
+    setSignout(false);
+    // this.setState({signout: false})
+    
+  })
+  }, []);
+
+  
   return (
       
     <header className="inner_header">
@@ -23,7 +50,8 @@ function InnerHeader() {
         </ul>
 
         </nav>
-        <a href="#" className="btn rgt"><img src={userIcon} alt="iamge" /><span>Sign Up</span></a>
+        {/* <AmplifySignOut/> */}
+  <Link to="#" onClick={() => {signOut()}} className="btn rgt"><img   src={userIcon} alt="iamge" /><span>{signout === true ? "Sign Out" : "Sign Up"}</span></Link>
 
     <div className="hamber-menu"><span></span><span></span><span></span></div>
 
