@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Form, } from 'semantic-ui-react'
-import EventCauses from './EventCauses'
-import EventDetails from './EventDetails'
-import trigger from '../graphql/triggers'
+import { Button, Form, } from 'semantic-ui-react';
+import EventCauses from './EventCauses';
+import EventDetails from './EventDetails';
+import trigger from '../graphql/triggers';
 import { v4 as uuidv4 } from 'uuid';
 
 import { withRouter } from 'react-router-dom';
