@@ -68,6 +68,27 @@ class CreateEventForm extends Component {
     });
   };
 
+  getLocationField = () => {
+    if (parseInt(process.env.REACT_APP_COVID19) === 1) {
+      return(<div></div>);
+    } else {
+      return(
+        <div>
+         <div className="ui divider"></div>
+        <Form.TextArea 
+            required
+            label="Where"
+            onChange={this.handleChangeInput}
+            name="location"
+            value={this.state.location}
+            placeholder="Add an address or location"
+          
+        /> 
+        </div>
+      );
+    }
+  } 
+
   componentDidMount() {
     // this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
   }
@@ -137,8 +158,8 @@ class CreateEventForm extends Component {
             />
           </Form.Field>
         </Form.Group>
-
-        <div className="ui divider"></div>
+        {this.getLocationField()}
+        {/* <div className="ui divider"></div>
         <Form.TextArea 
             required
             label="Where"
@@ -147,7 +168,7 @@ class CreateEventForm extends Component {
             value={this.state.location}
             placeholder="Add an address or location"
           
-        />
+        /> */}
 
         <div className="ui divider"></div>
         <Form.TextArea

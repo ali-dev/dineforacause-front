@@ -54,7 +54,6 @@ class CreateEventForm extends Component {
 			});
 			 
 		} else {
-			alert('not zoom');
 			trigger
             .createEvent(this.state)
             .then(data => {
