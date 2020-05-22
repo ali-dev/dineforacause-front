@@ -6,5 +6,5 @@ import { signUpConfig } from './config/AuthConfig';
 
 
 export const protectedPage = (component) => {
-    return withAuthenticator(component, true, [], null, AuthTheme, signUpConfig)
+    return withAuthenticator(component, false, [], null, AuthTheme, signUpConfig)
 }
