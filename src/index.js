@@ -23,9 +23,10 @@ import PrivateRoute from './components/PrivateRoute';
 import { createBrowserHistory } from 'history';
 import { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
+import config from 'react-global-configuration';
 
 import SiteConfig from "./config/SiteConfig";
-const config = new SiteConfig();
+let conf = new SiteConfig();
 
 Auth.configure(awsconfig);
 
@@ -34,6 +35,7 @@ Auth.configure(awsconfig);
 // import "./assets/css/style.css";
 // import "./assets/css/responsive.css";
 
+config.set({ siteSettings: conf });
 
 const logger = createLogger()
 
@@ -61,10 +63,9 @@ if (isReleased) {
     <Router history={history}>
     
         <Route exact={true} path="/" component={App} />
-        {/* <Route path="/event/create/" component={Event} /> */}
         <Route path="/rsvp/:viewId/:guestId" component={RSVP} />
         <Route path="/event/view/:viewId" component={EventView} />
-        <Route config={config} path="/event/manage/:editId" component={EventManage} />
+        {/* <Route config={config} path="/event/manage/:editId" component={EventManage} /> */}
         <Route path="/event/create/" component={Event} />
     </Router>
     </Provider>

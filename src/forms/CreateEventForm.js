@@ -6,8 +6,7 @@ import trigger from '../graphql/triggers';
 import { v4 as uuidv4 } from 'uuid';
 
 import { withRouter } from 'react-router-dom';
-import SiteConfig from "../config/SiteConfig";
-const config = new SiteConfig();
+import config from 'react-global-configuration';
 
 
 
@@ -16,6 +15,7 @@ class CreateEventForm extends Component {
 
 	constructor(props) {
 		super(props);
+		this.siteSettings = config.get('siteSettings');;
 		this.state = {
 			cause: '',
             organizationId: '',
@@ -47,7 +47,7 @@ class CreateEventForm extends Component {
 		
 		const { history } = this.props;
 		
-		const eventTrigger = config.getCreateEventTrigger;
+		const eventTrigger = this.siteSettings.getCreateEventTrigger;
 		eventTrigger(this.state)
 			.then((data) => {
 				history.push(`/event/manage/${this.state.editId}`);

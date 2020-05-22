@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import { Form, Dropdown } from "semantic-ui-react";
 import { DateInput } from "semantic-ui-calendar-react";
 import {TIME_LIST} from '../utils/lists';
-import SiteConfig from "../config/SiteConfig";
-const config = new SiteConfig();
+
+import config from 'react-global-configuration';
+
+
 
 class CreateEventForm extends Component {
   constructor(props) {
     super(props);
+    this.siteSettings = config.get('siteSettings');
     this.state = {
         eventName: "",
         eventDetails: "",
@@ -138,7 +141,7 @@ class CreateEventForm extends Component {
             />
           </Form.Field>
         </Form.Group>
-        {config.getLocationField(this.handleChangeInput, this.state.location)}
+        {this.siteSettings.getLocationField(this.handleChangeInput, this.state.location)}
         
 
         <div className="ui divider"></div>
