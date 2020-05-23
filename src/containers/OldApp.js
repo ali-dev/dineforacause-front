@@ -89,18 +89,6 @@ class OldApp extends Component {
     });
   };
 
-  createEventAction() {
-    alert(this.state.user);
-    if (this.state.user) {
-      window.location.href = "/event/create";
-    } else {
-      window.location.href = process.env.REACT_APP_CREATE_EVENT_URL;
-      
-    }
-
-    
-    
-  }
   render() {
     const { causes, searchField, onSearchChange } = this.props;
     return (
@@ -133,7 +121,6 @@ class OldApp extends Component {
               </ul>
             </nav>
             <a href="/event/create"   className="btn rgt">
-            {/* onClick={() => this.createEventAction()} */}
               <img src={userIcon} alt="image" />
               <span>{this.siteSettings.createEventLabel}</span>
             </a>
