@@ -1,5 +1,5 @@
 import React from 'react';
-import { withAuthenticator } from 'aws-amplify-react';
+// import { withAuthenticator } from 'aws-amplify-react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -14,12 +14,10 @@ import Event from './containers/Event';
 import RSVP from './containers/RSVP';
 import EventView from './containers/EventView';
 import EventManage from './containers/EventManage';
-import registerServiceWorker from './registerServiceWorker';
 import { requestCauses, requestCause, searchCauses, requestEventForView, requestEventForEdit, requestDataForRSVP } from './reducers'
 
 import { Router } from 'react-router';
 import { Route} from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute';
 import { createBrowserHistory } from 'history';
 import { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
@@ -33,14 +31,9 @@ import "./assets/css/font-awesome.min.css";
 import "./assets/css/style.css";
 import "./assets/css/responsive.css";
 
-let conf = new SiteConfig();
+const conf = new SiteConfig();
 
 Auth.configure(awsconfig);
-
-// import "./assets/css/font-awesome.min.css";
-
-// import "./assets/css/style.css";
-// import "./assets/css/responsive.css";
 
 config.set({ siteSettings: conf });
 
@@ -68,11 +61,10 @@ if (isReleased) {
   routing = (
     <Provider store={store}>
     <Router history={history}>
-    
         <Route exact={true} path="/" component={App} />
         <Route path="/rsvp/:viewId/:guestId" component={RSVP} />
         <Route path="/event/view/:viewId" component={EventView} />
-        {/* <Route config={config} path="/event/manage/:editId" component={EventManage} /> */}
+        <Route  path="/event/manage/:editId" component={EventManage} />
         <Route path="/event/create/" component={Event} />
     </Router>
     </Provider>
@@ -83,7 +75,6 @@ if (isReleased) {
 
 ReactDOM.render(routing, document.getElementById('root'));
 
-// registerServiceWorker();
 let componentToRender = App;
 if (!isReleased) {
   componentToRender = ComingSoon;
