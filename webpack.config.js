@@ -43,6 +43,7 @@ const envVars = new webpack.EnvironmentPlugin({
     REACT_APP_APPSYNC_URL: process.env.REACT_APP_APPSYNC_URL, // use 'development' unless process.env.NODE_ENV is defined
     REACT_APP_APPSYNC_API_KEY: process.env.REACT_APP_APPSYNC_API_KEY,
     REACT_APP_IS_RELEASED: process.env.REACT_APP_IS_RELEASED,
+    REACT_APP_COVID19: process.env.REACT_APP_COVID19
   });
 
 
