@@ -3,9 +3,14 @@ import { Form, Dropdown } from "semantic-ui-react";
 import { DateInput } from "semantic-ui-calendar-react";
 import {TIME_LIST} from '../utils/lists';
 
+import config from 'react-global-configuration';
+
+
+
 class CreateEventForm extends Component {
   constructor(props) {
     super(props);
+    this.siteSettings = config.get('siteSettings');
     this.state = {
         eventName: "",
         eventDetails: "",
@@ -67,28 +72,6 @@ class CreateEventForm extends Component {
       attendees: attendees
     });
   };
-
-  getLocationField = () => {
-    if (parseInt(process.env.REACT_APP_COVID19) === 1) {
-      return(<div></div>);
-    } else {
-      return(
-        <div>
-         <div className="ui divider"></div>
-        <Form.TextArea 
-            required
-            label="Where"
-            onChange={this.handleChangeInput}
-            name="location"
-            value={this.state.location}
-            placeholder="Add an address or location"
-          
-        /> 
-        </div>
-      );
-    }
-  } 
-
   componentDidMount() {
     // this.props.onRequestCause(this.props.match.params.organizationId, this.props.match.params.id);
   }
@@ -158,7 +141,7 @@ class CreateEventForm extends Component {
             />
           </Form.Field>
         </Form.Group>
-        {this.getLocationField()}
+        {this.siteSettings.getLocationField(this.handleChangeInput, this.state.location)}
         
 
         <div className="ui divider"></div>
