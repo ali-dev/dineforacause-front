@@ -4,13 +4,13 @@ frontend:
     preBuild:
       commands:
         - yarn install
+        -  aws s3 rm s3://cause-cuisine-site-assets/ --recursive
     build:
       commands:
         -  PUBLIC_URL=https://assets-staging.causeandcuisine.com/dist/
         -  yarn run build
     postBuild:
         commands:
-        -  aws s3 rm s3://cause-cuisine-site-assets/ --recursive
         # -  yarn run upload-assets   
   artifacts:
     baseDirectory: dist
