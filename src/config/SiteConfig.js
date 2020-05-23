@@ -18,6 +18,33 @@ class Covid {
     this.getLocationField = (handler, value) => {
       return <div></div>;
     };
+
+    
+
+    this.getCausesOptions = (data) => {
+        
+        const result = data.data.getAllCauses.causes.filter((val) => { return val.causeName == 'Covid19 Relief Fund'});
+        console.log(result); 
+        return result;
+    };
+
+    this.getCausesField = (onChangeHandler) => {
+        return(
+            <Form.Field required>
+            <label>Cause</label>  
+            <Dropdown
+              selectOnNavigation={true}
+              
+              fluid
+              search
+              selection
+              options={causes}
+              onChange={onChangeHandler}
+            />
+          </Form.Field>
+        )
+
+    }
   }
 }
 
@@ -40,6 +67,12 @@ class RegularSite {
         </div>
       );
     };
+
+    this.getCausesOptions = (data) => {
+        return data.data.getAllCauses.causes;
+    }
+    
+
   }
 }
 

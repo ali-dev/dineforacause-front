@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import {getCauseInfo, getAllCauses, getEventForView, getEventForEdit} from './graphql/queries';//addCharge, 
 import {client, privateClient} from './api/appSyncClient'
+import config from 'react-global-configuration';
 import {
   CHANGE_SEARCHFIELD,
   REQUEST_CAUSES_PENDING,
@@ -26,12 +27,15 @@ import {
 export const setSearchField = (text) => ({ type: CHANGE_SEARCHFIELD, payload: text })
 
 export const requestCauses = () => (dispatch) => {
+  const siteSettings = config.get('siteSettings')
   dispatch({ type: REQUEST_CAUSES_PENDING })
   client.query({
 	  query: gql(getAllCauses),
 	  
-	}).then(data => dispatch({ type: REQUEST_CAUSES_SUCCESS, payload: data.data.getAllCauses.causes }))
-	  .catch(e => dispatch({ type: REQUEST_CAUSES_FAILED, payload: e }))
+  }).then((data)  => {
+      const causesData = siteSettings.getCausesOptions(data);
+      dispatch({ type: REQUEST_CAUSES_SUCCESS, payload: causesData })
+  }).catch(e => dispatch({ type: REQUEST_CAUSES_FAILED, payload: e }))
 }
 
 
