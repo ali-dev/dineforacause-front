@@ -6,7 +6,7 @@ import "../assets/css/font-awesome.min.css";
 
 import "../assets/css/style.css";
 import "../assets/css/responsive.css";
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 // import Header from '../components/Header'
 // import CardList from '../components/CardList'
 // import SearchBox from '../components/SearchBox'
@@ -83,7 +83,7 @@ class OldApp extends Component {
   navScroll = (ref) => {
     const section = ref.current;
     window.scrollTo({
-      top: section.offsetTop,
+      top: section.offsetTop - 70,
       left: 0,
       behavior: "smooth"
     });
@@ -266,9 +266,11 @@ class OldApp extends Component {
 
           <span>The causes that you care about!</span>
 
-          <p >We truly believe that holding social events and dinner parties can be a powerful and organic way for grassroots groups and initiatives to support causes through community giving.</p>
+          <p >
+          Cause & Cuisine helps you fundraise for the causes that you care about. We truly believe that holding social events and dinner parties can be a powerful and organic way for grassroots groups and initiatives to support causes through community giving and partnerships with non-profit organizations. The platform helps fundraisers connect and engage with people who may be interested in donating to their causes and interested in joining like-minded communities working on grassroots initiatives.</p>
+            {/* We truly believe that holding social events and dinner parties can be a powerful and organic way for grassroots groups and initiatives to support causes through community giving.</p> */}
 
-          <a href="#" className="btn">Read More</a>
+          {/* <a href="#" className="btn">Read More</a> */}
 
       </div>
 
