@@ -1,5 +1,5 @@
-import React from 'react';
-import { Form } from 'semantic-ui-react';
+import React from "react";
+import { Form } from "semantic-ui-react";
 import trigger from "../graphql/triggers";
 class siteConfig {
   constructor() {
@@ -13,38 +13,38 @@ class siteConfig {
 
 class Covid {
   constructor() {
-    this.createEventLabel = "Create Event";
+    this.createEventLabel = "Create Virtual Event";
     this.getCreateEventTrigger = trigger.createVirtualEvent;
     this.getLocationField = (handler, value) => {
       return <div></div>;
     };
 
-    
-
+    this.getSocialMediaIcons = () => {
+      return;
+    };
     this.getCausesOptions = (data) => {
-        
-        const result = data.data.getAllCauses.causes.filter((val) => { return val.causeName == 'Covid19 Relief Fund'});
-        console.log(result); 
-        return result;
+      const result = data.data.getAllCauses.causes.filter((val) => {
+        return val.causeName == "Covid19 Relief Fund";
+      });
+      console.log(result);
+      return result;
     };
 
     this.getCausesField = (onChangeHandler) => {
-        return(
-            <Form.Field required>
-            <label>Cause</label>  
-            <Dropdown
-              selectOnNavigation={true}
-              
-              fluid
-              search
-              selection
-              options={causes}
-              onChange={onChangeHandler}
-            />
-          </Form.Field>
-        )
-
-    }
+      return (
+        <Form.Field required>
+          <label>Cause</label>
+          <Dropdown
+            selectOnNavigation={true}
+            fluid
+            search
+            selection
+            options={causes}
+            onChange={onChangeHandler}
+          />
+        </Form.Field>
+      );
+    };
   }
 }
 
@@ -52,6 +52,25 @@ class RegularSite {
   constructor() {
     this.createEventLabel = "Create Event";
     this.getCreateEventTrigger = trigger.createEvent;
+
+    this.getSocialMediaIcons = () => {
+      return (
+        <figcaption>
+          <a href="#">
+            <i className="fa fa-facebook"></i>
+          </a>
+
+          <a href="#">
+            <i className="fa fa-twitter"></i>
+          </a>
+
+          <a href="#">
+            <i className="fa fa-instagram"></i>
+          </a>
+        </figcaption>
+      );
+    };
+
     this.getLocationField = (handler, value) => {
       return (
         <div>
@@ -69,10 +88,8 @@ class RegularSite {
     };
 
     this.getCausesOptions = (data) => {
-        return data.data.getAllCauses.causes;
-    }
-    
-
+      return data.data.getAllCauses.causes;
+    };
   }
 }
 

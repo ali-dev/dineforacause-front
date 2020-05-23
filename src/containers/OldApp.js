@@ -52,7 +52,11 @@ class OldApp extends Component {
 		this.state = {
       headerClass: '',
       user: false
-		}
+    }
+    this.howItWorksRef = React.createRef();
+    this.aboutUsRef = React.createRef();
+    
+    console.log(process.env.REACT_APP_COVID19);
 	}
   componentDidMount() {
     this.props.onRequestCauses();
@@ -75,6 +79,15 @@ class OldApp extends Component {
       });
     }
   }
+
+  navScroll = (ref) => {
+    const section = ref.current;
+    window.scrollTo({
+      top: section.offsetTop,
+      left: 0,
+      behavior: "smooth"
+    });
+  };
 
   createEventAction() {
     alert(this.state.user);
@@ -102,20 +115,21 @@ class OldApp extends Component {
             <nav className="lft">
               <ul>
                 <li>
-                  <a href="http://www.google.com">About Us</a>
+                  <a onClick={e=> { e.preventDefault();  this.navScroll(this.howItWorksRef)}} href="#">How it Works</a>
+                </li>
+                <li>
+                  <a onClick={e=> { e.preventDefault();  this.navScroll(this.aboutUsRef)}}>About Us{" "}</a>
                 </li>
 
                 <li>
-                  <a href="http://www.google.com">Causes</a>
+                  <a href="#" onClick={() => this.navScroll(this.howItWorksRef)} >Causes{" "}</a>
                 </li>
 
-                <li>
+                {/* <li>
                   <a href="http://www.google.com">Organizations</a>
-                </li>
+                </li> */}
 
-                <li>
-                  <a href="http://www.google.com">How it Works</a>
-                </li>
+                
               </ul>
             </nav>
             <a href="/event/create"   className="btn rgt">
@@ -157,9 +171,9 @@ class OldApp extends Component {
      
 
 
-<main>
+<main >
 
-<section className="how-it-work main-wrapper">
+<section className="how-it-work main-wrapper" ref={this.howItWorksRef} >
 
     	<h2>How it Works</h2>
 
@@ -232,7 +246,7 @@ class OldApp extends Component {
 
 
 {/* ABOUT US  */}
-<section className="about-us">
+<section className="about-us" ref={this.aboutUsRef}>
 
 <img className="plate" src={plate} alt="image" />
 
@@ -281,17 +295,7 @@ class OldApp extends Component {
       <figure className="lft">
 
           <a href="index.html"><img src={footerLogo} alt="image" /></a>
-
-          <figcaption>
-
-              <a href="#"><i className="fa fa-facebook"></i></a>
-
-              <a href="#"><i className="fa fa-twitter"></i></a>
-
-              <a href="#"><i className="fa fa-instagram"></i></a>
-
-          </figcaption>
-
+          {this.siteSettings.getSocialMediaIcons()}
       </figure>
 
       <div className="quick-link lft">
@@ -300,14 +304,15 @@ class OldApp extends Component {
 
           <ul>
 
-            <li><a href="#">About Us</a></li>
+            <li><a onClick={e=> { e.preventDefault();  this.navScroll(this.aboutUsRef)}} href="#">About Us</a></li>
+
+              <li><a onClick={e=> { e.preventDefault();  this.navScroll(this.howItWorksRef)}} href="#">How it Works</a></li>
 
               <li><a href="#">Causes</a></li>
 
-              <li><a href="#">Organizations</a></li>
+              {/* <li><a href="#">Organizations</a></li> */}
 
-              <li><a href="#">How it Works</a></li>
-
+              
           </ul>
 
       </div>
