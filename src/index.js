@@ -26,6 +26,13 @@ import awsconfig from './aws-exports';
 import config from 'react-global-configuration';
 
 import SiteConfig from "./config/SiteConfig";
+
+
+import "./assets/css/font-awesome.min.css";
+
+import "./assets/css/style.css";
+import "./assets/css/responsive.css";
+
 let conf = new SiteConfig();
 
 Auth.configure(awsconfig);
