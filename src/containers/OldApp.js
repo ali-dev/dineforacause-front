@@ -57,6 +57,8 @@ class OldApp extends Component {
     this.aboutUsRef = React.createRef();
     
     console.log(process.env.REACT_APP_COVID19);
+    console.log(process.env.REACT_APP_APPSYNC_URL);
+    
 	}
   componentDidMount() {
     this.props.onRequestCauses();
