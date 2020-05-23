@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setSearchField, requestCauses } from '../actions';
-import './App.css';
+// import './App.css';
 import Header from '../components/Header'
 import CardList from '../components/CardList'
 import SearchBox from '../components/SearchBox'
