@@ -10,7 +10,7 @@ frontend:
         -  yarn run build
     postBuild:
         commands:
-        # -  aws s3 rm s3://cause-cuisine-site-assets/ --recursive
+        -  aws s3 rm s3://cause-cuisine-site-assets/ --recursive
         # -  yarn run upload-assets   
   artifacts:
     baseDirectory: dist
